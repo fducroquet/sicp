@@ -1,0 +1,12 @@
+*.swp
+
+# Fichiers produits par LaTeX
+*.aux
+*.log
+*.out
+*.pdf
+*.pyg
+*.pyg.lst
+*.pyg.sty
+*.toc
+*.vrb
