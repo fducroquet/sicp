@@ -1,0 +1,52 @@
+\documentclass{scrreprt}
+
+% Language-specific settings
+\usepackage{polyglossia}
+\setdefaultlanguage{american}
+
+% Fonts
+\usepackage{fontspec,microtype}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
+\setmonofont[Scale=MatchLowercase]{Linux Libertine Mono O}
+
+% Hyperlinks
+\usepackage{xcolor}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.3,0}
+\usepackage[pdftitle={Title}, urlcolor=darkblue, linkcolor=darkgreen, colorlinks]{hyperref}
+
+% Headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+
+% Source code highlighting
+\usepackage{minted}
+\newmintedfile[scm]{scheme}{style=colorful}
+\newmintinline[vscm]{scheme}{style=colorful}
+
+\usepackage{amssymb,amsmath,amsthm}
+\newtheoremstyle{break}{}{}{}{-12pt}{\bfseries}{}{\newline}{}
+\theoremstyle{break}
+\newtheorem{exe}{Exercise}[chapter]
+
+\newtheoremstyle{example}{}{}{}{}{\itshape}{:}{ }{}
+\theoremstyle{example}
+\newtheorem*{example}{Example}
+
+\title{Solutions to Structure and Interpretation of Computer Programs}
+\author{Fabienne \textsc{Ducroquet}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\include{ch01}
+
+\end{document}

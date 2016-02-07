@@ -1,0 +1,38 @@
+\chapter{Building Abstractions with Procedures}
+
+\section{The Elements of Programming}
+
+\begin{exe}
+    Check with a scheme interpreter.
+\end{exe}
+
+\begin{exe}
+    A minimally indented version:
+    \scm{ch01/1.02a.scm}
+    A heavily indented version:
+    \scm{ch01/1.02b.scm}
+\end{exe}
+
+\begin{exe}
+    \ \vspace{-20pt}
+    \scm{ch01/1.03.scm}
+\end{exe}
+
+\begin{exe}
+  If $b > 0$, \vscm{(a-plus-abs-b a b)} returns $a + b$; otherwise it returns $a 
+- b$.
+In other words, \vscm{(a-plus-abs-b a b)} returns $a + |b|$.
+\end{exe}
+
+\begin{exe}
+    With applicative-order evaluation, the interpreter tries to evaluate 
+    \vscm{(p)}, which results in an infinite loop, so the interpreter never 
+    returns (or returns an error).
+
+    With normal-order evaluation, the interpreter doesn't try to evaluate 
+    \vscm{(p)} until it's really needed, but that never happens since
+    \vscm{(= x 0)} returns true, so the call returns 0.
+\end{exe}
+
+
+% vim:filetype=tex:set expandtab
