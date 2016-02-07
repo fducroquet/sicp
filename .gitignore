@@ -10,3 +10,4 @@
 *.pyg.sty
 *.toc
 *.vrb
+_minted-sicp/
