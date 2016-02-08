@@ -45,4 +45,39 @@ In other words, \vscm{(a-plus-abs-b a b)} returns $a + |b|$.
     ends up in an infinite loop.
 \end{exe}
 
+\begin{exe} % 1.7
+    A possible solution:
+    \scm{ch01/1.07.scm}
+
+    Let's call $x$ the number whose root we want to compute.
+
+    With the initial \vscm{good-enough?} test:
+    \begin{itemize}
+        \item If $x$ is very small, the difference between the guess and $x$ 
+        becomes smaller than $0.001$ (or any number we would replace $0.001$ 
+        with, for small enough numbers) while the guess is still several times 
+        larger than $\sqrt{x}$, or even orders of magnitude away from it.
+        \begin{example}
+            \vscm{(sqrt 0.0001)} returns $0.03230844833048122$ instead of $0.01$ 
+            because\linebreak
+            \vscm{(abs (- (square 0.03230844833048122) 0.0001))} 
+            returns\linebreak
+            $9.438358335233747e-4$.
+        \end{example}
+    \item If $x$ is very large, the difference between the guess and $x$ will 
+        always be found to be larger than $0.001$ (or any number we would 
+        replace $0.001$ with, for large enough numbers) because
+        ($x - \text{any number}$) can not be expressed to the precision required 
+        to compare it to $0.001$, so the call never returns.
+        \begin{example}
+            \vscm{(sqrt 1e+129)} does not return, while \vscm{(sqrt 1e+128)} 
+            returns a correct answer almost instantly\footnote{These values are 
+            implementation-dependent.}.
+        \end{example}
+    \end{itemize}
+
+    With the modified versions of \vscm{good-enough?} and \vscm{sqrt-iter}, the 
+    above examples work.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
