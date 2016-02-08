@@ -34,5 +34,15 @@ In other words, \vscm{(a-plus-abs-b a b)} returns $a + |b|$.
     \vscm{(= x 0)} returns true, so the call returns 0.
 \end{exe}
 
+\begin{exe} % 1.6
+    When Alyssa attempts to use this to compute square roots, the program never 
+    returns.
+
+    Explication: \vscm{new-if} is an ordinary procedure, so each time it is 
+    called, the evaluator tries to evaluate all of its arguments. In particular, 
+    each call to \vscm{sqrt-iter} will cause one more call to \vscm{sqrt-iter}, 
+    whether \vscm{(good-enough? guess x)} returns true or not, so the evaluator 
+    ends up in an infinite loop.
+\end{exe}
 
 % vim:filetype=tex:set expandtab
