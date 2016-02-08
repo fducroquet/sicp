@@ -84,4 +84,63 @@
     \scm{ch01/1.08.scm}
 \end{exe}
 
+\section{Procedures and the Processes They Generate}
+
+\begin{exe} % 1.9
+    With the first procedure:
+    \scm{ch01/1.09a.scm}
+
+    With the second procedure:
+    \scm{ch01/1.09b.scm}
+
+    The first process is recursive, the second is iterative.
+\end{exe}
+
+\begin{exe} % 1.10
+    Using the interpreter, we obtain $1024 = 2^{10}$ for \vscm{(A 1 10)}, and 
+    $65536 = 2^{16}$ for \vscm{(A 2 4)} and \vscm{(A 3 3)}.
+
+    By definition of the Ackermann function, \vscm{(A 0 n)}, i.e.
+    \vscm{(f n)} computes $2n$.
+
+    \medskip
+
+    If $n > 0$, \vscm{(g n)} computes $2^n$.
+
+    \begin{proof}
+        By definition, \vscm{(g 1)} equals $2$, and for $n > 1$, \vscm{(A 1 n)} 
+        equals \vscm{(A 0 (A 1 (- n 1)))}. Since \vscm{(A 0 n)} computes $2n$,
+        the result follows by mathematical induction.
+    \end{proof}
+
+    \medskip
+
+    If $n > 0$, \vscm{(h n)} computes $2 \uparrow \uparrow n$, that is, 
+    $2^{2^{2^{…}}}$ with $n$ copies of $2$.
+
+    \begin{proof}
+        This is true for $n = 1$ by definition. For $n > 1$, \vscm{(A 2 n)} is 
+        equal to\linebreak
+        \vscm{(A 1 (A 2 (- n 1)))}. The result follows by mathematical induction 
+        using the previous result.
+    \end{proof}
+
+    \medskip
+
+    \begin{remark}
+        \vscm{(A 3 3)} returns $2^{16} = 2^{2^{2^2}}$ as well. The recursion 
+        beginning with \vscm{(A 3 n)} with\linebreak
+        $n > 1$ gives \vscm{(A 2 (A 3 (- n 1)))}, so according to the previous 
+        result, \vscm{(A 3 n)} is obtained from \vscm{(A 3 (- n 1))} by 
+        computing $2^{2^{2^{…}}}$ with a tower of
+        \vscm{(A 3 (- n 1))} 2s, so since \vscm{(A 3 1)} is $2$, \vscm{(A 3 2)} 
+        is $2^2 = 4$, and \vscm{(A 3 3)} is $2^{2^{2^2}}$. The general value of 
+        \vscm{(A 3 n)} can be noted $2 \uparrow \uparrow \uparrow n$, or $2 
+        \uparrow^3 n$.
+
+        This notation can be extended for all $m$s, so \vscm{(A m n)} computes 
+        $2 \uparrow^m n$.
+    \end{remark}
+\end{exe}
+
 % vim:filetype=tex:set expandtab
