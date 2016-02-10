@@ -157,4 +157,35 @@
     $k$ is the column number from the left starting from $0$.
 \end{exe}
 
+\begin{exe} % 1.13
+    Let’s prove that for any $n \geq 0$, $\text{Fib}(n) = \sfrac{\left( \phi^n 
+    - \psi^n \right)}{\sqrt{5}}$, where $\phi = \sfrac{\left( 1 + \sqrt{5} 
+    \right)}{2}$ and $\psi = \sfrac{\left( 1 - \sqrt{5} \right)}{2}$.
+
+    It’s true for $n = 0$ and $n = 1$.
+
+    Let’s assume that it’s true for any $k < n$. We have :
+
+    \begin{align*}
+        \text{Fib}(n) &= \text{Fib}(n - 1) + \text{Fib}(n - 2) \\
+        &= \frac{\phi^{n - 1} - \psi^{n - 1}}{\sqrt{5}} + \frac{\phi^{n - 2} 
+        - \psi^{n - 2}}{\sqrt{5}} \\
+        &= \frac{1}{\sqrt{5}}\left(\phi^{n - 2}\left(\phi + 1\right) - \psi^{n 
+        - 2}\left(\psi + 1\right) \right) \\
+    \end{align*}
+
+    But $\phi$ and $\psi$ are the roots of the equation $x^2 - x - 1 = 0$, in 
+    other words, $\phi^2 = \phi + 1$ and $\psi^2 = \psi + 1$, hence 
+    $\text{Fib}(n) = \sfrac{\left(\phi^n - \psi^n \right)}{\sqrt{5}}$.
+
+    Furthermore, $ \lvert 1 - \sqrt{5} \rvert < 2 $, so for any $n \geq 0$, 
+    $ \lvert 1 - \sqrt{5} \rvert^n < 2^n $, so dividing by $2^n$, we get 
+    $ \lvert \psi^n \rvert < 1 $, and by dividing by $\sqrt{5}$, $ \lvert 
+    \sfrac{\psi^n}{\sqrt{5}} \rvert < \sfrac{1}{\sqrt{5}} $. Since 
+    $ \sfrac{1}{\sqrt{5}} < \sfrac{1}{2} $, we have $ \lvert 
+    \sfrac{\psi^n}{\sqrt{5}} \rvert < \sfrac{1}{2} $ for any $n \geq 0$, which 
+    means that $\text{Fib}(n)$ is the closest integer to $\sfrac{\phi^n}{5}$.
+
+\end{exe}
+
 % vim:filetype=tex:set expandtab
