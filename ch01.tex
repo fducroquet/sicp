@@ -188,4 +188,29 @@
 
 \end{exe}
 
+\begin{exe} % 1.14
+    The space required is proportional to the maximum depth of the tree, so it 
+    grows as $\Theta(n)$.
+
+    For the time complexity, let’s use the mathematical notation $\text{cc}(n, 
+    k)$ rather than \vscm{(cc n k)}.
+
+    The time complexity for $\text{cc}(n, 1)$ grows as $\Theta(n)$.
+
+    If we note $v$ the denomination of the $k$-th coin, we have:
+    \begin{align*}
+        \text{cc}(n, k) &= \text{cc}(n - v, k) + \text{cc}(n, k - 1) \\
+                        &= \text{cc}(n - 2v, k) + 2\, \text{cc}(n, k - 1) \\
+                        &= … \\
+                        &= \text{cc}(n - \left\lceil \frac{n}{v} \right\rceil v, 
+                        k) + \left\lceil \frac{n}{v} \right\rceil \text{cc}(n, 
+                        k - 1)
+    \end{align*}
+
+    Since $n - \left\lceil \frac{n}{v} \right\rceil v \leq 0$, the time 
+    complexity of $\text{cc}(n, k)$ is proportional to $n$ times the time 
+    complexity of $\text{cc}(n, k - 1)$. As a consequence, the time complexity 
+    for $5$ kinds of coins grows as $\Theta(n^5)$.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
