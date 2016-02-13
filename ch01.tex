@@ -213,4 +213,23 @@
     for $5$ kinds of coins grows as $\Theta(n^5)$.
 \end{exe}
 
+\begin{exe} % 1.15
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] If the argument is greater than $0.1$, \vscm{p} is called 
+            once, and the argument is divided by three. So the number of steps 
+            required is the smallest integer $n$ such that $\sfrac{12.15}{3^n} 
+            < 0.1$, or equivalently $121.5 < 3^n$. The smallest such $n$ is 5, 
+            so \vscm{p} is called 5 times when \vscm{(sine 12.15)} is evaluated.
+        \item[b.] By the same calculation as above, if $a > 0.1$, the number of 
+            steps is the smallest $n$ such that $10 \, a < 3^n$. By taking the 
+            logarithm, we get $\log(10) + \log(a) < n \log(3)$, so $n 
+            = \left\lceil \sfrac{(\log(10) + \log(a))}{\log(3)} \right\rceil$.
+
+            Therefore, the number of steps has order of growth 
+            $\Theta(\log(n))$. The space required is proportional to the number 
+            of steps, so its order of growth is the same.
+    \end{itemize}
+\end{exe}
+
 % vim:filetype=tex:set expandtab
