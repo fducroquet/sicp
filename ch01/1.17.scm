@@ -1,0 +1,10 @@
+(define (*-rec a b)
+  (define (double n)
+    (* 2 n))
+  (define (halve n)
+    (/ n 2))
+  (cond ((= b 0) 0)
+	((= b 1) a)
+	((even? b) (*-rec (double a) (halve b)))
+	(else (+ a
+		 (*-rec a (- b 1))))))
