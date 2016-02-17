@@ -259,4 +259,36 @@
     \scm{ch01/1.19.scm}
 \end{exe}
 
+\begin{exe} % 1.20
+    With normal-order evaluation, \vscm{(gcd 206 40)} expands to
+    \vscm{(gcd 40 (remainder 206 40))}, a \vscm{remainder} operation is 
+    performed to test whether the remainder is null, then the expression expands 
+    to \vscm{(gcd (remainder 206 40) (remainder 40 (remainder 206 40)))}. Two 
+    \vscm{remainder} operations are performed to test whether the second 
+    argument is null, and the expression expands to
+    \begin{cscm}
+        (gcd (remainder 40 (remainder 206 40))
+             (remainder (remainder 206 40) (remainder 40 (remainder 206 40))))
+    \end{cscm}
+    Four new executions of \vscm{remainder} are necessary to determine that the 
+    second argument is not null, and the expression becomes:
+    \begin{cscm}
+        (gcd (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))
+             (remainder (remainder 40 (remainder 206 40))
+                        (remainder (remainder 206 40)
+                                   (remainder 40 (remainder 206 40)))))
+    \end{cscm}
+    Seven executions of \vscm{remainder} are necessary to determine that the 
+    second argument is null, and the GCD is computed with four executions of 
+    \vscm{remainder}. In total, 18 \vscm{remainder} operations are performed in 
+    the normal-order evaluation.
+
+    \bigskip
+
+    With applicative-order evaluation, \vscm{(gcd 206 40)} expands to
+    \vscm{(gcd 40 6)}, then to \vscm{(gcd 6 4)}, \vscm{(gcd 4 2)},
+    \vscm{(gcd 2 0)} and to 2. One \vscm{remainder} operation is performed each 
+    time \vscm{b} is not null, so four such operations are performed.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
