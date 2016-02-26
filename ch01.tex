@@ -308,4 +308,15 @@
     proportional to the number of steps required for the computation.
 \end{exe}
 
+\begin{exe} % 1.23
+    The next procedure is:
+    \scm{ch01/1.23a.scm}
+    and \vscm{smallest-divisor} becomes:
+    \scm{ch01/1.23b.scm}
+
+    The modified version does not run twice as fast, but only about 1.7 times 
+    as fast as the original version. This is because time is necessary to 
+    apply the \vscm{next} procedure at each step.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
