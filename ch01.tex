@@ -336,4 +336,11 @@
     each recursion step, the numbers remain smaller than the tested number.
 \end{exe}
 
+\begin{exe} % 1.26
+    If we use an explicit multiplication rather than calling square, 
+    \vscm{(expmod base (/ exp 2) m)} is computed twice rather than once at 
+    each recursive call with \vscm{exp} even, so that the process becomes 
+    linear again.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
