@@ -319,4 +319,15 @@
     apply the \vscm{next} procedure at each step.
 \end{exe}
 
+\begin{exe} % 1.24
+    The only change needed is to replace \vscm{prime?} with \vscm{fast-prime?} 
+    using an arbitrary number of tests (100 here) in \vscm{start-prime-test}.
+    \scm{ch01/1.24.scm}
+
+    When the number of digits is doubled, the time needed should be doubled as 
+    well since the Fermat test has logarithmic growth. This is what is found 
+    experimentally, though again, it’s necessary to use numbers much larger 
+    than 1000 and 1,000,000 to get significant results.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
