@@ -1,0 +1,11 @@
+(define (simpson f a b n)
+  (define step (/ (- b a) n))
+  (define (term-sim k)
+    (cond ((= 0 k) (f a))
+	  ((= n k) (f b))
+	  ((even? k)
+	   (* 2 (f (+ a (* k step)))))
+	  (else
+	    (* 4 (f (+ a (* k step)))))))
+  (* (/ step 3.0)
+     (sum term-sim 0 inc n)))
