@@ -425,4 +425,17 @@
     \scm{ch01/1.35.scm}
 \end{exe}
 
+\begin{exe}[1.36]
+    Modified version of \vscm{fixed-points}:
+    \scm{ch01/1.36a.scm}
+    We can find a solution to $x^x = 1000$ with, for instance, without average 
+    damping:
+    \scm{ch01/1.36b.scm}
+    And with average damping:
+    \scm{ch01/1.36c.scm}
+
+    The former takes 35 steps while the latter takes 9 steps, so average damping 
+    makes the search much faster here.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
