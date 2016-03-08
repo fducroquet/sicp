@@ -30,6 +30,9 @@
 \newmintedfile[scm]{scheme}{style=colorful}
 \newmintinline[vscm]{scheme}{style=bw}
 
+% Show subsubsections in the table of contents.
+\setcounter{tocdepth}{4}
+
 % Theorem environments
 \usepackage{amssymb,amsmath,amsthm}
 \newtheoremstyle{break}{}{}{}{-12pt}{\bfseries}{}{\newline}{}
@@ -39,9 +42,9 @@
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}
 {\IfNoValueTF{#1}
-    {\exeaux\addcontentsline{toc}{subsection}%
+    {\exeaux\addcontentsline{toc}{subsubsection}%
         {Exercise}}
-    {\exeaux\addcontentsline{toc}{subsection}%
+    {\exeaux\addcontentsline{toc}{subsubsection}%
         {Exercise #1}}%
         \ignorespaces}
 {\endexeaux}

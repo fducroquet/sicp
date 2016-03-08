@@ -2,6 +2,28 @@
 
 \section{The Elements of Programming}
 
+\subsection{Expressions}
+
+This subsection contains no exercises.
+
+\subsection{Naming and the Environment}
+
+This subsection contains no exercises.
+
+\subsection{Evaluationg Combinations}
+
+This subsection contains no exercises.
+
+\subsection{Compound Procedures}
+
+This subsection contains no exercises.
+
+\subsection{The Substitution Model for Procedure Application}
+
+This subsection contains no exercises.
+
+\subsection{Conditional Expressions and Predicates}
+
 \begin{exe}[1.1]
     Check with a scheme interpreter.
 \end{exe}
@@ -32,6 +54,8 @@
     \vscm{(p)} until it's really needed, but that never happens since
     \vscm{(= x 0)} returns true, so the call returns 0.
 \end{exe}
+
+\subsection{Example: Square Roots by Newton’s Method}
 
 \begin{exe}[1.6]
     When Alyssa attempts to use this to compute square roots, the program never 
@@ -84,7 +108,13 @@
     \scm{ch01/1.08.scm}
 \end{exe}
 
+\subsection{Procedures as Black-Box Abstractions}
+
+This subsection contains no exercises.
+
 \section{Procedures and the Processes They Generate}
+
+\subsection{Linear Recursion and Iteration}
 
 \begin{exe}[1.9]
     With the first procedure:
@@ -143,6 +173,8 @@
     \end{remark}
 \end{exe}
 
+\subsection{Tree Recursion}
+
 \begin{exe}[1.11]
     Procedure computing $f$ by means of a recursive process :
     \scm{ch01/1.11a.scm}
@@ -188,6 +220,8 @@
 
 \end{exe}
 
+\subsection{Orders of Growth}
+
 \begin{exe}[1.14]
     The space required is proportional to the maximum depth of the tree, so it 
     grows as $\Theta(n)$.
@@ -232,6 +266,8 @@
     \end{itemize}
 \end{exe}
 
+\subsection{Exponentiation}
+
 \begin{exe}[1.16]
     A possible solution to compute exponentials in a logarithmic number of steps 
     iteratively:
@@ -258,6 +294,8 @@
     procedure becomes:
     \scm{ch01/1.19.scm}
 \end{exe}
+
+\subsection{Greatest Common Divisors}
 
 \begin{exe}[1.20]
     With normal-order evaluation, \vscm{(gcd 206 40)} expands to
@@ -290,6 +328,8 @@
     \vscm{(gcd 2 0)} and to 2. One \vscm{remainder} operation is performed each 
     time \vscm{b} is not null, so four such operations are performed.
 \end{exe}
+
+\subsection{Example: Testing for Primality}
 
 \begin{exe}[1.21]
     The smallest divisors of 199, 1999 and 19999 are 199, 1999 and 
@@ -359,6 +399,8 @@
 
 \section{Formulating Abstractions with Higher-Order Procedures}
 
+\subsection{Procedures as Arguments}
+
 \begin{exe}[1.29]
     Here is a solution:
     \scm{ch01/1.29.scm}
@@ -410,12 +452,16 @@
     \end{itemize}
 \end{exe}
 
+\subsection{Construction Procedures Using \vscm{Lambda}}
+
 \begin{exe}[1.34]
     If we try to evaluate \vscm{(f f)}, we get an error saying that the operator 
     is not a procedure. The reason is that \vscm{(f f)} evaluates to
     \vscm{(f 2)}, which itself evaluates to \vscm{(2 2)}, and this operation is 
     impossible since 2 is not a procedure.
 \end{exe}
+
+\subsection{Procedures as General Methods}
 
 \begin{exe}[1.35]
     We already noticed in exercise 1.13 that $\phi^2 = \phi + 1$. By dividing 
@@ -464,5 +510,7 @@
     A possible solution for \vscm{(tan-cf x k)}:
     \scm{ch01/1.39.scm}
 \end{exe}
+
+\subsection{Procedures as Returned Values}
 
 % vim:filetype=tex:set expandtab
