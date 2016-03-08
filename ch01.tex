@@ -2,28 +2,28 @@
 
 \section{The Elements of Programming}
 
-\begin{exe} % 1.1
+\begin{exe}[1.1]
     Check with a scheme interpreter.
 \end{exe}
 
-\begin{exe} % 1.2
+\begin{exe}[1.2]
     A minimally indented version:
     \scm{ch01/1.02a.scm}
     A heavily indented version:
     \scm{ch01/1.02b.scm}
 \end{exe}
 
-\begin{exe} % 1.3
+\begin{exe}[1.3]
     \ \vspace{-20pt}
     \scm{ch01/1.03.scm}
 \end{exe}
 
-\begin{exe} % 1.4
+\begin{exe}[1.4]
     If $b > 0$, \vscm{(a-plus-abs-b a b)} returns $a + b$; otherwise it returns 
     $a - b$. In other words, \vscm{(a-plus-abs-b a b)} returns $a + |b|$.
 \end{exe}
 
-\begin{exe} % 1.5
+\begin{exe}[1.5]
     With applicative-order evaluation, the interpreter tries to evaluate 
     \vscm{(p)}, which results in an infinite loop, so the interpreter never 
     returns (or returns an error).
@@ -33,7 +33,7 @@
     \vscm{(= x 0)} returns true, so the call returns 0.
 \end{exe}
 
-\begin{exe} % 1.6
+\begin{exe}[1.6]
     When Alyssa attempts to use this to compute square roots, the program never 
     returns.
 
@@ -44,7 +44,7 @@
     ends up in an infinite loop.
 \end{exe}
 
-\begin{exe} % 1.7
+\begin{exe}[1.7]
     A possible solution:
     \scm{ch01/1.07.scm}
 
@@ -79,14 +79,14 @@
     above examples work.
 \end{exe}
 
-\begin{exe} % 1.8
+\begin{exe}[1.8]
     Here is a solution based on the solution of exercise 1.7.
     \scm{ch01/1.08.scm}
 \end{exe}
 
 \section{Procedures and the Processes They Generate}
 
-\begin{exe} % 1.9
+\begin{exe}[1.9]
     With the first procedure:
     \scm{ch01/1.09a.scm}
 
@@ -96,7 +96,7 @@
     The first process is recursive, the second is iterative.
 \end{exe}
 
-\begin{exe} % 1.10
+\begin{exe}[1.10]
     Using the interpreter, we obtain $1024 = 2^{10}$ for \vscm{(A 1 10)}, and 
     $65536 = 2^{16}$ for \vscm{(A 2 4)} and \vscm{(A 3 3)}.
 
@@ -143,21 +143,21 @@
     \end{remark}
 \end{exe}
 
-\begin{exe} % 1.11
+\begin{exe}[1.11]
     Procedure computing $f$ by means of a recursive process :
     \scm{ch01/1.11a.scm}
     Procedure computing $f$ by means of a iterative process :
     \scm{ch01/1.11b.scm}
 \end{exe}
 
-\begin{exe} % 1.12
+\begin{exe}[1.12]
     Here is an example of a solution :
     \scm{ch01/1.12.scm}
     The argument $n$ is the line number from the top starting from $0$, and 
     $k$ is the column number from the left starting from $0$.
 \end{exe}
 
-\begin{exe} % 1.13
+\begin{exe}[1.13]
     Let’s prove that for any $n \geq 0$, $\text{Fib}(n) = \sfrac{\left( \phi^n 
     - \psi^n \right)}{\sqrt{5}}$, where $\phi = \sfrac{\left( 1 + \sqrt{5} 
     \right)}{2}$ and $\psi = \sfrac{\left( 1 - \sqrt{5} \right)}{2}$.
@@ -188,7 +188,7 @@
 
 \end{exe}
 
-\begin{exe} % 1.14
+\begin{exe}[1.14]
     The space required is proportional to the maximum depth of the tree, so it 
     grows as $\Theta(n)$.
 
@@ -213,7 +213,7 @@
     for $5$ kinds of coins grows as $\Theta(n^5)$.
 \end{exe}
 
-\begin{exe} % 1.15
+\begin{exe}[1.15]
     \ \vspace{-20pt}
     \begin{itemize}
         \item[a.] If the argument is greater than $0.1$, \vscm{p} is called 
@@ -232,19 +232,19 @@
     \end{itemize}
 \end{exe}
 
-\begin{exe} % 1.16
+\begin{exe}[1.16]
     A possible solution to compute exponentials in a logarithmic number of steps 
     iteratively:
     \scm{ch01/1.16.scm}
 \end{exe}
 
-\begin{exe} % 1.17
+\begin{exe}[1.17]
     A recursive process that multiplies two non-negative integers using 
     a logarithmic number of steps.
     \scm{ch01/1.17.scm}
 \end{exe}
 
-\begin{exe} % 1.18
+\begin{exe}[1.18]
     An iterative process that multiplies two non-negative integers using 
     a logarithmic number of steps.
 
@@ -253,13 +253,13 @@
     \scm{ch01/1.18.scm}
 \end{exe}
 
-\begin{exe} % 1.19
+\begin{exe}[1.19]
     By calculation, we get $p' = p^2 + q^2$ and $q' = q^2 + 2pq$, so the 
     procedure becomes:
     \scm{ch01/1.19.scm}
 \end{exe}
 
-\begin{exe} % 1.20
+\begin{exe}[1.20]
     With normal-order evaluation, \vscm{(gcd 206 40)} expands to
     \vscm{(gcd 40 (remainder 206 40))}, a \vscm{remainder} operation is 
     performed to test whether the remainder is null, then the expression expands 
@@ -291,12 +291,12 @@
     time \vscm{b} is not null, so four such operations are performed.
 \end{exe}
 
-\begin{exe} % 1.21
+\begin{exe}[1.21]
     The smallest divisors of 199, 1999 and 19999 are 199, 1999 and 
     7 respectively.
 \end{exe}
 
-\begin{exe} % 1.22
+\begin{exe}[1.22]
     Example solution:
     \scm{ch01/1.22.scm}
 
@@ -308,7 +308,7 @@
     proportional to the number of steps required for the computation.
 \end{exe}
 
-\begin{exe} % 1.23
+\begin{exe}[1.23]
     The next procedure is:
     \scm{ch01/1.23a.scm}
     and \vscm{smallest-divisor} becomes:
@@ -319,7 +319,7 @@
     apply the \vscm{next} procedure at each step.
 \end{exe}
 
-\begin{exe} % 1.24
+\begin{exe}[1.24]
     The only change needed is to replace \vscm{prime?} with \vscm{fast-prime?} 
     using an arbitrary number of tests (100 here) in \vscm{start-prime-test}.
     \scm{ch01/1.24.scm}
@@ -330,20 +330,20 @@
     than 1000 and 1,000,000 to get significant results.
 \end{exe}
 
-\begin{exe} % 1.25
+\begin{exe}[1.25]
     Alyssa’s procedure computes the correct result but it is much slower 
     because it deals with huge numbers, whereas by taking the remainder at 
     each recursion step, the numbers remain smaller than the tested number.
 \end{exe}
 
-\begin{exe} % 1.26
+\begin{exe}[1.26]
     If we use an explicit multiplication rather than calling square, 
     \vscm{(expmod base (/ exp 2) m)} is computed twice rather than once at 
     each recursive call with \vscm{exp} even, so that the process becomes 
     linear again.
 \end{exe}
 
-\begin{exe} % 1.27
+\begin{exe}[1.27]
     Here is an example of a procedure that tells whether $a^n$ is congruent to 
     $a$ modulo $n$ for every $a < n$:
     \scm{ch01/1.27.scm}
@@ -351,7 +351,7 @@
     It returns true for the given Carmichael numbers.
 \end{exe}
 
-\begin{exe} % 1.28
+\begin{exe}[1.28]
     A possible way to implement the Miller-Rabin test is:
     \scm{ch01/1.28.scm}
     It returns false on the Carmichael numbers listed in footnote 47.
@@ -359,17 +359,17 @@
 
 \section{Formulating Abstractions with Higher-Order Procedures}
 
-\begin{exe} % 1.29
+\begin{exe}[1.29]
     Here is a solution:
     \scm{ch01/1.29.scm}
 \end{exe}
 
-\begin{exe} % 1.30
+\begin{exe}[1.30]
     A sum procedure generating an iterative process:
     \scm{ch01/1.30.scm}
 \end{exe}
 
-\begin{exe} % 1.31
+\begin{exe}[1.31]
     \ \vspace{-20pt}
     \begin{itemize}
         \item[a.] Here is a procedure analogous to \vscm{sum} that computes 
@@ -383,7 +383,7 @@
     \end{itemize}
 \end{exe}
 
-\begin{exe} % 1.32
+\begin{exe}[1.32]
     \ \vspace{-20pt}
     \begin{itemize}
         \item[a.] A recursive \vscm{accumulate} procedure and the definition of 
@@ -394,7 +394,7 @@
     \end{itemize}
 \end{exe}
 
-\begin{exe} % 1.33
+\begin{exe}[1.33]
     A \vscm{filtered-accumulate} procedure generating a recursive process:
     \scm{ch01/1.33.1.scm}
     A \vscm{filtered-accumulate} procedure generating an iterative process:
@@ -410,7 +410,7 @@
     \end{itemize}
 \end{exe}
 
-\begin{exe} % 1.34
+\begin{exe}[1.34]
     If we try to evaluate \vscm{(f f)}, we get an error saying that the operator 
     is not a procedure. The reason is that \vscm{(f f)} evaluates to
     \vscm{(f 2)}, which itself evaluates to \vscm{(2 2)}, and this operation is 

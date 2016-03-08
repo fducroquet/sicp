@@ -30,10 +30,21 @@
 \newmintedfile[scm]{scheme}{style=colorful}
 \newmintinline[vscm]{scheme}{style=bw}
 
+% Theorem environments
 \usepackage{amssymb,amsmath,amsthm}
 \newtheoremstyle{break}{}{}{}{-12pt}{\bfseries}{}{\newline}{}
 \theoremstyle{break}
-\newtheorem{exe}{Exercise}[chapter]
+\newtheorem{exeaux}{Exercise}[chapter]
+
+% Include the exercises in the table of contents.
+\NewDocumentEnvironment{exe}{o}
+{\IfNoValueTF{#1}
+    {\exeaux\addcontentsline{toc}{subsection}%
+        {Exercise}}
+    {\exeaux\addcontentsline{toc}{subsection}%
+        {Exercise #1}}%
+        \ignorespaces}
+{\endexeaux}
 
 \newtheoremstyle{example}{}{}{}{}{\itshape}{:}{ }{}
 \theoremstyle{example}
