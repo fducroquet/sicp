@@ -30,14 +30,14 @@ This subsection contains no exercises.
 
 \begin{exe}[1.2]
     A minimally indented version:
-    \scm{ch01/1.02a.scm}
+    \scm{ch1/1.02a.scm}
     A heavily indented version:
-    \scm{ch01/1.02b.scm}
+    \scm{ch1/1.02b.scm}
 \end{exe}
 
 \begin{exe}[1.3]
     \ \vspace{-20pt}
-    \scm{ch01/1.03.scm}
+    \scm{ch1/1.03.scm}
 \end{exe}
 
 \begin{exe}[1.4]
@@ -70,7 +70,7 @@ This subsection contains no exercises.
 
 \begin{exe}[1.7]
     A possible solution:
-    \scm{ch01/1.07.scm}
+    \scm{ch1/1.07.scm}
 
     Let's call $x$ the number whose root we want to compute.
 
@@ -105,7 +105,7 @@ This subsection contains no exercises.
 
 \begin{exe}[1.8]
     Here is a solution based on the solution of exercise 1.7.
-    \scm{ch01/1.08.scm}
+    \scm{ch1/1.08.scm}
 \end{exe}
 
 \subsection{Procedures as Black-Box Abstractions}
@@ -118,10 +118,10 @@ This subsection contains no exercises.
 
 \begin{exe}[1.9]
     With the first procedure:
-    \scm{ch01/1.09a.scm}
+    \scm{ch1/1.09a.scm}
 
     With the second procedure:
-    \scm{ch01/1.09b.scm}
+    \scm{ch1/1.09b.scm}
 
     The first process is recursive, the second is iterative.
 \end{exe}
@@ -177,14 +177,14 @@ This subsection contains no exercises.
 
 \begin{exe}[1.11]
     Procedure computing $f$ by means of a recursive process :
-    \scm{ch01/1.11a.scm}
+    \scm{ch1/1.11a.scm}
     Procedure computing $f$ by means of a iterative process :
-    \scm{ch01/1.11b.scm}
+    \scm{ch1/1.11b.scm}
 \end{exe}
 
 \begin{exe}[1.12]
     Here is an example of a solution :
-    \scm{ch01/1.12.scm}
+    \scm{ch1/1.12.scm}
     The argument $n$ is the line number from the top starting from $0$, and 
     $k$ is the column number from the left starting from $0$.
 \end{exe}
@@ -271,13 +271,13 @@ This subsection contains no exercises.
 \begin{exe}[1.16]
     A possible solution to compute exponentials in a logarithmic number of steps 
     iteratively:
-    \scm{ch01/1.16.scm}
+    \scm{ch1/1.16.scm}
 \end{exe}
 
 \begin{exe}[1.17]
     A recursive process that multiplies two non-negative integers using 
     a logarithmic number of steps.
-    \scm{ch01/1.17.scm}
+    \scm{ch1/1.17.scm}
 \end{exe}
 
 \begin{exe}[1.18]
@@ -286,13 +286,13 @@ This subsection contains no exercises.
 
     We keep a state variable $c$ such that $ab + c$ is constant at each call 
     of the inner function.
-    \scm{ch01/1.18.scm}
+    \scm{ch1/1.18.scm}
 \end{exe}
 
 \begin{exe}[1.19]
     By calculation, we get $p' = p^2 + q^2$ and $q' = q^2 + 2pq$, so the 
     procedure becomes:
-    \scm{ch01/1.19.scm}
+    \scm{ch1/1.19.scm}
 \end{exe}
 
 \subsection{Greatest Common Divisors}
@@ -338,7 +338,7 @@ This subsection contains no exercises.
 
 \begin{exe}[1.22]
     Example solution:
-    \scm{ch01/1.22.scm}
+    \scm{ch1/1.22.scm}
 
     Nowadays, it’s necessary to use numbers much larger than those suggested in 
     the book to test the prediction about the timing, but the data support the 
@@ -350,9 +350,9 @@ This subsection contains no exercises.
 
 \begin{exe}[1.23]
     The next procedure is:
-    \scm{ch01/1.23a.scm}
+    \scm{ch1/1.23a.scm}
     and \vscm{smallest-divisor} becomes:
-    \scm{ch01/1.23b.scm}
+    \scm{ch1/1.23b.scm}
 
     The modified version does not run twice as fast, but only about 1.7 times 
     as fast as the original version. This is because time is necessary to 
@@ -362,7 +362,7 @@ This subsection contains no exercises.
 \begin{exe}[1.24]
     The only change needed is to replace \vscm{prime?} with \vscm{fast-prime?} 
     using an arbitrary number of tests (100 here) in \vscm{start-prime-test}.
-    \scm{ch01/1.24.scm}
+    \scm{ch1/1.24.scm}
 
     When the number of digits is doubled, the time needed should be doubled as 
     well since the Fermat test has logarithmic growth. This is what is found 
@@ -386,14 +386,14 @@ This subsection contains no exercises.
 \begin{exe}[1.27]
     Here is an example of a procedure that tells whether $a^n$ is congruent to 
     $a$ modulo $n$ for every $a < n$:
-    \scm{ch01/1.27.scm}
+    \scm{ch1/1.27.scm}
 
     It returns true for the given Carmichael numbers.
 \end{exe}
 
 \begin{exe}[1.28]
     A possible way to implement the Miller-Rabin test is:
-    \scm{ch01/1.28.scm}
+    \scm{ch1/1.28.scm}
     It returns false on the Carmichael numbers listed in footnote 47.
 \end{exe}
 
@@ -403,12 +403,12 @@ This subsection contains no exercises.
 
 \begin{exe}[1.29]
     Here is a solution:
-    \scm{ch01/1.29.scm}
+    \scm{ch1/1.29.scm}
 \end{exe}
 
 \begin{exe}[1.30]
     A sum procedure generating an iterative process:
-    \scm{ch01/1.30.scm}
+    \scm{ch1/1.30.scm}
 \end{exe}
 
 \begin{exe}[1.31]
@@ -419,9 +419,9 @@ This subsection contains no exercises.
             to define \vscm{factorial} and to compute approximations of $\pi$. 
             In the latter case, we use $\sfrac{(i - 1)(i + 1)}{i^2} = \sfrac{i^2 
             - 1}{i^2}$ as the general term.
-            \scm{ch01/1.31a.scm}
+            \scm{ch1/1.31a.scm}
         \item[b.] A \vscm{product} procedure generating an iterative process.
-            \scm{ch01/1.31b.scm}
+            \scm{ch1/1.31b.scm}
     \end{itemize}
 \end{exe}
 
@@ -430,25 +430,25 @@ This subsection contains no exercises.
     \begin{itemize}
         \item[a.] A recursive \vscm{accumulate} procedure and the definition of 
             \vscm{sum} and \vscm{product} using that procedure:
-            \scm{ch01/1.32a.scm}
+            \scm{ch1/1.32a.scm}
         \item[b.] An iterative version of \vscm{accumulate}:
-            \scm{ch01/1.32b.scm}
+            \scm{ch1/1.32b.scm}
     \end{itemize}
 \end{exe}
 
 \begin{exe}[1.33]
     A \vscm{filtered-accumulate} procedure generating a recursive process:
-    \scm{ch01/1.33.1.scm}
+    \scm{ch1/1.33.1.scm}
     A \vscm{filtered-accumulate} procedure generating an iterative process:
-    \scm{ch01/1.33.2.scm}
+    \scm{ch1/1.33.2.scm}
     \begin{itemize}
         \item[a.] Assuming \vscm{prime?} is already written, the sum of the 
             squares of the prime numbers in the interval $a$ to $b$ can be 
             computed with:
-            \scm{ch01/1.33a.scm}
+            \scm{ch1/1.33a.scm}
         \item[b.] The product of all positive integers less than $n$ that are 
             relatively prime to $n$ can be computed with:
-            \scm{ch01/1.33b.scm}
+            \scm{ch1/1.33b.scm}
     \end{itemize}
 \end{exe}
 
@@ -468,17 +468,17 @@ This subsection contains no exercises.
     this equation by $\phi$, we get $\phi = 1 + \sfrac{1}{\phi}$.
 
     We can then compute $\phi$ with the command:
-    \scm{ch01/1.35.scm}
+    \scm{ch1/1.35.scm}
 \end{exe}
 
 \begin{exe}[1.36]
     Modified version of \vscm{fixed-points}:
-    \scm{ch01/1.36a.scm}
+    \scm{ch1/1.36a.scm}
     We can find a solution to $x^x = 1000$ with, for instance, without average 
     damping:
-    \scm{ch01/1.36b.scm}
+    \scm{ch1/1.36b.scm}
     And with average damping:
-    \scm{ch01/1.36c.scm}
+    \scm{ch1/1.36c.scm}
 
     The former takes 35 steps while the latter takes 9 steps, so average damping 
     makes the search much faster here.
@@ -489,38 +489,38 @@ This subsection contains no exercises.
     \begin{itemize}
         \item[a.] A procedure \vscm{cont-frac} generating an iterative process, 
             doing the computation starting from \vscm{k}:
-            \scm{ch01/1.37a.scm}
+            \scm{ch1/1.37a.scm}
 
             11 steps are necessary to get an approximation that is accurate to 
             4 decimal places.
 
         \item[b.] A procedure \vscm{cont-frac} generating a recursive process, 
             doing the computation starting from 1:
-            \scm{ch01/1.37b.scm}
+            \scm{ch1/1.37b.scm}
     \end{itemize}
 \end{exe}
 
 \begin{exe}[1.38]
     The following procedure computes an approximation of $e$ using a $k$-term 
     finite continued fraction.
-    \scm{ch01/1.38.scm}
+    \scm{ch1/1.38.scm}
 \end{exe}
 
 \begin{exe}[1.39]
     A possible solution for \vscm{(tan-cf x k)}:
-    \scm{ch01/1.39.scm}
+    \scm{ch1/1.39.scm}
 \end{exe}
 
 \subsection{Procedures as Returned Values}
 
 \begin{exe}[1.40]
     The procedure \vscm{cubic} is:
-    \scm{ch01/1.40.scm}
+    \scm{ch1/1.40.scm}
 \end{exe}
 
 \begin{exe}[1.41]
     The procedure \vscm{double}:
-    \scm{ch01/1.41.scm}
+    \scm{ch1/1.41.scm}
 
     \vscm{(double double)} is a procedure that takes a procedure of one argument 
     as argument and returns a procedure that applies the original procedure four 
@@ -535,20 +535,20 @@ This subsection contains no exercises.
 
 \begin{exe}[1.42]
     Here is a procedure \vscm{compose}:
-    \scm{ch01/1.42.scm}
+    \scm{ch1/1.42.scm}
 \end{exe}
 
 \begin{exe}[1.43]
     A solution generationg a recursive process:
-    \scm{ch01/1.43a.scm}
+    \scm{ch1/1.43a.scm}
 
     A solution generationg an iterative process:
-    \scm{ch01/1.43b.scm}
+    \scm{ch1/1.43b.scm}
 \end{exe}
 
 \begin{exe}[1.44]
     A possible solution is:
-    \scm{ch01/1.44.scm}
+    \scm{ch1/1.44.scm}
 
     The $n$-fold smoothed function of a function \vscm{f} can be obtained with
     \vscm{((repeated smooth n) f)}.
@@ -558,18 +558,18 @@ This subsection contains no exercises.
     Experimentally, we find that the number of average dampings necessary to 
     compute $n$th roots in this way is $\lfloor \log n \rfloor$, so the 
     procedure to compute $n$th roots is:
-    \scm{ch01/1.45.scm}
+    \scm{ch1/1.45.scm}
 \end{exe}
 
 \begin{exe}[1.46]
     A solution for \vscm{iterative-improve}:
-    \scm{ch01/1.46a.scm}
+    \scm{ch1/1.46a.scm}
 
     The \vscm{sqrt} procedure of section 1.1.7 becomes:
-    \scm{ch01/1.46b.scm}
+    \scm{ch1/1.46b.scm}
 
     The \vscm{fixed-point} procedure of section 1.3.3 becomes:
-    \scm{ch01/1.46c.scm}
+    \scm{ch1/1.46c.scm}
 \end{exe}
 
 % vim:filetype=tex:set expandtab
