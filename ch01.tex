@@ -518,4 +518,19 @@ This subsection contains no exercises.
     \scm{ch01/1.40.scm}
 \end{exe}
 
+\begin{exe}[1.41]
+    The procedure \vscm{double}:
+    \scm{ch01/1.41.scm}
+
+    \vscm{(double double)} is a procedure that takes a procedure of one argument 
+    as argument and returns a procedure that applies the original procedure four 
+    times.
+
+    \vscm{((double (double double)) f)} evaluates to
+    \vscm{((double double) ((double double) f))}, so it returns a procedures 
+    that applies \vscm{f} $4 \times 4 = 16$ times.
+
+    So the value returned by \vscm{(((double (double double)) inc) 5)} is 21.
+\end{exe}
+
 % vim:filetype=tex:set expandtab
