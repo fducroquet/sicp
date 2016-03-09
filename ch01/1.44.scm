@@ -1,0 +1,7 @@
+(define (smooth f)
+  (lambda (x)
+    (let ((dx 0.00001))
+      (/ (+ (f (- x dx))
+            (f x)
+            (f (+ x dx)))
+         3))))
