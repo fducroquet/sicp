@@ -3,9 +3,6 @@
     0
     (+ a (sum-integers (+ a 1) b))))
 
-(define (cube x)
-  (* x x x))
-
 (define (sum-cubes a b)
   (if (> a b)
     0
@@ -22,9 +19,6 @@
     0
     (+ (term a)
        (sum term (next a) next b))))
-
-(define (inc n) (+ n 1))
-(define (identity x) x)
 
 (define (sum-integers a b)
   (sum identity a inc b))

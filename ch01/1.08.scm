@@ -1,6 +1,3 @@
-(define (cube x)
-  (* x x x))
-
 (define (cube-iter guess x)
   (define new-guess (improve guess x))
   (if (good-enough? guess new-guess)

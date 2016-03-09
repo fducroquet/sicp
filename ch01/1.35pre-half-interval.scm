@@ -21,6 +21,3 @@
 	   (search f b a))
 	  (else
 	    (error "Values are not of opposite sign" a b)))))
-
-(define (average a b)
-  (/ (+ a b) 2))
