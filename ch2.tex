@@ -14,3 +14,34 @@
     Exemple implementation for the representation of segments in a plane:
     \scm{ch2/2.02.scm}
 \end{exe}
+
+\begin{exe}[2.3]
+    In the following implementation, a rectangle is represented by its two 
+    opposite sides, which must have the same orientation. The code makes use of 
+    auxiliary procedures defined below.
+
+    I added selectors to access each of the vertices of the rectangle to be 
+    able to print rectangles in a uniform format.
+    \scm{ch2/2.03.1.scm}
+
+    The procedures that compute the perimeter and area of a rectangle, and the 
+    procedure that prints a rectangle, are defined thus:
+    \scm{ch2/2.03.perim-area.scm}
+
+    Another possibility is to represent a rectangle by its four vertices:
+    \scm{ch2/2.03.2.scm}
+
+    Yet another possibility is to represent a rectangle by two perpendicular 
+    segments with the same origin:
+    \scm{ch2/2.03.3.scm}
+
+    The procedures \vscm{perim-rect}, \vscm{area-rect} and \vscm{print-rect} 
+    work in all three cases.
+
+    \begin{comp}
+        The code above makes use of the following auxiliary procedures to check 
+        that the input is correct, compute the length of a segment, and print 
+        points inline for use in \vscm{print-rect}:
+        \scm{ch2/2.03.aux.scm}
+    \end{comp}
+\end{exe}
