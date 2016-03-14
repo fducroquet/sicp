@@ -131,3 +131,25 @@
     The subtraction procedure can thus be defined:
     \scm{ch2/2.08.scm}
 \end{exe}
+
+\begin{exe}[2.9]
+    Let $[a;b]$ and $[c;d]$ be two intervals.
+
+    Their sum is $[a + c; b + d]$. Its width is $\sfrac{(b + d) - (a + c)}{2} 
+    = \sfrac{(b - a)}{2} + \sfrac{(d - c)}{2}$, in other words, the sum’s 
+    width is the sum of the widths, so it depends only on the widths of the 
+    intervals being added.
+
+    The difference can be defined as the sum with the opposite, and taking the 
+    opposite doesn’t change the width, so this is also true for differences.
+
+    For multiplication and division, the width of the result also depends on 
+    the values of the bounds. For instance, $[1; 2] \times [2; 3] = [2; 6]$, 
+    but $[0; 1] \times [2; 3] = [0; 3]$. In both cases, we multiply two 
+    intervals of width $\sfrac{1}{2}$, but the former product has a width of 
+    $2$ while the latter has a width of $\sfrac{3}{2}$, so the width of the 
+    product is not a function of the widths of the intervals being multiplied.
+
+    Since division can be defined as a multiplication, this is also true for 
+    division.
+\end{exe}
