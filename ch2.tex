@@ -68,3 +68,13 @@
     The method to prove that \vscm{(cdr (cons x y))} yields \vscm{y} is the same 
     as with \vscm{car}.
 \end{exe}
+
+\begin{exe}[2.5]
+    If $a$ and $b$ are known, we can compute $2^a 3^b$, and since the 
+    decomposition of integers as a product of primes is unique, it’s possible to 
+    find $a$ and $b$ from the value of $2^a 3^b$.
+
+    The procedures \vscm{cons}, \vscm{car}, and \vscm{cdr} corresponding to this 
+    representation can be defined as:
+    \scm{ch2/2.05.scm}
+\end{exe}
