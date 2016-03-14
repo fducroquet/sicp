@@ -47,3 +47,24 @@
         \scm{ch2/2.03.aux.scm}
     \end{comp}
 \end{exe}
+
+\subsection{What Is Meant by Data?}
+
+\begin{exe}[2.4]
+    With the representation of pairs given in the exercise, \vscm{(cons x y)} is 
+    a procedure that takes as its argument a procedure \vscm{m} with two 
+    arguments and returns the result of the application of \vscm{m} to \vscm{x} 
+    and \vscm{y}.
+
+    \vscm{(car z)} applies the procedure \vscm{(cons x y)} to the procedure that 
+    returns the first of its arguments, so \vscm{(car (cons x y))} yields 
+    \vscm{x}.
+
+    Using the substitution model, the successive steps are:
+    \scm{ch2/2.04a.scm}
+
+    The corresponding definition of \vscm{cdr} is:
+    \scm{ch2/2.04b.scm}
+    The method to prove that \vscm{(cdr (cons x y))} yields \vscm{y} is the same 
+    as with \vscm{car}.
+\end{exe}
