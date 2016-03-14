@@ -78,3 +78,40 @@
     representation can be defined as:
     \scm{ch2/2.05.scm}
 \end{exe}
+
+\begin{exe}[2.6]
+    The successive substitution steps to evaluate \vscm{(add-1 zero)} are:
+    \scm{ch2/2.06a.scm}
+
+    In other words, \vscm{one} is a procedure that takes a one-argument 
+    procedure as its argument and returns it.
+
+    The substitution steps to evaluate \vscm{(add-1 one)} are:
+    \scm{ch2/2.06b.scm}
+
+    In other words, \vscm{two} is a procedure that takes a one-argument 
+    procedure $f$ as its argument and returns the procedure $f \circ f$ ($f$ 
+    applied twice).
+
+    From these observations, and after remarking that \vscm{zero} is a procedure 
+    that takes one argument and always returns the identity procedure, we can 
+    make the hypothesis that the $n$th Church numeral is a procedure that takes 
+    a one-argument procedure $f$ as its argument and returns the $n$th repeated 
+    application of $f$ (see exercise~\ref{1.43}). This can be proved by 
+    induction.
+
+    \begin{proof}
+        We’ve already shown that it’s true for $0$, $1$ and $2$.
+        Let’s assume that it’s true for a positive integer $n$.
+
+        From the induction hypothesis, \vscm{(n f)} is the $n$th repeated 
+        application of $f$, so it’s obvious that
+        \vscm{(lambda (x) (f ((n f) x)))} is the $(n + 1)$th repeatead 
+        application of $f$, so the result is true for $n + 1$, hence it’s true 
+        for any positive integer $n$.
+    \end{proof}
+
+    To apply a function $n + m$ times, we just need to apply it $m$ times, and 
+    then $n$ times more, so \vscm{+} can be defined directly as:
+    \scm{ch2/2.06c.scm}
+\end{exe}
