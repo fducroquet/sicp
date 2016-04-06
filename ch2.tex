@@ -182,3 +182,22 @@ Let’s first define a function that prints intervals:
     as:
     \scm{ch2/2.12.scm}
 \end{exe}
+
+\begin{exe}[2.13]
+    Let $c_1, c_2, w_1$ and $w_2$ be the centers and widths of two intervals. We 
+    assume that all numbers are positive. The lower and upper bounds of the 
+    product are
+    $(c_1 \pm w_1) \times (c_2 \pm w_2) = c_1 c_2 \pm (c_1 w_2 + c_2 w_1) + w_1 
+    w_2$.
+
+    Since the percentages are small, $w_1 w_2$ is negligible, and the product’s 
+    width is $w \approx c_1 w_2 + c_2 w_1$.
+
+    Additionally, if we call the percentage tolerances $p_1$ and $p_2$ 
+    respectively, we have $w_i = c_i \times \sfrac{p_i}{100}$ for $i = 1, 2$.
+
+    From there, $w \approx c_1 c_2 \times \sfrac{p_1 + p_2}{100}$, and $c_1 c_2$ 
+    is the product’s center, so under the given conditions, the approximate 
+    percentage tolerance of the product is the sum of the tolerances of the 
+    factors.
+\end{exe}
