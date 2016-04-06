@@ -161,3 +161,18 @@ Let’s first define a function that prints intervals:
     The new code of \vscm{div-interval} could be:
     \scm{ch2/2.10.scm}
 \end{exe}
+
+\begin{exe}[2.11]
+    There are three cases for each interval:
+    \begin{itemize}
+        \item the lower bound is positive or null;
+        \item the upper bound is negative or null;
+        \item the lower bound is negative and the upper bound is positive.
+    \end{itemize}
+    This results in a total of nine cases, and the only case where the smallest 
+    and greatest products can’t be deduced from the signs is when both intervals 
+    span zero.
+
+    A procedure taking this suggestion into account is:
+    \scm{ch2/2.11.scm}
+\end{exe}
