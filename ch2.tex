@@ -247,3 +247,14 @@ Let’s first define a function that prints intervals:
     The completed procedures are:
     \scm{ch2/2.21.scm}
 \end{exe}
+
+\begin{exe}[2.22]
+    With the first procedure, the answer list is in reverse order because the 
+    elements are added to it starting from the beginning of the initial list, 
+    and the first element added to a list is at its end.
+
+    With the second procedure, the result is not a list because \vscm{cons} is 
+    called with a list as its first argument and the element to add as its 
+    second argument. To add an element to a list, the order of the arguments 
+    should be the opposite.
+\end{exe}
