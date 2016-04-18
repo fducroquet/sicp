@@ -263,3 +263,33 @@ Let’s first define a function that prints intervals:
     Here is a possible implementation of \vscm{for-each}:
     \scm{ch2/2.23.scm}
 \end{exe}
+
+\subsection{Hierarchical Structures}
+
+\begin{exe}[2.24]
+    The result given by the interpreter is \vscm{(1 (2 (3 4)))}. To represent 
+    the corresponding box-and-pointer structure in terms of pairs, one must use 
+    the equality of \vscm{(list 1 (list 2 (list 3 4)))} and
+    \vscm{(cons 1 (cons (list 2 (list 3 4)) nil))}, and similar equalities for 
+    the two other lists.
+
+    \begin{figure}
+        \begin{center}
+            TODO (too time-consuming…)
+        \end{center}
+        \caption{Box-and-pointer-structure of \vscm{(1 (2 (3 4)))}.}
+    \end{figure}
+
+    \vspace*{1cm}
+    \begin{figure}
+        \begin{center}
+            \pstree[nodesepB=5pt]{\Tdot[tnpos=a]~{\vscm{(1 (2 (3 4)))}}}{%
+            \TR[tnpos=b]{1}%
+            \pstree{\Tdot[tnpos=r]~{\vscm{(2 (3 4))}}}{%
+            \TR[tnpos=b]{2}%
+            \pstree{\Tdot[tnpos=r]~{\vscm{(3 4)}}}{%
+            \TR[tnpos=b]{3}\TR[tnpos=b]{4}}}}
+        \end{center}
+        \caption{Tree representation of \vscm{(1 (2 (3 4)))}.}
+    \end{figure}
+\end{exe}
