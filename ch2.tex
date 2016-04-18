@@ -293,3 +293,13 @@ Let’s first define a function that prints intervals:
         \caption{Tree representation of \vscm{(1 (2 (3 4)))}.}
     \end{figure}
 \end{exe}
+
+\begin{exe}[2.25]
+    If we call the three lists $x$, $y$ and $z$ respectively, the combinations 
+    \vscm{(car (cdr (car (cdr (cdr x)))))}, \vscm{(car (car y))} (which can be 
+    shortened to \vscm{(caar y)}), and\linebreak
+    \vscm{(car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr z))))))))))))}
+    or, more simply,
+    \vscm{(cadr (cadr (cadr (cadr (cadr (cadr z))))))},
+    all pick 7 from the lists.
+\end{exe}
