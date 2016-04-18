@@ -303,3 +303,9 @@ Let’s first define a function that prints intervals:
     \vscm{(cadr (cadr (cadr (cadr (cadr (cadr z))))))},
     all pick 7 from the lists.
 \end{exe}
+
+\begin{exe}[2.26]
+    The results printed by the interpreter are \vscm{(1 2 3 4 5 6)} for
+    \vscm{(append x y)}, \vscm{((1 2 3) 4 5 6)} for \vscm{(cons x y)} and
+    \vscm{((1 2 3) (4 5 6))} for \vscm{(list x y)}.
+\end{exe}
