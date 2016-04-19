@@ -379,3 +379,11 @@ Let’s first define a function that prints intervals:
     A polynomial can be evaluated using Horner’s rule with the procedure:
     \scm{ch2/2.34.scm}
 \end{exe}
+
+\begin{exe}[2.35]
+    This can be done with or without \vscm{enumate-tree}. Without that function:
+    \scm{ch2/2.35.scm}
+    The mapped function associates to each subtree its number of leaves: 1 if 
+    the subtree has no children, i.e.\ is a leaf, \vscm{(count-leaves subtree)} 
+    otherwise.
+\end{exe}
