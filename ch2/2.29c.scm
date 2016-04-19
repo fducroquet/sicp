@@ -1,0 +1,7 @@
+(define (balanced? mobile)
+  (let ((left (left-branch mobile))
+        (right (right-branch mobile)))
+    (= (* (branch-length left)
+          (branch-weight left))
+       (* (branch-length right)
+          (branch-weight right)))))

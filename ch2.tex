@@ -319,3 +319,20 @@ Let’s first define a function that prints intervals:
     A possible solution for \vscm{fringe} is:
     \scm{ch2/2.28.scm}
 \end{exe}
+
+\begin{exe}[2.29]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] The selectors can be defined as:
+            \scm{ch2/2.29a.scm}
+        \item[b.] The total weight can be computed with:
+            \scm{ch2/2.29b.scm}
+        \item[c.] Since we defined a \vscm{branch-weight} procedure in b., 
+            \vscm{balanced?} can be defined simply with:
+            \scm{ch2/2.29c.scm}
+        \item[d.] To convert to the new representation, the only things that 
+            need to be changed are the \vscm{right-branch} and 
+            \vscm{branch-structure} selectors:
+            \scm{ch2/2.29d.scm}
+    \end{itemize}
+\end{exe}
