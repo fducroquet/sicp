@@ -355,3 +355,15 @@ Let’s first define a function that prints intervals:
     or using it:
     \scm{ch2/2.31b.scm}
 \end{exe}
+
+\begin{exe}[2.32]
+    The completed procedure is:
+    \scm{ch2/2.32.scm}
+
+    The empty set has only one subset: the empty set.
+
+    For a non-empty (finite) set, with elements $\{a_1, …, a_n\}$, the set of 
+    subsets is the reunion of the subsets not containing $a_1$ and the subsets 
+    containing $a_1$, and the application $S \mapsto S \cup \{a_1\}$ is 
+    a bijection between these two sets.
+\end{exe}
