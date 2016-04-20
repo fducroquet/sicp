@@ -468,3 +468,10 @@ Let’s first define a function that prints intervals:
     and \vscm{adjoin-position} because I didn’t need it.
     \scm{ch2/2.42.scm}
 \end{exe}
+
+\begin{exe}[2.43]
+    In Louis’ program, each call to \vscm{(queen-cols k)} calls 
+    \vscm{(queen-cols (- k 1))} 8 times, instead of only one time with the 
+    program in exercise 2.42. Since there are 8 recursion levels, Louis’ program 
+    will take about $8^8T$ time to solve the eight-queens puzzle.
+\end{exe}
