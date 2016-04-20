@@ -397,3 +397,46 @@ Let’s first define a function that prints intervals:
     The matrix operation can be define as:
     \scm{ch2/2.37.scm}
 \end{exe}
+
+\begin{exe}[2.38]
+    The value of \vscm{(fold-right / 1 (list 1 2 3))} is $\sfrac{3}{2}$.
+
+    The value of \vscm{(fold-left / 1 (list 1 2 3))} is $\sfrac{1}{6}$.
+
+    The value of \vscm{(fold-right list nil (list 1 2 3))} is the list
+    \vscm{(1 (2 (3 nil)))}.
+
+    The value of \vscm{(fold-left list nil (list 1 2 p))} is the list
+    \vscm{(((nil 1) 2) 3)}.
+
+    \vscm{fold-right} and \vscm{fold-left} produce the same values for any 
+    sequence  if (and only if) \vscm{op} is commutative.
+
+    \begin{proof}
+        Suppose \vscm{op} commutative. We’ll show by induction that 
+        \vscm{fold-left} and \vscm{fold-right} always produce the same results.
+
+        \vscm{(fold-right op init nil)} and
+        \vscm{(fold-left op init nil)} both produce \vscm{init}.
+
+        Let’s assume that \vscm{fold-left} and \vscm{fold-right} produce the 
+        same values for any list of length $n \geq 0$. If \vscm{sequence} is 
+        a list of length $n + 1$,
+        \vscm{(fold-right op init sequence)} equals\linebreak
+        \vscm{(op (car sequence) (fold-right op init (cdr sequence)))}, and
+        \vscm{(fold-left op init sequence)} equals
+        \vscm{(op (fold-left op init (cdr sequence)) (car sequence))}. It 
+        follows from the induction hypothesis and the commutativity of \vscm{op} 
+        that these two values are equal.
+
+        Hence, by induction, \vscm{fold-left} and \vscm{fold-right} always 
+        produce the same results.
+
+        Conversely, if \vscm{op} is not commutative, there exists elements 
+        \vscm{a} and \vscm{b} such that \vscm{(op a b)} is different from
+        \vscm{(op b a)}, and these expressions are equal respectively to
+        \vscm{(fold-left op a (list b))} and to
+        \vscm{(fold-right op a (list b))}, so \vscm{fold-left} and 
+        \vscm{fold-right} don’t always produce the same values.
+    \end{proof}
+\end{exe}
