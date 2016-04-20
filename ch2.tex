@@ -459,3 +459,12 @@ Let’s first define a function that prints intervals:
     The triples $(i, j, k)$ are in decreasing order because \vscm{unique-pairs} 
     returns pairs $(j, k)$ with $j > k$.
 \end{exe}
+
+\begin{exe}[2.42]
+    A possible solution, with a position represented as the list of the numbers 
+    of the lines occupied by the queen in each column. The position of the queen 
+    in the first column is at the end of the list because the functions are 
+    easier to write this way. I removed the \vscm{k} parameter in \vscm{safe?} 
+    and \vscm{adjoin-position} because I didn’t need it.
+    \scm{ch2/2.42.scm}
+\end{exe}
