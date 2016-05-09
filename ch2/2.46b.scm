@@ -1,0 +1,7 @@
+(define (make-vect x y)
+  (make-posn (* 300 x)
+             (* 300 (- 1 y))))
+(define (xcor-vect vect)
+  (/ (posn-x vect) 300) )
+(define (ycor-vect vect)
+  (+ 1 (- (/ (posn-y vect) 300))))
