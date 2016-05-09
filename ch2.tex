@@ -579,3 +579,9 @@ Let’s first define a function that prints intervals:
     A possible implementation of \vscm{equal?}:
     \scm{ch2/2.54.scm}
 \end{exe}
+
+\begin{exe}[2.55]
+    The expression \vscm{''abracadabra} is equivalent to
+    \vscm{(quote (quote abracadabra))}, which evaluates to
+    \vscm{(quote abracadabra)}, an expression whose \vscm{car} is \vscm{quote}.
+\end{exe}
