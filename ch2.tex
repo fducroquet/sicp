@@ -475,3 +475,22 @@ Let’s first define a function that prints intervals:
     program in exercise 2.42. Since there are 8 recursion levels, Louis’ program 
     will take about $8^8T$ time to solve the eight-queens puzzle.
 \end{exe}
+
+\subsection{Example: A Picture Language}
+
+\begin{comp}
+    To test the code in this section, it’s necessary to load a module including 
+    graphical functions. The solution I chose here is to use DrRacket’s 
+    \vscm{graphics.ss} library. It required me to adapt my solution to 
+    exercise~2.46 and to slightly modify the \vscm{segments->painter} to use the 
+    given viewport. The code from later exercises is sometimes needed to try out 
+    some previous code.
+
+    Code to put at the beginning of the file:
+    \scm{ch2/2.44pre2.scm}
+\end{comp}
+
+\begin{exe}[2.44]
+    The definition of \vscm{up-split} is:
+    \scm{ch2/2.44.scm}
+\end{exe}
