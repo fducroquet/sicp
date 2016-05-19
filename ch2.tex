@@ -594,3 +594,20 @@ Let’s first define a function that prints intervals:
     \vscm{make-exponentiation} can be written as:
     \scm{ch2/2.56.scm}
 \end{exe}
+
+\begin{exe}[2.57]
+    The \vscm{deriv} procedure always calls \vscm{make-sum} and 
+    \vscm{make-product} with only two arguments, so all that’s necessary is to 
+    redefine \vscm{augend} and \vscm{multiplicand} as indicated in the text, for 
+    instance:
+    \scm{ch2/2.57a.scm}
+
+    As a supplement, if we also want to be able to call \vscm{make-sum} and 
+    \vscm{make-product} with more than two arguments, we can redefine 
+    \vscm{make-sum} and \vscm{make-product} as well:
+    \scm{ch2/2.57b.scm}
+    These procedures also simplify the result very partially by grouping the 
+    numerical arguments together, however expressions such as
+    \vscm{(make-sum 'x (make-sum 'y 'x))} or
+    \vscm{(make-sum 'x 'y 2 'x)} are not simplified.
+\end{exe}
