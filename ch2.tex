@@ -749,3 +749,10 @@ Let’s first define a function that prints intervals:
     alphabet of 8 symbols, and the message contains 36 symbols, so at least 108 
     bits would have been needed.
 \end{exe}
+
+\begin{exe}
+    Since $\sum_{i = 0}^{k} 2^i = 2^{k + 1} - 1$, every right (or every left) 
+    branch of the tree is a leaf, and the tree has a depth of $n - 1$. So the 
+    most frequent symbol is encoded with 1 bit, while the least frequent symbol 
+    is encoded with $n - 1$ bits.
+\end{exe}
