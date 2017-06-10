@@ -611,3 +611,27 @@ Let’s first define a function that prints intervals:
     \vscm{(make-sum 'x (make-sum 'y 'x))} or
     \vscm{(make-sum 'x 'y 2 'x)} are not simplified.
 \end{exe}
+
+\begin{exe}[2.58]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] It is sufficient to redefine the following procedures:
+            \scm{ch2/2.58a.scm}
+        \item[b.] The following implementations supports only multiplication and 
+            addition and can produce results with unnecessary parentheses.
+
+            It uses several helper procedures:
+            \begin{itemize}
+                \item \vscm{(elt-or-list elts)} returns the car of elts if elts 
+                    is of length 1, and the list elts otherwise.
+                \item \vscm{(take-until l elt)} returns a list containing all 
+                    the elements of l until the first occurrence of \vscm{elt}, 
+                    excluding it. If elt is not contained in the list, the full 
+                    list is returned.
+                \item \vscm{(intersperse l sep)} returns a list containing all 
+                    the elements of l, with sep inserted between each pair of 
+                    elements.
+            \end{itemize}
+            \scm{ch2/2.58b.scm}
+    \end{itemize}
+\end{exe}
