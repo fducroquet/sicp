@@ -687,3 +687,28 @@ Let’s first define a function that prints intervals:
             \vscm{tree->list-2} grows as $\Theta(n)$.
     \end{itemize}
 \end{exe}
+
+\begin{exe}
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] If $n = 0$, the constructed tree is empty.
+
+            Otherwise, one element will be the tree’s entry, so $n - 1$ elements 
+            will be in the subtrees.
+            $l = \lfloor \sfrac{n - 1}{2}\rfloor$ elements are put in the left 
+            tree, and the remaining $r = n - 1 - l$ are put in the right tree.
+
+            Since the list is ordered and the elements in the left tree must be 
+            smaller than the entry, the first elements of the list are used to 
+            build the left tree. The first remaining element is the entry, and 
+            the $r$ following remaining elements are used to build the right 
+            tree. The remaining elements of this last operation are also the 
+            remaining elements for the current call to \vscm{partial-tree}, so 
+            all that remains to be done is to put all the results together.
+
+        \item[b.] For \vscm{partial-tree}, the number of steps $T(n)$ as 
+            a function of the size of the tree to build $n$ verifies
+            $T(n) \approx 2 T\left(\sfrac{n}{2}\right)$, so its growth is in 
+            $\Theta(n)$, so \vscm{list->tree} has linear growth.
+    \end{itemize}
+\end{exe}
