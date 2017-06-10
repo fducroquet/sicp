@@ -10,3 +10,6 @@
 (define (inc n) (+ n 1))
 
 (define (identity x) x)
+
+(define false #f)
+(define true #t)
