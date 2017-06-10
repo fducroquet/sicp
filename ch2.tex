@@ -642,3 +642,17 @@ Let’s first define a function that prints intervals:
     The \vscm{union-set} operation can be defined as:
     \scm{ch2/2.59.scm}
 \end{exe}
+
+\begin{exe}
+    If duplicate elements are allowed, we can redefine \vscm{adjoin-set} and 
+    \vscm{union-set} in a more efficient way:
+    \scm{ch2/2.60.scm}
+    The operation \vscm{adjoin-set} now has $\Theta(1)$ complexity, while 
+    \vscm{union-set} has $\Theta(n)$ complexity. It’s not possible to improve 
+    the performance of \vscm{element-of-set?} and \vscm{intersection-set}.
+
+    This representation would be preferable to the non-duplicate one when there 
+    is no need to worry about the size taken by the sets in memory, and when the 
+    operations \vscm{adjoin-set} and \vscm{union-set} are used a lot more than 
+    \vscm{element-of-set?} and \vscm{intersection-set}.
+\end{exe}
