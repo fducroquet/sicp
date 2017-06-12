@@ -638,12 +638,12 @@ Let’s first define a function that prints intervals:
 
 \subsection{Example: Representing sets}
 
-\begin{exe}
+\begin{exe}[2.59]
     The \vscm{union-set} operation can be defined as:
     \scm{ch2/2.59.scm}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.60]
     If duplicate elements are allowed, we can redefine \vscm{adjoin-set} and 
     \vscm{union-set} in a more efficient way:
     \scm{ch2/2.60.scm}
@@ -657,19 +657,19 @@ Let’s first define a function that prints intervals:
     \vscm{element-of-set?} and \vscm{intersection-set}.
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.61]
     A possible implementation of \vscm{adjoin-set} requiring on average half as 
     many steps as with the unordered representation is:
     \scm{ch2/2.61.scm}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.62]
     By using the same method as for \vscm{intersection-set}, we get 
     a $\Theta(n)$ \vscm{union-set} implementation:
     \scm{ch2/2.62.scm}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.63]
     \ \vspace{-20pt}
     \begin{itemize}
         \item[a.] Both procedures produce the same result for every tree. They 
@@ -688,7 +688,7 @@ Let’s first define a function that prints intervals:
     \end{itemize}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.64]
     \ \vspace{-20pt}
     \begin{itemize}
         \item[a.] If $n = 0$, the constructed tree is empty.
@@ -713,7 +713,7 @@ Let’s first define a function that prints intervals:
     \end{itemize}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.65]
     If we call \vscm{union-set-ordered-list} and 
     \vscm{intersection-set-ordered-list} the linear union and intersection 
     procedures defined for ordered lists, we can define linear procedures 
@@ -721,7 +721,7 @@ Let’s first define a function that prints intervals:
     \scm{ch2/2.65.scm}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.66]
     The procedure is almost the same as \vscm{element-of-set?} for sets 
     represented as binary trees:
     \scm{ch2/2.66.scm}
@@ -729,28 +729,28 @@ Let’s first define a function that prints intervals:
 
 \subsection{Example: Huffman Encoding Trees}
 
-\begin{exe}
+\begin{exe}[2.67]
     The encoded string is ADABBCA.
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.68]
     A possible implementation of \vscm{encode-symbol} is:
     \scm{ch2/2.68.scm}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.69]
     A possible implementation for \vscm{successive-merge} is:
     \scm{ch2/2.69.scm}
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.70]
     With a Huffman encoding tree, 84 bits are required for encoding.
     With a fixed-length code, at least 3 bits per symbol are required for an 
     alphabet of 8 symbols, and the message contains 36 symbols, so at least 108 
     bits would have been needed.
 \end{exe}
 
-\begin{exe}
+\begin{exe}[2.71]
     Since $\sum_{i = 0}^{k} 2^i = 2^{k + 1} - 1$, every right (or every left) 
     branch of the tree is a leaf, and the tree has a depth of $n - 1$. So the 
     most frequent symbol is encoded with 1 bit, while the least frequent symbol 
