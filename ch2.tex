@@ -756,3 +756,30 @@ Let’s first define a function that prints intervals:
     most frequent symbol is encoded with 1 bit, while the least frequent symbol 
     is encoded with $n - 1$ bits.
 \end{exe}
+
+\begin{exe}[2.72]
+    In the \vscm{encode-symbol} procedure given in exercise 2.68, only the 
+    symbol list of the left subtree is searched at each node encountered, so we 
+    can distinguish two cases for the distribution given in exercise 2.71:
+
+    \paragraph*{The left subtree of each node corresponds to the most frequent 
+    symbol.}
+    Encoding the most frequent symbol takes $\Theta(1)$ steps since only 
+    one search in a list of size one is necessary before a leaf is reached.
+
+    Encoding the least frequent symbol takes $\Theta(n)$ steps, since 
+    all the levels of the tree are traversed, and at each level a search in 
+    a list of one element is performed.
+
+    \paragraph*{The right subtree of each node corresponds to the most frequent 
+    symbol.}
+    Encoding the most frequent symbol takes $\Theta(n)$ steps, for the search in 
+    the symbol list.
+
+    For the least frequent symbol, at each of the $n - 1$ tree levels the left 
+    subtree’s symbol list is searched, which takes $n - 1 - i$ steps, where $i$ 
+    is the level number, with $0$ designing the tree root. The number of steps 
+    required grows as $\sum_{k = 1}^{n - 1} k = \sfrac{n (n - 1)}{2}$, so the 
+    number of steps required to encode the least frequent symbol is in 
+    $\Theta(n^2)$.
+\end{exe}
