@@ -189,3 +189,12 @@
   ((get 'make-from-real-imag 'rectangular) x y))
 (define (make-from-mag-ang r a)
   ((get 'make-from-mag-ang 'polar) r a))
+
+; Exercise 2.73
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp) (if (same-variable? exp var) 1 0))
+        (else ((get 'deriv (operator exp)) (operands exp)
+                                           var))))
+(define (operator exp) (car exp))
+(define (operands exp) (cdr exp))
