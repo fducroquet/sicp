@@ -846,3 +846,23 @@ This subsection contains no exercises.
     The constructor \vscm{make-from-mag-ang} can be defined as follows:
     \scm{ch2/2.75.scm}
 \end{exe}
+
+\begin{exe}[2.76]
+    With generic operations with explicit dispatch, when a new type is added, 
+    all existing operations must be updated. When a new operation is added, no 
+    change to existing code is required.
+
+    With data-directed style, when a new type is added, all the operations for 
+    this type must be added to the table. When a new operation is added, it must be 
+    defined and inserted into the table for each type.
+
+    With message-passing, when a new type is added, no change is required to 
+    existing code. When a new operation is added, it must be added to all the 
+    existing types.
+
+    \medskip
+
+    For a system in which new types must often be added, message-passing is most 
+    appropriate. If new operations must often be added, explicit dispatch is 
+    most appropriate.
+\end{exe}
