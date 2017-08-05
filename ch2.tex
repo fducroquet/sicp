@@ -866,3 +866,26 @@ This subsection contains no exercises.
     appropriate. If new operations must often be added, explicit dispatch is 
     most appropriate.
 \end{exe}
+
+\section{Systems with Generic Operations}
+
+\subsection{Generic Arithmetic Operations}
+
+\begin{exe}[2.77]
+    When one of the generic operations is called on a \vscm{complex} number, 
+    \vscm{apply-generic} is called and dispatches the call to the same generic 
+    operation on the \vscm{polar} or \vscm{rectangular} number contained in the 
+    \vscm{complex}.
+
+    For the object \vscm{z} given in figure 2.24, the procedures called are:
+    \begin{cscm}
+        (magnitude z)
+        (apply-generic 'magnitude z)
+        (magnitude (contents z))
+        (apply-generic 'magnitude (contents z))
+        (magnitude-rectangular (3 . 4))
+    \end{cscm}
+    So \vscm{apply-generic} is called twice, it dispatches first to the same 
+    generic operation \vscm{magnitude}, then to the specific operation for 
+    rectangular numbers.
+\end{exe}
