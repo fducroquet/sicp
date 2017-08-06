@@ -1,10 +1,10 @@
 (define (install-deriv-exp)
   (define (base operands) (car operands))
   (define (exponent operands) (cadr operands))
-  (define (deriv operands var)
+  (define (deriv-exp operands var)
     (let ((u (base operands))
           (n (exponent operands)))
     (make-product (make-product n
                                 (make-exponentiation u (- n 1)))
                   (deriv u var))))
-  (put 'deriv '** deriv))
+  (put 'deriv '** deriv-exp))
