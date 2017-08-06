@@ -1,0 +1,7 @@
+(load "../ch1/utils.scm")
+(load "associative-table.scm")
+(load "2.73pre.scm")
+(install-rectangular-package)
+(install-polar-package)
+(define z1 (make-from-real-imag 3 4))
+(define z2 (make-from-mag-ang 1.42 .785))
