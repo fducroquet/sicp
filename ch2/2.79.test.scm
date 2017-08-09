@@ -1,0 +1,5 @@
+(load "2.78.test.scm")
+(load "2.79a.scm")
+(define (numer x) (car x))
+(define (denom x) (cdr x))
+(load "2.79b.scm")
