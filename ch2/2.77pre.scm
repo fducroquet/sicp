@@ -58,7 +58,10 @@
        (lambda (n d) (tag (make-rat n d))))
   'done)
 
-(define (install-complex-pacage)
+(define (make-rational n d)
+  ((get 'make 'rational) n d))
+
+(define (install-complex-package)
   ;; Imported procedures from rectangular and polar packages.
   (define (make-from-real-imag x y)
     ((get 'make-from-real-imag 'rectangular) x y))
