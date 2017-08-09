@@ -912,3 +912,22 @@ This subsection contains no exercises.
     Scheme number, rational and complex packages.
     \scm{ch2/2.80.scm}
 \end{exe}
+
+\subsection{Combining Data of Different Types}
+
+\begin{exe}[2.81]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] With Louis’s coercion procedures installed, if 
+            \vscm{apply-generic} is called with two arguments of type 
+            \vscm{complex} for an operation that is not found in the table for 
+            those types, as in the example given for \vscm{exp}, 
+            \vscm{apply-generic} is called recursively with the same arguments, 
+            so there is an infinite loop.
+        \item[b.]The  \vscm{apply-coercion} procedure works correctly, however, 
+            it’s unnecessary to attempt coercion to the same type so it should 
+            not be attempted.
+        \item[c.] The new version of \vscm{apply-generic} could be:
+            \scm{ch2/2.81.scm}
+    \end{itemize}
+\end{exe}
