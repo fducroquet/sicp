@@ -931,3 +931,17 @@ This subsection contains no exercises.
             \scm{ch2/2.81.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[2.82]
+    A version of \vscm{apply-generic} that handles coercion in the case of 
+    multiple arguments can look like:
+    \scm{ch2/2.82.scm}
+
+    The strategy proposed is not sufficiently general: let’s assume we define 
+    a procedure \vscm{exp} for arguments of type \vscm{complex} and 
+    \vscm{scheme-number}. If we call it with a rational and a Scheme number, the 
+    procedure above will try to coerce both arguments to rationals, and then to 
+    Scheme numbers, and will not find a suitable procedure in either case. 
+    However, it would have been enough to coerce the first argument to a complex 
+    to be able to apply the registered procedure.
+\end{exe}
