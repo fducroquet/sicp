@@ -945,3 +945,17 @@ This subsection contains no exercises.
     However, it would have been enough to coerce the first argument to a complex 
     to be able to apply the registered procedure.
 \end{exe}
+
+\begin{exe}[2.83]
+    The \vscm{raise} operation can be installed with:
+    \scm{ch2/2.83.scm}
+
+    \begin{comp}
+        So far, we have only used the types \vscm{scheme-number}, 
+        \vscm{rational} and \vscm{complex}. Since a lot of Scheme 
+        implementations --- including Gambit --- provide the full numeric tower, 
+        including predicates \vscm{integer?} and \vscm{real?}, we can implement 
+        the full tower by loading the following code:
+        \scm{ch2/2.83pre.scm}
+    \end{comp}
+\end{exe}
