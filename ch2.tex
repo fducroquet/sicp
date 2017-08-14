@@ -966,3 +966,16 @@ This subsection contains no exercises.
     type, the only necessary change is to add the new level to the tower.
     \scm{ch2/2.84.scm}
 \end{exe}
+
+\begin{exe}[2.85]
+    Let’s first define the \vscm{project} and \vscm{drop} procedures:
+    \scm{ch2/2.85a.scm}
+    Since \vscm{raise} is defined with \vscm{apply-generic}, simply calling 
+    \vscm{drop} after applying the procedure found causes an infinite loop. It’s 
+    also unnecessary to call it after \vscm{project}, and it can be called only 
+    on results representing numbers. So we add entries in the table to indicate 
+    that \vscm{drop} should not be called if the operation applied is 
+    \vscm{raise}, \vscm{project}, \vscm{equ?} or \vscm{=zero?}. It is called by 
+    default.
+    \scm{ch2/2.85b.scm}
+\end{exe}
