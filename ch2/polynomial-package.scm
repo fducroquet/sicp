@@ -72,6 +72,9 @@
 
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))
+
+  (include "poly-sup.scm")
+
   (put 'add '(polynomial polynomial)
        (lambda (p1 p2) (tag (add-poly p1 p2))))
   (put 'mul '(polynomial polynomial)

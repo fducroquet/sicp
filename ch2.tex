@@ -988,3 +988,20 @@ This subsection contains no exercises.
     \vscm{cos}, \vscm{sin}, \vscm{atan}, \vscm{sqrt} and \vscm{square}.
     \scm{ch2/2.86.scm}
 \end{exe}
+
+\subsection{Example: Symbolic Algebra}
+
+\begin{comp}
+    I decided to add the polynomial type to the tower of types used since 
+    exercise 2.83. For this to work, I had to redefine the tower of types:
+    \begin{cscm}
+        (define tower '(integer rational real complex polynomial))
+    \end{cscm}
+    and to define the procedures \vscm{project} and \vscm{equ?} for polynomials, 
+    as well as a \vscm{raise} procedure that transforms a complex number into 
+    a polynomial of degree 0. So I added the following code to the polynomial 
+    package given in the book. This still needs the \vscm{=zero?} procedure 
+    defined in the following exercise for \vscm{=equ?} to work on polynomials 
+    with polynomial coefficients.
+    \scm{ch2/poly-sup.scm}
+\end{comp}
