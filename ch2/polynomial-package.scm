@@ -71,6 +71,7 @@
           (mul-term-by-all-terms t1 (rest-terms L))))))
 
   (include "2.87a.scm")
+  (include "2.88b.scm")
 
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))
@@ -85,6 +86,10 @@
        (lambda (var terms) (tag (make-poly var terms))))
   (put '=zero? '(polynomial)
        (lambda (p) (=zero-terms? (term-list p))))
+  (put 'neg '(polynomial)
+       (lambda (p) (tag (neg-poly p))))
+  (put 'sub '(polynomial polynomial)
+       (lambda (p1 p2) (tag (add-poly p1 (neg-poly p2)))))
   'done)
 
 (define (make-polynomial var terms)
