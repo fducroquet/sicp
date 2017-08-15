@@ -70,6 +70,8 @@
                      (mul (coeff t1) (coeff t2)))
           (mul-term-by-all-terms t1 (rest-terms L))))))
 
+  (include "2.87a.scm")
+
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))
 
@@ -81,6 +83,8 @@
        (lambda (p1 p2) (tag (mul-poly p1 p2))))
   (put 'make 'polynomial
        (lambda (var terms) (tag (make-poly var terms))))
+  (put '=zero? '(polynomial)
+       (lambda (p) (=zero-terms? (term-list p))))
   'done)
 
 (define (make-polynomial var terms)
