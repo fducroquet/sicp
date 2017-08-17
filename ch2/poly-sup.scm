@@ -37,7 +37,8 @@
 
 (put 'raise '(complex)
      (lambda (z)
-       (make-polynomial 'x (list (list 0 (attach-tag 'complex z))))))
+       (make-polynomial 'x (adjoin-term (make-term 0 (attach-tag 'complex z))
+                                        (make-empty-termlist 'dense)))))
 
 (put 'equ? '(polynomial polynomial)
      (lambda (p1 p2)

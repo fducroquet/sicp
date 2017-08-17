@@ -1029,3 +1029,24 @@ This subsection contains no exercises.
     \vscm{first-term}:
     \scm{ch2/2.89.scm}
 \end{exe}
+
+\begin{exe}[2.90]
+    I defined two packages to install the representions for the two kinds of 
+    term lists. Each package defines \vscm{adjoin-term}, \vscm{first-term}, 
+    \vscm{rest-terms}, \vscm{empty-termlist?}, as well as a constructor for the 
+    empty term list.
+
+    For the \vscm{adjoin-term} procedure, a generic procedure on the kind of 
+    term-list returns a lambda that takes a term as an argument. This avoids 
+    having to tag the term as well.
+
+    The procedures \vscm{coeff}, \vscm{order} and \vscm{make-term} have been put 
+    out of the polynomial package because they are needed in all three packages.
+
+    The only adaptation needed for the other procedures of the polynomial 
+    package is to replace calls to \vscm{(the-empty-termlist)} with calls to 
+    \vscm{make-empty-termlist} with the correct type. For simplicity, I used the 
+    type of the arguments rather than looking at the number of non-zero 
+    coefficients of the result to pick the best representation.
+    \scm{ch2/2.90.scm}
+\end{exe}
