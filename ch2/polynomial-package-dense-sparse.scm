@@ -128,6 +128,7 @@
 
   (include "2.87a.scm")
   (include "2.88b.scm")
+  (include "2.91a.scm")
 
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))
@@ -146,6 +147,8 @@
        (lambda (p) (tag (neg-poly p))))
   (put 'sub '(polynomial polynomial)
        (lambda (p1 p2) (tag (add-poly p1 (neg-poly p2)))))
+  (put 'div '(polynomial polynomial)
+       (lambda (p1 p2) (map tag (div-poly p1 p2))))
   'done)
 
 (define (make-polynomial var terms)

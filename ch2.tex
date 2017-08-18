@@ -1050,3 +1050,15 @@ This subsection contains no exercises.
     coefficients of the result to pick the best representation.
     \scm{ch2/2.90.scm}
 \end{exe}
+
+\begin{exe}[2.91]
+    The \vscm{div-poly} and \vscm{div-terms} procedures can be defined in the 
+    following way. I used the polynomial package with two term-list 
+    representations from the previous exercise. For testing, I added
+    \vscm{(put 'no-drop? 'div true)} to prevent \vscm{apply-generic} from 
+    attempting to simplify the list of two polynomials returned by the division, 
+    but it would be better to modify the way \vscm{apply-generic} decides 
+    whether to simplify its results to avoid disabling simplification entirely.
+    \scm{ch2/2.91a.scm}
+    \scm{ch2/2.91b.scm}
+\end{exe}
