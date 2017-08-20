@@ -1062,3 +1062,59 @@ This subsection contains no exercises.
     \scm{ch2/2.91a.scm}
     \scm{ch2/2.91b.scm}
 \end{exe}
+
+\begin{exe}[2.92]
+    I tried to find a solution that was as general as possible: works for an 
+    arbitrary number of variables used in the polynomials, in any order. The 
+    variables are ordered alphabetically.
+
+    The \vscm{poly->monoms} procedure transforms a polynomial into an ordered 
+    list of monoms. A monom consists of a list of variable-power lists and 
+    a non-zero coefficient.
+    The order on the variable-power lists is defined by:
+    \vscm{(< (var1 n1) (var2 n2))} iff
+    \begin{cscm}
+    (or (string<? var1 var2)
+        (and (string=? var1 var2) (> n1 n2)))
+    \end{cscm}
+    (where we omitted the calls to \vscm{symbol->string} for simplicity.
+    The monoms are ordered lexicographically on their lists of variables, with 
+    the empty list appearing last.
+
+    The \vscm{monoms->poly} procedure transforms the list of monoms built by 
+    \vscm{poly->monoms} back into a polynomial where each variable appears only 
+    at one level, and the variables appear in alphabetical order. Note that 
+    \vscm{monoms->poly} can actually return types other than polynomial, if the 
+    original polynomial was of degree 0.
+
+    The \vscm{make-same-var} procedure takes two polynomials and returns a pair 
+    of two polynomials in the same main variable. This is useful if the 
+    variables appearing in the two polynomials are different. If the same 
+    variables appear, but ordered differently, \vscm{monoms->poly} is enough.
+
+    Since \vscm{monoms->poly} can return types other than polynomial, it must 
+    return tagged data, and \vscm{add-poly}, \vscm{mul-poly}, \vscm{neg-poly} 
+    and \vscm{div-poly} have been transformed to return tagged data as well.
+
+    \begin{comp}
+        I kept the original code in the case when the two polynomials are in the 
+        same variable, but in the case that, say, p1 is a polynomial in $x$ with 
+        coefficients in $y$, some of them having coefficients in $x$ as well, this 
+        won’t work and the transformation to a canonical form should be used. We’ll 
+        assume that this doesn’t happen to avoid going through the transformation 
+        when it’s not necessary.
+
+        It would also have been possible to rewrite \vscm{add-poly} and 
+        \vscm{mul-poly} so that the operations are made on the monoms rather than 
+        the terms, e.g. two polynomials can be added with:
+        \begin{cscm}
+            (monoms->poly (merge-monoms (poly->monoms p1)
+            (poly->monoms p2)))
+        \end{cscm}
+    \end{comp}
+
+    Additions to the polynomial package:
+    \scm{ch2/2.92.scm}
+    Changes to existing code:
+    \scm{ch2/2.92changes.scm}
+\end{exe}

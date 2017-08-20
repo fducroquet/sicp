@@ -6,5 +6,5 @@
                               (neg (coeff first-term)))
                    (neg-terms (rest-terms L))))))
 (define (neg-poly p)
-  (make-poly (variable p)
-             (neg-terms (term-list p))))
+  (make-polynomial (variable p)
+                   (neg-terms (term-list p))))
