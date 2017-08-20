@@ -33,7 +33,10 @@
 
 (put 'project '(polynomial)
      (lambda (p)
-       (get-coeff-by-degree p 0)))
+       (let ((c0 (get-coeff-by-degree p 0)))
+         (if (eq? (type-tag c0) 'polynomial)
+           (project c0)
+           c0))))
 
 (put 'raise '(complex)
      (lambda (z)
