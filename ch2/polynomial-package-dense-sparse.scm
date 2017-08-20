@@ -8,6 +8,9 @@
   (apply-generic 'empty-termlist? term-list))
 (define (make-empty-termlist type)
   ((get 'make type) '()))
+(define (greatest-common-divisor x y)
+  (apply-generic 'gcd x y))
+
 (put 'no-drop? 'adjoin-term true)
 (put 'no-drop? 'first-term true)
 (put 'no-drop? 'rest-terms true)
@@ -131,6 +134,8 @@
   (include "2.87a.scm")
   (include "2.88b.scm")
   (include "2.91a.scm")
+  (include "2.94pre.scm")
+  (include "2.94.scm")
 
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))
@@ -151,6 +156,8 @@
        (lambda (p1 p2) (add-poly p1 (contents (neg-poly p2)))))
   (put 'div '(polynomial polynomial)
        (lambda (p1 p2) (div-poly p1 p2)))
+  (put 'gcd '(polynomial polynomial)
+       (lambda (p1 p2) (tag (gcd-poly p1 p2))))
   'done)
 
 (define (make-polynomial var terms)

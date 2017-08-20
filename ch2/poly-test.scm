@@ -35,3 +35,8 @@
 (define p1 (make-polynomial 'x '(sparse (2 1) (0 1))))
 (define p2 (make-polynomial 'x '(sparse (3 1) (0 1))))
 (define rf (make-rational p2 p1))
+
+; Exercise 2.94
+(put 'gcd '(integer integer) gcd)
+(define p1 (make-polynomial 'x '(sparse (4 1) (3 -1) (2 -2) (1 2))))
+(define p2 (make-polynomial 'x '(sparse (3 1) (1 -1))))
