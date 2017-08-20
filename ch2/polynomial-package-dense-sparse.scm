@@ -10,11 +10,14 @@
   ((get 'make type) '()))
 (define (greatest-common-divisor x y)
   (apply-generic 'gcd x y))
+(define (reduce x y)
+  (apply-generic 'reduce x y))
 
 (put 'no-drop? 'adjoin-term true)
 (put 'no-drop? 'first-term true)
 (put 'no-drop? 'rest-terms true)
 (put 'no-drop? 'empty-termlist? true)
+(put 'no-drop? 'reduce true)
 
 (define (make-term order coeff) (list order coeff))
 (define (order term) (car term))
@@ -138,6 +141,7 @@
   (include "2.96a1.scm")
   ; (include "2.96a2.scm")
   (include "2.96b.scm")
+  (include "2.97a.scm")
 
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))
@@ -160,6 +164,8 @@
        (lambda (p1 p2) (div-poly p1 p2)))
   (put 'gcd '(polynomial polynomial)
        (lambda (p1 p2) (tag (gcd-poly p1 p2))))
+  (put 'reduce '(polynomial polynomial)
+       (lambda (p1 p2) (map tag (reduce-poly p1 p2))))
   'done)
 
 (define (make-polynomial var terms)

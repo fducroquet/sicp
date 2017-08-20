@@ -1161,3 +1161,19 @@ This subsection contains no exercises.
             \scm{ch2/2.96b.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[2.97]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] The \vscm{reduce-terms} and \vscm{reduce-poly} procedures can 
+            be defined as:
+            \scm{ch2/2.97a.scm}
+        \item[b.] The only change needed besides adding the necessary entries to 
+            the associative table is to redefine \vscm{make-rat} as:
+            \scm{ch2/2.97b.scm}
+            The result returned by \vscm{(add rf1 rf2)} corresponds to
+            $\frac{-x^3 - 2x^2 - 3x - 1}{-x^4 - x^3 + x + 1}$, which is 
+            correctly reduced to lowest terms, though multiplying both the 
+            numerator and the denominator by $-1$ would seem more natural.
+    \end{itemize}
+\end{exe}
