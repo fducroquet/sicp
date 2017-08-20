@@ -28,3 +28,10 @@
 (define d (make-polynomial 'z `(dense 1 ,a1 ,p7)))
 (define e (make-polynomial 'y `(dense ,p1 ,a ,b ,(make-rational 3 2))))
 (define f (make-polynomial 't `(dense ,e 0 0)))
+
+(load "2.93.scm")
+(load "2.93sup.scm")
+(install-rational-package)
+(define p1 (make-polynomial 'x '(sparse (2 1) (0 1))))
+(define p2 (make-polynomial 'x '(sparse (3 1) (0 1))))
+(define rf (make-rational p2 p1))
