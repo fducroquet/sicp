@@ -134,8 +134,10 @@
   (include "2.87a.scm")
   (include "2.88b.scm")
   (include "2.91a.scm")
-  (include "2.94pre.scm")
   (include "2.94.scm")
+  (include "2.96a1.scm")
+  ; (include "2.96a2.scm")
+  (include "2.96b.scm")
 
   ;; Interface to rest of system.
   (define (tag p) (attach-tag 'polynomial p))

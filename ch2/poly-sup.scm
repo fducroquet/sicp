@@ -1,17 +1,20 @@
 (define (get-coeff-by-degree p degree)
-  (define (iter term-list)
-    (cond ((empty-termlist? term-list) 0)
-          ((= (order (first-term term-list)) degree)
-           (coeff (first-term term-list)))
-          (else
-            (iter (rest-terms term-list)))))
-  (iter (term-list p)))
+  (get-coeff-by-degree-terms (term-list p) degree))
+
+(define (get-coeff-by-degree-terms term-list degree)
+  (cond ((empty-termlist? term-list) 0)
+        ((= (order (first-term term-list)) degree)
+         (coeff (first-term term-list)))
+        (else
+          (get-coeff-by-degree-terms (rest-terms term-list) degree))))
 
 (define (degree p)
-  (let ((term-list (term-list p)))
-    (if (empty-termlist? term-list)
-      0
-      (order (first-term term-list)))))
+  (degree-terms (term-list p)))
+
+(define (degree-terms term-list)
+  (if (empty-termlist? term-list)
+    0
+    (order (first-term term-list))))
 
 (define (equ-term-lists? L1 L2)
   (cond ((and (empty-termlist? L1) (empty-termlist? L2))
@@ -40,7 +43,7 @@
 
 (put 'raise '(complex)
      (lambda (z)
-       (make-polynomial 'x (adjoin-term (make-term 0 (attach-tag 'complex z))
+       (make-polynomial 'x (adjoin-term (make-term 0 (drop (attach-tag 'complex z)))
                                         (make-empty-termlist 'dense)))))
 
 (put 'equ? '(polynomial polynomial)

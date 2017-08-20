@@ -1146,3 +1146,18 @@ This subsection contains no exercises.
     limited-precision decimal numbers as coefficients, and the second call does not 
     return.
 \end{exe}
+
+\begin{exe}[2.96]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] The procedure \vscm{pseudoremainder-terms} can be defined as:
+            \scm{ch2/2.96a1.scm}
+            and the new version of \vscm{gcd-terms} is:
+            \scm{ch2/2.96a2.scm}
+            On the example in exercise 2.95, \vscm{greatest-common-divisor} now 
+            produces the polynomial $1458 x^2 - 2916 x + 1458$.
+        \item[b.] The procedure can be rewritten in the following way to divide 
+            the coefficients of the answer by their greatest common divisor.
+            \scm{ch2/2.96b.scm}
+    \end{itemize}
+\end{exe}

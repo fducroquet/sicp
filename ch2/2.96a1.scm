@@ -1,0 +1,6 @@
+(define (pseudoremainder-terms a b)
+  (let* ((o1 (degree-terms a))
+         (o2 (degree-terms b))
+         (c (get-coeff-by-degree-terms b o2)))
+    (cadr (div-terms (mul-term-by-all-terms (make-term 0 (expt c (+ 1 (- o1 o2)))) a)
+                     b))))
