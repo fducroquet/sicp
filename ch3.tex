@@ -37,3 +37,17 @@
     The \vscm{rand} procedure can be rewritten as:
     \scm{ch3/3.06.scm}
 \end{exe}
+
+\subsection{The Costs of Introducing Assignment}
+
+\begin{exe}[3.7]
+    I simply added a \vscm{join} action to the account returned by 
+    \vscm{make-account} that creates an access with another password. I also 
+    make \vscm{incorrect-password} throw an error instead of simply returning 
+    a string, otherwise a call such as
+    \vscm{(define new-acc (make-join account curr-pass new-pass))} with an 
+    incorrect current password will affect a string value to \vscm{new-acc} 
+    without reporting an error, and subsequent uses of the account will throw 
+    errors because \vscm{"Incorrect password"} is not a procedure.
+    \scm{ch3/3.07.scm}
+\end{exe}
