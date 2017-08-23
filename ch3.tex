@@ -51,3 +51,15 @@
     errors because \vscm{"Incorrect password"} is not a procedure.
     \scm{ch3/3.07.scm}
 \end{exe}
+
+\begin{exe}[3.8]
+    The procedure \vscm{f} returns:
+    \begin{itemize}
+        \item 0 if it is the first time it is called;
+        \item the previous argument it was called with otherwise.
+    \end{itemize}
+    Thus, if we evaluate \vscm{(f 0)}, then \vscm{(f 1)}, we get 0 both times, 
+    but if we evaluate \vscm{(f 1)}, then \vscm{(f 0)}, we get 0 the first 
+    time and 1 the second.
+    \scm{ch3/3.08.scm}
+\end{exe}
