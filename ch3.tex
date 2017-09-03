@@ -175,3 +175,137 @@ font=\ttfamily\small,
     both versions of the procedure are shown in figures \ref{fact_rec} and 
     \ref{fact_iter}.
 \end{exe}
+
+\subsection{Frames as the Repository of Local State}
+
+\var{\circleradius}{3mm}
+\var{\smallcircleradius}{.8mm}
+\newcommand\pointer[1]{
+\draw (#1) circle (\circleradius);
+\filldraw (#1) circle (\smallcircleradius);
+}
+\newcommand\procedure[3]{
+\coordinate[left=\circleradius of #1]  (#2);
+\coordinate[right=\circleradius of #1]  (#3);
+\pointer{#2}
+\pointer{#3}
+}
+
+\begin{exe}[3.10]
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \matrix[matrix anchor=north west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+            \node[text width=1cm, align=right] (ge) {global\\ env}; &
+            \node[code] (mkw) {make-withdraw: ...}; \\[-8pt]
+            & \node[code] (w1) {W1: }; \\
+            };
+            \begin{scope}[on background layer]
+                \coordinate (w1b) at ($ (w1.south) - (0, 10pt) $);
+                \node[global env, fit=(mkw) (w1b), right=\nametoenv of ge] (g) 
+                {};
+            \end{scope}
+            \node[text width=1cm, align=right, below=of g] (e1) {E1};
+            \node[env, right=\nametoenv of e1] (n1) {initial-amount:\,100};
+            \node[env, below=of n1] (n2) {balance:\,100};
+            \node[left=\nametoenv of n2] (e2) {E2};
+            \node[env, below=of n2] (n3) {amount:\,50};
+
+            \coordinate[left=3cm of e1] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: amount\\
+            body: (if ...)
+            };
+            \node[code, below=1ex of n3] { (if ...) };
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -- ++(0, -8mm) -| ($ (n2.north) - (.5cm, 0) $);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \foreach \i in {1, 2}
+                \draw[->] (e\i) -- (n\i);
+            \draw[->] (n1.north) -- (n1.north |- g.south);
+            \draw[->] (n2) -- (n1);
+            \draw[->] (n3) -- (n2);
+            \draw[->] (w1) -| ($ (p1) + (0, \circleradius) $);
+        \end{tikzpicture}
+        \caption{Environments created when executing
+        \vscm{(W1 50)} after executing
+        \vscm{(define (W1 (make-withdraw 100))}. The environment E1 is created 
+        by the call to \vscm{make-withdraw}, E2 is created when the lambda 
+        procedure created by the \vscm{let} is executed. E2 is referenced by the 
+        procedure returned by \vscm{make-withdraw}. When \vscm{(W1 50)} is 
+        called, a new environment pointing to E2 is created, in which the body 
+        of \vscm{W1} is evaluated.}
+        \label{3.10figa}
+    \end{figure}
+
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \matrix[matrix anchor=north west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+            & \node[code] (mkw) {make-withdraw: ...}; \\
+            \node[text width=1cm, align=right] (ge) {global\\ env};& \node[code] 
+            (w1) {W1: }; \\[-8pt]
+            & \node[code] (w2) {W2: }; \\
+            };
+            \begin{scope}[on background layer]
+                \coordinate (mkwb) at ($ (mkw.north) + (0, 20pt) $);
+                \node[global env, fit=(mkwb) (w1), right=\nametoenv of ge] (g) 
+            {};
+            \end{scope}
+            \coordinate (e1pos) at ($ (g.south west)!.65!(g.south east) $);
+            \node[text width=1cm, align=right, below=of e1pos] (e1) {E1};
+            \node[env, right=\nametoenv of e1] (n1) {initial-amount:\,100};
+            \node[env, below=of n1] (n2) {balance:\,50};
+            \node[left=\nametoenv of n2] (e2) {E2};
+
+            \coordinate[left=.8cm of e1] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: amount\\
+            body: (if ...)
+            };
+
+            \coordinate (e3pos) at (ge |- g.south east);
+            \node[text width=1cm, align=right, below=of e3pos] (e3) {E3};
+            \node[env, right=\nametoenv of e3] (n3) {initial-amount:\,100};
+            \node[env, below=of n3] (n4) {balance:\,100};
+            \node[left=\nametoenv of n4] (e4) {E4};
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -- ++(0, -8mm) -| ($ (n2.north) - (.5cm, 0) $);
+            \draw[->] (w1) -| ($ (p1) + (0, \circleradius) $);
+
+            \coordinate[left=2cm of p1] (p2);
+            \procedure{p2}{c3}{c4}
+            \draw[->] (c3) |- (code.west);
+            \draw[->] (c4) -- ++(0, -8mm) -| ($ (n4.north) + (.5cm, 0) $);
+            \draw[->] (w2) -| ($ (p2) + (0, \circleradius) $);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \foreach \i in {1, ..., 4}
+                \draw[->] (e\i) -- (n\i);
+            \draw[->] (n1.north) -- (n1.north |- g.south);
+            \draw[->] (n3.north) -- (n3.north |- g.south);
+            \draw[->] (n2) -- (n1);
+            \draw[->] (n4) -- (n3);
+        \end{tikzpicture}
+        \caption{Environments created after the execution of
+        \vscm{(define W1 (make-withdraw 100))}, followed by \vscm{(W1 50)}, then 
+        \vscm{(define W2 (make-withdraw 100))}. The call to \vscm{W1} modified 
+        the value of \vscm{balance} in E2, but \vscm{W2} uses the \vscm{balance} 
+        variable of environment E4.}
+        \label{3.10figb}
+    \end{figure}
+
+    The environments created after the execution of the three commands are shown 
+    in figures \ref{3.10figa} and \ref{3.10figb}, see the captions for some 
+    details. As with the first version of \vscm{make-version}, each object 
+    created with a call to \vscm{make-version} uses a \vscm{balance} binding 
+    situated in an environment specific to the object.
+
+    In the second version, two environments are created instead of one, and the 
+    value of \vscm{initial-value} is unchanged.
+\end{exe}
