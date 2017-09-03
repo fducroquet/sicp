@@ -40,8 +40,14 @@ linkcolor=darkgreen, breaklinks, colorlinks]{hyperref}
 \theoremstyle{break}
 \newtheorem{exeaux}{Exercise}[chapter]
 
-% For exercise 2.24
-\usepackage{pstricks, pst-tree}
+% For exercise 2.24, and some exercises in chapter 3
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+% \usegdlibrary{trees, layered}
+\newcommand\var[2]{%
+\newlength{#1}
+\setlength{#1}{#2}
+}
 
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}

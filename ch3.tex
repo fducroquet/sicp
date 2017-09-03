@@ -63,3 +63,115 @@
     time and 1 the second.
     \scm{ch3/3.08.scm}
 \end{exe}
+
+\section{The Environment Model of Evaluation}
+
+\subsection{The Rules for Evaluation}
+
+This subsection contains no exercises.
+
+\subsection{Applying Simple Procedures}
+
+% Tikz styles for the environments of section 3.2.
+\tikzset{env/.style={
+rectangle,
+rounded corners=2pt,
+% border
+very thick,
+draw=teal!80!black,
+% filling
+fill=teal!10,
+inner sep = 2mm,
+font=\ttfamily\small,
+align=left,
+},
+global env/.style={
+env,
+align=left,
+inner xsep=1ex,
+text width=13cm-2*\pgfkeysvalueof{/pgf/inner xsep},
+minimum width=13cm,
+minimum height=1.5cm
+},
+code/.style={
+align=left,
+font=\ttfamily\small,
+}
+}
+
+\var{\nametoenv}{4mm}
+\var{\envtonext}{3mm}
+\begin{exe}[3.9]
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \node[text width=1cm, align=right] (ge) {global\\ env};
+            \node[global env, right=\nametoenv of ge] (g) {factorial};
+            \node[text width=1cm, align=right, below=of ge] (e1) {E1};
+            \node[env, right=\nametoenv of e1] (n1) {n:\,6};
+            \node[right=\envtonext of n1] (e2) {E2};
+            \node[env, right=\nametoenv of e2] (n2) {n:\,5};
+            \node[right=\envtonext of n2] (e3) {E3};
+            \node[env, right=\nametoenv of e3] (n3) {n:\,4};
+            \node[right=\envtonext of n3] (e4) {E4};
+            \node[env, right=\nametoenv of e4] (n4) {n:\,3};
+            \node[right=\envtonext of n4] (e5) {E5};
+            \node[env, right=\nametoenv of e5] (n5) {n:\,2};
+            \node[right=\envtonext of n5] (e6) {E6};
+            \node[env, right=\nametoenv of e6] (n6) {n:\,1};
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \foreach \i in {1, ..., 6} {
+                \draw[->] (e\i) -- (n\i);
+                \draw[->] (n\i.north) -- (n\i.north|-g.south);
+                \node[code,below=2mm of n\i] { \vscm{(if ...)} };
+            }
+        \end{tikzpicture}
+        \caption{Environments created by evaluating \vscm{(factorial 6)} with 
+        the recursive procedure. In all the environments created, the code to 
+        evaluate corresponds to the body of the \vscm{factorial} procedure.}
+        \label{fact_rec}
+    \end{figure}
+
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \node[text width=1cm, align=right] (ge) {global\\ env};
+            \node[global env, right=\nametoenv of ge] (g)
+            {factorial\\ fact-iter};
+            \node[text width=1cm, align=right, below=of ge] (e1) {E1};
+            \node[env, right=\nametoenv of e1] (n1) {n:\,6};
+            \node[right=\envtonext of n1] (e2) {E2};
+            \node[env, right=\nametoenv of e2] (n2) {p:\,1\\ c:\,1\\ m:\,6};
+            \node[right=\envtonext of n2] (e3) {E3};
+            \node[env, right=\nametoenv of e3] (n3) {p:\,2\\ c:\,2\\ m:\,6};
+            \node[right=(\envtonext+.6cm) of n3] (e4) {E4};
+            \node[env, right=\nametoenv of e4] (n4) {p:\,6\\ c:\,3\\ m:\,6};
+            \node[right=(\envtonext+.3cm) of n4] (e5) {E5};
+            \node[env, right=\nametoenv of e5] (n5) {p:\,24\\ c:\,4\\ m:\,6};
+            \node[below=1.9cm of n3] (e6) {E6};
+            \node[env, right=\nametoenv of e6] (n6) {p:\,24\\ c:\,5\\ m:\,6};
+            \node[right=\envtonext of n6] (e7) {E7};
+            \node[env, right=\nametoenv of e7] (n7) {p:\,120\\ c:\,6\\ m:\,6};
+            \node[right=\envtonext of n7] (e8) {E8};
+            \node[env, right=\nametoenv of e8] (n8) {p:\,720\\ c:\,7\\ m:\,6};
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \foreach \i in {1, ..., 8} {
+                \draw[->] (e\i) -- (n\i);
+                \draw[->] (n\i.north) -- (n\i.north|-g.south);
+            }
+
+            \node[code, below = 2mm of n1] { \vscm{(fact-iter 1 1 n)} };
+            \foreach \i in {2, ..., 8} {
+                \node[code, below = 2mm of n\i] { \vscm{(if ...)} };
+            }
+        \end{tikzpicture}
+        \caption{Environments created by evaluating \vscm{(factorial 6)} with 
+        the iterative procedure. In environments E2 to E8, the code to evaluate 
+        corresponds to the body of the \vscm{fact-iter} procedure.}
+        \label{fact_iter}
+    \end{figure}
+
+    The environment structure created by evaluating \vscm{(factorial 6)} with 
+    both versions of the procedure are shown in figures \ref{fact_rec} and 
+    \ref{fact_iter}.
+\end{exe}
