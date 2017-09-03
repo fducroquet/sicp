@@ -309,3 +309,149 @@ font=\ttfamily\small,
     In the second version, two environments are created instead of one, and the 
     value of \vscm{initial-value} is unchanged.
 \end{exe}
+
+\subsection{Internal Definitions}
+
+\begin{exe}[3.11]
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \matrix[matrix anchor=base west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+            \node[text width=1cm, align=right] (ge) {global\\ env};
+            & \node[code] (mkw) {make-account: ...}; \\[-8pt]
+            & \node[code] (acc) {acc: }; \\
+            };
+            \coordinate (e1pos) at ($ (g.south west)!.15!(g.south east) $);
+            \matrix[matrix anchor=north west, column sep=2\nametoenv,
+            below=1mm of e1pos, column 2/.style={anchor=base west}] {
+            \node[text width=1cm, align=right] (e1) {E1};
+            & \node[code] (balance) { balance: 50}; \\[-11pt]
+            & \node[code] { withdraw: ... }; \\
+            & \node[code] { deposit: ... }; \\
+            & \node[code] (dispatch) { dispatch: }; \\
+            };
+            \begin{scope}[on background layer]
+                \coordinate (accb) at ($ (acc.south) - (0, 20pt) $);
+                \node[global env, fit=(mkw) (accb), right=\nametoenv of ge] (g) 
+                    {};
+                \node[env, minimum width=4cm, fit=(balance) (dispatch), 
+                right=\nametoenv of e1, yshift=-3mm] (n1) {};
+            \end{scope}
+
+            \coordinate (xp1) at ($ (n1.south)!.50!(n1.south east) $);
+            \coordinate[below=of xp1] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: m\\
+            body: (cond ...)
+            };
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -| ($ (n1.south east) - (3mm, 0) $);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \draw[->] (e1) -- (e1.east -| n1.west);
+            \draw[->] (n1.north) -- (n1.north |- g.south);
+            \draw[->] (dispatch) -| ($ (p1) + (0, \circleradius) $);
+
+            \draw[->] (acc) -- ($ (acc) + (1cm, 0) $)
+                |- ($ (p1) + (-2\circleradius, 0) $);
+
+            % Evaluation of ((acc 'deposit) 40)
+            \coordinate[right=2cm of n1.east] (middle);
+            \node[env, above=1em of middle] (m)
+            {m: 'deposit};
+            \node[env, below=1em of middle] (amount) {amount: 40};
+            \node[right=of m] (e2) {E2};
+            \node[right=of amount] (e3) {E3};
+            \draw[->] (e2) -- (m);
+            \draw[->] (e3) -- (amount);
+            \draw[->] (m) -- (m -| n1.east);
+            \draw[->] (amount) -- (amount -| n1.east);
+        \end{tikzpicture}
+
+        \caption{Environments when evaluating \vscm{((acc 'deposit) 40)}
+        after evaluating \vscm{(define acc (make-account 50))}. E1 is created 
+        when defining \vscm{acc}, then the evaluation of \vscm{(acc 'deposit)}
+        causes the creation of an environment referencing E1, and since the 
+        result of the evaluation is the procedure \vscm{deposit}, \vscm{(deposit 
+        40)} is then evaluated in a new environment.}
+        \label{3.11figa}
+    \end{figure}
+
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \matrix[matrix anchor=base west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+            \node[text width=1cm, align=right] (ge) {global\\ env};
+            & \node[code] (mkw) {make-account: ...}; \\[-8pt]
+            & \node[code] (acc) {acc: }; \\
+            };
+            \coordinate (e1pos) at ($ (g.south west)!.15!(g.south east) $);
+            \matrix[matrix anchor=north west, column sep=2\nametoenv,
+            below=1cm of e1pos, column 2/.style={anchor=base west}] {
+            \node[text width=1cm, align=right] (e1) {E1};
+            & \node[code] (balance) { balance: 90}; \\[-11pt]
+            & \node[code] { withdraw: ... }; \\
+            & \node[code] { deposit: ... }; \\
+            & \node[code] (dispatch) { dispatch: }; \\
+            };
+            \begin{scope}[on background layer]
+                \coordinate (accb) at ($ (acc.south) - (0, 20pt) $);
+                \node[global env, fit=(mkw) (accb), right=\nametoenv of ge] (g) 
+                    {};
+                \node[env, minimum width=4cm, fit=(balance) (dispatch), 
+                right=\nametoenv of e1, yshift=-3mm] (n1) {};
+            \end{scope}
+
+            \coordinate (xp1) at ($ (n1.south)!.50!(n1.south east) $);
+            \coordinate[below=of xp1] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: m\\
+            body: (cond ...)
+            };
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -| ($ (n1.south east) - (3mm, 0) $);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \draw[->] (e1) -- (e1.east -| n1.west);
+            \draw[->] (n1.north) -- (n1.north |- g.south);
+            \draw[->] (dispatch) -| ($ (p1) + (0, \circleradius) $);
+
+            \draw[->] (acc) -- ($ (acc) + (1cm, 0) $)
+                |- ($ (p1) + (-2\circleradius, 0) $);
+
+            % Evaluation of ((acc 'withdraw) 60)
+            \coordinate[right=2cm of n1.east] (middle);
+            \node[env, above=1em of middle] (m)
+            {m: 'withdraw};
+            \node[env, below=1em of middle] (amount) {amount: 60};
+            \node[right=of m] (e4) {E4};
+            \node[right=of amount] (e5) {E5};
+            \draw[->] (e4) -- (m);
+            \draw[->] (e5) -- (amount);
+            \draw[->] (m) -- (m -| n1.east);
+            \draw[->] (amount) -- (amount -| n1.east);
+        \end{tikzpicture}
+
+        \caption{Environments during the evaluation of
+        \vscm{((acc 'withdraw) 60)}.}
+        \label{3.11figb}
+    \end{figure}
+
+    The environments generated by the evaluation of
+    \vscm{(define acc (make-account 50))},\\
+    \vscm{((acc 'deposit) 40)} and \vscm{((acc 'withdraw) 60)} are shown in 
+    figures \ref{3.11figa} and \ref{3.11figb}. The local state for \vscm{acc} is 
+    kept in the local environment referenced by the procedure object referenced 
+    by \vscm{acc}.
+
+    If a second environment is created, its local state is kept in a new 
+    environment created when evaluating the \vscm{make-account} procedure, so it 
+    does not interfere with \vscm{acc}’s local environment.
+
+    The environment structures of \vscm{acc} and \vscm{acc2} share the global 
+    environment.
+\end{exe}
