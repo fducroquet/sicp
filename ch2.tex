@@ -274,22 +274,57 @@ Let’s first define a function that prints intervals:
     the two other lists.
 
     \begin{figure}
-        \begin{center}
-            TODO (too time-consuming…)
-        \end{center}
+        \centering
+        \begin{tikzpicture}[box and pointer]
+            \matrix[cell matrix] {
+            \node[car] (11) {}; & \node[cdr] (12) {}; &[+\boxsize]
+            \node[car] (13) {}; & \node[cdr] (14) {}; \\
+
+            \node[box] (1) {1}; &&
+            \node[car] (21) {}; & \node[cdr] (22) {}; &[+\boxsize]
+            \node[car] (23) {}; & \node[cdr] (24) {}; \\
+
+            &&
+            \node[box] (2) {2}; &&
+            \node[car] (31) {}; & \node[cdr] (32) {}; &[+\boxsize]
+            \node[car] (33) {}; & \node[cdr] (34) {}; \\
+
+            &&&&
+            \node[box] (3) {3}; &&[+\boxsize]
+            \node[box] (4) {4}; \\
+            };
+
+            \link{11}{1}
+            \link{12}{13}
+            \link{13}{21}
+            \link{21}{2}
+            \link{22}{23}
+            \link{23}{31}
+            \link{31}{3}
+            \link{32}{33}
+            \link{33}{4}
+            \nil{14}
+            \nil{24}
+            \nil{34}
+        \end{tikzpicture}
         \caption{Box-and-pointer-structure of \vscm{(1 (2 (3 4)))}.}
     \end{figure}
 
     \vspace*{1cm}
     \begin{figure}
-        \begin{center}
-            \pstree[nodesepB=5pt]{\Tdot[tnpos=a]~{\vscm{(1 (2 (3 4)))}}}{%
-            \TR[tnpos=b]{1}%
-            \pstree{\Tdot[tnpos=r]~{\vscm{(2 (3 4))}}}{%
-            \TR[tnpos=b]{2}%
-            \pstree{\Tdot[tnpos=r]~{\vscm{(3 4)}}}{%
-            \TR[tnpos=b]{3}\TR[tnpos=b]{4}}}}
-        \end{center}
+        \centering
+        \begin{tikzpicture}[node font=\ttfamily,inner/.style={circle,fill=black, 
+        inner sep=1.5pt}]
+        \node[inner, label={(1 (2 (3 4)))}] {}
+         child { node {1} }
+         child { node[inner, label=45:{(2 (3 4))}] {}
+             child { node {2} }
+             child { node[inner, label=45:{(3 4)}] {}
+                child { node {3}}
+                child { node {4}}
+                }
+             };
+        \end{tikzpicture}
         \caption{Tree representation of \vscm{(1 (2 (3 4)))}.}
     \end{figure}
 \end{exe}
