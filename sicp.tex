@@ -42,12 +42,79 @@ linkcolor=darkgreen, breaklinks, colorlinks]{hyperref}
 
 % For exercise 2.24, and some exercises in chapter 3
 \usepackage{tikz}
-\usetikzlibrary{positioning, arrows.meta, calc, fit, backgrounds}
-% \usegdlibrary{trees, layered}
+\usetikzlibrary{positioning, arrows.meta, calc, fit, backgrounds, 
+decorations.markings}
 \newcommand\var[2]{%
-\newlength{#1}
-\setlength{#1}{#2}
+    \newlength{#1}
+    \setlength{#1}{#2}
 }
+
+% Definitions for the box-and-pointer diagrams.
+\var{\boxsize}{2em}
+\var{\round}{3pt}
+
+\tikzset{
+    box/.style={
+        minimum size = \boxsize,
+        rectangle,
+        rounded corners=\round,
+        draw,
+        fill=brown!15,
+    },
+    car/.style={
+        minimum size = \boxsize,
+        append after command={
+        \pgfextra
+        \draw[sharp corners,fill=brown!15]
+            (\tikzlastnode.south)
+            -| (\tikzlastnode.east)
+            |- (\tikzlastnode.north)
+            [rounded corners=\round]
+            -| (\tikzlastnode.west)
+            |- (\tikzlastnode.south east);
+        \endpgfextra},
+    },
+    cdr/.style={
+        minimum size = \boxsize,
+        append after command={
+        \pgfextra
+            \draw[sharp corners,fill=brown!15] (\tikzlastnode.south)
+                -| (\tikzlastnode.west) |- (\tikzlastnode.north)
+                [rounded corners=\round] -| (\tikzlastnode.east)
+                |- (\tikzlastnode.south west);
+        \endpgfextra},
+    },
+    cell matrix/.style={
+        row sep = 1.2\boxsize,
+        column sep = {\boxsize,between origins}
+    },
+    box and pointer/.style={
+        very thick,
+        font = \ttfamily,
+        decoration = {markings,
+            mark = at position 0 with { \fill circle (3pt); }
+        },
+    },
+    pointer/.style = {
+        -Stealth
+    },
+    box pointer/.style = {
+        pointer,
+        postaction = decorate
+    },
+    nil/.style = {
+        Triangle Cap[]-,
+        shorten >=.8pt,
+    }
+}
+
+\newcommand\nil[1]{
+    \draw[nil] (#1.south west) -- (#1.north east);
+}
+\newcommand\link[2]{
+    \draw[box pointer] (#1.base) -- (#2);
+}
+% Box-and-pointer end.
 
 % Tikz styles and commands for the environments of section 3.2.
 \tikzset{

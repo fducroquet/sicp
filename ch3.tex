@@ -415,3 +415,104 @@ This subsection contains no exercises.
     The environment structures of \vscm{acc} and \vscm{acc2} share the global 
     environment.
 \end{exe}
+
+\section{Modeling with Mutable Data}
+
+\subsection{Mutable List Structure}
+
+\begin{exe}[3.12]
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[box and pointer]
+            \matrix[cell matrix] {
+            % x
+            \node(x) {x}; &[+2\boxsize]
+            \node[car] (carx) {}; & \node[cdr] (cdrx) {}; &[+\boxsize]
+            \node[car] (cadrx) {}; & \node[cdr] (cddrx) {}; \\
+
+            % Values
+            & \node[box] (a) {a}; &&
+            \node[box] (b) {b}; &&[+2\boxsize]
+            \node[box] (c) {c}; &&[+\boxsize]
+            \node[box] (d) {d}; & \\
+
+            % z and y
+            \node(z) {z}; &[+2\boxsize]
+            \node[car] (carz) {}; & \node[cdr] (cdrz) {}; &
+            \node[car] (cadrz) {}; & \node[cdr] (cddrz) {}; &
+            \node[car] (cary) {}; & \node[cdr] (cdry) {}; &
+            \node[car] (cadry) {}; & \node[cdr] (cddry) {}; &
+            \\
+            };
+
+            \draw[pointer] (x) -- (carx);
+            \link{carx}{a}
+            \link{cdrx}{cadrx}
+            \link{cadrx}{b}
+            \nil{cddrx}
+
+            \draw[pointer] (z) -- (carz);
+            \link{carz}{a}
+            \link{cdrz}{cadrz}
+            \link{cadrz}{b}
+            \link{cddrz}{cary}
+            \link{cary}{c}
+            \link{cdry}{cadry}
+            \link{cadry}{d}
+            \nil{cddry}
+
+            \coordinate(ypos) at ($ (cary.north west)!.4!(cary.west) $);
+            \node[left=1.5\boxsize of ypos] (y) {y};
+            \draw[pointer] (y) -- (ypos);
+        \end{tikzpicture}
+        \caption{The lists \vscm{x}, \vscm{y} and \vscm{z} right after the 
+        definition of \vscm{z}.}
+        \label{3.12z}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[box and pointer]
+            \matrix[cell matrix] {
+            % z and y
+            \node(x) {x}; &[+2\boxsize]
+            \node[car] (carx) {}; & \node[cdr] (cdrx) {}; &[+\boxsize]
+            \node[car] (cadrx) {}; & \node[cdr] (cddrx) {}; &[+3\boxsize]
+            \node[car] (cary) {}; & \node[cdr] (cdry) {}; &[+\boxsize]
+            \node[car] (cadry) {}; & \node[cdr] (cddry) {}; & \\
+
+            % Values
+            & \node[box] (a) {a}; &&
+            \node[box] (b) {b}; &&[+2\boxsize]
+            \node[box] (c) {c}; &&[+\boxsize]
+            \node[box] (d) {d}; & \\
+            };
+
+            \draw[pointer] (x) -- (carx);
+            \link{carx}{a}
+            \link{cdrx}{cadrx}
+            \link{cadrx}{b}
+            \link{cddrx}{cary}
+
+            \link{cary}{c}
+            \link{cdry}{cadry}
+            \link{cadry}{d}
+            \nil{cddry}
+
+            \coordinate(wpos) at ($ (carx.north west)!.4!(carx.west) $);
+            \node[left=3\boxsize of wpos] (w) {w};
+            \draw[pointer] (w) -- (wpos);
+
+            \coordinate(ypos) at ($ (cary.north west)!.4!(cary.west) $);
+            \node[left=1.5\boxsize of ypos] (y) {y};
+            \draw[pointer] (y) -- (ypos);
+        \end{tikzpicture}
+        \caption{The lists \vscm{x}, \vscm{y} and \vscm{w} right after the 
+        definition of \vscm{w}.}
+        \label{3.12w}
+    \end{figure}
+    The first response is \vscm{(b)}, the second response is \vscm{(b c d)}. The 
+    figure \ref{3.12z} shows the lists \vscm{x}, \vscm{y} and \vscm{z} right 
+    after the definition of \vscm{z}. The figure \ref{3.12w} shows the lists 
+    \vscm{x}, \vscm{y} and \vscm{w} after the definition of \vscm{w}.
+\end{exe}
