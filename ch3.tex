@@ -516,3 +516,42 @@ This subsection contains no exercises.
     after the definition of \vscm{z}. The figure \ref{3.12w} shows the lists 
     \vscm{x}, \vscm{y} and \vscm{w} after the definition of \vscm{w}.
 \end{exe}
+
+\begin{exe}[3.13]
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[box and pointer]
+            \matrix[cell matrix] {
+            \node[car] (carz) {}; & \node[cdr] (cdrz) {}; &[+\boxsize]
+            \node[car] (cadrz) {}; & \node[cdr] (cddrz) {}; &[+\boxsize]
+            \node[car] (caddrz) {}; & \node[cdr] (cdddrz) {}; \\
+
+            % Values
+            \node[box] (a) {a}; &&
+            \node[box] (b) {b}; &&[+\boxsize]
+            \node[box] (c) {c}; \\
+            };
+
+            \link{carz}{a}
+            \link{cdrz}{cadrz}
+            \link{cadrz}{b}
+            \link{cddrz}{caddrz}
+            \link{caddrz}{c}
+
+            \coordinate(zpos) at ($ (carz.north west)!.6!(carz.west) $);
+            \node[left=2\boxsize of zpos] (z) {z};
+            \draw[pointer] (z) -- (zpos);
+
+            \coordinate(in) at ($ (carz.south west)!.6!(carz.west) $);
+            \draw[box pointer] (cdddrz.base) -- ++(0, -3.5\boxsize) -|
+                ($ (in) - (\boxsize, 0) $) -- (in);
+        \end{tikzpicture}
+        \caption{The structure created by
+        \vscm{define z (make-cycle (list 'a 'b 'c)}.}
+        \label{3.13fig}
+    \end{figure}
+    The structure \vscm{z} is shown in figure \ref{3.13fig}.
+
+    If we try to compute \vscm{(last-pair z)}, we get an infinite loop since 
+    \vscm{z} has a cycle.
+\end{exe}
