@@ -49,6 +49,48 @@ linkcolor=darkgreen, breaklinks, colorlinks]{hyperref}
 \setlength{#1}{#2}
 }
 
+% Tikz styles and commands for the environments of section 3.2.
+\tikzset{
+    env/.style={
+        rectangle,
+        rounded corners=2pt,
+        % border
+        very thick,
+        draw=teal!80!black,
+        % filling
+        fill=teal!10,
+        inner sep = 2mm,
+        font=\ttfamily\small,
+        align=left,
+    },
+    global env/.style={
+        env,
+        align=left,
+        inner xsep=1ex,
+        text width=13cm-2*\pgfkeysvalueof{/pgf/inner xsep},
+        minimum width=13cm,
+        minimum height=1.5cm
+    },
+    code/.style={
+        align=left,
+        font=\ttfamily\small,
+    }
+}
+
+\var{\circleradius}{3mm}
+\var{\smallcircleradius}{.8mm}
+\newcommand\pointer[1]{
+    \draw (#1) circle (\circleradius);
+    \filldraw (#1) circle (\smallcircleradius);
+}
+\newcommand\procedure[3]{
+    \coordinate[left=\circleradius of #1]  (#2);
+    \coordinate[right=\circleradius of #1]  (#3);
+    \pointer{#2}
+    \pointer{#3}
+}
+% Environments end.
+
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}
 {\IfNoValueTF{#1}
