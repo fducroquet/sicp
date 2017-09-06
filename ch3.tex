@@ -426,7 +426,7 @@ This subsection contains no exercises.
         \begin{tikzpicture}[box and pointer]
             \matrix[cell matrix] {
             % x
-            \node(x) {x}; &[+2\boxsize]
+            \node[struct name] (x) {x}; &[+2\boxsize]
             \node[car] (carx) {}; & \node[cdr] (cdrx) {}; &[+\boxsize]
             \node[car] (cadrx) {}; & \node[cdr] (cddrx) {}; \\
 
@@ -437,7 +437,7 @@ This subsection contains no exercises.
             \node[box] (d) {d}; & \\
 
             % z and y
-            \node(z) {z}; &[+2\boxsize]
+            \node[struct name] (z) {z}; &[+2\boxsize]
             \node[car] (carz) {}; & \node[cdr] (cdrz) {}; &
             \node[car] (cadrz) {}; & \node[cdr] (cddrz) {}; &
             \node[car] (cary) {}; & \node[cdr] (cdry) {}; &
@@ -462,7 +462,7 @@ This subsection contains no exercises.
             \nil{cddry}
 
             \coordinate(ypos) at ($ (cary.north west)!.4!(cary.west) $);
-            \node[left=1.5\boxsize of ypos] (y) {y};
+            \node[struct name, left=1.5\boxsize of ypos] (y) {y};
             \draw[pointer] (y) -- (ypos);
         \end{tikzpicture}
         \caption{The lists \vscm{x}, \vscm{y} and \vscm{z} right after the 
@@ -475,7 +475,7 @@ This subsection contains no exercises.
         \begin{tikzpicture}[box and pointer]
             \matrix[cell matrix] {
             % z and y
-            \node(x) {x}; &[+2\boxsize]
+            \node[struct name] (x) {x}; &[+2\boxsize]
             \node[car] (carx) {}; & \node[cdr] (cdrx) {}; &[+\boxsize]
             \node[car] (cadrx) {}; & \node[cdr] (cddrx) {}; &[+3\boxsize]
             \node[car] (cary) {}; & \node[cdr] (cdry) {}; &[+\boxsize]
@@ -500,11 +500,11 @@ This subsection contains no exercises.
             \nil{cddry}
 
             \coordinate(wpos) at ($ (carx.north west)!.4!(carx.west) $);
-            \node[left=3\boxsize of wpos] (w) {w};
+            \node[struct name, left=3\boxsize of wpos] (w) {w};
             \draw[pointer] (w) -- (wpos);
 
             \coordinate(ypos) at ($ (cary.north west)!.4!(cary.west) $);
-            \node[left=1.5\boxsize of ypos] (y) {y};
+            \node[struct name, left=1.5\boxsize of ypos] (y) {y};
             \draw[pointer] (y) -- (ypos);
         \end{tikzpicture}
         \caption{The lists \vscm{x}, \vscm{y} and \vscm{w} right after the 
@@ -540,7 +540,7 @@ This subsection contains no exercises.
             \link{caddrz}{c}
 
             \coordinate(zpos) at ($ (carz.north west)!.6!(carz.west) $);
-            \node[left=2\boxsize of zpos] (z) {z};
+            \node[struct name, left=2\boxsize of zpos] (z) {z};
             \draw[pointer] (z) -- (zpos);
 
             \coordinate(in) at ($ (carz.south west)!.6!(carz.west) $);
@@ -562,7 +562,7 @@ This subsection contains no exercises.
         \centering
         \begin{tikzpicture}[box and pointer]
             \matrix[cell matrix] {
-            \node(v) {v}; &[+2\boxsize]
+            \node[struct name] (v) {v}; &[+2\boxsize]
             \node[car] (c11) {}; & \node[cdr] (c12) {}; &[+\boxsize]
             \node[car] (c21) {}; & \node[cdr] (c22) {}; &[+\boxsize]
             \node[car] (c31) {}; & \node[cdr] (c32) {}; &[+\boxsize]
@@ -593,7 +593,7 @@ This subsection contains no exercises.
         \centering
         \begin{tikzpicture}[box and pointer]
             \matrix[cell matrix] {
-            \node(w) {w}; &[+2\boxsize]
+            \node[struct name] (w) {w}; &[+2\boxsize]
             \node[car] (c11) {}; & \node[cdr] (c12) {}; &[+\boxsize]
             \node[car] (c21) {}; & \node[cdr] (c22) {}; &[+\boxsize]
             \node[car] (c31) {}; & \node[cdr] (c32) {}; &[+3\boxsize]
@@ -617,7 +617,7 @@ This subsection contains no exercises.
             \nil{c42}
 
             \coordinate(vpos) at ($ (c41.north west)!.6!(c41.west) $);
-            \node[left=2\boxsize of vpos] (v) {v};
+            \node[struct name, left=2\boxsize of vpos] (v) {v};
             \draw[pointer] (v) -- (vpos);
         \end{tikzpicture}
         \caption{The lists \vscm{v} and \vscm{w} after calling \vscm{mystery}.}
@@ -635,7 +635,7 @@ This subsection contains no exercises.
         \centering
         \begin{tikzpicture}[box and pointer]
             \matrix[cell matrix] {
-            \node(z1) {z1}; &[+2\boxsize]
+            \node[struct name] (z1) {z1}; &[+2\boxsize]
             \node[car] (c11) {}; & \node[cdr] (c12) {}; \\
 
             &
@@ -663,7 +663,7 @@ This subsection contains no exercises.
         \centering
         \begin{tikzpicture}[box and pointer]
             \matrix[cell matrix] {
-            \node(z2) {z2}; &[+2\boxsize]
+            \node[struct name] (z2) {z2}; &[+2\boxsize]
             \node[car] (c11) {}; & \node[cdr] (c12) {}; &[+\boxsize]
             \node[car] (c13) {}; & \node[cdr] (c14) {}; &[+\boxsize]
             \node[car] (c15) {}; & \node[cdr] (c16) {}; \\
