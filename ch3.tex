@@ -518,6 +518,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[3.13]
+    \label{3.13}
     \begin{figure}
         \centering
         \begin{tikzpicture}[box and pointer]
@@ -696,4 +697,104 @@ This subsection contains no exercises.
     \end{figure}
     The figures \ref{3.15z1} and \ref{3.15z2} show the effect of 
     \vscm{set-to-wow!} on \vscm{z1} and \vscm{z2}.
+\end{exe}
+
+\begin{exe}[3.16]
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[box and pointer,
+            every label/.style={font=\sffamily}]
+            \hspace{-1.3cm} % To center the figure better.
+            % Example returning 3.
+            \matrix[cell matrix, label=below:{List structure returning 3.}] (e1) 
+            {
+            \node[struct name] (x) {x}; &[+\boxsize]
+            \node[car] (x11) {}; & \node[cdr] (x12) {}; &[+\boxsize]
+            \node[car] (x21) {}; & \node[cdr] (x22) {}; &[+\boxsize]
+            \node[car] (x31) {}; & \node[cdr] (x32) {}; \\
+
+            & \node[box] (xa) {a}; &&
+            \node[box] (xb) {b}; &&[+\boxsize]
+            \node[box] (xc) {c}; \\
+            };
+
+            \draw[pointer] (x) -- (x11);
+            \link{x11}{xa}
+            \link{x12}{x21}
+            \link{x21}{xb}
+            \link{x22}{x31}
+            \link{x31}{xc}
+            \nil{x32}
+
+            % Example returning 4.
+            \matrix[cell matrix, right=of e1, label=below:{List structure 
+            returning 4.}] (e2) {
+            \node[struct name] (y) {y}; &[+\boxsize]
+            \node[car] (y11) {}; & \node[cdr] (y12) {}; &[+\boxsize]
+            \node[car] (y21) {}; & \node[cdr] (y22) {}; &[+\boxsize]
+            \node[car] (y31) {}; & \node[cdr] (y32) {}; \\
+
+            &&&
+            \node[box] (ya) {a}; &&[+\boxsize]
+            \node[box] (yb) {b}; \\
+            };
+
+            \draw[pointer] (y) -- (y11);
+            \draw[box pointer] (y11.base) -- ++(0, 1.2\boxsize) -| (y31);
+            \link{y12}{y21}
+            \link{y21}{ya}
+            \link{y22}{y31}
+            \link{y31}{yb}
+            \nil{y32}
+
+            % Example returning 7.
+            \matrix[cell matrix, below=4em of e1, label=below:{List structure 
+            returning 7.}] (e3) {
+            \node[struct name] (z) {z}; &[+\boxsize]
+            \node[car] (z11) {}; & \node[cdr] (z12) {}; &[+\boxsize]
+            \node[car] (z21) {}; & \node[cdr] (z22) {}; &[+\boxsize]
+            \node[car] (z31) {}; & \node[cdr] (z32) {}; \\
+
+            &&&&&
+            \node[box] (za) {a}; \\
+            };
+
+            \draw[pointer] (z) -- (z11);
+            \draw[box pointer] (z11.base) -- ++(0, -1.2\boxsize) -| (z21);
+            \link{z12}{z21}
+            \draw[box pointer] (z21.base) -- ++(0, 1.2\boxsize) -| (z31);
+            \link{z22}{z31}
+            \link{z31}{za}
+            \nil{z32}
+
+            % Example never returning.
+            \matrix[cell matrix, right=of e3, label=below:{List structure never 
+            returning.}] (e4) {
+            \node[struct name] (t) {t}; &[+\boxsize]
+            \node[car] (t11) {}; & \node[cdr] (t12) {}; &[+\boxsize]
+            \node[car] (t21) {}; & \node[cdr] (t22) {}; &[+\boxsize]
+            \node[car] (t31) {}; & \node[cdr] (t32) {}; \\
+
+            & \node[box] (ta) {a}; &&
+            \node[box] (tb) {b}; &&[+\boxsize]
+            \node[box] (tc) {c}; \\
+            };
+
+            \draw[pointer] (t) -- (t11);
+            \link{t11}{ta}
+            \link{t12}{t21}
+            \link{t21}{tb}
+            \link{t22}{t31}
+            \link{t31}{tc}
+            \draw[box pointer] (t32.base) -- ++(0, 1.2\boxsize) -| (t11);
+        \end{tikzpicture}
+        \caption{Structures made of exactly three pairs for which Ben’s 
+            procedure returns different values.}
+        \label{3.16ex}
+    \end{figure}
+    Figure \ref{3.16ex} shows examples of list structures made up of exactly 
+    three pairs for which Ben’s procedure returns 3, 4, 7, or never at all.
+    These structures can be defined in the following way, using 
+    \vscm{make-cycle} from exercise \ref{3.13} for the last one.
+    \scm{ch3/3.16.scm}
 \end{exe}
