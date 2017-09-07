@@ -816,3 +816,99 @@ This subsection contains no exercises.
     second one will reach the end of the list.
     \scm{ch3/3.19.scm}
 \end{exe}
+
+\begin{exe}[3.20]
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \matrix[matrix anchor=base west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+            & \node[code] (cons) {cons: ...}; \\[-3pt]
+            \node[text width=1cm, align=right] (ge) {global\\ env};
+            & \node[code] (z) {z: }; \\[-8pt]
+            & \node[code] (x) {x: }; \\
+            };
+
+            % E1
+            \coordinate (e1pos) at ($ (g.south west)!.10!(g.south east) $);
+            \matrix[matrix anchor=north west, column sep=2\nametoenv,
+            below=of e1pos, column 2/.style={anchor=base west}] {
+            \node[text width=1cm, align=right] (e1) {E1};
+            & \node[code] (x1) { x: 1}; \\[-11pt]
+            & \node[code] (y1) { y: 2}; \\
+            & \node[code] { set-x!: ... }; \\
+            & \node[code] { set-y!: ... }; \\
+            & \node[code] (dispatch1) { dispatch: }; \\
+            };
+
+            % E2
+            \coordinate (e2pos) at ($ (g.south west)!.55!(g.south east) $);
+            \matrix[matrix anchor=north west, column sep=2\nametoenv,
+            below=of e2pos, column 2/.style={anchor=base west}] {
+            \node[text width=1cm, align=right] (e2) {E2};
+            & \node[code] (x2) { x: x}; \\[-11pt]
+            & \node[code] (y2) { y: x}; \\
+            & \node[code] { set-x!: ... }; \\
+            & \node[code] { set-y!: ... }; \\
+            & \node[code] (dispatch2) { dispatch: }; \\
+            };
+
+            % Backgrounds
+            \begin{scope}[on background layer]
+                \node[global env, fit=(cons) (x), right=\nametoenv of ge, 
+                yshift=1mm] (g) {};
+                \node[env, minimum width=4cm, fit=(x1) (dispatch1), 
+                right=\nametoenv of e1, yshift=-6mm] (n1) {};
+                \node[env, minimum width=4cm, fit=(x2) (dispatch2), 
+                right=\nametoenv of e2, yshift=-6mm] (n2) {};
+            \end{scope}
+
+            \coordinate (xp1) at ($ (n1.south)!.50!(n1.south east) $);
+            \coordinate[below=of xp1] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: m\\
+            body: (cond ...)
+            };
+
+            \coordinate (xp2) at ($ (n2.south)!.50!(n2.south east) $);
+            \coordinate[below=of xp2] (p2);
+            \procedure{p2}{c3}{c4}
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -| ($ (n1.south east) - (3mm, 0) $);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \draw[->] (e1) -- (e1.east -| n1.west);
+            \draw[->] (n1.north) -- (n1.north |- g.south);
+            \draw[->] (dispatch1) -| ($ (p1) + (0, \circleradius) $);
+
+            \draw[->] (e2) -- (e2.east -| n2.west);
+            \draw[->] (c3) |- (code);
+            \draw[->] (c4) -| ($ (n2.south east) - (3mm, 0) $);
+            \draw[->] (n2.north) -- (n2.north |- g.south);
+            \draw[->] (dispatch2) -| ($ (p2) + (0, \circleradius) $);
+            \draw[->] (x) -- ($ (x) + (1cm, 0) $)
+                |- ($ (p1) + (-2\circleradius, 0) $);
+            \draw[->] (z) -- ($ (z) + (7cm, 0) $)
+                |- ($ (p2) + (-2\circleradius, 0) $);
+        \end{tikzpicture}
+        \caption{Environment structure after the definitions of \vscm{x} and 
+        \vscm{z}. In E2, the values of \vscm{x} and \vscm{y} correspond to the 
+        \vscm{x} defined in the global environment.}
+        \label{3.20fig}
+    \end{figure}
+    Figure \ref{3.20fig} shows the environments created by the definitions of 
+    \vscm{x} and \vscm{z}. When\\
+    \vscm{(set-car! (cdr z) 17)} is evaluated, \vscm{(cdr z)} is evaluated 
+    first. This creates an environment E3 pointing to E2, where \vscm{(z 'cdr)} 
+    is evaluated, returning the \vscm{x} defined in the global environment. So 
+    the expression becomes \vscm{(set-car! x 17)}, evaluated in the global 
+    environment. The expression
+    \vscm{((x 'set-car!) 17)} is then evaluated. The evaluation of
+    \vscm{(x 'set-car!)} leads to the creation of an environment E4 pointing to 
+    E1, in which the evaluation returns the \vscm{set-x!} procedure from 
+    environment E1. The evaluation of the expression obtained \vscm{(set-x! 17)} 
+    leads to the modification of the value of \vscm{x} in environment E1. 
+    Lastly, \vscm{(car x)} is evaluated in an environment pointing to E1, so the 
+    value returned is 17.
+\end{exe}
