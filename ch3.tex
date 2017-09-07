@@ -808,3 +808,11 @@ This subsection contains no exercises.
     Here is a possible solution:
     \scm{ch3/3.18.scm}
 \end{exe}
+
+\begin{exe}[3.19]
+    We go through the list with two pointers: one advancing one step at a time, 
+    the other advancing two steps at a time. If the list contains a cycle, 
+    they’ll end up pointing to the same pair after a while. Otherwise, the 
+    second one will reach the end of the list.
+    \scm{ch3/3.19.scm}
+\end{exe}
