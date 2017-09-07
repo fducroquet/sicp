@@ -912,3 +912,14 @@ This subsection contains no exercises.
     Lastly, \vscm{(car x)} is evaluated in an environment pointing to E1, so the 
     value returned is 17.
 \end{exe}
+
+\subsection{Representing Queues}
+
+\begin{exe}[3.21]
+    The elements actually contained in the queue are only the contents of the 
+    queue’s \vscm{car}. The queue’s \vscm{cdr} points to the last element of the 
+    queue, so it is printed twice. The rear pointer is not updated when the last 
+    element from the queue is deleted, so the former last element is still 
+    printed although the queue is empty.
+    \scm{ch3/3.21.scm}
+\end{exe}
