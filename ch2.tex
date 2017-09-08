@@ -496,6 +496,7 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.42]
+    \label{2.42}
     A possible solution, with a position represented as the list of the numbers 
     of the lines occupied by the queen in each column. The position of the queen 
     in the first column is at the end of the list because the functions are 
@@ -507,19 +508,20 @@ Let’s first define a function that prints intervals:
 \begin{exe}[2.43]
     In Louis’ program, each call to \vscm{(queen-cols k)} calls 
     \vscm{(queen-cols (- k 1))} 8 times, instead of only one time with the 
-    program in exercise 2.42. Since there are 8 recursion levels, Louis’ program 
-    will take about $8^8T$ time to solve the eight-queens puzzle.
+    program in exercise \ref{2.42}. Since there are 8 recursion levels, Louis’ 
+    program will take about $8^8T$ time to solve the eight-queens puzzle.
 \end{exe}
 
 \subsection{Example: A Picture Language}
+\label{2.2.4}
 
 \begin{comp}
     To test the code in this section, it’s necessary to load a module including 
     graphical functions. The solution I chose here is to use DrRacket’s 
     \vscm{graphics.ss} library. It required me to adapt my solution to 
-    exercise~2.46 and to slightly modify the \vscm{segments->painter} to use the 
-    given viewport. The code from later exercises is sometimes needed to try out 
-    some previous code.
+    exercise~\ref{2.46} and to slightly modify the \vscm{segments->painter} to 
+    use the given viewport. The code from later exercises is sometimes needed to 
+    try out some previous code.
 
     Code to put at the beginning of the file:
     \scm{ch2/2.44pre2.scm}
@@ -536,6 +538,7 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.46]
+    \label{2.46}
     A possible solution if we are not using \vscm{graphics.ss}:
     \scm{ch2/2.46a.scm}
     With \vscm{graphics.ss}, we must redefine \vscm{make-vect}, \vscm{xcor-vect} 
@@ -622,8 +625,10 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \subsection{Example: Symbolic Differentiation}
+\label{2.3.2}
 
 \begin{exe}[2.56]
+    \label{2.56}
     The modified version of \vscm{deriv} and the procedures 
     \vscm{exponentiation?}, \vscm{base}, \vscm{exponent}, and 
     \vscm{make-exponentiation} can be written as:
@@ -769,6 +774,7 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.68]
+    \label{2.68}
     A possible implementation of \vscm{encode-symbol} is:
     \scm{ch2/2.68.scm}
 \end{exe}
@@ -786,6 +792,7 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.71]
+    \label{2.71}
     Since $\sum_{i = 0}^{k} 2^i = 2^{k + 1} - 1$, every right (or every left) 
     branch of the tree is a leaf, and the tree has a depth of $n - 1$. So the 
     most frequent symbol is encoded with 1 bit, while the least frequent symbol 
@@ -793,9 +800,9 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.72]
-    In the \vscm{encode-symbol} procedure given in exercise 2.68, only the 
+    In the \vscm{encode-symbol} procedure given in exercise \ref{2.68}, only the 
     symbol list of the left subtree is searched at each node encountered, so we 
-    can distinguish two cases for the distribution given in exercise 2.71:
+    can distinguish two cases for the distribution given in exercise \ref{2.71}:
 
     \paragraph*{The left subtree of each node corresponds to the most frequent 
     symbol.}
@@ -840,12 +847,12 @@ This subsection contains no exercises.
 
         \item[b.] The procedures for derivation can be written in the following 
             way, using \vscm{make-sum} and \vscm{make-product} from section 
-            2.3.2.
+            \ref{2.3.2}.
             \scm{ch2/2.73b.scm}
 
         \item[c.] To allow differentiation of exponents, it’s enough to call the 
             following procedure, using \vscm{make-exporentiation} from exercise 
-            2.56.
+            \ref{2.56}.
 
         \item[d.] The only change required is to exchange the arguments when 
             calling \vscm{put}, using e.g. \vscm{(put '+ 'deriv deriv-sum)} 
@@ -982,6 +989,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[2.83]
+    \label{2.83}
     The \vscm{raise} operation can be installed with:
     \scm{ch2/2.83.scm}
 
@@ -1028,7 +1036,7 @@ This subsection contains no exercises.
 
 \begin{comp}
     I decided to add the polynomial type to the tower of types used since 
-    exercise 2.83. For this to work, I had to redefine the tower of types:
+    exercise \ref{2.83}. For this to work, I had to redefine the tower of types:
     \begin{cscm}
         (define tower '(integer rational real complex polynomial))
     \end{cscm}
@@ -1173,6 +1181,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[2.95]
+    \label{2.95}
     Dividing by hand, the remainder found after the first division is
     $\sfrac{1458}{169} x^2 - \sfrac{2916}{169} x + \sfrac{1458}{169}$, which 
     divides $Q_2$.
@@ -1189,8 +1198,9 @@ This subsection contains no exercises.
             \scm{ch2/2.96a1.scm}
             and the new version of \vscm{gcd-terms} is:
             \scm{ch2/2.96a2.scm}
-            On the example in exercise 2.95, \vscm{greatest-common-divisor} now 
-            produces the polynomial $1458 x^2 - 2916 x + 1458$.
+            On the example in exercise \ref{2.95}, 
+            \vscm{greatest-common-divisor} now produces the polynomial $1458 x^2 
+            - 2916 x + 1458$.
         \item[b.] The procedure can be rewritten in the following way to divide 
             the coefficients of the answer by their greatest common divisor.
             \scm{ch2/2.96b.scm}
