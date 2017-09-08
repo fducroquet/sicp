@@ -929,3 +929,16 @@ This subsection contains no exercises.
     The implementation of the queue operations doesn’t need to be modified.
     \scm{ch3/3.22.scm}
 \end{exe}
+
+\begin{exe}[3.23]
+    To respect the requirement that all operations should be accomplished in 
+    $\Theta(1)$ steps, it’s necessary to use a doubly-linked list instead of 
+    a singly-linked list. The deque is represented as a pair containing 
+    a pointer to the first element of a list and a pointer to the last element 
+    of this list just like the queue. Each element of the list is a pair 
+    containing the value and a pointer to the previous element of the list. 
+    Since such a structure can’t be printed since it contains infinite loops as 
+    soon as the deque contains at least 2 elements, the insertion and deletion 
+    procedures return a list representation of the contents of the deque.
+    \scm{ch3/3.23.scm}
+\end{exe}
