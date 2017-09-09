@@ -942,3 +942,17 @@ This subsection contains no exercises.
     procedures return a list representation of the contents of the deque.
     \scm{ch3/3.23.scm}
 \end{exe}
+
+\subsection{Representing Tables}
+
+\begin{exe}[3.24]
+    The only necessary change is to define an \vscm{assoc} procedure that uses 
+    the provided \vscm{same-key?} instead of \vscm{equal?}. The code below is 
+    a possible solution for a one-dimensional table. For multi-dimensional 
+    tables, there is no reason to assume that the successive keys are of the 
+    same type or that the same equality test must be used at every level, so 
+    multiple comparison procedures should be provided, and the right procedure 
+    should be passed as an argument to \vscm{assoc} at each level of the table.
+    \scm{ch3/3.24.scm}
+    \scm{ch3/3.24test.scm}
+\end{exe}
