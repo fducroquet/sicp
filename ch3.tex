@@ -979,3 +979,72 @@ This subsection contains no exercises.
     intermediate trees.
     \scm{ch3/3.26.scm}
 \end{exe}
+
+\begin{exe}[3.27]
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick]
+            \matrix[matrix anchor=base west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+            \node[text width=1cm, align=right] (ge) {global\\ env};
+            & \node[code] (memoize) {memoize: ...}; \\[-8pt]
+            & \node[code] (memo-fib) {memo-fib: }; \\
+            };
+            \coordinate (e1pos) at ($ (g.south west)!.25!(g.south east) $);
+            \matrix[matrix anchor=north west, column sep=2\nametoenv,
+            below=1cm of e1pos, column 2/.style={anchor=base west}] {
+            \node[text width=1cm, align=right] (e1) {E1};
+            & \node[code] (f) { f: ...}; \\[-11pt]
+            & \node[code] (table) { table: ... }; \\
+            };
+            \begin{scope}[on background layer]
+                \node[global env, fit=(memoize) (memo-fib),
+                right=\nametoenv of ge, yshift=-1mm] (g) {};
+                \node[env, minimum width=3cm, fit=(f) (table),
+                right=\nametoenv of e1, yshift=1mm] (n1) {};
+            \end{scope}
+
+            \coordinate (xp1) at ($ (n1.south west)!.50!(n1.south east) $);
+            \coordinate[below=of xp1] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: x\\
+            body: (let ...)
+            };
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -- (c2 |- n1.south);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \draw[->] (e1) -- (e1.east -| n1.west);
+            \draw[->] (n1.north) -- (n1.north |- g.south);
+
+            \draw[->] (memo-fib) -- ($ (memo-fib) + (2cm, 0) $)
+                |- ($ (p1) + (-2\circleradius, 0) $);
+
+            % Evaluation of (memo-fib 3)
+            \node[env, right=of n1] (n3) {n: 3};
+            \node[below=of n3] {$\vdots$};
+            \node[right=of n3] (e4) {E4};
+            \draw[->] (e4) -- (n3);
+            \draw[->] (n3) -- (n3 -| n1.east);
+        \end{tikzpicture}
+
+        \caption{Environments created during the evaluation of
+        \vscm{(memo-fib 3)}.}
+        \label{3.27fig}
+    \end{figure}
+    Figure \ref{3.27fig} shows some of the environments created during the 
+    evaluation of \vscm{(memo-fib 3)}.
+    The call to \vscm{memoize} creates a local environment E1 containing 
+    a table, and the procedure returned by \vscm{memoize} points to this 
+    environment. When \vscm{memo-fib} is called for the first time with a value, 
+    it puts the computed result into the table. When it is called again with the 
+    same value, it simply returns the value stored in the table instead of 
+    making recursive calls. So \vscm{memo-fib} computes the $n$th Fibonacci 
+    number in linear time because it never computes the value for the same 
+    number twice.
+
+    If we had defined \vscm{memo-fib} to be \vscm{(memoize fib)}, it would not 
+    have worked because \vscm{fib} calls itself rather than \vscm{memo-fib} 
+    recursively.
+\end{exe}
