@@ -1093,3 +1093,18 @@ This subsection contains no exercises.
     ripple-carry adder is
     $ (n - 1) (a + o) + (n + 1) \max(2a + i, o + a) $.
 \end{exe}
+
+\begin{exe}[3.31]
+    The initialization is necessary to compute correctly all the signals with 
+    the initial values of the inputs. Since there are inverters, not all signals 
+    are 0 even if all inputs and outputs are 0, and if they are not initialized 
+    properly, the values computed after changing the inputs could be wrong as 
+    well.
+
+    In the case of the half-adder example, without the initialization, the 
+    output of the inverter would have a signal of 0 instead of 1 initially. 
+    Since setting the first input to 1 does not trigger a change to the 
+    inverter’s input, the sum would remain 0 after the propagation. After 
+    setting the second input to 1, the sum would still remain 0 and the carry 
+    would become 1.
+\end{exe}
