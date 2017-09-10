@@ -1108,3 +1108,22 @@ This subsection contains no exercises.
     setting the second input to 1, the sum would still remain 0 and the carry 
     would become 1.
 \end{exe}
+
+\begin{exe}[3.32]
+    If the (last in, first out) order is used, the values set by the actions 
+    executed last in a segment could set incorrect values because they are not 
+    taking into account all the changes that occurred in that segment.
+
+    If the inputs $a_1$ and $a_2$ are $0$ and $1$ are both changed in the same 
+    segment, if the action triggered by the change of $a_2$ is executed first, 
+    an action setting the output value to $0$ is scheduled, than when the change 
+    to $a_1$ is taken into account, the same action is scheduled again at the 
+    same time, so the order of execution of these two actions does not matter.
+
+    However, if the change to $a_1$ is treated first, an action setting the 
+    output signal to $1$ is scheduled, and when $a_2$ switches to $0$ an action 
+    setting the output signal to $0$ is scheduled at the same time. If these 
+    actions are executed (last in, first out), the final output value will be 
+    $1$ instead of $0$ because the scheduled action executed last used stale 
+    values for some signals.
+\end{exe}
