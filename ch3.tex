@@ -956,3 +956,16 @@ This subsection contains no exercises.
     \scm{ch3/3.24.scm}
     \scm{ch3/3.24test.scm}
 \end{exe}
+
+\begin{exe}[3.25]
+    It would be possible to use the lists as keys directly but I don’t think 
+    that’s the point of the exercise. The solution I implemented allows 
+    different numbers of keys for different records, however it does not allow 
+    keys that are prefixes of each other: if a value is stored under the key
+    \vscm{'(a b c)} and another value is then stored under \vscm{'(a b)}, the 
+    record for \vscm{'(a b c)} is silently deleted, and vice versa. It would 
+    also be inefficient for large tables since it checks whether the record 
+    found really contains a table by going through the whole record before 
+    looking for the following key in it.
+    \scm{ch3/3.25.scm}
+\end{exe}
