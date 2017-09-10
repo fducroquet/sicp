@@ -1063,3 +1063,33 @@ This subsection contains no exercises.
     delay.
     \scm{ch3/3.29.scm}
 \end{exe}
+
+\begin{exe}[3.30]
+    The ripple-carry-adder can be defined using the following procedure:
+    \scm{ch3/3.30.scm}
+
+    Let’s use the following notations: $o = \textrm{or-delay}, 
+    a = \textrm{and-delay}, i = \textrm{inverter-delay}$.
+    Let’s call $R_{Ci}$ the delay to obtain $C_i$ in a ripple-carry adder, 
+    $R_{Si}$ the delay to obtain $S_i$ in a ripple-carry adder, $F_s$ the delay 
+    to obtain the sum bit in a full-adder, $F_c$ the delay to obtain the carry 
+    bit in a full-adder, $H_s$ the delay to obtain the carry in a half-adder, 
+    $H_c$ the delay to obtain the carry in a half-adder.
+
+    For the half-adder we have $H_c = a$ and
+    $H_s = \max(2a + i, o + a)$.
+
+    For the full-adder, we have $F_s = 2 H_s = 2 \max(2a + i, o + a)$, and $F_c 
+    = H_s + H_c + o = a + o + \max(2a + i, o + a)$, from where
+    $F_s \geq F_c$.
+
+    For the full-carry adder, we have:
+    $R_{Ci} = (n - i) \times F_c$ and $R_{Si} = R_{Ci} + F_s$ because only the 
+    carry is transmitted to the following full-adders.
+
+    The delay to obtain the complete output from an $n$-bit ripple-carry adder 
+    is $R_{C1} + \max(F_s, F_c) = R_{C1} + F_s = (n - 1) F_c + F_s$. In terms of 
+    the delays for and-gates, or-gates and inverters, the delay for the 
+    ripple-carry adder is
+    $ (n - 1) (a + o) + (n + 1) \max(2a + i, o + a) $.
+\end{exe}
