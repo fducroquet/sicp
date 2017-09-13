@@ -43,7 +43,7 @@ linkcolor=darkgreen, breaklinks, colorlinks]{hyperref}
 % For exercise 2.24, and some exercises in chapter 3
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta, calc, fit, backgrounds, 
-decorations.markings}
+decorations.markings,shapes.misc}
 \newcommand\var[2]{%
     \newlength{#1}
     \setlength{#1}{#2}
@@ -160,6 +160,28 @@ decorations.markings}
     \pointer{#3}
 }
 % Environments end.
+
+% Settings for timing diagrams in section 3.4.
+\tikzset{
+    bank/.style={
+        circle,
+        draw,
+        minimum size=1.2cm,
+    },
+    action/.style={
+        rounded rectangle,
+        draw,
+        minimum height=1.5em,
+    },
+    time matrix/.style={
+        column sep=1em,
+    },
+    arrow/.style={
+        rounded corners=10pt,
+        thick,
+        ->,
+    },
+}
 
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}

@@ -1352,3 +1352,121 @@ This subsection contains no exercises.
     The procedures can be defined in the following way:
     \scm{ch3/3.37.scm}
 \end{exe}
+
+\section{Concurrency: Time Is of the Essence}
+
+\subsection{The Nature of Time in Concurrent Systems}
+
+\begin{exe}[3.38]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] If no interleaving is possible, the possible final values are 
+            \$35, \$40, \$45 and \$50:
+            \begin{itemize}
+                \item Peter, Paul, Mary: \$45;
+                \item Paul, Peter, Mary: \$45;
+                \item Mary, Peter, Paul: \$40;
+                \item Mary, Paul, Peter: \$40;
+                \item Peter, Mary, Paul: \$35;
+                \item Paul, Mary, Peter: \$50.
+            \end{itemize}
+        \item[b.] Some of the possible other values are \$110, \$80, \$55, \$90. 
+            Figures \ref{3.38.1} and \ref{3.38.2} show timing diagrams 
+            explaining how the value \$110 and \$90 can occur.
+    \end{itemize}
+
+    \begin{figure}
+        \small
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[time matrix] {
+                \node (Peter) {Peter}; &
+                \node (Mary) {Mary}; &
+                \node (Bank) {Bank}; &
+                \node (Paul) {Paul}; \\
+
+                && \node[bank] (b100) {\$100}; & \\
+                \node[action] (peacc) {Access balance: \$100}; &&& \\
+                & \node[action] (macc) {Access balance: \$100}; && \\
+                &&& \node[action] (paacc) {Access balance: \$100}; \\
+                \node[action] (penv) {new value: $100 + 10 = 110$}; &&& \\
+                & \node[action] (mnv) {new value: $100 / 2 = 50$}; && \\
+                &&& \node[action] (panv) {new value: $100 - 20 = 80$}; \\
+                & \node[action] (mset) {set! balance to \$50}; && \\
+                && \node[bank] (b50) {\$50}; &\\
+                &&& \node[action] (paset) {set! balance to \$80}; \\
+                && \node[bank] (b80) {\$80}; &\\
+                \node[action] (peset) {set! balance to \$110}; &&& \\
+                && \node[bank] (b110) {\$110}; &\\
+            };
+
+            \draw[arrow] (b100) -| (peacc);
+            \draw[arrow] (peacc) -- (penv);
+            \draw[arrow] (penv) -- (peset);
+            \draw[arrow] (peset) |- (b110);
+
+            \draw[arrow] (b100) -| (macc);
+            \draw[arrow] (macc) -- (mnv);
+            \draw[arrow] (mnv) -- (mset);
+            \draw[arrow] (mset) |- (b50);
+
+            \draw[arrow] (b100) -| (paacc);
+            \draw[arrow] (paacc) -- (panv);
+            \draw[arrow] (panv) -- (paset);
+            \draw[arrow] (paset) |- (b80);
+
+            \draw[<-, line width=.8mm] (current bounding box.south west) 
+            --node[sloped,above]{time} (current bounding box.north west);
+        \end{tikzpicture}
+        \caption{A timing diagram showing how the final value can be \$110.}
+        \label{3.38.1}
+    \end{figure}
+
+    \begin{figure}
+        \small
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[time matrix] {
+                \node (Peter) {Peter}; &
+                \node (Mary) {Mary}; &
+                \node (Bank) {Bank}; &
+                \node (Paul) {Paul}; \\
+
+                && \node[bank] (b100) {\$100}; & \\
+                \node[action] (peacc) {Access balance: \$100}; &&& \\[+1.5em]
+                \node[action] (penv) {new value: $100 + 10 = 110$}; &&& 
+                \\[+1.5em]
+                \node[action] (peset) {set! balance to \$110}; &&& \\
+                && \node[bank] (b110) {\$110}; &\\
+                & \node[action] (macc) {Access balance: \$110}; && \\[+1.5em]
+                & \node[action] (mnv) {new value: $110 / 2 = 55$}; && \\
+                &&& \node[action] (paacc) {Access balance: \$110}; \\[+1.5em]
+                &&& \node[action] (panv) {new value: $110 - 20 = 90$}; \\
+                & \node[action] (mset) {set! balance to \$55}; && \\
+                && \node[bank] (b55) {\$55}; &\\
+                &&& \node[action] (paset) {set! balance to \$90}; \\
+                && \node[bank] (b90) {\$90}; &\\
+            };
+
+            \draw[arrow] (b100) -| (peacc);
+            \draw[arrow] (peacc) -- (penv);
+            \draw[arrow] (penv) -- (peset);
+            \draw[arrow] (peset) |- (b110);
+
+            \draw[arrow] (b100) -| (macc);
+            \draw[arrow] (macc) -- (mnv);
+            \draw[arrow] (mnv) -- (mset);
+            \draw[arrow] (mset) |- (b55);
+
+            \draw[arrow] (b100) -| (paacc);
+            \draw[arrow] (paacc) -- (panv);
+            \draw[arrow] (panv) -- (paset);
+            \draw[arrow] (paset) |- (b90);
+
+            \draw[<-, line width=.8mm] (current bounding box.south west) 
+            --node[sloped,above]{time} (current bounding box.north west);
+        \end{tikzpicture}
+        \caption{A timing diagram showing how the final value can be \$90.}
+        \label{3.38.2}
+    \end{figure}
+\end{exe}
