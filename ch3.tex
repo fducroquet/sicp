@@ -152,6 +152,7 @@ This subsection contains no exercises.
 \subsection{Frames as the Repository of Local State}
 
 \begin{exe}[3.10]
+    \label{3.10}
     \begin{figure}
         \begin{tikzpicture}[>=Stealth, thick]
             \matrix[matrix anchor=north west, column sep=2\nametoenv, column 
@@ -1147,4 +1148,202 @@ This subsection contains no exercises.
 \begin{exe}[3.35]
     The squarer can be defined in the following way:
     \scm{ch3/3.35.scm}
+\end{exe}
+
+\begin{exe}[3.36]
+    \begin{figure}
+        \hspace{-1cm}
+        \begin{tikzpicture}[>=Stealth, thick]
+            % Global environment
+            \matrix[matrix anchor=base west, column sep=2\nametoenv, column 
+            2/.style={anchor=base west}] at (0,0) {
+                & \node[code] (fee) {for-each-except: ...}; \\[-8pt]
+                \node[text width=1cm, align=right] (ge) {global\\ env};
+                & \node[code] (mc) {make-connector: ...}; \\[-9pt]
+                & \node[code] (sv) {set-value!: ...}; \\
+                & \node[code] {inform-about-value: ...}; \\
+                & \node[code] (b) {b:}; \\
+                & \node[code] (a) {a:}; \\
+            };
+
+            % E1
+            \coordinate (e1pos) at ($ (g.south west)!.05!(g.south east) $);
+            \matrix[column sep=2\nametoenv, below=of e1pos] (env1m) {
+                \node[text width=1cm, align=right] (env1n) {E1};
+                & \node[env, minimum width=3cm, minimum height=1em] (env1) {}; 
+            \\
+            };
+
+            % E2
+            \matrix[column sep=2\nametoenv, below=of env1m, column 
+                2/.style={anchor=base west}] (env2m) {
+                \node[text width=1cm, align=right] (env2n) {E2};
+                & \node[code] (value1) { value: 10}; \\[-11pt]
+                & \node[code] { informant: 'user}; \\
+                & \node[code] { constraints: '() }; \\
+                & \node[code] { set-my-value: ... }; \\
+                & \node[code] { forget-my-value: ... }; \\
+                & \node[code] { connect: ... }; \\
+                & \node[code] (me1) { me: }; \\
+            };
+
+            % E3
+            \coordinate (e3pos) at ($ (g.south west)!.85!(g.south east) $);
+            \matrix[column sep=2\nametoenv, below=of e3pos] (env3m) {
+                \node[text width=1cm, align=right] (env3n) {E3};
+                & \node[env, minimum width=3cm, minimum height=1em] (env3) {}; 
+            \\
+            };
+
+            % E4
+            \matrix[column sep=2\nametoenv, below=of env3m, column 
+            2/.style={anchor=base west}] {
+                \node[text width=1cm, align=right] (env4n) {E4};
+                & \node[code] (value2) { value: false}; \\[-11pt]
+                & \node[code] { informant: false}; \\
+                & \node[code] { constraints: '() }; \\
+                & \node[code] { set-my-value: ... }; \\
+                & \node[code] { forget-my-value: ... }; \\
+                & \node[code] { connect: ... }; \\
+                & \node[code] (me2) { me: }; \\
+            };
+
+            % E5 (set-value! a 10 'user)
+            \coordinate (e5pos) at ($ (g.north west)!.05!(g.north east) $);
+            \matrix[column sep=2\nametoenv, above=6.5em of e5pos, column 
+                2/.style={anchor=west}] (env5m) {
+                & \node[code] (conn5) {connector: a}; \\[-9pt]
+                \node (env5n) {E5};
+                & \node[code] {new-value: 10}; \\
+                & \node[code] (inf5) {informant: 'user}; \\
+            };
+
+            % E6 (a 'set-value)
+            \node[code, right=3cm of value1, env] (env6) {request: 'set-value};
+            \node[above=of env6] (env6n) {E6};
+
+            % E7 (set-my-value 10 'user)
+            \node[below=1em of env6] (env7n) {E7};
+            \matrix[below=of env7n, nodes={anchor=west}] {
+                \node[code] (nv7) {newval: 10}; \\
+                \node[code] (setter7) {setter: 'user}; \\
+            };
+
+            % E8 (for-each-except ...)
+            \matrix[column sep=2\nametoenv, yshift=1em, right=of env5m, column 
+                2/.style={anchor=west}] (env8m) {
+                & \node[code] (ex8) {exception: 'user}; \\
+                \node[align=right] (env8n) {E8};
+                & \node[code] (proc8) {procedure: inform-about-value}; \\
+                & \node[code] (list8) {list: '()}; \\
+                & \node[code] (loop8) {loop: ...}; \\
+            };
+
+            % Backgrounds (global environment, E2, E4, E5, E7, E8)
+            \begin{scope}[on background layer]
+                \node[global env, fit=(fee) (a), right=\nametoenv of ge, 
+                yshift=-1.5em] (g) {};
+                \node[env, minimum width=4cm, fit=(value1) (me1), below=of env1, 
+                yshift=-1mm] (env2) {};
+                \node[env, minimum width=4cm, fit=(value2) (me2), below=of env3, 
+                yshift=-1mm] (env4) {};
+                \node[env, fit=(conn5) (inf5)] (env5) {};
+                \node[env, fit=(nv7) (setter7)] (env7) {};
+                \node[env, fit=(ex8) (proc8) (list8) (loop8)] (env8) {};
+            \end{scope}
+
+            % E9 (loop ...)
+            \node[env, code, above=of env8] (env9) {list: list}; \\
+            \node[left=of env9] (env9n) {E9};
+            \draw[->] (env9n) -- (env9);
+            \draw[->] (env9) -- (env8);
+
+            \coordinate[below=of env2] (p1);
+            \procedure{p1}{c1}{c2}
+            \node[code, below=of p1] (code) {
+            parameters: request\\
+            body: (cond ...)
+            };
+
+            \coordinate[below=of env4] (p2);
+            \procedure{p2}{c3}{c4}
+
+            \draw[->] (c1) -- (c1 |- code.north);
+            \draw[->] (c2) -| ($ (env2.south east) - (1cm, 0) $);
+
+            \draw[->] (ge) -- (ge.west -| g.west);
+            \draw[->] (env1n) -- (env1n.east -| env1.west);
+            \draw[->] (env2n) -- (env2n.east -| env2.west);
+            \draw[->] (env3n) -- (env3n.east -| env3.west);
+            \draw[->] (env4n) -- (env4n.east -| env4.west);
+            \draw[->] (env1.north) -- (env1.north |- g.south);
+            \draw[->] (me1) -| ($ (p1) + (0, \circleradius) $);
+            \draw[->] (env2) -- (env1);
+
+            \draw[->] (env5n) -- (env5n.east -| env5.west);
+            \draw[->] (env5) -- (env5.south |- g.north);
+
+            \draw[->] (env6n) -- (env6n |- env6.north);
+            \draw[->] (env6) -- (env6 -| env2.east);
+            \draw[->] (env7n) -- (env6n |- env7.north);
+            \draw[->] (env7) -- (env7 -| env2.east);
+
+            \draw[->] (env8n) -- (env8n -| env8.west);
+            \draw[->] (env8) -- (env8 |- g.north);
+
+            \draw[->] (c3) |- (code);
+            \draw[->] (c4) -| ($ (env4.south east) - (1cm, 0) $);
+            \draw[->] (env3.north) -- (env3.north |- g.south);
+            \draw[->] (env4) -- (env3);
+            \draw[->] (me2) -| ($ (p2) + (0, \circleradius) $);
+            \draw[->] (a) -- ($ (a) - (2.3cm, 0) $)
+                |- ($ (p1) + (-2\circleradius, 0) $);
+            \draw[->] (b) -- ($ (b) + (8cm, 0) $)
+                |- ($ (p2) + (-2\circleradius, 0) $);
+        \end{tikzpicture}
+        \caption{Environment structure in which the expresion
+        \vscm{(for-each-except setter inform-about-value constraints)} is 
+        evaluated.}
+        \label{3.36fig}
+    \end{figure}
+
+    Figure \ref{3.36fig} shows the environment structure in which the expression 
+    is evaluated. The environments created when defining \vscm{a} and \vscm{b} 
+    are similar to those created in exercise \ref{3.10}: an environment E1 
+    (resp. E3) is created for the evaluation of \vscm{(make-connector)}, then 
+    since \vscm{(make-connector)} contains a \vscm{let}, a new environment E2 
+    (resp. E4) pointing to E1 (resp. E3) is created. The variables \vscm{value}, 
+    \vscm{informant}, \vscm{constraints} and the local procedures 
+    \vscm{set-my-value}, \vscm{forget-my-value}, \vscm{connect} and \vscm{me} 
+    are defined in E2 (resp. E4). The local procedure \vscm{me} pointing to E2 
+    (resp. E4) is returned and bound to \vscm{a} (resp. \vscm{b}).
+
+    The following environments are created during the evaluation of 
+    \vscm{(set-value! a 10 'user)}:
+    \begin{itemize}
+        \item E5: for the evaluation of \vscm{(set-value! a 10 'user)}. It 
+            points to the global environment since \vscm{set-value!} is defined 
+            there.
+        \item E6: for the evaluation of \vscm{(a 'set-value!)}. It points to E2 
+            since \vscm{a} is a procedure pointing to E2. The evaluation returns 
+            the \vscm{set-my-value} procedure from E2.
+        \item E7: for the evaluation of \vscm{(set-my-value 10 'user)}. It 
+            points to E2 since \vscm{set-my-value} is the procedure returned at 
+            the previous step.
+        \item E8: After \vscm{(has-value? me)} is evaluated (environments 
+            omitted) the values of \vscm{value} and \vscm{informant} are changed 
+            in \vscm{set-my-value}, \vscm{for-each-except} is called, which 
+            leads to the creation of environment E8 pointing to the global 
+            environment since that’s where \vscm{for-each-except} was defined. 
+            The \vscm{loop} procedure is defined in E8, so the evaluation of 
+            \vscm{(loop list)} leads to the creation of E9 pointing to E8.
+
+            There are no constraints here so no further environments are 
+            created. Otherwise, for each constraint, an environment pointing to 
+            the global environment would be created, in which 
+            \vscm{(inform-about-value construint)} would be evaluated. Then 
+            \newline
+            \vscm{(constraint 'I-have-a-value)} would be evaluated in an 
+            environment pointing to the constraint’s local environment.
+    \end{itemize}
 \end{exe}
