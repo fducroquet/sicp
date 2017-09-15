@@ -1470,3 +1470,15 @@ This subsection contains no exercises.
         \label{3.38.2}
     \end{figure}
 \end{exe}
+
+\subsection{Mechanisms for Controlling Concurrency}
+
+\begin{exe}[3.39]
+    The remaining possibilities are 101, 121 and 100. The value of \vscm{x} 
+    can’t change between the two times that $P_1$ accesses it to evaluate
+    \vscm{(* x x)} so 110 is not possible anymore. The value of \vscm{x} can’t 
+    change during the execution of $P_2$ so 11 is not possible anymore. The 
+    final value can be 100 if $P_1$ accesses \vscm{x} and computes the final 
+    value as 100 but $P_2$ accesses it and sets it to 11 before $P_1$ can set it 
+    to 100.
+\end{exe}
