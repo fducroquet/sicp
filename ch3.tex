@@ -1503,3 +1503,12 @@ This subsection contains no exercises.
 
     If the procedures are serialized the only possible value is $100\,000$.
 \end{exe}
+
+\begin{exe}[3.41]
+    I don’t think serializing access to balance is necessary because both 
+    \vscm{withdraw} and \vscm{deposit} make a single assignment to 
+    \vscm{balance}, so accessing \vscm{balance} concurrently with one of these 
+    procedures will reflect the state of the account either before or after the 
+    withdrawal or deposit, but it will correspond to a real state of the 
+    account.
+\end{exe}
