@@ -1482,3 +1482,24 @@ This subsection contains no exercises.
     value as 100 but $P_2$ accesses it and sets it to 11 before $P_1$ can set it 
     to 100.
 \end{exe}
+
+\begin{exe}[3.40]
+    The possible values are:
+    \begin{itemize}
+        \item $100$: $P_1$ accesses \vscm{x} twice and $P_2$ accesses \vscm{x} 
+            thrice, then \vscm{x} $P_2$ sets \vscm{x} to 1000 before $P_1$ sets 
+            it to 100.
+        \item $1000$: $P_1$ accesses \vscm{x} twice and $P_2$ accesses \vscm{x} 
+            thrice, then \vscm{x} $P_1$ sets \vscm{x} to 100 before $P_2$ sets 
+            it to 1000.
+        \item $10\,000$: either $P_1$ accesses \vscm{x} once before $P_2$ sets 
+            it to 1000, or $P_2$ accesses \vscm{x} twice before $P_1$ sets it to 
+            100.
+        \item $100\,000$: $P_2$ accesses \vscm{x} once before $P_1$ sets it to 
+        100.
+        \item $1\,000\,000$: the two procedures execute sequentially in any 
+    order.
+    \end{itemize}
+
+    If the procedures are serialized the only possible value is $100\,000$.
+\end{exe}
