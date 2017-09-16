@@ -1676,3 +1676,39 @@ This subsection contains no exercises.
     \vscm{serialized-exchange}, it’ll wait forever while trying to execute \\
     \vscm{((account1 'withdraw) difference)}.
 \end{exe}
+
+\begin{exe}[3.46]
+    Figure \ref{3.46fig} shows how the implementation of \vscm{test-and-set!} 
+    can fail if two procedures access the cell and find its contents at false 
+    before both set its contents to true.
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[time matrix] {
+                & \node (cell) {mutex cell}; & \\
+
+                & \node[bank] (cfalse) {false}; & \\
+                \node[action] (p1acc) {Access cell: false}; && \\
+                && \node[action] (p2acc) {Access cell: false}; \\
+                \node[action] (p1set) {set! cell to true}; && \\
+                & \node[bank] (ctrue1) {true}; & \\
+                && \node[action] (p2set) {set! cell to true}; \\
+                & \node[bank] (ctrue2) {true}; & \\
+            };
+
+            \draw[arrow] (cfalse) -| (p1acc);
+            \draw[arrow] (p1acc) -- (p1set);
+            \draw[arrow] (p1set) |- (ctrue1);
+
+            \draw[arrow] (cfalse) -| (p2acc);
+            \draw[arrow] (p2acc) -- (p2set);
+            \draw[arrow] (p2set) |- (ctrue2);
+
+            \draw[<-, line width=.8mm] (current bounding box.south west) 
+            --node[sloped,above]{time} (current bounding box.north west);
+        \end{tikzpicture}
+        \caption{A timing diagram showing how the mutex implementation can allow 
+        to processes to acquire the mutex at the same time.}
+        \label{3.46fig}
+    \end{figure}
+\end{exe}
