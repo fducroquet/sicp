@@ -1517,3 +1517,141 @@ This subsection contains no exercises.
     The change proposed by Ben Bitdiddle is safe to make. The two versions of 
     \vscm{make-account} allow the same concurrency.
 \end{exe}
+
+\begin{exe}[3.43]
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[time matrix] {
+                &
+                \node (a1) {a1}; &
+                \node (a2) {a2}; &
+                \node (a3) {a3}; & \\
+
+                & \node[bank] (a130) {\$30}; &
+                \node[bank] (a220) {\$20}; &
+                \node[bank] (a310) {\$10}; & \\
+                \node[action] (p1aa1) {Access balance a1: \$30}; &&& \\
+                &&&& \node[action] (p2aa2) {Access balance a2: \$20}; \\
+                \node[action] (p1aa2) {Access balance a2: \$20}; &&& \\
+                &&&& \node[action] (p2aa3) {Access balance a3: \$10}; \\
+                \node[action] (p1diff) {Difference: \$10}; &&& \\
+                &&&& \node[action] (p2diff) {Difference: \$10}; \\
+                \node[action] (p1w) {\vscm{((a1 'withdraw) 10)}}; &&& \\
+                & \node[bank] (a120) {\$20}; &&& \\
+                &&&& \node[action] (p2w) {\vscm{((a2 'withdraw) 10)}}; \\
+                && \node[bank] (a210) {\$10}; && \\
+                \node[action] (p1d) {\vscm{((a2 'deposit) 10)}}; &&& \\
+                && \node[bank] (a220b) {\$20}; && \\
+                &&&& \node[action] (p2d) {\vscm{((a3 'deposit) 10)}}; \\
+                &&& \node[bank] (a320) {\$20}; & \\
+            };
+
+            \draw[arrow] (a130) -| (p1aa1);
+            \draw[arrow] (a220) |- (p1aa2);
+            \draw[arrow] (p1aa1) -- (p1aa2);
+            \draw[arrow] (p1aa2) -- (p1diff);
+            \draw[arrow] (p1diff) -- (p1w);
+            \draw[arrow] (p1w) -- (p1d);
+            \draw[arrow] (p1w) |- (a120);
+            \draw[arrow] (p1d) |- (a220b);
+
+            \draw[arrow] (a220) |- (p2aa2);
+            \draw[arrow] (a310) |- (p2aa3);
+            \draw[arrow] (p2aa2) -- (p2aa3);
+            \draw[arrow] (p2aa3) -- (p2diff);
+            \draw[arrow] (p2diff) -- (p2w);
+            \draw[arrow] (p2w) -- (p2d);
+            \draw[arrow] (p2w) |- (a210);
+            \draw[arrow] (p2d) |- (a320);
+
+            \draw[<-, line width=.8mm] (current bounding box.south west) 
+            --node[sloped,above]{time} (current bounding box.north west);
+        \end{tikzpicture}
+        \caption{A timing diagram showing how the account balances can all three 
+        be \$20 after exchanging concurrently \vscm{a1} and \vscm{a2} on one 
+        side, \vscm{a2} and \vscm{a3} on the other side.}
+        \label{3.43.1}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[time matrix] {
+                &
+                \node (a1) {a1}; &
+                \node (a2) {a2}; &
+                \node (a3) {a3}; & \\
+
+                & \node[bank] (a130) {\$30}; &
+                \node[bank] (a220) {\$20}; &
+                \node[bank] (a310) {\$10}; & \\
+                \node[action] (p1aa1) {Access balance a1: \$30}; &&& \\
+                &&&& \node[action] (p2aa2) {Access balance a2: \$20}; \\
+                \node[action] (p1aa2) {Access balance a2: \$20}; &&& \\
+                &&&& \node[action] (p2aa3) {Access balance a3: \$10}; \\
+                \node[action] (p1diff) {Difference: \$10}; &&& \\
+                &&&& \node[action] (p2diff) {Difference: \$10}; \\
+                \node[action] (p1w) {\vscm{((a1 'withdraw) 10)}}; &&& \\
+                & \node[bank] (a120) {\$20}; &&& \\
+                &&&& \node[action] (p2w1) {Access balance a2: \$20}; \\[+1.2em]
+                &&&& \node[action] (p2w2) {New value for a2: \$10}; \\
+                \node[action] (p1d) {\vscm{((a2 'deposit) 10)}}; &&& \\
+                && \node[bank] (a220b) {\$20}; && \\
+                &&&& \node[action] (p2w3) {set! balance for a2 to \$10}; \\
+                && \node[bank] (a210) {\$10}; && \\
+                &&&& \node[action] (p2d) {\vscm{((a3 'deposit) 10)}}; \\
+                &&& \node[bank] (a320) {\$20}; & \\
+            };
+
+            \draw[arrow] (a130) -| (p1aa1);
+            \draw[arrow] (a220) |- (p1aa2);
+            \draw[arrow] (p1aa1) -- (p1aa2);
+            \draw[arrow] (p1aa2) -- (p1diff);
+            \draw[arrow] (p1diff) -- (p1w);
+            \draw[arrow] (p1w) -- (p1d);
+            \draw[arrow] (p1w) |- (a120);
+            \draw[arrow] (p1d) |- (a220b);
+
+            \draw[arrow] (a220) |- (p2aa2);
+            \draw[arrow] (a220) |- (p2w1);
+            \draw[arrow] (a310) |- (p2aa3);
+            \draw[arrow] (p2aa2) -- (p2aa3);
+            \draw[arrow] (p2aa3) -- (p2diff);
+            \draw[arrow] (p2diff) -- (p2w1);
+            \draw[arrow] (p2w1) -- (p2w2);
+            \draw[arrow] (p2w2) -- (p2w3);
+            \draw[arrow] (p2w3) -- (p2d);
+            \draw[arrow] (p2w3) |- (a210);
+            \draw[arrow] (p2d) |- (a320);
+
+            \draw[<-, line width=.8mm] (current bounding box.south west) 
+            --node[sloped,above]{time} (current bounding box.north west);
+        \end{tikzpicture}
+        \caption{A timing diagram showing how the sum of the balances in the 
+        accounts is not preserved if the transactions on individual accounts are 
+        not serialized.}
+        \label{3.43.2}
+    \end{figure}
+
+    Since each exchange run individually exchanges the balances of two of the 
+    accounts, if any number of exchanges happen sequentially the balances of the 
+    accounts will still be \$10, \$20 and \$30 in some order.
+
+    Figure \ref{3.43.1} shows how the account balances can be different than 
+    \$10, \$20 and \$30 with the first version of the account-exchange program. 
+    The \vscm{withdraw} and \vscm{deposit} procedures from each account are 
+    serialized, so each of them is an atomic operation. Each exchange operation 
+    removes an amount from an account and adds the same amount to another 
+    account, and these operations are serialized, so the sum of the balances is 
+    preserved.
+
+    Figure \ref{3.43.2} shows a case where the sum of the balances of the 
+    accounts is not preserved after exchanges between \vscm{a1} and \vscm{a2} on 
+    one side, \vscm{a2} and \vscm{a3} on the other side. Compared to the version 
+    from figure \ref{3.43.1}, the only transaction for a single account that 
+    does not happen as if it were serialized is \vscm{((a2 'withdraw) 10)}: the 
+    first exchange procedure sets the account’s balance to \$20 before the 
+    second procedure can set it to \$10, and the final sum is \$50 instead of 
+    \$60.
+\end{exe}
