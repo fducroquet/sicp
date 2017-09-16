@@ -1667,3 +1667,12 @@ This subsection contains no exercises.
     each account: an access to the balance and then either a deposit or 
     a withdrawal.
 \end{exe}
+
+\begin{exe}[3.45]
+    The problem with Louis’ reasoning is that when a procedure serialized with 
+    an account’s serializer attempts to withdraw or deposit to that account, it 
+    calls a procedure serialized with the same serializer and it gets stuck 
+    forever waiting for the mutex it holds to be available. In the case of 
+    \vscm{serialized-exchange}, it’ll wait forever while trying to execute \\
+    \vscm{((account1 'withdraw) difference)}.
+\end{exe}
