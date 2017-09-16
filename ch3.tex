@@ -1655,3 +1655,15 @@ This subsection contains no exercises.
     second procedure can set it to \$10, and the final sum is \$50 instead of 
     \$60.
 \end{exe}
+
+\begin{exe}[3.44]
+    Louis is wrong, there is no problem with Ben Bitdiddle’s procedure: at the 
+    end of the transfer, \vscm{amount} has been withdrawn from 
+    \vscm{from-account} and deposited on \vscm{to-account}, it does not matter 
+    whether other procedures access the accounts in-between. The fundamental 
+    difference with the exchange problem is that for the transfer the amount is 
+    an argument to the procedure, so there are only two atomic operations, one 
+    on each account. In the case of exchange there are two atomic operations for 
+    each account: an access to the balance and then either a deposit or 
+    a withdrawal.
+\end{exe}
