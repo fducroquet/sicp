@@ -31,8 +31,8 @@
   (stream-for-each display-line s))
 
 (define (display-line x)
-  (newline)
-  (display x))
+  (display x)
+  (newline))
 
 (define (stream-car stream) (car stream))
 (define (stream-cdr stream) (force (cdr stream)))
@@ -68,3 +68,21 @@
                        (stream-cdr
                          (stream-filter prime?
                                         (stream-enumerate-interval 10000 1000000)))))
+
+; From the MIT website.
+;;For Section 3.5 -- useful for looking at finite amounts of infinite streams
+;;Print the first n elements of the stream s.
+;;One version prints on one line, one on separate lines
+
+(define (print-n-line s n)
+  (if (> n 0)
+      (begin (display (stream-car s))
+             (display ", ")
+             (print-n-line (stream-cdr s) (- n 1)))
+      (newline)))
+
+(define (print-n s n)
+  (if (> n 0)
+      (begin (display (stream-car s))
+             (newline)
+             (print-n (stream-cdr s) (- n 1)))))
