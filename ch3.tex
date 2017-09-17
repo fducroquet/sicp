@@ -1764,3 +1764,19 @@ This subsection contains no exercises.
     The generalized version of \vscm{stream-map} is:
     \scm{ch3/3.50.scm}
 \end{exe}
+
+\begin{exe}[3.51]
+    After the first expression, the interpreter prints \vscm{0}. This is the 
+    result of applying \vscm{show} to the first element of the stream in 
+    \vscm{stream-map}, in \vscm{(cons-stream (proc (stream-car s)) ...)}.
+
+    After the second expression, it prints \vscm{1 2 3 4 5 5} (one value per 
+    line). Each call to \vscm{stream-cdr} on the result of \vscm{stream-map} 
+    causes a call to \vscm{show} as the following value is evaluated. Then the 
+    value returned by \vscm{stream-ref} is returned.
+
+    After the third expression, it prints \vscm{6 7 7} (one value per line). 
+    Since \vscm{delay} uses \vscm{memo-proc}, \vscm{show} is only called for the 
+    elements of the stream not visited during the previous evaluation. Then the 
+    value \vscm{7} is returned.
+\end{exe}
