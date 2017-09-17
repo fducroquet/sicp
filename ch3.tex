@@ -1828,3 +1828,11 @@ This subsection contains no exercises.
 \begin{exe}[3.53]
     The elements of this stream are the powers of 2.
 \end{exe}
+
+\begin{exe}[3.54]
+    The procedure \vscm{mul-streams} and the stream \vscm{factorials} can be 
+    defined as:
+    \scm{ch3/3.54.scm}
+    We use \vscm{(stream-cdr integers)} rather than \vscm{integers}, otherwise 
+    the $n$th element would be $n!$ and not $(n + 1)!$.
+\end{exe}
