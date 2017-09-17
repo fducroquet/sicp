@@ -1747,3 +1747,15 @@ This subsection contains no exercises.
     other tables that contain the new value of the field to update these rows. 
     (Not sure of a concrete example, but it’s the idea…)
 \end{exe}
+
+\section{Streams}
+
+\begin{comp}
+    In order to make the code in this section work with Gambit scheme, it’s 
+    necessary to define \vscm{the-empty-stream} and \vscm{stream-null?}, as well 
+    as the macros \vscm{delay} and \vscm{cons-stream}. This can be done with the 
+    following:
+    \scm{ch3/3.50pre.gambc.scm}
+\end{comp}
+
+\subsection{Streams Are Delayed Lists}
