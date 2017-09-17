@@ -1780,3 +1780,45 @@ This subsection contains no exercises.
     elements of the stream not visited during the previous evaluation. Then the 
     value \vscm{7} is returned.
 \end{exe}
+
+\begin{exe}[3.52]
+    Since \vscm{delay} uses \vscm{memo-proc}, \vscm{accum} is called only once 
+    for each element of the enumerated interval, so the elements of \vscm{seq} 
+    are the sums of successive integers: $1, 3, 6, 10, 15, ...$. Furthermore, 
+    \vscm{sum} is equal to the sum of the integers from 1 to $n + 1$, where $n$ 
+    is the maximum of the indices of the elements already visited in the stream 
+    \vscm{seq}.
+
+    After the definition of \vscm{seq}, the value of \vscm{sum} is 1 because 
+    \vscm{accum} was applied to the first element of the enumeration by 
+    \vscm{stream-map} ($n = 0$).
+
+    The definition of \vscm{y} causes \vscm{stream-cdr} to be called on 
+    \vscm{seq} until the first even element is found. This happens for the third 
+    element of the stream interval, and then the value of \vscm{sum} is 6 ($n 
+    = 2$).
+
+    The definition of \vscm{y} causes \vscm{stream-cdr} to be called on 
+    \vscm{seq} until the first multiple of 5 is found. This is the fourth 
+    element of the stream, which is 10 ($n = 3$).
+
+    The eighth even element of \vscm{seq} is 136, so after evaluationg
+    \vscm{(stream-ref y 7)}, \vscm{sum} will be equal to 136, which is also the 
+    printed response to the evaluation.
+
+    The evaluation of \vscm{display-stream} causes the stream \vscm{seq} to be 
+    fully evaluated, so at the end the value of \vscm{sum} is the last value of 
+    that stream: 210. The evaluation of \vscm{(display-stream z)} displays the 
+    elements of \vscm{seq} that are multiples of 5, followed by \vscm{done}, one 
+    element per line:
+    \vscm{10 15 45 55 105 120 190 210 done}.
+
+    \vspace{\baselineskip}
+
+    The responses would differ if \vscm{delay} were implemented without using 
+    \vscm{memo-proc}. Since the result of \vscm{accum} depends on the value of 
+    a variable that changes with every call to \vscm{accum}, the stream 
+    \vscm{seq} would be completely different each time it is used. It becomes 
+    a lot harder to reason about what \vscm{seq}, \vscm{sum}, \vscm{y}, \vscm{z} 
+    represent since they don’t correspond to something clearly definable.
+\end{exe}
