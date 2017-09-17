@@ -1726,3 +1726,16 @@ This subsection contains no exercises.
             \scm{ch3/3.47b.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[3.48]
+    The \vscm{serialized-exchange} and \vscm{make-account-and-serializer} 
+    procedures can be modified in the following way to incorporate the numbering 
+    technique. It works because if two procedures need to access the same two 
+    accounts, they will both attempt to access the same account first and one of 
+    them will wait until the other one is done with no deadlock. More generally, 
+    if one procedure P1 already holds a lock L1 and waits to acquire a lock L2 
+    held by another procedure P2, we know that P2 won’t attempt to acquire L1, 
+    otherwise it would have done so before acquiring L2, so the lock held by P1 
+    can’t prevent P2 from completing.
+    \scm{ch3/3.48.scm}
+\end{exe}
