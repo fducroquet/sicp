@@ -1712,3 +1712,17 @@ This subsection contains no exercises.
         \label{3.46fig}
     \end{figure}
 \end{exe}
+
+\begin{exe}[3.47]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] The following implementation of semaphores uses a mutex to 
+            guard a variable holding the number of available accesses to the 
+            semaphore:
+            \scm{ch3/3.47a.scm}
+        \item[b.] The following implementation uses a cell holding the number of 
+            available accesses, and an atomic \vscm{test-and-set!} operation to 
+            change the value of that cell:
+            \scm{ch3/3.47b.scm}
+    \end{itemize}
+\end{exe}
