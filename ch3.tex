@@ -1854,3 +1854,23 @@ This subsection contains no exercises.
     If \vscm{memo-proc} is not used, the values are recomputed every time they 
     are needed, so the number of additions is exponential.
 \end{exe}
+
+\begin{exe}[3.58]
+    The given stream computes the expansion of the ratio of \vscm{num} and 
+    \vscm{den} in basis \vscm{radix}. More precisely, if we call $n$, $d$ and 
+    $b$ the values of \vscm{num}, \vscm{den} and \vscm{radix}, $q_i$ the $i$th 
+    element of the stream, and $n_i$ the value of \vscm{num} during the $i$th 
+    recursive call to \vscm{expand} (with $n = n_0$), we can prove by induction 
+    that for any $k \geq 0$:
+    \[
+    n = \sum_{i = 0}^{k} \frac{q_i d}{b^{i + 1}} + \frac{n_{k + 1}}{b^{k + 1}}
+    \]
+    so by taking the limit when $k$ tends to $+\infty$:
+    \[
+	\frac{n}{d} = \sum_{i \geq 0} \frac{q_i}{b^{i + 1}}
+    \]
+    The streams \vscm{(expand 1 7 10)} and \vscm{(expand 3 8 10)} give the 
+    decimal expansions of $\sfrac{1}{7}$ and $\sfrac{3}{8}$ respectively: in the 
+    first case the elements are 1, 4, 2, 8, 5 and 7 repeating indefinitely, in 
+    the second case the elements are 3, 7 and 5 followed by zeroes.
+\end{exe}
