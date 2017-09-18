@@ -1846,3 +1846,11 @@ This subsection contains no exercises.
     The required stream can be constructed as:
     \scm{ch3/3.56.scm}
 \end{exe}
+
+\begin{exe}[3.57]
+    Only $n - 1$ additions are performed to compute the $n$th Fibonacci number 
+    since the values already computed are not computed again.
+
+    If \vscm{memo-proc} is not used, the values are recomputed every time they 
+    are needed, so the number of additions is exponential.
+\end{exe}
