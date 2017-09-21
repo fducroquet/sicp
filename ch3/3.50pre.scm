@@ -76,13 +76,13 @@
 
 (define (print-n-line s n)
   (if (> n 0)
-      (begin (display (stream-car s))
+      (begin (write (stream-car s))
              (display ", ")
              (print-n-line (stream-cdr s) (- n 1)))
       (newline)))
 
 (define (print-n s n)
   (if (> n 0)
-      (begin (display (stream-car s))
+      (begin (write (stream-car s))
              (newline)
              (print-n (stream-cdr s) (- n 1)))))
