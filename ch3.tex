@@ -1902,3 +1902,17 @@ This subsection contains no exercises.
     \vscm{invert-unit-series}, otherwise the computation does not benefit from 
     the optimization provided by \vscm{memo-proc} and is a lot slower.
 \end{exe}
+
+\begin{exe}[3.62]
+    If $F$ and $G$ are two power series with $G = c_0 + \sum_{i > 0} c_i x^i$ 
+    and $c_0 \neq 0$, we can write $G = c_0 H$ where $H = \frac{1}{c_0} G$ is 
+    a power series with a constant term equal to $1$. We have:
+    \[
+    \frac{F}{G} = \frac{F}{c_0 H} = \frac{1}{c_0} \times F \times \frac{1}{H}
+    \]
+    Since \vscm{invert-unit-series} can be used to compute the power series for 
+    $\frac{1}{H}$, \vscm{div-series} can be defined as shown belown, and the 
+    power series for tangent can be defined using $\tan x = \frac{\sin x}{\cos 
+    x}$.
+    \scm{ch3/3.62.scm}
+\end{exe}
