@@ -1916,3 +1916,19 @@ This subsection contains no exercises.
     x}$.
     \scm{ch3/3.62.scm}
 \end{exe}
+
+\subsection{Exploiting the Stream Paradigm}
+
+\begin{exe}[3.63]
+    If we don’t use a local variable, each recursive call to \vscm{sqrt-stream} 
+    produces a new stream, so if the $n$ first elements of the result have been 
+    computed, to get the next element, the $n$ first elements are computed again 
+    before the final mapping can be applied, so the time needed to compute the 
+    $(n + 1)$-th element is at least twice the time needed to compute the $n$th 
+    element, the time complexity is in $\Theta(2^n)$.
+
+    With a local variable and \vscm{memo-proc}, the complexity is linear, but 
+    without \vscm{memo-proc} the complexity would still be exponential since all 
+    the previous elements of the stream must be recomputed to obtain the next 
+    element.
+\end{exe}
