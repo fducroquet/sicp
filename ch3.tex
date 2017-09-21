@@ -1950,3 +1950,48 @@ This subsection contains no exercises.
     even more quickly: the first 10 terms give a correct value to 14 decimal 
     places.
 \end{exe}
+
+\begin{exe}[3.66]
+    Intuitively, since \vscm{interleave} produces a stream where half of the 
+    elements come from the first stream and half from the second stream, about 
+    one out of two elements of \vscm{int-pairs} comes from the first line, and 
+    more generally, the interval between two pairs starting with $i$ is about 
+    $2^i$.
+
+    To give more precise results, let’s call $S_i$ the stream produced by 
+    \vscm{pairs} with integers greater than or equal to $i$, so that 
+    \vscm{int-pairs} is equal to $S_1$.
+    Because of the order of the arguments of \vscm{interleave} in \vscm{pairs}, 
+    the elements at index 0 and at odd indices of $S_i$ start with $i$. The 
+    pairs with even indices $\geq 2$ are elements of $S_{i + 1}$.
+
+    Using this, we can show that the index of $(i, i)$ in $S_1$ is equal to $2^i 
+    - 2$, and the index of
+    $(i, j)$ with $j > i$ is $(j - i) 2^{i} + 2^{i - 1} - 2$.
+
+    \begin{proof}
+        This is true for $i = 1$.
+
+        Let’s assume that it’s true for some $i \geq 1$. We can prove the 
+        formulas for $i + 1$ by using the two following facts: 1) the index of 
+        $(i + 1, j)$ in $S_2$ is the same as the index of $(i, j - 1)$ in $S_1$ 
+        since these streams are constructed in the same way, 2) the $k$th 
+        element of $S_2$ has index $2k + 2$ in $S_1$.
+
+        From the induction hypothesis, the index of $(i + 1, i + 1)$ in $S_2$ is 
+        $2^i - 2$. Since the $k$th element of $S_2$ has index $2k + 2$ in $S_1$, 
+        the index of $(i + 1, i + 1)$ is $S_1$ is $2(2^i - 2) + 2 = 2^{i + 1} 
+        - 2$.
+
+        In the same way, the index of $(i + 1, j)$ with $j > i + 1$ in $S_2$ is 
+        equal to the index of $(i, j - 1)$ in $S_1$, that is, to
+        $(j - i - 1) 2^{i} + 2^{i - 1} - 2$. So the index of $(i + 1, j)$ in 
+        $S_1$ is equal to\\
+        $2((j - i - 1) 2^{i} + 2^{i - 1} - 2) + 2 = (j - i - 1)2^{i + 1} + 2^i 
+        - 2$, which is the result wanted.
+    \end{proof}
+
+    By applying this result, we find that the pair $(1, 100)$ has index 197, so 
+    it is preceded by 197 pairs. The pair $(99, 100)$ has index $2^{99} + 2^{98} 
+    - 2$, and the pair $(100, 100)$ has index $2^{100} - 2$.
+\end{exe}
