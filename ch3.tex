@@ -1884,3 +1884,12 @@ This subsection contains no exercises.
 	    \scm{ch3/3.59b.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[3.60]
+    If we write the two power series to multiply as $S_1 = a_0 + x A_1$ and $S_2 
+    = b_0 + x B_1$, where $A_1$ and $B_1$ are the power series represented by
+    \vscm{(stream-cdr s1)} and \vscm{(stream-cdr s2)}, we have
+    $S_1 S_2 = a_0 b_0 + x (b_0 A_1 + a_0 B_1 + x A_1 B_1)
+    = a_0 b_0 + x (a_0 B_1 + A_1 S_2)$, so \vscm{mul-series} can be defined as:
+    \scm{ch3/3.60.scm}
+\end{exe}
