@@ -22,3 +22,6 @@
 (include "3.66pre.scm")
 (include "3.67.scm")
 (include "3.69.scm")
+(include "3.70.scm")
+(include "3.70a.scm")
+(include "3.70b.scm")
