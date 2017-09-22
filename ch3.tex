@@ -2005,3 +2005,11 @@ This subsection contains no exercises.
     definition.
     \scm{ch3/3.67.scm}
 \end{exe}
+
+\begin{exe}[3.68]
+    Louis’ definition of \vscm{pairs} causes an infinite loop when it is called 
+    with infinite streams because \vscm{interleave} is called directly, it is 
+    not put in an argument to \vscm{cons-stream}, which uses delayed evaluation. 
+    So the arguments of \vscm{interleave} are evaluated, which causes infinite 
+    recursive calls to \vscm{pairs}.
+\end{exe}
