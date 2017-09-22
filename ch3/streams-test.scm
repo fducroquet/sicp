@@ -20,3 +20,4 @@
 (include "3.64.scm")
 (include "3.65.scm")
 (include "3.66pre.scm")
+(include "3.67.scm")

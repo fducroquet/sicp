@@ -1995,3 +1995,13 @@ This subsection contains no exercises.
     it is preceded by 197 pairs. The pair $(99, 100)$ has index $2^{99} + 2^{98} 
     - 2$, and the pair $(100, 100)$ has index $2^{100} - 2$.
 \end{exe}
+
+\begin{exe}[3.67]
+    We can divide the stream \vscm{(all-pairs S T)} containing all pairs of 
+    elements from the two streams into four parts: the first pair $(S_0, T_0)$, 
+    the rest of the first line, the rest of the first column, and the stream
+    \vscm{(all-pairs (stream-cdr S) (stream-cdr T))}. We only need to add the 
+    stream corresponding to the rest of the first column to the previous 
+    definition.
+    \scm{ch3/3.67.scm}
+\end{exe}
