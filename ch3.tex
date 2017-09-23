@@ -2033,3 +2033,26 @@ This subsection contains no exercises.
             \scm{ch3/3.70b.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[3.71]
+    I used a procedure \vscm{group-by} that takes as arguments an infinite 
+    stream and a test procedure \vscm{same-group?} that tests whether two 
+    successive elements of the stream belong to the same group, and returns 
+    a stream where the elements are grouped into lists according to the given 
+    procedure. To find all Ramanujan number, we first generate the stream of 
+    pairs of integers ordered by the sum of their cubes, then group the pairs 
+    with the same cube sum, and keep only the groups with more than one element.
+    \scm{ch3/3.71.scm}
+
+    The 6 first Ramanujan numbers are 1729, 4104, 13832, 20683, 32832 and 39312. 
+    The procedure given above returns them with their decompositions:
+    \begin{cscm}
+        > (print-n ramanujan 6)
+        (1729 (1 12) (9 10))
+        (4104 (2 16) (9 15))
+        (13832 (2 24) (18 20))
+        (20683 (10 27) (19 24))
+        (32832 (4 32) (18 30))
+        (39312 (2 34) (15 33))
+    \end{cscm}
+\end{exe}
