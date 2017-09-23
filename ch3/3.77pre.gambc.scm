@@ -1,0 +1,6 @@
+(define (solve f y0 dt)
+  (let ((y 'undefined)
+        (dy 'undefined))
+    (set! y (integral (delay dy) y0 dt))
+    (set! dy (stream-map f y))
+    y))

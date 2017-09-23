@@ -36,3 +36,5 @@
 (include "3.74.scm")
 (include "3.75.scm")
 (include "3.76.scm")
+(include "3.77pre.scm")
+(include "3.77pre.gambc.scm")
