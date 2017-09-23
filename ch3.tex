@@ -2056,3 +2056,24 @@ This subsection contains no exercises.
         (39312 (2 34) (15 33))
     \end{cscm}
 \end{exe}
+
+\begin{exe}[3.72]
+    Thanks to the definition of \vscm{group-by} in the previous exercise, the 
+    stream can be defined by applying a few stream operations in a way very 
+    similar to the definition of the stream of Ramanujan numbers.
+    \scm{ch3/3.72.scm}
+    The first 10 such numbers found are:
+    \begin{cscm}
+        > (print-n three-square-sums 10)
+        (325 (1 18) (6 17) (10 15))
+        (425 (5 20) (8 19) (13 16))
+        (650 (5 25) (11 23) (17 19))
+        (725 (7 26) (10 25) (14 23))
+        (845 (2 29) (13 26) (19 22))
+        (850 (3 29) (11 27) (15 25))
+        (925 (5 30) (14 27) (21 22))
+        (1025 (1 32) (8 31) (20 25))
+        (1105 (4 33) (9 32) (12 31) (23 24))
+        (1250 (5 35) (17 31) (25 25))
+    \end{cscm}
+\end{exe}
