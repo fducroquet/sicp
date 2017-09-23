@@ -2125,3 +2125,12 @@ This subsection contains no exercises.
     0 by defining \vscm{zero-crossings} instead in the following way:
     \scm{ch3/3.74b.scm}
 \end{exe}
+
+\begin{exe}[3.75]
+    The “last-value” to use to compute the average should be the last value from 
+    the \vscm{sense-data} stream, and the value to use to detect the sign change 
+    should be the last average. Louis uses the last average for both. The 
+    solution is to pass both the last value and the last average as arguments to 
+    \vscm{zero-crossings}.
+    \scm{ch3/3.75.scm}
+\end{exe}
