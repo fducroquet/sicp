@@ -2106,3 +2106,22 @@ This subsection contains no exercises.
     The RC circuit can be modeled with the following procedure:
     \scm{ch3/3.73.scm}
 \end{exe}
+
+\begin{exe}[3.74]
+    \ \vspace{-20pt}
+    \begin{comp}
+        To test the code from the book, let’s first define a procedure to 
+        transform a list into a stream, as well as the 
+        \vscm{sign-change-detector} procedure from the book. Note that because 
+        of the way \vscm{make-zero-crossings} is defined, 
+        \vscm{sign-change-detector} works backwards: it returns 1 when its first 
+        argument is positive and the second is negative and vice-versa.
+        \scm{ch3/3.74sup.scm}
+    \end{comp}
+    With the suggestion from the book, the stream of zero crossing can be 
+    defined as:
+    \scm{ch3/3.74.scm}
+    However, it would be better to avoid adding an arbitrary initial value of 
+    0 by defining \vscm{zero-crossings} instead in the following way:
+    \scm{ch3/3.74b.scm}
+\end{exe}

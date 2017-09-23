@@ -29,3 +29,8 @@
 (include "3.72.scm")
 (include "3.73pre.scm")
 (include "3.73.scm")
+(load "../ch2/2.33pre.scm") ; for accumulate aka fold-right
+(define fold-right accumulate)
+(include "3.74sup.scm")
+(include "3.74pre.scm")
+(include "3.74.scm")
