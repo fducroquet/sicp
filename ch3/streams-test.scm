@@ -27,3 +27,5 @@
 (include "3.70b.scm")
 (include "3.71.scm")
 (include "3.72.scm")
+(include "3.73pre.scm")
+(include "3.73.scm")
