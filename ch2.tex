@@ -405,6 +405,8 @@ Let’s first define a function that prints intervals:
 
 \subsection{Sequences as Conventional Interfaces}
 
+\subsubsection{Sequence Operations}
+
 \begin{exe}[2.33]
     The operations can be redefined as:
     \scm{ch2/2.33.scm}
@@ -482,6 +484,8 @@ Let’s first define a function that prints intervals:
     \scm{ch2/2.39.scm}
 \end{exe}
 
+\subsubsection{Nested Mappings}
+
 \begin{exe}[2.40]
     The procedure \vscm{unique-pairs} and the simplified definition of 
     \vscm{prime-sum-pairs} are:
@@ -515,6 +519,8 @@ Let’s first define a function that prints intervals:
 \subsection{Example: A Picture Language}
 \label{2.2.4}
 
+\subsubsection{The picture language}
+
 \begin{comp}
     To test the code in this section, it’s necessary to load a module including 
     graphical functions. The solution I chose here is to use DrRacket’s 
@@ -532,10 +538,14 @@ Let’s first define a function that prints intervals:
     \scm{ch2/2.44.scm}
 \end{exe}
 
+\subsubsection{Higher-order operations}
+
 \begin{exe}[2.45]
     The \vscm{split} procedure can be defined as:
     \scm{ch2/2.45.scm}
 \end{exe}
+
+\subsubsection{Frames}
 
 \begin{exe}[2.46]
     \label{2.46}
@@ -555,6 +565,8 @@ Let’s first define a function that prints intervals:
     For the second implementation:
     \scm{ch2/2.47c.scm}
 \end{exe}
+
+\subsubsection{Painters}
 
 \begin{comp}
     Sligthly modified version of \vscm{segments->painter} for use with 
@@ -580,6 +592,8 @@ Let’s first define a function that prints intervals:
     \end{itemize}
 \end{exe}
 
+\subsubsection{Transforming and combining painters}
+
 \begin{exe}[2.50]
     The given transformations can be defined as:
     \scm{ch2/2.50.scm}
@@ -592,6 +606,8 @@ Let’s first define a function that prints intervals:
     In terms of \vscm{beside} and rotation operations:
     \scm{ch2/2.51b.scm}
 \end{exe}
+
+\subsubsection{Levels of language for robust design}
 
 \begin{exe}[2.52]
     \ \vspace{-20pt}
@@ -679,6 +695,8 @@ Let’s first define a function that prints intervals:
 \subsection{Example: Representing sets}
 \label{2.3.3}
 
+\subsubsection{Sets as unordered lists}
+
 \begin{exe}[2.59]
     The \vscm{union-set} operation can be defined as:
     \scm{ch2/2.59.scm}
@@ -698,6 +716,8 @@ Let’s first define a function that prints intervals:
     \vscm{element-of-set?} and \vscm{intersection-set}.
 \end{exe}
 
+\subsubsection{Sets as ordered lists}
+
 \begin{exe}[2.61]
     A possible implementation of \vscm{adjoin-set} requiring on average half as 
     many steps as with the unordered representation is:
@@ -709,6 +729,8 @@ Let’s first define a function that prints intervals:
     a $\Theta(n)$ \vscm{union-set} implementation:
     \scm{ch2/2.62.scm}
 \end{exe}
+
+\subsubsection{Sets as binary trees}
 
 \begin{exe}[2.63]
     \ \vspace{-20pt}
@@ -761,6 +783,8 @@ Let’s first define a function that prints intervals:
     \vscm{union-set} and \vscm{intersection-set} for binary trees as:
     \scm{ch2/2.65.scm}
 \end{exe}
+
+\subsubsection{Sets and information retrieval}
 
 \begin{exe}[2.66]
     The procedure is almost the same as \vscm{element-of-set?} for sets 
@@ -884,6 +908,8 @@ This subsection contains no exercises.
             operation-and-type table.
     \end{itemize}
 \end{exe}
+
+\subsubsection{Message passing}
 
 \begin{exe}[2.75]
     The constructor \vscm{make-from-mag-ang} can be defined as follows:
@@ -1035,6 +1061,8 @@ This subsection contains no exercises.
 
 \subsection{Example: Symbolic Algebra}
 
+\subsubsection{Arithmetic on polynomials}
+
 \begin{comp}
     I decided to add the polynomial type to the tower of types used since 
     exercise \ref{2.83}. For this to work, I had to redefine the tower of types:
@@ -1107,6 +1135,8 @@ This subsection contains no exercises.
     \scm{ch2/2.91b.scm}
 \end{exe}
 
+\subsubsection{Hierarchies of types in symbolic algebra}
+
 \begin{exe}[2.92]
     I tried to find a solution that was as general as possible: works for an 
     arbitrary number of variables used in the polynomials, in any order. The 
@@ -1162,6 +1192,8 @@ This subsection contains no exercises.
     Changes to existing code:
     \scm{ch2/2.92changes.scm}
 \end{exe}
+
+\subsubsection{Extended exercise: Rational functions}
 
 \begin{exe}[2.93]
     The changes to the rational packages are straightforward.

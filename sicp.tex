@@ -188,9 +188,9 @@ decorations.markings,shapes.misc}
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}
 {\IfNoValueTF{#1}
-    {\exeaux\addcontentsline{toc}{subsubsection}%
+    {\exeaux\addcontentsline{toc}{paragraph}%
         {Exercise}}
-    {\exeaux\addcontentsline{toc}{subsubsection}%
+    {\exeaux\addcontentsline{toc}{paragraph}%
         {Exercise #1}}%
         \ignorespaces}
 {\endexeaux}

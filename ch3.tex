@@ -631,6 +631,8 @@ This subsection contains no exercises.
     \vscm{(a)} and \vscm{(d c b a)}.
 \end{exe}
 
+\subsubsection{Sharing and identity}
+
 \begin{exe}[3.15]
     \begin{figure}
         \centering
@@ -817,6 +819,8 @@ This subsection contains no exercises.
     second one will reach the end of the list.
     \scm{ch3/3.19.scm}
 \end{exe}
+
+\subsubsection{Mutation is just assignment}
 
 \begin{exe}[3.20]
     \begin{figure}
@@ -1052,6 +1056,8 @@ This subsection contains no exercises.
 
 \subsection{A Simulator for Digital Circuits}
 
+\subsubsection{Primitive function boxes}
+
 \begin{exe}[3.28]
     Here is a definition of an or-gate similar to the definiton of the and-gate:
     \scm{ch3/3.28.scm}
@@ -1095,6 +1101,8 @@ This subsection contains no exercises.
     $ (n - 1) (a + o) + (n + 1) \max(2a + i, o + a) $.
 \end{exe}
 
+\subsubsection{Representing wires}
+
 \begin{exe}[3.31]
     The initialization is necessary to compute correctly all the signals with 
     the initial values of the inputs. Since there are inverters, not all signals 
@@ -1109,6 +1117,8 @@ This subsection contains no exercises.
     setting the second input to 1, the sum would still remain 0 and the carry 
     would become 1.
 \end{exe}
+
+\subsubsection{Implementing the agenda}
 
 \begin{exe}[3.32]
     If the (last in, first out) order is used, the values set by the actions 
@@ -1473,6 +1483,8 @@ This subsection contains no exercises.
 
 \subsection{Mechanisms for Controlling Concurrency}
 
+\subsubsection{Serializers in Scheme}
+
 \begin{exe}[3.39]
     The remaining possibilities are 101, 121 and 100. The value of \vscm{x} 
     can’t change between the two times that $P_1$ accesses it to evaluate
@@ -1517,6 +1529,8 @@ This subsection contains no exercises.
     The change proposed by Ben Bitdiddle is safe to make. The two versions of 
     \vscm{make-account} allow the same concurrency.
 \end{exe}
+
+\subsubsection{Complexity of using multiple shared resources}
 
 \begin{exe}[3.43]
     \begin{figure}
@@ -1677,6 +1691,8 @@ This subsection contains no exercises.
     \vscm{((account1 'withdraw) difference)}.
 \end{exe}
 
+\subsubsection{Implementing serializers}
+
 \begin{exe}[3.46]
     Figure \ref{3.46fig} shows how the implementation of \vscm{test-and-set!} 
     can fail if two procedures access the cell and find its contents at false 
@@ -1726,6 +1742,8 @@ This subsection contains no exercises.
             \scm{ch3/3.47b.scm}
     \end{itemize}
 \end{exe}
+
+\subsubsection{Deadlock}
 
 \begin{exe}[3.48]
     The \vscm{serialized-exchange} and \vscm{make-account-and-serializer} 
@@ -1919,6 +1937,8 @@ This subsection contains no exercises.
 
 \subsection{Exploiting the Stream Paradigm}
 
+\subsubsection{Formulating iterations as stream processes}
+
 \begin{exe}[3.63]
     If we don’t use a local variable, each recursive call to \vscm{sqrt-stream} 
     produces a new stream, so if the $n$ first elements of the result have been 
@@ -1950,6 +1970,8 @@ This subsection contains no exercises.
     even more quickly: the first 10 terms give a correct value to 14 decimal 
     places.
 \end{exe}
+
+\subsubsection{Infinite streams of pairs}
 
 \begin{exe}[3.66]
     Intuitively, since \vscm{interleave} produces a stream where half of the 
