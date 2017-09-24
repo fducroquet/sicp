@@ -16,7 +16,7 @@
 (include "3.61.scm")
 (include "3.62.scm")
 (include "3.63pre.scm")
-(include "3.64pre.scm")
+; (include "3.64pre.scm") ; sqrt x tolerance
 (include "3.64.scm")
 (include "3.65.scm")
 (include "3.66pre.scm")
@@ -39,3 +39,4 @@
 (include "3.77pre.scm")
 (include "3.77pre.gambc.scm")
 (include "3.79.scm")
+(include "3.81pre.scm")
