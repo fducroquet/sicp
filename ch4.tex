@@ -1,0 +1,12 @@
+\chapter{Metalinguistic Abstraction}
+
+\section{The Metacircular Evaluator}
+
+\subsection{The Core of the Evaluator}
+
+\begin{exe}[4.1]
+    We can put the value to evaluate first inside a \vscm{let} expression. Since 
+    the \vscm{let} is transformed into a \vscm{lambda} internally, we know that 
+    its argument will be evaluated before the body of the \vscm{let}.
+    \scm{ch4/4.01.scm}
+\end{exe}
