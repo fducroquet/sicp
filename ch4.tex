@@ -10,3 +10,24 @@
     its argument will be evaluated before the body of the \vscm{let}.
     \scm{ch4/4.01.scm}
 \end{exe}
+
+\subsection{Representing Expressions}
+
+\begin{exe}[4.2]
+    \ \vspace{-20pt}
+    \begin{itemize}
+	\item[a.] The test to determine whether an expression is a procedure 
+	    just checks whether it is a pair, so it will return true for all 
+	    list expressions: \vscm{if}, \vscm{cond}, \vscm{begin}, 
+	    \vscm{define}, \vscm{set!}, etc., and the evaluator will try to 
+	    apply the procedure \vscm{if}, \vscm{cond}, etc. to the rest of the 
+	    arguments. It’s not possible to transform the special forms into 
+	    procedures because all the arguments of a procedure are evaluated 
+	    before evaluation.
+	\item[b.] The only required change to \vscm{eval} is to put the 
+	    \vscm{application?} test first. Then we only need changing the 
+	    definition of the \vscm{application?} predicate and the associated 
+	    selectors so they reflect the new syntax.
+	    \scm{ch4/4.02.scm}
+    \end{itemize}
+\end{exe}
