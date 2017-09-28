@@ -31,3 +31,22 @@
 	    \scm{ch4/4.02.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.3]
+    As in exercise \ref{2.73}, a few cases can’t be assimilated to the 
+    data-directed dispatch because they correspond to untagged data: here it’s 
+    the case of \vscm{variable?}, \vscm{self-evaluating?} and 
+    \vscm{application?}. If we had kept Louis’ idea from the previous exercise 
+    to start procedure applications with \vscm{call}, \vscm{application?} could 
+    have been assimilated into the dispatch. Since we don’t keep this idea, we 
+    have to redefine the \vscm{application?} predicate: if we keep it as 
+    \vscm{pair?} we can’t put it before the dispatch because all the special 
+    forms will be considered as procedure applications, and we can’t put it 
+    after the dispatch either because the procedure won’t be found in the table 
+    and it will cause an error. So I consider that every expression for which no 
+    procedure of the correct type is found in the table is a procedure 
+    application. I used a two-dimensional table as in chapter 2, though 
+    a one-dimensional table would be enough if we don’t do any other dispatch on 
+    the expressions’ type.
+    \scm{ch4/4.03.scm}
+\end{exe}
