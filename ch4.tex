@@ -50,3 +50,20 @@
     the expressions’ type.
     \scm{ch4/4.03.scm}
 \end{exe}
+
+\begin{exe}[4.4]
+    If we define specific evaluation procedures \vscm{eval-and} and 
+    \vscm{eval-or}, we have to add the following two lines to the definition of 
+    \vscm{eval}
+    \scm{ch4/4.04a.scm}
+    Then we can implement the predicates, selectors and the evaluation 
+    procedures in the following way:
+    \scm{ch4/4.04b.scm}
+    If \vscm{and} and {or} are implemented as derived expressions, the 
+    predicates and selectors don’t change, but the lines regarding \vscm{and} 
+    and \vscm{or} in \vscm{eval} are replaced by:
+    \scm{ch4/4.04c.scm}
+    And the procedures transforming \vscm{and} and \vscm{or} expressions into 
+    \vscm{if} expressions can be defined as:
+    \scm{ch4/4.04d.scm}
+\end{exe}
