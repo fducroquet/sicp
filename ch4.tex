@@ -94,3 +94,11 @@
     This can be done in the following way:
     \scm{ch4/4.07.scm}
 \end{exe}
+
+\begin{exe}[4.8]
+    To support named \vscm{let}, we modify the selectors for \vscm{let} so they 
+    handle both named \vscm{let}s and ordinary \vscm{let}s, and 
+    \vscm{let->combination} so the generated code creates a procedure with the 
+    given name instead of a lambda.
+    \scm{ch4/4.08.scm}
+\end{exe}

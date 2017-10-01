@@ -9,3 +9,5 @@
 (load "4.06.scm")
 ; let* expressions
 (load "4.07.scm")
+; Named let
+(load "4.08.scm")
