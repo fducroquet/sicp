@@ -315,7 +315,10 @@
         (list '< <)
         (list '> >)
         (list '>= >=)
-        (list '<= <=)))
+        (list '<= <=)
+        (list 'assoc assoc)
+        (list 'write write)
+        (list 'exit exit)))
 
 (define (primitive-procedure-names)
   (map car primitive-procedures))
