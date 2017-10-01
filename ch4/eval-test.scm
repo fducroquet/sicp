@@ -5,3 +5,5 @@
 ; (load "4.04b.scm")
 ; Additional syntax for cond
 (load "4.05.scm")
+; let expressions
+(load "4.06.scm")
