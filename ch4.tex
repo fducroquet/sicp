@@ -82,3 +82,15 @@
     transformation procedure \vscm{let->combination} in the following way:
     \scm{ch4/4.06.scm}
 \end{exe}
+
+\begin{exe}[4.7]
+    A \vscm{let*} expression can be rewritten as a set of nested \vscm{let} 
+    expressions defining only one binding at a time, so that the second binding 
+    is defined in the body of the first \vscm{let} etc. For instance, the 
+    example from the book becomes:
+    \scm{ch4/4.07b.scm}
+    If we have already implemented \vscm{let}, it is sufficient to rewrite 
+    \vscm{let*} expressions in terms of \vscm{let} expressions to handle them. 
+    This can be done in the following way:
+    \scm{ch4/4.07.scm}
+\end{exe}

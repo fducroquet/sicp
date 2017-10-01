@@ -7,3 +7,5 @@
 (load "4.05.scm")
 ; let expressions
 (load "4.06.scm")
+; let* expressions
+(load "4.07.scm")
