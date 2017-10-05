@@ -11,3 +11,7 @@
 (load "4.07.scm")
 ; Named let
 (load "4.08.scm")
+; Iterative constructs
+(load "4.09while.scm")
+(load "4.09until.scm")
+(load "4.09for.scm")
