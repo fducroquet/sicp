@@ -15,3 +15,6 @@
 (load "4.09while.scm")
 (load "4.09until.scm")
 (load "4.09for.scm")
+; Alternative syntax
+(load "4.10a.scm")
+; (load "4.10b.scm")

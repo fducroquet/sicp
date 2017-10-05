@@ -246,3 +246,26 @@
     transformed in a \vscm{let} expression containing a \vscm{while}.
     \scm{ch4/4.09for.scm}
 \end{exe}
+
+\begin{exe}[4.10]
+    It’s easy to modify the symbol used as the \vscm{car} of an expression to 
+    define its type: we only need changing the predicate (and the associated 
+    constructor if any was defined) for this type of expression. For instance, 
+    we can replace \vscm{cond} with \vscm{case}, \vscm{and} with \vscm{&&}, and 
+    \vscm{or} with \vscm{||} with the following code:
+    \scm{ch4/4.10a.scm}
+
+    We can replace \vscm{not} with \vscm{!} by replacing
+    \vscm{(list 'not not)} with \vscm{(list '! not)} in the list of primitive 
+    procedures.
+
+    I also modified the selectors for procedure application so that
+    \vscm{(proc args)} becomes \vscm{(proc (args))}. This change actually makes 
+    the syntax more complex since e.g. \vscm{(not (> x 3))} has to be written 
+    \vscm{(! ((> (x 3))))}, it’s just for the sake of the example.
+    \scm{ch4/4.10b.scm}
+
+    I think that more dramatic changes such as replacing the parentheses with 
+    brackets would require a lot of work since currently we rely on the 
+    underlying Scheme for list processing.
+\end{exe}

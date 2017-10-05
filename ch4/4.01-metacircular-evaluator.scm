@@ -316,7 +316,7 @@
         (list '+ +)
         (list '- -)
         (list '/ /)
-        (list 'not not)
+        (list '! not)
         (list '= =)
         (list '< <)
         (list '> >)
