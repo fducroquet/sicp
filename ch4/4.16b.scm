@@ -1,0 +1,25 @@
+(define (scan-out-defines body)
+  (define (defines->let vars vals body)
+    (if (null? vars)
+      body
+      (list (make-let (map (lambda (var)
+                             (list var ''*unassigned*))
+                           vars)
+                      (sequence->exp
+                        (append
+                          (map (lambda (var val)
+                                 (make-set! var val))
+                               vars
+                               vals)
+                          body))))))
+  (define (scan body vars vals exps)
+    (if (null? body)
+      (defines->let (reverse vars) (reverse vals) (reverse exps))
+      (let ((first (first-exp body)))
+        (if (definition? first)
+          (scan (cdr body)
+                (cons (definition-variable first) vars)
+                (cons (definition-value first) vals)
+                exps)
+          (scan (cdr body) vars vals (cons first exps))))))
+  (scan body '() '() '()))

@@ -35,4 +35,9 @@
 ; Unbind variables
 (load "4.13b.scm")
 
+;; Section 4.1.6
+(load "4.16a.scm")
+(load "4.16b.scm")
+(load "4.16c.scm")
+
 (define the-global-environment (setup-environment))

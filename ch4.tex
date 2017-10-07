@@ -280,6 +280,7 @@
 \end{exe}
 
 \begin{exe}[4.12]
+    \label{4.12}
     We can define a procedure that recursively traverses the environment 
     structure and executes the given action when a binding is found for the 
     given variable as shown below. By default, the procedure goes to the 
@@ -343,4 +344,28 @@
 
     Both assumptions lead to a contradiction, so such a \vscm{halts?} procedure 
     can’t exist.
+\end{exe}
+
+\subsection{Internal Definitions}
+
+\begin{exe}[4.16]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] Here is the updated version of \vscm{lookup-variable-value} 
+            for the frame representation as a list of pairs, with the 
+            abstractions defined in exercise \ref{4.12}:
+            \scm{ch4/4.16a.scm}
+        \item[b.] The \vscm{scan-out-defines} procedure can be defined as:
+            \scm{ch4/4.16b.scm}
+            No transformation must be done if no definition is found because 
+            \vscm{let} expressions are transformed into procedure applications, 
+            so this would lead to infinite loops. The \vscm{*unassigned*} symbol 
+            has to be quoted twice so that the returned code contains a quoted 
+            symbol.
+        \item[c.] It is better to install \vscm{scan-out-defines} in 
+            \vscm{make-procedure} than in \vscm{procedure-body}, because the 
+            latter is called every time the procedure is applied, while the 
+            former is called only when it is defined.
+            \scm{ch4/4.16c.scm}
+    \end{itemize}
 \end{exe}
