@@ -447,3 +447,12 @@
     implemented in the following way:
     \scm{ch4/4.17.scm}
 \end{exe}
+
+\begin{exe}[4.18]
+    This procedure won’t work if internal definitions are scanned out as in this 
+    exercise because the value of \vscm{y} is needed to evaluate the value of 
+    \vscm{dy}, and in the exercise the value has been computed but not yet 
+    assigned to \vscm{y}.
+
+    It works if internal definitions are scanned out as shown in the text.
+\end{exe}
