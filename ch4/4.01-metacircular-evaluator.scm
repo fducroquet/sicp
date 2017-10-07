@@ -364,5 +364,3 @@
                  (procedure-body object)
                  '<procedure-env>))
     (write object)))
-
-(define the-global-environment (setup-environment))

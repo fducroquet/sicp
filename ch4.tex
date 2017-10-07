@@ -269,3 +269,12 @@
     brackets would require a lot of work since currently we rely on the 
     underlying Scheme for list processing.
 \end{exe}
+
+\subsection{Evaluator Data Structures}
+
+\begin{exe}[4.11]
+    If each binding is represented as a name-value pair, each frame represents 
+    a table, so we can simplify the implementation by using \vscm{assoc}. We can 
+    change the implementation by rewriting the following procedures:
+    \scm{ch4/4.11.scm}
+\end{exe}

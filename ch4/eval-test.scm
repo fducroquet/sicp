@@ -18,3 +18,7 @@
 ; Alternative syntax
 (load "4.10a.scm")
 ; (load "4.10b.scm")
+; Alternative structure for environment frames
+(load "4.11.scm")
+
+(define the-global-environment (setup-environment))

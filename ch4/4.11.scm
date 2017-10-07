@@ -1,0 +1,46 @@
+(define (make-frame variables values)
+  (if (null? variables)
+    (list '*frame*)
+    (add-binding-to-frame! (car variables) (car values)
+                           (make-frame (cdr variables) (cdr values)))))
+
+(define (frame-bindings frame) (cdr frame))
+
+(define (add-binding-to-frame! var val frame)
+  (set-cdr! frame (cons (cons var val) (cdr frame)))
+  frame)
+
+(define (lookup-variable-value var env)
+  (define (env-loop env)
+    (define (scan bindings)
+      (let ((binding (assoc var bindings)))
+        (if binding
+          (cdr binding)
+          (env-loop (enclosing-environment env)))))
+    (if (eq? env the-empty-environment)
+      (error "Unbound variable" var)
+      (let ((frame (first-frame env)))
+        (scan (frame-bindings frame)))))
+  (env-loop env))
+
+(define (set-variable-value! var val env)
+  (define (env-loop env)
+    (define (scan bindings)
+      (let ((binding (assoc var bindings)))
+        (if binding
+          (set-cdr! binding val)
+          (env-loop (enclosing-environment env)))))
+    (if (eq? env the-empty-environment)
+      (error "Unbound variable -- SET!" var)
+      (let ((frame (first-frame env)))
+        (scan (frame-bindings frame)))))
+  (env-loop env))
+
+(define (define-variable! var val env)
+  (let ((frame (first-frame env)))
+    (define (scan bindings)
+      (let ((binding (assoc var bindings)))
+        (if binding
+          (set-cdr! binding val)
+          (add-binding-to-frame! var val frame))))
+    (scan (frame-bindings frame))))
