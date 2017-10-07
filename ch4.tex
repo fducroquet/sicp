@@ -331,3 +331,16 @@
     procedure to apply with the underlying Scheme’s \vscm{apply}, and it 
     considers that representation as a list and not as a procedure.
 \end{exe}
+
+\subsection{Data as Programs}
+
+\begin{exe}[4.15]
+    Let’s assume that \vscm{(halts? try try)} returns true. Then 
+    \vscm{(run-forever)} is executed so \vscm{(try try)} does not halt.
+
+    Let’s assume that on the contrary, \vscm{(halts? try try)} returns false. 
+    Then \vscm{(try try)} halts.
+
+    Both assumptions lead to a contradiction, so such a \vscm{halts?} procedure 
+    can’t exist.
+\end{exe}
