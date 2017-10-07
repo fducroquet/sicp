@@ -1,4 +1,6 @@
 (load "4.01-metacircular-evaluator.scm")
+
+;; Section 4.1.2
 ; And and or
 (load "4.04b.scm")
 ; And and or as derived forms
@@ -18,7 +20,11 @@
 ; Alternative syntax
 (load "4.10a.scm")
 ; (load "4.10b.scm")
+
+;; Section 4.1.3
 ; Alternative structure for environment frames
-(load "4.11.scm")
+; (load "4.11.scm")
+; Abstractions for environment manipulation
+(load "4.12.scm")
 
 (define the-global-environment (setup-environment))

@@ -278,3 +278,12 @@
     change the implementation by rewriting the following procedures:
     \scm{ch4/4.11.scm}
 \end{exe}
+
+\begin{exe}[4.12]
+    We can define a procedure that recursively traverses the environment 
+    structure and executes the given action when a binding is found for the 
+    given variable as shown below. By default, the procedure goes to the 
+    enclosing environment if the procedure is not found in the first frame, but 
+    a second procedure can be passed as an argument to specify another behavior.
+    \scm{ch4/4.12.scm}
+\end{exe}
