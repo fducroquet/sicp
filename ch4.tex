@@ -322,3 +322,12 @@
     the first in the frame need not be handled separately:
     \scm{ch4/4.13b.scm}
 \end{exe}
+
+\subsection{Running the Evaluator as a Program}
+
+\begin{exe}[4.14]
+    Louis’ \vscm{map} fails because the \vscm{map} procedure from the underlying 
+    Scheme is called with a procedure representation from the interpreter as the 
+    procedure to apply with the underlying Scheme’s \vscm{apply}, and it 
+    considers that representation as a list and not as a procedure.
+\end{exe}
