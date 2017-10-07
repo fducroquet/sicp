@@ -1,0 +1,12 @@
+(define (defines-first body)
+  (define (scan body defines exps)
+    (if (null? body)
+      (append (reverse defines) (reverse exps))
+      (let ((first (first-exp body)))
+        (if (definition? first)
+          (scan (cdr body) (cons first defines) exps)
+          (scan (cdr body) defines (cons first exps))))))
+  (scan body '() '()))
+
+(define (make-procedure parameters body env)
+  (list 'procedure parameters (defines-first body) env))

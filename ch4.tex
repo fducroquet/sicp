@@ -369,3 +369,81 @@
             \scm{ch4/4.16c.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.17]
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick,
+            code/.append style={font=\ttfamily},
+            label distance=5mm]
+            % Sequential evaluation
+            \matrix[column sep=2\nametoenv, column 2/.style={anchor=west},
+            label=below:{Sequential evaluation}] (gem1) {
+            \node[text width=1cm, align=right] (ge1) {global\\ env};
+            & \node[env,minimum width=4cm, minimum height=1cm] (geb1) 
+            {};\\[+1.5cm]
+
+            & \node[code] (vars1) {\ <vars>: <vals>}; \\
+            \node[text width=1cm, align=right] (e11) {E1};
+            & \node[code] (u1) {\ u: <e1>}; \\
+            & \node[code] (v1) {\ v: <e2>}; \\
+            };
+
+            \begin{scope}[on background layer]
+                \node[env, minimum width=4cm, fit=(vars1) (u1) (v1), below=of 
+                geb1,yshift=-2mm] (e1b) {};
+            \end{scope}
+
+            \draw[->] (ge1) -- (ge1.west -| geb1.west);
+            \draw[->] (e11) -- (e11.east -| e1b.west);
+            \draw[->] (e1b) -- (geb1);
+
+            % After scanning out defines
+            \matrix[column sep=2\nametoenv, column 2/.style={anchor=west},
+            right=of gem1, label=below:{After scanning out}] {
+            \node[text width=1cm, align=right] (ge2) {global\\ env};
+            & \node[env,minimum width=4cm, minimum height=1cm] (geb2) 
+            {};\\[+1.5cm]
+
+            \node[text width=1cm, align=right] (e12) {E1};
+            & \node[code] (vars2) {\ <vars>: <vals>}; \\[+1.5cm]
+
+            \node[text width=1cm, align=right] (e2) {E2};
+            & \node[code] (u2) {\ u: <e1>}; \\
+            & \node[code] (v2) {\ v: <e2>}; \\
+            };
+
+            \begin{scope}[on background layer]
+                \node[env, minimum width=4cm, fit=(vars2), below=of 
+                geb2,yshift=-2.5mm] (e12b) {};
+                \node[env, minimum width=4cm, fit=(u2) (v2), below=of 
+                e12b,yshift=-1mm] (e2b) {};
+            \end{scope}
+
+            \draw[->] (ge2) -- (ge2.west -| geb2.west);
+            \draw[->] (e12) -- (e12.east -| e12b.west);
+            \draw[->] (e12b) -- (geb2);
+            \draw[->] (e2) -- (e2.east -| e2b.west);
+            \draw[->] (e2b) -- (e12b);
+        \end{tikzpicture}
+        \caption{Environment structures in which \vscm{<e3>} is evaluated when 
+        the definitions are interpreted sequentially and after scanning out.}
+        \label{4.17fig}
+    \end{figure}
+    Figure \ref{4.17fig} shows the environment structures in which \vscm{<e3>} 
+    is evaluated when the definitions are interpreted sequentially and when they 
+    are scanned out. In the later case, there is an extra frame because 
+    \vscm{let} corresponds to a \vscm{lambda} application.
+
+    This difference in environment structure makes no difference in a correct 
+    program’s behavior because the same bindings are accessible when the body of 
+    the procedure is evaluated, and since the inner \vscm{let} contains the 
+    whole body of the outer lambda, both frames in the later case always go 
+    together: if the outer lambda returns a procedure, its environment will be 
+    E2, it can never be E1, so there can be no lost bindings.
+
+    A possible solution would be to move all the inner definitions to the top of 
+    the procedure body. This will work only if the values of the defined 
+    variables don’t use the value of a variable defined later. This can be 
+    implemented in the following way:
+    \scm{ch4/4.17.scm}
+\end{exe}
