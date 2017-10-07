@@ -25,10 +25,14 @@
 
 ; Abstractions for environment manipulation
 (load "4.12a.scm")
+; Unbind variables
+(load "4.13a.scm")
 
 ; Alternative structure for environment frames
 (load "4.11.scm")
 ; Abstractions for environment manipulation
 (load "4.12b.scm")
+; Unbind variables
+(load "4.13b.scm")
 
 (define the-global-environment (setup-environment))

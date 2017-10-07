@@ -291,3 +291,34 @@
     Implementation for the reperesentation of frames as a list of pairs:
     \scm{ch4/4.12b.scm}
 \end{exe}
+
+\begin{exe}[4.13]
+    The solutions I read on the internet unbind variables only from the first 
+    frame of the environment because modifying the enclosing environment seemed 
+    too risky or similar reasons. I chose to delete the first binding found even 
+    if it’s not in the first frame: the interpreter implementation already 
+    allows us to change bindings in the enclosing environments, e.g. if I define 
+    a function
+    \vscm{(define (f x) (set! + -) x)}, the sequence of interactions:
+    \begin{cscm}
+	(+ 2 1)
+	(f 2)
+	(+ 2 1)
+    \end{cscm}
+    produces 3, 2 and 1. This choice is thus coherent with the rest of the 
+    implementation.
+
+    To add the \vscm{make-unbound!} operation, we add to \vscm{eval} the line:
+    \begin{cscm}
+	((unbind? exp) (eval-unbind exp env))
+    \end{cscm}
+    The necessary procedures with the implementation of frames as a pair of 
+    lists are:
+    \scm{ch4/4.13a.scm}
+
+    The implementation of \vscm{delete-binding-from-frame} is simpler with 
+    a list of pairs than with a pair of lists because there is only one list to 
+    modify, and the list is headed, so the case where the variable to unbind is 
+    the first in the frame need not be handled separately:
+    \scm{ch4/4.13b.scm}
+\end{exe}
