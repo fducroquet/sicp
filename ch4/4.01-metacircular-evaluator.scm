@@ -21,6 +21,7 @@
                          env))
         ((let? exp) (eval (let->combination exp) env))
         ((let*? exp) (eval (let*->nested-lets exp) env))
+        ((letrec? exp) (eval (letrec->let exp) env))
         ((while? exp) (eval (while->if exp) env))
         ((until? exp) (eval (until->while exp) env))
         ((for? exp) (eval (for->let exp) env))

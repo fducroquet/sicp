@@ -42,4 +42,7 @@
 
 ; (load "4.17.scm")
 
+; letrec
+(load "4.20.scm")
+
 (define the-global-environment (setup-environment))

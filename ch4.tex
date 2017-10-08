@@ -349,6 +349,7 @@
 \subsection{Internal Definitions}
 
 \begin{exe}[4.16]
+    \label{4.16}
     \ \vspace{-20pt}
     \begin{itemize}
         \item[a.] Here is the updated version of \vscm{lookup-variable-value} 
@@ -491,4 +492,113 @@
     automatically delaying them, and forcing them only when a variable’s value 
     is looked up. This would be a big change to Scheme’s evaluation order 
     however.
+\end{exe}
+
+\begin{exe}[4.20]
+    \ \vspace{-20pt}
+    \begin{figure}
+        \begin{tikzpicture}[>=Stealth, thick,
+            code/.append style={font=\ttfamily},
+	    label distance=5mm,
+	    env/.append style={minimum width=3cm, minimum height=1cm}]
+	    % With letrec
+	    \matrix[column sep=2\nametoenv, column 2/.style={anchor=west}, 
+	    label={[xshift=1cm]above:{With letrec}}] (gem1) {
+            \node[text width=1cm, align=right] (ge1) {global\\ env};
+	    & \node[code] (gec1) {\ f: ...};\\[+1.5cm]
+
+	    \node[text width=1cm, align=right] (e111) {E1};
+	    & \node[code] (x1) {\ x: 5}; \\[+1.5cm]
+
+	    \node[text width=1cm, align=right] (e11) {E2};
+	    & \node[code] (even1) {\ even?:}; \\
+	    & \node[code] (odd1) {\ odd?:}; \\
+	    };
+
+            \begin{scope}[on background layer]
+		\node[env, fit=(gec1), xshift=2\nametoenv] (geb1) {};
+		\node[env, fit=(x1), below=of geb1, yshift=-2mm] (e21b) {};
+		\node[env, fit=(even1) (odd1), below=of e21b] (e1b) {};
+            \end{scope}
+
+	    \coordinate (odd1px) at ($ (e1b.south west)!.5!(e1b.south) $);
+	    \coordinate[below=of odd1px] (odd1p);
+	    \procedure{odd1p}{oc1}{oe1}
+	    \draw[->] (oe1) -- (oe1 |- e1b.south);
+	    \draw[->] (odd1.south -| odd1p) -- ($ (odd1p) + (0, \circleradius) 
+	    $);
+
+	    \coordinate (even1px) at ($ (e1b.south)!.5!(e1b.south east) $);
+	    \coordinate[below=of even1px] (even1p);
+	    \procedure{even1p}{ec1}{ee1}
+	    \draw[->] (ee1) -- (ee1 |- e1b.south);
+	    \draw[->] (even1.east) -| ($ (even1p) + (0, \circleradius) $);
+
+            \draw[->] (ge1) -- (ge1.west -| geb1.west);
+            \draw[->] (e11) -- (e11.east -| e1b.west);
+	    \draw[->] (e111) -- (e111.east -| e21b.west);
+	    \draw[->] (e21b) -- (geb1);
+	    \draw[->] (e1b) -- (e21b);
+
+	    % With let
+	    \matrix[right=3cm of gem1, column sep=2\nametoenv, column 
+	    2/.style={anchor=west},
+	    label={[xshift=1cm]above:{With let}}] {
+	    \node[text width=1cm, align=right] (ge2) {global\\ env};
+	    & \node[code] (gec2) {\ f: ...};\\[+1.5cm]
+
+	    \node[text width=1cm, align=right] (e112) {E1};
+	    & \node[code] (x2) {\ x: 5}; \\[+1.5cm]
+
+	    \node[text width=1cm, align=right] (e12) {E2};
+	    & \node[code] (even2) {\ even?:}; \\
+	    & \node[code] (odd2) {\ odd?:}; \\
+	    };
+
+            \begin{scope}[on background layer]
+		\node[env, fit=(gec2), xshift=2\nametoenv] (geb2) {};
+		\node[env, fit=(x2), below=of geb2, yshift=-2mm] (e22b) {};
+		\node[env, fit=(even2) (odd2), below=of e22b] (e2b) {};
+            \end{scope}
+
+	    \coordinate (odd2px) at ($ (e2b.south west)!.5!(e2b.south) $);
+	    \coordinate[below=of odd2px] (odd2p);
+	    \procedure{odd2p}{oc2}{oe2}
+	    \draw[->] (oe2) -- ($ (oe2) + (0,-.8cm) $) -- ++(3cm,0) |-
+	    ($ (e22b.east)!.4!(e22b.north east) $);
+	    \draw[->] (odd2.south -| odd2p) -- ($ (odd2p) + (0, \circleradius) 
+	    $);
+
+	    \coordinate (even2px) at ($ (e2b.south)!.5!(e2b.south east) $);
+	    \coordinate[below=of even2px] (even2p);
+	    \procedure{even2p}{ec2}{ee2}
+	    \draw[->] (ee2) -- ($ (ee2) + (1cm,0) $) |-
+	    ($ (e22b.east)!.4!(e22b.south east) $);
+	    \draw[->] (even2.east) -| ($ (even2p) + (0, \circleradius) $);
+
+            \draw[->] (ge2) -- (ge2.west -| geb2.west);
+            \draw[->] (e12) -- (e12.east -| e2b.west);
+	    \draw[->] (e112) -- (e112.east -| e22b.west);
+	    \draw[->] (e22b) -- (geb2);
+	    \draw[->] (e2b) -- (e22b);
+	\end{tikzpicture}
+	\caption{Environment structures in which \vscm{<rest of body of f>} is 
+	evaluated during evaluation of the expression \vscm{(f 5)}.}
+	\label{4.20fig}
+    \end{figure}
+    \begin{itemize}
+	\item[a.] \vscm{Letrec} can be implemented as shown below. This is very 
+	    similar to exercise \ref{4.16}, so the code could be mutualized:
+	    \scm{ch4/4.20.scm}
+	\item[b.] Figure \ref{4.20fig} shows the environment structures in which 
+	    the \vscm{<rest of body of f>} is evaluated during evaluation of the 
+	    expression \vscm{(f 5)}, first with \vscm{letrec}, then with 
+	    \vscm{let}. With \vscm{letrec}, the values of \vscm{odd?} and 
+	    \vscm{even?} are evaluated in an environment where the bindings 
+	    already exist, so the procedures created point to an environment 
+	    where the other is defined. With \vscm{let}, the values of 
+	    \vscm{even?} and \vscm{odd?} are evaluated before the bindings 
+	    exist, so they point to an environment where they are undefined and 
+	    the recursive calls won’t work.
+    \end{itemize}
 \end{exe}
