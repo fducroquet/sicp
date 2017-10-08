@@ -602,3 +602,24 @@
 	    the recursive calls won’t work.
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.21]
+    \ \vspace{-20pt}
+    \begin{itemize}
+	\item[a.] The trick used here is to modify the recursive procedure 
+	    (\vscm{(lambda (ft k) ...)} in the exercise) so it takes as an 
+	    additional parameter the procedure to call where a recursive call 
+	    would be used otherwise, and the argument used is the modified 
+	    procedure itself. The first inner \vscm{lambda}
+	    (\vscm{(lambda (fact) ...)}) is used to do the initial call to the 
+	    modified (derecursified?) procedure.
+
+	    The Fibonacci numbers can be computed similarly:
+	    \scm{ch4/4.21a.scm}
+
+	\item[b.] This time, since there are two mutually recursive procedures, 
+	    two procedure parameters are needed to pass around the procedures to 
+	    call when we are not in the terminal case.
+	    \scm{ch4/4.21b.scm}
+    \end{itemize}
+\end{exe}
