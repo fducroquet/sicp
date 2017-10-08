@@ -456,3 +456,39 @@
 
     It works if internal definitions are scanned out as shown in the text.
 \end{exe}
+
+\begin{exe}[4.19]
+    Inner definitions should be simultaneous, so Eva is right, but if it’s too 
+    difficult to implement internal definitions so they behave that way, it’s 
+    better to signal an error than to use an incorrect value as Ben suggests.
+
+    To implement Eva’s idea, we would have to sort the definitions so that if 
+    the value of a defined variable is needed to compute another’s value, it 
+    should come first. However, it won’t always be possible, definitions such as
+    \begin{cscm}
+	(define (f x)
+	    (define a (+ b 5))
+	    (define b (+ a 1))
+	    <exps>)
+    \end{cscm}
+    should result in an error. But there are cases of mutual recursion that 
+    work, so it’s not enough to scan the defined symbols’ names in other defined 
+    symbols’ values to order the definitions: mutually recursive procedure 
+    definitions are not problematic as long as neither procedure is called 
+    before both are defined. Mutual recursion is not problematic either in cases 
+    where evaluation is delayed, as in the \vscm{solve} example. A symbol could 
+    also appear at a place where it will never be evaluated, for instance:
+    \begin{cscm}
+	(define (f x)
+	    (define a (if (> 0 1) (* b 2) 3))
+	    (define b 5)
+	    <exps>)
+    \end{cscm}
+    So it seems difficult to implement a general solution that does what Eva 
+    prefers.
+
+    Another possible solution would be to make the definitions lazy by 
+    automatically delaying them, and forcing them only when a variable’s value 
+    is looked up. This would be a big change to Scheme’s evaluation order 
+    however.
+\end{exe}
