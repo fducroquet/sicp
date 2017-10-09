@@ -656,3 +656,15 @@
         \scm{ch4/4.22d.scm}
     \end{comp}
 \end{exe}
+
+\begin{exe}[4.23]
+    If the sequence has just one expression, the procedure produced by Alyssa’s 
+    program tests the \vscm{cdr} of \vscm{procs}, finds that it’s null and then 
+    calls the first procedure. The program in the text does the test during 
+    analysis and returns the result of analyzing the expression directly, so the 
+    only work done during evaluation is to call it.
+
+    For a sequence with two expressions, Alyssa’s procedure will loop through 
+    the procedures each time the sequence is evaluated, while the procedure from 
+    the text loops through them only once during analysis.
+\end{exe}
