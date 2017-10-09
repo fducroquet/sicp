@@ -7,6 +7,8 @@
 (define (eval exp env)
   (cond ((self-evaluating? exp) exp)
         ((variable? exp) (lookup-variable-value exp env))
+        ; Uncomment for exercise 4.19
+        ; ((variable? exp) (force (lookup-variable-value exp env)))
         ((quoted? exp) (text-of-quotation exp))
         ((assignment? exp) (eval-assignment exp env))
         ((definition? exp) (eval-definition exp env))

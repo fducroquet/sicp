@@ -42,6 +42,8 @@
 ; (load "4.16c.scm")
 
 ; (load "4.17.scm")
+; Lazy evaluation of definitions and assignments’ values.
+; (load "4.19a.scm")
 
 ; letrec
 (load "4.20.scm")

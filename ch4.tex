@@ -491,10 +491,19 @@
     So it seems difficult to implement a general solution that does what Eva 
     prefers.
 
-    Another possible solution would be to make the definitions lazy by 
-    automatically delaying them, and forcing them only when a variable’s value 
-    is looked up. This would be a big change to Scheme’s evaluation order 
-    however.
+    \medskip
+
+    Another possible solution is to make definitions and assignments lazy by 
+    automatically delaying their values’ evaluation, and forcing them only when 
+    a variable’s value is looked up. This is a big change to Scheme’s evaluation 
+    order, but since we have already seen how to use \vscm{delay} and 
+    \vscm{force} in section \ref{streams} this is not difficult to implement. We 
+    need to redefine \vscm{eval-definition} and \vscm{eval-assignment} so they 
+    delay the values’ evaluation:
+    \scm{ch4/4.19a.scm}
+    Then we must call \vscm{force} when we look up a variable’s value, for 
+    instance by modifying the \vscm{variable?} case in \vscm{eval}:
+    \scm{ch4/4.19b.scm}
 \end{exe}
 
 \begin{exe}[4.20]

@@ -1,0 +1,11 @@
+(define (eval-definition exp env)
+  (define-variable! (definition-variable exp)
+                    (delay (eval (definition-value exp) env))
+                    env)
+  'ok)
+
+(define (eval-assignment exp env)
+  (set-variable-value! (assignment-variable exp)
+                       (delay (eval (assignment-value exp) env))
+                       env)
+  'ok)
