@@ -54,4 +54,6 @@
 (load "4.22c.scm")
 (load "4.22d.scm")
 
+(load "4.24a.scm")
+
 (define the-global-environment (setup-environment))

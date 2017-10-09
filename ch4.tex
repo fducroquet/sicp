@@ -668,3 +668,21 @@
     the procedures each time the sequence is evaluated, while the procedure from 
     the text loops through them only once during analysis.
 \end{exe}
+
+\begin{exe}[4.24]
+    I wrote a small procedure to interpret code with the interpreter without 
+    using the REPL (I should probably have done that some time ago…):
+    \scm{ch4/4.24a.scm}
+    I then ran the following two tests: one with a recursive procedure and the 
+    other with a non-recursive procedure:
+    \scm{ch4/4.24b.scm}
+    With the evaluator in this section, the first test evaluates in 7877~ms, the 
+    second one in 36~ms.
+
+    With the original version, the first test evaluates in 16024~ms, the second 
+    one in 79~ms.
+
+    Separating analysis from execution speeds up execution by a factor of more 
+    than two, so we can estimate that about half the time was spent in analysis 
+    with the original version of the evaluator.
+\end{exe}
