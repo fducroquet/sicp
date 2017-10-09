@@ -18,8 +18,9 @@
 (load "4.09until.scm")
 (load "4.09for.scm")
 ; Alternative syntax
-(load "4.10a.scm")
-; (load "4.10b.scm")
+(load "4.10a.scm") ; and => &&, or => ||, cond => case
+(load "4.10b.scm") ; not => !
+; (load "4.10c.scm)" ; parentheses for function arguments
 
 ;; Section 4.1.3
 

@@ -104,6 +104,7 @@
 \end{exe}
 
 \begin{exe}[4.9]
+    \label{4.9}
     I chose to implement three iterative control structures: a \vscm{while} 
     loop, an \vscm{until} loop, and a \vscm{for} loop. The return value of all 
     the expressions described is \vscm{false}, so they are useful only for their 
@@ -257,13 +258,15 @@
 
     We can replace \vscm{not} with \vscm{!} by replacing
     \vscm{(list 'not not)} with \vscm{(list '! not)} in the list of primitive 
-    procedures.
+    procedures and redefining the \vscm{make-not} procedure defined in exercise 
+    \ref{4.9}:
+    \scm{ch4/4.10b.scm}
 
     I also modified the selectors for procedure application so that
     \vscm{(proc args)} becomes \vscm{(proc (args))}. This change actually makes 
     the syntax more complex since e.g. \vscm{(not (> x 3))} has to be written 
     \vscm{(! ((> (x 3))))}, it’s just for the sake of the example.
-    \scm{ch4/4.10b.scm}
+    \scm{ch4/4.10c.scm}
 
     I think that more dramatic changes such as replacing the parentheses with 
     brackets would require a lot of work since currently we rely on the 

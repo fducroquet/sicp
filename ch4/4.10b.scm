@@ -1,1 +1,2 @@
-(define (operands exp) (cadr exp))
+(define (make-not exp)
+  (list '! exp))
