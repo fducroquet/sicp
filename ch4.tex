@@ -686,3 +686,15 @@
     than two, so we can estimate that about half the time was spent in analysis 
     with the original version of the evaluator.
 \end{exe}
+
+\section{Variations on a Scheme―Lazy Evaluation}
+
+\subsection{Normal Order and Applicative Order}
+
+\begin{exe}[4.25]
+    If we attempt to evaluate \vscm{(factorial 5)}, we will get an infinite loop 
+    since Scheme attempts to evaluate the second argument to \vscm{unless} 
+    recursively.
+
+    It would work in a normal-order language.
+\end{exe}
