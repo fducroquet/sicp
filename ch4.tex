@@ -637,6 +637,7 @@
 \end{exe}
 
 \subsection{Separating Syntactic Analysis from Execution}
+\label{analysis}
 
 \begin{exe}[4.22]
     Since \vscm{let} is a derived form, all that’s needed to support it is to 
@@ -697,4 +698,25 @@
     recursively.
 
     It would work in a normal-order language.
+\end{exe}
+
+\begin{exe}[4.26]
+    Ben is right that it’s possible to define \vscm{unless} as a derived 
+    expression:
+    \scm{ch4/4.26a.scm}
+    Then we just have to have the following line to \vscm{eval}:
+    \scm{ch4/4.26b.scm}
+    or the following line to \vscm{analyze} for the evaluator from section 
+    \ref{analysis}:
+    \scm{ch4/4.26c.scm}
+
+    It would be useful to have \vscm{unless} available as a procedure rather 
+    than a special form to use it as a parameter to higher-order procedures, for 
+    instance in \vscm{(map unless bools list1 list2)}, which returns a list 
+    where the element of index $i$ is:
+    \begin{itemize}
+	\item the element of index $i$ of \vscm{list2} if the element of index 
+	    $i$ in the list \vscm{bools} is true;
+	\item the element of index $i$ of \vscm{list1} otherwise.
+    \end{itemize}
 \end{exe}

@@ -56,4 +56,9 @@
 
 (load "4.24a.scm")
 
+;;; Section 4.2: Lazy Evaluation
+;; Section 4.2.2
+; unless
+(load "4.26a.scm")
+
 (define the-global-environment (setup-environment))
