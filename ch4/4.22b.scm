@@ -1,0 +1,7 @@
+((or? exp) (analyze (or->if exp)))
+((and? exp) (analyze (and->if exp)))
+((let*? exp) (analyze (let*->nested-lets exp)))
+((letrec? exp) (analyze (letrec->let exp)))
+((while? exp) (analyze (while->if exp)))
+((until? exp) (analyze (until->while exp)))
+((for? exp) (analyze (for->let exp)))

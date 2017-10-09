@@ -626,3 +626,24 @@
 	    \scm{ch4/4.21b.scm}
     \end{itemize}
 \end{exe}
+
+\subsection{Separating Syntactic Analysis from Execution}
+
+\begin{exe}[4.22]
+    Since \vscm{let} is a derived form, all that’s needed to support it is to 
+    add the following line to \vscm{analyze}:
+    \scm{ch4/4.22a.scm}
+    \begin{comp}
+        We can just as easily add support for all the derived forms implemented 
+        in the previous exercises:
+        \scm{ch4/4.22b.scm}
+        We need to implement \vscm{analyze} procedures to support the versions of 
+        \vscm{or} and \vscm{and} defined with special evaluation functions, as 
+        well as \vscm{make-unbound!}:
+        \scm{ch4/4.22c.scm}
+        Lastly, we can implement scanning out of internal definitions as in 
+        exercise \ref{4.16} by calling \vscm{scan-out-defines} in 
+        \vscm{analyze-lambda}:
+        \scm{ch4/4.22d.scm}
+    \end{comp}
+\end{exe}

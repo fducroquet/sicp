@@ -37,13 +37,19 @@
 (load "4.13b.scm")
 
 ;; Section 4.1.6
-; (load "4.16a.scm")
-; (load "4.16b.scm")
+(load "4.16a.scm")
+(load "4.16b.scm")
 ; (load "4.16c.scm")
 
 ; (load "4.17.scm")
 
 ; letrec
 (load "4.20.scm")
+
+;; Section 4.1.7
+; Support additional forms (let, or, and… and scanning out defines in the new 
+; version of the interpreter.
+(load "4.22c.scm")
+(load "4.22d.scm")
 
 (define the-global-environment (setup-environment))
