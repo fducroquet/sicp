@@ -32,9 +32,14 @@
         ((cond? exp) (eval (cond->if exp) env))
         ((unbind? exp) (eval-unbind exp env))
         ((unless? exp) (eval (unless->if exp) env))
+        ; ((application? exp)
+        ; (apply (eval (operator exp) env)
+        ;        (list-of-values (operands exp) env)))
+        ; Lazy evaluator
         ((application? exp)
-         (apply (eval (operator exp) env)
-                (list-of-values (operands exp) env)))
+         (apply (actual-value (operator exp) env)
+                (operands exp)
+                env))
         (else
           (error "Unknown expression type -- EVAL" exp))))
 

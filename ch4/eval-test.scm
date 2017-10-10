@@ -61,4 +61,6 @@
 ; unless
 (load "4.26a.scm")
 
+(load "4.27pre-lazy-evaluator.scm")
+
 (define the-global-environment (setup-environment))
