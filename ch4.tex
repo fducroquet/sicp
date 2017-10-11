@@ -720,3 +720,13 @@
 	\item the element of index $i$ of \vscm{list1} otherwise.
     \end{itemize}
 \end{exe}
+
+\subsection{An Interpreter with Lazy Evaluation}
+
+\begin{exe}[4.27]
+    The value of \vscm{count} the first time is 1 because the body of the outer 
+    \vscm{id} in the definition of \vscm{w} was evaluated. Then the value of 
+    \vscm{w} is 10 as expected, and once \vscm{w} has been forced the value of 
+    \vscm{count} is 2 because the inner \vscm{id} in the definition of \vscm{w} 
+    was evaluated as well.
+\end{exe}
