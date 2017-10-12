@@ -1,7 +1,7 @@
 (define (actual-value exp env)
   (force-it (eval exp env)))
 
-(define (apply procedure arguments env)
+(define (lazy-apply procedure arguments env)
   (cond ((primitive-procedure? procedure)
          (apply-primitive-procedure
            procedure
@@ -31,15 +31,14 @@
           (list-of-delayed-args (rest-operands exps)
                                 env))))
 
-(define (eval-if exp env)
+(define (lazy-eval-if exp env)
   (if (true? (actual-value (if-predicate exp) env))
     (eval (if-consequent exp) env)
     (eval (if-alternative exp) env)))
 
-(define input-prompt ";;; L-Eval input:")
-(define output-prompt ";;; L-Eval value:")
-
-(define (driver-loop)
+(define (lazy-driver-loop)
+  (define input-prompt ";;; L-Eval input:")
+  (define output-prompt ";;; L-Eval value:")
   (prompt-for-input input-prompt)
   (let ((input (read)))
     (let ((output
@@ -49,7 +48,7 @@
   (driver-loop))
 
 ;; Thunks
-(define (force-it obj)
+(define (unmemoized-force-it obj)
   (if (thunk? obj)
     (actual-value (thunk-exp obj) (thunk-env obj))
     obj))
@@ -69,7 +68,7 @@
 
 (define (thunk-value evaluated-thunk) (cadr evaluated-thunk))
 
-(define (force-it obj)
+(define (memoized-force-it obj)
   (cond ((thunk? obj)
          (let ((result (actual-value
                          (thunk-exp obj)

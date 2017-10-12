@@ -64,3 +64,43 @@
 (load "4.27pre-lazy-evaluator.scm")
 
 (define the-global-environment (setup-environment))
+
+;; Procedures defining the evaluator’s behavior on following invocations of 
+;; driver-loop or run-in-interpreter.
+; Values for default evaluator
+(define eval default-eval)
+(define apply default-apply)
+(define lazy false)
+(define eval-if default-eval-if)
+(define force-it memoized-force-it)
+(define driver-loop default-driver-loop)
+
+(define (default-evaluator)
+  (set! eval default-eval)
+  (set! apply default-apply)
+  (set! lazy false)
+  (set! eval-if default-eval-if)
+  (set! driver-loop default-driver-loop))
+
+(define (analyzing-evaluator)
+  (set! eval analyzing-eval)
+  (set! apply default-apply)
+  (set! lazy false)
+  (set! eval-if default-eval-if)
+  (set! driver-loop default-driver-loop))
+
+(define (lazy-evaluator)
+  (set! eval default-eval)
+  (set! apply lazy-apply)
+  (set! lazy true)
+  (set! eval-if lazy-eval-if)
+  (set! force-it memoized-force-it)
+  (set! driver-loop lazy-driver-loop))
+
+(define (lazy-evaluator-unmemoized)
+  (set! eval default-eval)
+  (set! apply lazy-apply)
+  (set! lazy true)
+  (set! eval-if lazy-eval-if)
+  (set! force-it unmemoized-force-it)
+  (set! driver-loop lazy-driver-loop))

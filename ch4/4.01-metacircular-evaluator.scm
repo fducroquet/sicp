@@ -4,7 +4,7 @@
 (define apply-in-underlying-scheme apply)
 
 ;; Section 4.1.1: The Core of the Evaluator
-(define (eval exp env)
+(define (default-eval exp env)
   (cond ((self-evaluating? exp) exp)
         ((variable? exp) (lookup-variable-value exp env))
         ; Uncomment for exercise 4.19
@@ -32,18 +32,17 @@
         ((cond? exp) (eval (cond->if exp) env))
         ((unbind? exp) (eval-unbind exp env))
         ((unless? exp) (eval (unless->if exp) env))
-        ; ((application? exp)
-        ; (apply (eval (operator exp) env)
-        ;        (list-of-values (operands exp) env)))
-        ; Lazy evaluator
         ((application? exp)
-         (apply (actual-value (operator exp) env)
-                (operands exp)
-                env))
+         (if lazy
+           (apply (actual-value (operator exp) env)
+                  (operands exp)
+                  env)
+           (apply (eval (operator exp) env)
+                  (list-of-values (operands exp) env))))
         (else
           (error "Unknown expression type -- EVAL" exp))))
 
-(define (apply procedure arguments)
+(define (default-apply procedure arguments)
   (cond ((primitive-procedure? procedure)
          (apply-primitive-procedure procedure arguments))
         ((compound-procedure? procedure)
@@ -63,7 +62,7 @@
     (cons (eval (first-operand exps) env)
           (list-of-values (rest-operands exps) env))))
 
-(define (eval-if exp env)
+(define (default-eval-if exp env)
   (if (true? (eval (if-predicate exp) env))
     (eval (if-consequent exp) env)
     (eval (if-alternative exp) env)))
@@ -350,10 +349,9 @@
     (primitive-implementation proc) args))
 
 ; Driver loop
-(define input-prompt ";;; M-Eval input:")
-(define output-prompt ";;; M-Eval value:")
-
-(define (driver-loop)
+(define (default-driver-loop)
+  (define input-prompt ";;; M-Eval input:")
+  (define output-prompt ";;; M-Eval value:")
   (prompt-for-input input-prompt)
   (let ((input (read)))
     (let ((output (eval input the-global-environment)))
@@ -376,7 +374,7 @@
     (write object)))
 
 ;; Section 4.1.7: Separating Syntactic Analysis from Execution
-(define (eval exp env)
+(define (analyzing-eval exp env)
   ((analyze exp) env))
 
 (define (analyze exp)
