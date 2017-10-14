@@ -735,3 +735,44 @@
     This forcing is needed if the operator has been passed as an argument to 
     a higher-order procedure, for instance in \vscm{map}.
 \end{exe}
+
+\begin{exe}[4.29]
+    Recursive procedures such as \vscm{factorial}, defined as usual as:
+    \scm{ch4/4.29.scm}
+    run much more slowly without memoization. Let’s compare what happens when we 
+    evaluate, for intance \vscm{(factorial 10)} with and without memoization:
+    \begin{itemize}
+	\item With memoization, the argument is evaluated when the value of 
+	    \vscm{(= n 0)} is needed in the \vscm{if} expression. Then 
+	    \vscm{(factorial (- n 1))} is evaluated, and the argument passed to 
+	    factorial is a thunk containing the expression \vscm{(- n 1)}, where 
+	    \vscm{n} is an evaluated thunk with value 10. This new thunk is 
+	    transformed into an evaluated thunk with value 9 when testing the 
+	    predicate in the \vscm{if}, and this evaluated thunk’s value is 
+	    immediately accessible in the evaluation of the argument of the next 
+	    call to \vscm{factorial}. And so on until 0 is reached. The time 
+	    complexity of the computation is linear, the same as with 
+	    applicative-order.
+	\item Without memoization, the thunk with value 10 is evaluated in the 
+	    \vscm{if} predicate, but it is not transformed into an evaluated 
+	    thunk. So the recursive call to \vscm{factorial} has as its argument 
+	    a thunk containing \vscm{(- n 1)}, where \vscm{n} is an unevaluated 
+	    thunk. Two evaluations are needed to find that the value of this 
+	    thunk is 9. Then, for the next recursive call, 3 evaluations are 
+	    needed to find that the value of the argument is 8. During the 
+	    terminal call, 11 thunk evaluations are needed each time the 
+	    argument’s value is needed. As a consequence, the time complexity of 
+	    \vscm{factorial} with a lazy evaluator that does not memoize is 
+	    quadratic instead of linear.
+    \end{itemize}
+    Of course, the same happens with any recursive procedure running in linear 
+    time, such as \vscm{length} to compute a list’s length.
+
+    \medskip
+
+    The value of \vscm{(square (id 10))} is 100 both when the evaluator memoizes 
+    and when it does not. When the evaluator memoizes, the value of \vscm{count} 
+    after evaluating \vscm{(square (id 10))} is 1 because \vscm{(id 10)} has 
+    been evaluated only once. When the evaluator does not memoize, the value of 
+    \vscm{count} is 2 because \vscm{(id 10)} has been evaluated twice.
+\end{exe}
