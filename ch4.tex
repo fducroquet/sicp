@@ -776,3 +776,65 @@
     been evaluated only once. When the evaluator does not memoize, the value of 
     \vscm{count} is 2 because \vscm{(id 10)} has been evaluated twice.
 \end{exe}
+
+\begin{exe}[4.30]
+    \ \vspace{-20pt}
+    \begin{itemize}
+	\item[a.] Ben is right about the behavior of \vscm{for-each} because 
+	    each expression in the body of the \vscm{begin} expression is 
+	    evaluated with \vscm{eval}, which causes each expression in the body 
+	    of \vscm{proc} to be evaluated with each item in turn, so the 
+	    side-effects they cause do take place.
+
+	    The only case where a side effect could not take place is when the 
+	    expression defining it is delayed and then never forced, which can 
+	    happen only if that expression was passed as an argument to 
+	    a compound procedure, as in b. below.
+	\item[b.] With the original \vscm{eval-sequence}, the value of
+	    \vscm{(p1 1)} is \vscm{(1 2)} because the \vscm{set!} expression in 
+	    the body of \vscm{p1} was evaluated. The value of \vscm{(p2 1)} is 
+	    \vscm{1} because during the evaluation of \vscm{e} in the body of 
+	    \vscm{p}, \vscm{e} is a variable whose value is a thunk containing 
+	    an expression defining a side effect, but this expression is never 
+	    actually evaluated because \vscm{e}’s value is not used.
+
+	    With Cy’s proposed change to \vscm{eval-sequence}, the values would 
+	    be \vscm{(1 2)} for both \vscm{(p1 1)} and \vscm{(p2 1)}.
+	\item[c.] The proposed change does not affect the behavior of the 
+	    example in part a. because if the result of \vscm{eval} is not 
+	    a thunk, applying \vscm{force-it} to it does nothing.
+	\item[d.] I prefer the approach in the text. I don’t think the change 
+	    proposed by Cy is necessary because, as noticed in part a., the only 
+	    case when a side effect could not take place is when the expression 
+	    causing it―not a procedure containing that expression, unless said 
+	    procedure is not called of course—is passed as an argument to 
+	    a compound procedure\footnote{It could also happen if an argument is 
+	    the result of a procedure application that produces side effects and 
+	    returns a value. If this argument’s value is not needed in the body 
+	    of the procedure, the side effects won’t happen, but this is to be 
+	    expected with normal-order evaluation and this is not directly 
+	    related to the evaluation of sequences.}, which I don’t think should 
+	    be done anyway: an expression passed as an argument should be there 
+	    for its value, not for its side effects, and it does not make much 
+	    sense to use an expression defining only side effects where a value 
+	    should be used. For the example of \vscm{p2} in the exercise, if we 
+	    want to use a parameter of \vscm{p} to define a side-effect before 
+	    returning \vscm{x}, it is better to use a procedure, and it works 
+	    without changing the evaluator’s behavior:
+	    \scm{ch4/4.30.scm}
+	    When reading the definition above, we can tell that the parameter 
+	    \vscm{e} should be a procedure, and that it is expected to cause 
+	    side-effects because its return value is not used. From reading the 
+	    definition of \vscm{p2}, it is not clear at all what the evaluation 
+	    of \vscm{e} is expected to do. It would be even less clear with 
+	    applicative-order since \vscm{e} would already have been evaluated 
+	    before applying \vscm{p}, so evaluating it again in the body of 
+	    \vscm{p} would do absolutely nothing.
+
+	    To sum it up, it can indeed happen that some side effects do not 
+	    take place with the approach taken in the text, but I think that the 
+	    programs where this happens can be modified in a straightforward way 
+	    to fix the problem, and furthermore the modification is likely to 
+	    make them clearer.
+    \end{itemize}
+\end{exe}

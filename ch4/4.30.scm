@@ -1,0 +1,5 @@
+(define (p3 x)
+  (define (p e)
+    (e)
+    x)
+  (p (lambda () (set! x (cons x '(2))))))
