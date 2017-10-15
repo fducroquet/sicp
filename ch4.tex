@@ -848,3 +848,38 @@
     delays each argument or not as appropriate.
     \scm{ch4/4.31.scm}
 \end{exe}
+
+\subsection{Streams as Lazy Lists}
+
+\begin{exe}[4.32]
+    With the streams of section \ref{streams}, there were places where we had to 
+    define the first element of a stream separately to avoid infinite loops. 
+    With the lazy evaluator, we can simplify some of the definitions. For 
+    instance, the following definition of \vscm{pairs} taken from exercise 
+    \ref{3.68}, where it caused an infinite loop, works for lazy lists:
+    \scm{ch4/4.32a.scm}
+    Similar simplifications can be applied to the answers to exercises 
+    \ref{3.69} and \ref{3.70}.
+
+    \medskip
+
+    As noticed in the text, the values of the elements of the lazy list won’t 
+    actually be computed until they are absolutely needed, so that for instance, 
+    if we define the lazy lists:
+    \scm{ch4/4.32b.scm}
+    we get no error, while this would cause an error with streams.
+
+    \medskip
+
+    And if we define a \vscm{length} procedure:
+    \scm{ch4/4.32c.scm}
+    we can compute \vscm{l2}’s length without trouble since the values of the 
+    elements are not used.
+
+    \medskip
+
+    As noted in the book’s footnote, lazy lists allow us to define arbitrary 
+    lazy data structures which can’t be defined with the streams of section 
+    \ref{streams}, such as trees where all branches could potentially be 
+    infinite.
+\end{exe}

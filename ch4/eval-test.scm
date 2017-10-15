@@ -68,6 +68,9 @@
 
 (define the-global-environment (setup-environment))
 
+(define (run-in-interpreter . exps)
+  (actual-value (sequence->exp exps) the-global-environment))
+
 ;; Procedures defining the evaluator’s behavior on following invocations of 
 ;; driver-loop or run-in-interpreter.
 ; Values for default evaluator

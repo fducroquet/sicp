@@ -2029,6 +2029,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[3.68]
+    \label{3.68}
     Louis’ definition of \vscm{pairs} causes an infinite loop when it is called 
     with infinite streams because \vscm{interleave} is called directly, it is 
     not put in an argument to \vscm{cons-stream}, which uses delayed evaluation. 
@@ -2037,6 +2038,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[3.69]
+    \label{3.69}
     The stream of triples can be generated similarly to the stream of pairs as 
     shown below. Once \vscm{triples} is defined, applying a filter is enough to 
     define a stream of all Pythagorean triples.
@@ -2044,6 +2046,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[3.70]
+    \label{3.70}
     The \vscm{merge-weighted} procedure is very similar to \vscm{merge}, except 
     that if multiple elements have the same weight, they are all kept, whereas 
     \vscm{merge} removed duplicates.
