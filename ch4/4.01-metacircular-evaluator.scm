@@ -31,7 +31,7 @@
          (eval-sequence (begin-actions exp) env))
         ((cond? exp) (eval (cond->if exp) env))
         ((unbind? exp) (eval-unbind exp env))
-        ((unless? exp) (eval (unless->if exp) env))
+        ; ((unless? exp) (eval (unless->if exp) env))
         ((application? exp)
          (if lazy
            (apply (actual-value (operator exp) env)
@@ -399,7 +399,7 @@
         ((until? exp) (analyze (until->while exp)))
         ((for? exp) (analyze (for->let exp)))
         ((unbind? exp) (analyze-unbind exp))
-        ((unless? exp) (analyze (unless->if exp)))
+        ; ((unless? exp) (analyze (unless->if exp)))
         ((application? exp) (analyze-application exp))
         (else
           (error "Unknown expression type -- ANALYZE" exp))))

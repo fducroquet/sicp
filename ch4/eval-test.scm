@@ -18,7 +18,7 @@
 (load "4.09until.scm")
 (load "4.09for.scm")
 ; Alternative syntax
-(load "4.10a.scm") ; and => &&, or => ||, cond => case
+; (load "4.10a.scm") ; and => &&, or => ||, cond => case
 (load "4.10b.scm") ; not => !
 ; (load "4.10c.scm)" ; parentheses for function arguments
 
@@ -59,7 +59,7 @@
 ;;; Section 4.2: Lazy Evaluation
 ;; Section 4.2.2
 ; unless
-(load "4.26a.scm")
+; (load "4.26a.scm")
 
 (load "4.27pre-lazy-evaluator.scm")
 
