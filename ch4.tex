@@ -883,3 +883,12 @@
     \ref{streams}, such as trees where all branches could potentially be 
     infinite.
 \end{exe}
+
+\begin{exe}[4.33]
+    We need to convert the lists from the underlying Scheme to lazy lists using 
+    a series of \vscm{cons}. We now need to call \vscm{eval} when evaluating 
+    quotations, so the statement for quotations in \vscm{eval} is replaced with:
+    \scm{ch4/4.33a.scm}
+    and the \vscm{eval-quotation} procedure can be defined as:
+    \scm{ch4/4.33b.scm}
+\end{exe}

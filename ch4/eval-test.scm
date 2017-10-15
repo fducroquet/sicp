@@ -66,6 +66,9 @@
 ; Lazy evaluation as an extension to Scheme.
 (load "4.31.scm")
 
+; Lazy quoted lists
+(load "4.33b.scm")
+
 (define the-global-environment (setup-environment))
 
 (define (run-in-interpreter . exps)
