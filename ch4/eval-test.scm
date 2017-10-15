@@ -63,6 +63,9 @@
 
 (load "4.27pre-lazy-evaluator.scm")
 
+; Lazy evaluation as an extension to Scheme.
+(load "4.31.scm")
+
 (define the-global-environment (setup-environment))
 
 ;; Procedures defining the evaluator’s behavior on following invocations of 
@@ -104,3 +107,11 @@
   (set! eval-if lazy-eval-if)
   (set! force-it unmemoized-force-it)
   (set! driver-loop lazy-driver-loop))
+
+(define (extended-evaluator)
+  (set! eval default-eval)
+  (set! apply ext-apply)
+  (set! lazy true)
+  (set! eval-if lazy-eval-if)
+  (set! force-it ext-force-it)
+  (set! driver-loop default-driver-loop))

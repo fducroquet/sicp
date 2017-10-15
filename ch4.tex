@@ -838,3 +838,13 @@
 	    make them clearer.
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.31]
+    In order to have both memoized and non memoized thunks, we define a new type 
+    of thunk with an associated delay procedure. I chose to define a new type 
+    for non memoized thunks. Then we redefine \vscm{force-it} so it handles the 
+    three types of thunks―unevaluated non memoized, unevaluated to memoize, and 
+    already evaluated—instead of two. And lastly we modify \vscm{apply} so it 
+    delays each argument or not as appropriate.
+    \scm{ch4/4.31.scm}
+\end{exe}
