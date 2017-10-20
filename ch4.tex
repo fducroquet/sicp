@@ -892,3 +892,36 @@
     and the \vscm{eval-quotation} procedure can be defined as:
     \scm{ch4/4.33b.scm}
 \end{exe}
+
+\begin{exe}[4.34]
+    My initial idea was to implement \vscm{cons}, \vscm{car} and \vscm{cdr} as 
+    special forms. In the end, I decided to find a solution where they are 
+    ordinary procedures so that they can be used in higher-order procedures.
+
+    I redefined \vscm{cons} so that it produces a pair with the tag 
+    \vscm{lazy-pair}, the actual pair being represented by the same procedure as 
+    in the text. But the tagged pair must be produced with the \vscm{cons} 
+    procedure from the underlying Scheme, because it needs to be recognized by 
+    the implementation language. So we first save the values of \vscm{cons}, 
+    \vscm{car} and \vscm{cdr} as initial procedures before redefining them in 
+    the interpreter as shown below:
+    \scm{ch4/4.34e.scm}
+    I also defined a \vscm{lazy-struct->pairs} procedure in the implemented 
+    language to transform a structure built from lazy pairs into a structure 
+    built from ordinary pairs. It uses the value of the global variables 
+    \vscm{*max-depth*} and \vscm{*max-breadth*} to limit the number of items 
+    included in the result. The advantage of defining the transformation in the 
+    implemented language rather than in the evaluator is that the values of 
+    \vscm{*max-depth*} and \vscm{*max-breadth*} can be changed from the driver 
+    loop.
+    \scm{ch4/4.34f.scm}
+    Then we need to define \vscm{lazy-pair?} in the underlying language so that
+    the evaluator can identify them:
+    \scm{ch4/4.34b.scm}
+    Then we can rewrite \vscm{user-print} so it applies 
+    \vscm{lazy-struct->pairs} to lazy pairs before printing the result:
+    \scm{ch4/4.34d.scm}
+    The last step is to modify the evaluator so it treats lazy pairs as 
+    self-evaluating values, for instance by adding:
+    \scm{ch4/4.34c.scm}
+\end{exe}

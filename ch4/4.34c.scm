@@ -1,0 +1,1 @@
+((lazy-pair? exp) exp)

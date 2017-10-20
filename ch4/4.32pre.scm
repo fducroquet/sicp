@@ -1,12 +1,13 @@
 (run-in-interpreter
-  '(define (cons x y)
-     (lambda (m) (m x y)))
+  ; Commented for exercise 4.34.
+  ; '(define (cons x y)
+  ;    (lambda (m) (m x y)))
 
-  '(define (car z)
-     (z (lambda (p q) p)))
+  ; '(define (car z)
+  ;    (z (lambda (p q) p)))
 
-  '(define (cdr z)
-     (z (lambda (p q) q)))
+  ; '(define (cdr z)
+  ;    (z (lambda (p q) q)))
 
   '(define (list-ref items n)
      (if (= n 0)
