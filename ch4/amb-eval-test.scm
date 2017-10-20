@@ -1,0 +1,33 @@
+; and and or
+(load "4.04b.scm")
+(load "4.04d.scm")
+; Additional syntax for cond
+(load "4.05.scm")
+; let expressions
+(load "4.06.scm")
+; let* expressions
+(load "4.07.scm")
+; Named let
+(load "4.08.scm")
+; Iterative constructs
+(load "4.09while.scm")
+(load "4.09until.scm")
+(load "4.09for.scm")
+; letrec
+(load "4.20.scm")
+
+(load "4.01-metacircular-evaluator.scm")
+(load "4.35pre-amb-evaluator.scm")
+
+(define the-global-environment (setup-environment))
+
+(define (run-in-interpreter . exps)
+  (ambeval (sequence->exp exps)
+           the-global-environment
+           (lambda (val next-alternative)
+             (if (not (eq? val 'ok))
+               (user-print val)))
+           ;; ambeval failure
+           (lambda ()
+             (announce-output ";;; There are no more values of")
+             (user-print input))))
