@@ -963,3 +963,22 @@
     $\sqrt{i^2 + j^2}$ is an integer, since this is necessarily the value of $k$ 
     if $(i, j, k)$ is a Pythagorean triple.
 \end{exe}
+
+\subsection{Examples of Nondeterministic Programs}
+
+\subsubsection{Logic Puzzles}
+
+\begin{exe}[4.38]
+    The only modification needed is to remove the line:
+    \begin{cscm}
+        (require (not (= (abs (- smith fletcher)) 1)))
+    \end{cscm}
+    Without this requirement, there are five possible solutions:
+    \begin{cscm}
+        ((baker 1) (cooper 2) (fletcher 4) (miller 3) (smith 5))
+        ((baker 1) (cooper 2) (fletcher 4) (miller 5) (smith 3))
+        ((baker 1) (cooper 4) (fletcher 2) (miller 5) (smith 3))
+        ((baker 3) (cooper 2) (fletcher 4) (miller 5) (smith 1))
+        ((baker 3) (cooper 4) (fletcher 2) (miller 5) (smith 1))
+    \end{cscm}
+\end{exe}

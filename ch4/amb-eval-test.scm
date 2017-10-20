@@ -36,3 +36,6 @@
 (load "4.35pre2.scm")
 (load "4.35.scm")
 (load "4.36.scm")
+
+;; 4.3.2 Logic puzzles
+(load "4.38pre.scm") ; multiple dwellings
