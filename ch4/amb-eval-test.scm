@@ -31,3 +31,5 @@
            (lambda ()
              (announce-output ";;; There are no more values of")
              (user-print input))))
+
+(load "4.35pre.scm")

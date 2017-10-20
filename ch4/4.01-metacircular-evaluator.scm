@@ -336,6 +336,7 @@
         (list '> >)
         (list '>= >=)
         (list '<= <=)
+        (list 'remainder remainder)
         (list 'assoc assoc)
         (list 'write write)
         (list 'display display)
