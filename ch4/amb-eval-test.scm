@@ -33,3 +33,5 @@
              (user-print input))))
 
 (load "4.35pre.scm")
+(load "4.35pre2.scm")
+(load "4.35.scm")
