@@ -953,3 +953,13 @@
     \vscm{try-again}.
     \scm{ch4/4.36tex.scm}
 \end{exe}
+
+\begin{exe}[4.37]
+    Ben is correct. The procedure in exercise \ref{4.35} systematically searches 
+    all possible triples $(i, j, k)$ with $low \leq i \leq j \leq k \leq high$. 
+    Ben’s version eliminates the pairs $(i, j)$ for which $i^2 + j^2 > high^2$ 
+    since there is no possible value of $k$ within the bounds in this case, and 
+    then instead of trying all possible values for $k$, it tests only whether 
+    $\sqrt{i^2 + j^2}$ is an integer, since this is necessarily the value of $k$ 
+    if $(i, j, k)$ is a Pythagorean triple.
+\end{exe}
