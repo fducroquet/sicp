@@ -1114,3 +1114,18 @@
             \scm{ch4/4.45e.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.46]
+    The \vscm{parse-word} procedure looks for the required part of speech at the 
+    beginning of the contents of \vscm{*unparsed*}. So with 
+    \vscm{parse-sentence} defined as:
+    \begin{cscm}
+        (define (parse-sentence)
+          (list 'sentence
+                (parse-noun-phrase)
+                (parse-word verbs)))
+    \end{cscm}
+    when we try to parse \vscm{(the cat eats)}, if \vscm{(parse-word verbs)} is 
+    evaluated first, it will fail since \vscm{the} is not in the list of verbs, 
+    and there are no alternatives to try.
+\end{exe}
