@@ -1040,3 +1040,16 @@
     adjoin $x$ at all possible positions.
     \scm{ch4/4.41.scm}
 \end{exe}
+
+\begin{exe}[4.42]
+    We can solve the puzzle by defining a \vscm{liars} procedure in the amb 
+    evaluator as shown below. It uses the helper procedure \vscm{xor} to 
+    simplify the expression of the requirements.
+    \scm{ch4/4.42tex.scm}
+    The procedure’s output is:
+    \begin{cscm}
+        ((Betty 3) (Ethel 5) (Joan 2) (Kitty 1) (Mary 4))
+    \end{cscm}
+    so the order in which the girls were placed was: Kitty, Joan, Betty, Mary, 
+    and Ethel.
+\end{exe}
