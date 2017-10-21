@@ -982,3 +982,20 @@
         ((baker 3) (cooper 4) (fletcher 2) (miller 5) (smith 1))
     \end{cscm}
 \end{exe}
+
+\begin{exe}[4.39]
+    The order of the restrictions does not affect the answer. It does affect the 
+    time to find an answer but in a limited way: the original procedure takes 
+    about 370~ms on my computer, and I can’t do better than about 270~ms with 
+    the following order:
+    \scm{ch4/4.39tex.scm}
+
+    The only influence of the order of restrictions is that a possibility that 
+    leads to a dead end can be rejected after less computation time depending on 
+    that order. However, the real reason why the procedure is slow is that a lot 
+    of possibilities are explored though they could be ruled out from the start 
+    (as shown in the following exercise). For instance, \vscm{cooper} must not 
+    be equal to 1, but for a given value of \vscm{baker}, the procedure will 
+    explore and eliminate all the $5^3 = 75$ possibilities where \vscm{cooper} 
+    is 1 before setting \vscm{cooper} to 2.
+\end{exe}
