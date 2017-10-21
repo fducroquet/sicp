@@ -999,3 +999,23 @@
     explore and eliminate all the $5^3 = 75$ possibilities where \vscm{cooper} 
     is 1 before setting \vscm{cooper} to 2.
 \end{exe}
+
+\begin{exe}[4.40]
+    Before the requirement that floor assignments be distinct, there are $5^5 
+    = 3125$ sets of assignments of people to floors. After that requirement, 
+    there are $5! = 120$ such sets.
+
+    The following procedure finds the answer in about 40~ms:
+    \scm{ch4/4.40a.scm}
+    We can make it even faster by breaking up the
+    \vscm{(require (distinct? ...))} requirement into a series of
+    \vscm{(require (not (= ...)))} so that any case where two values are not 
+    distinct is ruled out as soon as possible. The following procedure solves 
+    the problem in about 20~ms:
+    \scm{ch4/4.40b.scm}
+    It would also be more efficient to modify the list of possibilities in 
+    \vscm{amb} for the people with floor restrictions, for instance using 
+    \vscm{(amb 2 3 4)} for \vscm{fletcher}. But this could be considered as 
+    solving part of the problem for the evaluator instead of stating the 
+    solution’s requirements.
+\end{exe}
