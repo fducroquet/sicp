@@ -39,3 +39,5 @@
 
 ;; 4.3.2 Logic puzzles
 (load "4.38pre.scm") ; multiple dwellings
+
+(load "4.45pre.scm") ; Parsing natural language

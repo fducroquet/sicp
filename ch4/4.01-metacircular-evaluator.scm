@@ -338,6 +338,7 @@
         (list '> >)
         (list '>= >=)
         (list '<= <=)
+        (list 'memq memq)
         (list 'member member)
         (list 'remainder remainder)
         (list 'sqrt sqrt)
