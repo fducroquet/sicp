@@ -1129,3 +1129,18 @@
     evaluated first, it will fail since \vscm{the} is not in the list of verbs, 
     and there are no alternatives to try.
 \end{exe}
+
+\begin{exe}[4.47]
+    The change suggested by Louis does not work because the second branch of the 
+    \vscm{amb} contains an infinite loop. For instance, if we parse the sentence 
+    “The cat eats.”, we get the correct result, but if we then type 
+    \vscm{try-again}, there is an infinite loop as the evaluator tries the 
+    second branch of the \vscm{amb} in \vscm{parse-verb-phrase}: the recursive 
+    call to \vscm{parse-verb-phrase} succeeds as it finds the verb \vscm{eats}, 
+    then the call to \vscm{parse-prepositional-phrase} fails since there is 
+    nothing left to parse, which causes the second branch of \vscm{amb} to be 
+    explored in the recursive call, and so on to infinity.
+
+    If we interchange the order of the expressions in the \vscm{amb}, the 
+    infinite loop is immediately apparent.
+\end{exe}
