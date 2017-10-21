@@ -320,6 +320,7 @@
 (define primitive-procedures
   (list (list 'car car)
         (list 'cdr cdr)
+        (list 'cadr cadr)
         (list 'cons cons)
         (list 'pair? pair?)
         (list 'integer? integer?)

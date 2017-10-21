@@ -1053,3 +1053,33 @@
     so the order in which the girls were placed was: Kitty, Joan, Betty, Mary, 
     and Ethel.
 \end{exe}
+
+\begin{exe}[4.43]
+    The puzzle can be solved by the following procedure, where we define lists
+    containing the daughter’s name and the boat’s name for each father.
+    \scm{ch4/4.43tex.scm}
+    Some of the requirements are redundant, for instance since we know the name 
+    of Barnacle’s boat and of his daughter, it’s not strictly necessary to check 
+    that they are distinct. Keeping these requirements makes it easier to modify 
+    the procedure if some constraints are removed.
+
+    The procedure returns a single possible solution, which is
+    \begin{cscm}
+        ((Moore (Mary-Ann Lorna))
+         (Downing (Lorna Melissa))
+         (Hall (Gabrielle Rosalind))
+         (Barnacle (Melissa Gabrielle))
+         (Parker (Rosalind Mary-Ann)))
+    \end{cscm}
+    so Lorna’s father is Colonel Downing.
+
+    If we are not told that Mary Ann’s father is Moore, the problem has two 
+    solutions. The first one is the same as above, the second one is:
+    \begin{cscm}
+        ((Moore (Gabrielle Lorna))
+         (Downing (Rosalind Melissa))
+         (Hall (Mary-Ann Rosalind))
+         (Barnacle (Melissa Gabrielle))
+         (Parker (Lorna Mary-Ann)))
+    \end{cscm}
+\end{exe}
