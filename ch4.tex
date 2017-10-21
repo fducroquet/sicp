@@ -1019,3 +1019,24 @@
     solving part of the problem for the evaluator instead of stating the 
     solution’s requirements.
 \end{exe}
+
+\begin{exe}[4.41]
+    Each assignment of people to floors where each floor has a unique person 
+    corresponds to a permutation of the set \vscm{(1 2 3 4 5)}, where we can 
+    consider that the first number is Baker’s floor, the second number is 
+    Cooper’s floor and so on. We can solve the puzzle by generating all the 
+    permutations and then filtering the set to keep only those that verify the 
+    puzzle’s requirements.
+
+    We already defined a \vscm{permutations} procedure in section \ref{2.2.3}, 
+    but I rewrote a different procedure to generate them before remembering 
+    that, and then I noticed that my version was faster so I kept it. To 
+    generate the permutations of a set $S$, I generate all the permutations of 
+    the set minus the first element, and then for each permutation I insert the 
+    removed element at each possible position in the returned list. The version 
+    in section \ref{2.2.3} generated all permutations of $S - x$ for \emph{each} 
+    element $x$ of $S$ and adjoined $x$ at the front of each permutation, 
+    whereas I generate all permutations of $S - x$ only for one $x$ and the 
+    adjoin $x$ at all possible positions.
+    \scm{ch4/4.41.scm}
+\end{exe}
