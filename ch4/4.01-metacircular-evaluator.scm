@@ -339,6 +339,7 @@
         (list '> >)
         (list '>= >=)
         (list '<= <=)
+        (list 'even? even?)
         (list 'random-integer random-integer)
         (list 'length length)
         (list 'list-ref list-ref)

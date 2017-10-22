@@ -20,6 +20,7 @@
 (load "4.35pre-amb-evaluator.scm")
 (load "4.50b.scm") ; ramb
 (load "4.51.scm") ; permanent-set!
+(load "4.52.scm") ; if-fail
 
 (define the-global-environment (setup-environment))
 
