@@ -18,6 +18,7 @@
         ((until? exp) (analyze (until->while exp)))
         ((for? exp) (analyze (for->let exp)))
         ((amb? exp) (analyze-amb exp))
+        ((ramb? exp) (analyze-ramb exp))
         ((application? exp) (analyze-application exp))
         (else
           (error "Unknown expression type -- ANALYZE" exp))))
