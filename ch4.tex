@@ -1247,3 +1247,13 @@
             professor.
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.51]
+    The \vscm{permanent-set!} assignement can be defined similarly to 
+    \vscm{set!}, except that it simply passes along the failure continuation 
+    instead of intercepting it to undo the change in case of failure:
+    \scm{ch4/4.51.scm}
+    If we had used \vscm{set!} rather than \vscm{permanent-set!}, the displayed 
+    values would have been \vscm{(a b 1)}, since the increment of \vscm{count} 
+    done during the first trial would have been undone before the second trial.
+\end{exe}

@@ -4,6 +4,7 @@
         ((quoted? exp) (analyze-quoted exp))
         ((variable? exp) (analyze-variable exp))
         ((assignment? exp) (analyze-assignment exp))
+        ((permanent-assignment? exp) (analyze-permanent-assignment exp))
         ((definition? exp) (analyze-definition exp))
         ((if? exp) (analyze-if exp))
         ((lambda? exp) (analyze-lambda exp))

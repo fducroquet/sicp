@@ -19,6 +19,7 @@
 (load "4.01-metacircular-evaluator.scm")
 (load "4.35pre-amb-evaluator.scm")
 (load "4.50b.scm") ; ramb
+(load "4.51.scm") ; permanent-set!
 
 (define the-global-environment (setup-environment))
 
