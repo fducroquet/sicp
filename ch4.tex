@@ -1154,3 +1154,39 @@
     with as result:
     \scm{ch4/4.48s.scm}
 \end{exe}
+
+\begin{exe}[4.49]
+    We make \vscm{parse-word} return a random element of the given list by 
+    redefining it as:
+    \scm{ch4/4.49tex.scm}
+    The first sentences I get using \vscm{(parse '())} (the input is ignored) 
+    are:
+    \begin{itemize}
+        \item The students eats.
+        \item A class sleeps.
+        \item A student eats.
+        \item The cat studies.
+        \item A class studies.
+        \item A cat eats.
+    \end{itemize}
+    Every time, the evaluator selects the first choice in \vscm{amb} to generate 
+    the sentence, so all the sentences have the same structure.
+
+    The result is not much better if I type \vscm{(parse '())} and then type 
+    \vscm{try-again} several times:
+    \begin{itemize}
+        \item A professor studies.
+        \item A professor studies by the student.
+        \item A professor studies by the student by a student.
+        \item A professor studies by the student by a student by the professor.
+        \item A professor studies by the student by a student by the professor 
+            in the cat.
+        \item A professor studies by the student by a student by the professor 
+            in the cat for the professor.
+    \end{itemize}
+    A sentence consists of a noun phrase followed by a verb phrase, and a verb 
+    phrase is a verb optionally followed by one or more prepositional phrases. 
+    Each use of \vscm{try-again} causes the evaluator to go back to the choice 
+    point in the \vscm{amb} in \vscm{parse-verb-phrase}, which adds a new 
+    prepositional phrase at the end of the sentence.
+\end{exe}
