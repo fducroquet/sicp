@@ -322,6 +322,7 @@
         (list 'cdr cdr)
         (list 'cadr cadr)
         (list 'cons cons)
+        (list 'append append)
         (list 'pair? pair?)
         (list 'integer? integer?)
         (list 'eq? eq?)
