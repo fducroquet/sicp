@@ -21,6 +21,8 @@
 (load "4.50b.scm") ; ramb
 (load "4.51.scm") ; permanent-set!
 (load "4.52.scm") ; if-fail
+(load "4.54pre.scm") ; require predicate and selector
+(load "4.54.scm") ; analyze-require
 
 (define the-global-environment (setup-environment))
 
