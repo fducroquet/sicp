@@ -6,7 +6,7 @@
                   (stream-cdr t))
       (pairs (stream-cdr s) (stream-cdr t)))))
 
-(define (append-stream s1 s2)
+(define (stream-append s1 s2)
   (if (stream-null? s1)
     s2
     (cons-stream (stream-car s1)
