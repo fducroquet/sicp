@@ -31,7 +31,7 @@
   (stream-for-each display-line s))
 
 (define (display-line x)
-  (display x)
+  (write x)
   (newline))
 
 (define (stream-car stream) (car stream))
