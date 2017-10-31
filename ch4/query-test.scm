@@ -23,3 +23,11 @@
 
 ; Data and database initialization
 (include "4.55pre-data.scm")
+
+(define (run query)
+  (let ((q (query-syntax-process query)))
+    (if (assertion-to-be-added? q)
+      (add-rule-or-assertion! (add-assertion-body q))
+      (qeval q (singleton-stream '())))))
+
+(load "4.57.scm")
