@@ -30,4 +30,5 @@
       (add-rule-or-assertion! (add-assertion-body q))
       (qeval q (singleton-stream '())))))
 
-(load "4.57.scm")
+(load "4.57.scm") ; can-replace
+(load "4.58.scm") ; big-shot
