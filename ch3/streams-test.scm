@@ -1,12 +1,12 @@
 (load "../ch1/utils.scm")
 (load "../ch1/1.21pre.scm") ; for prime?
-(include "3.50pre.gambc.scm")
-(include "3.50pre.scm")
-(include "3.50.scm")
-(include "3.53pre.scm")
-(include "3.54.scm")
-(include "3.55.scm")
-(include "3.56pre.scm")
+(include "3.50pre.gambc.scm") ; macros and definitions not in book
+(include "3.50pre.scm") ; general definitions for streams, examples with
+(include "3.50.scm") ; map on multiple streams
+(include "3.53pre.scm") ; primes, fibs, sieve, integers, add-streams, scale-stream
+(include "3.54.scm") ; mul-streams, factorials
+(include "3.55.scm") ; partial-sums
+(include "3.56pre.scm") ; merge
 (include "3.56.scm")
 (include "3.58.scm")
 (include "3.59a.scm")
