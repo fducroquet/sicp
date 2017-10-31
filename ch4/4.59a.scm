@@ -1,0 +1,1 @@
+(meeting ?division (Friday ?time))
