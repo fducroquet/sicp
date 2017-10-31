@@ -17,10 +17,3 @@
     s2
     (cons-stream (stream-car s1)
                  (interleave s2 (stream-cdr s1)))))
-
-(define int-pairs (pairs integers integers))
-
-(define prime-sum-stream
-  (stream-filter (lambda (pair)
-                   (prime? (+ (car pair) (cadr pair))))
-                 int-pairs))

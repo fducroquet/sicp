@@ -19,7 +19,8 @@
 ; (include "3.64pre.scm") ; sqrt x tolerance
 (include "3.64.scm")
 (include "3.65.scm")
-(include "3.66pre.scm")
+(include "3.66pre.scm") ; stream-append, interleave, pairs
+(include "3.66pre2.scm") ; prime-sum
 (include "3.67.scm")
 (include "3.69.scm")
 (include "3.70.scm")
