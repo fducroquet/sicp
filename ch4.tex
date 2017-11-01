@@ -1418,3 +1418,35 @@
     The rules can be defined as:
     \scm{ch4/4.63.scm}
 \end{exe}
+
+\subsection{How the Query System Works}
+
+This subsection contains no exercises.
+
+\subsection{Is Logic Programming Mathematical Logic?}
+
+\begin{exe}[4.64]
+    The evaluator unifies the query with the conclusion of the rule for 
+    \vscm{outranked-by} by binding the variable \vscm{?staff-person} to 
+    \vscm{(Bitdiddle Ben)} and \vscm{?boss} to \vscm{?who}. It then evaluates 
+    the rule’s body and finds the assertion in the database corresponding to 
+    Ben’s supervisor. This produces the first frame of the result stream, and an 
+    answer corresponding to this frame’s binding is displayed. The interpreter 
+    then processes the first part of the \vscm{and} query:
+    \vscm{(outranked-by ?middle-manager ?boss)}, with both variables unbound 
+    (more precisely, \vscm{?boss} is bound to an unbound variable). The 
+    recursive rule evaluation leads again to a recursive evaluation of an 
+    \vscm{outranked-by} rule, which leads to an infinite loop.
+
+    With the initial version of \vscm{outranked-by}, when evaluating the 
+    compound \vscm{and} query, the query
+    \vscm{(supervisor ?staff-person ?boss)}, with \vscm{?staff-person} bound to 
+    a constant, would have been evaluated first, and it would have produced 
+    either an empty stream, which would have ended the proccessing for the given 
+    frame, or a stream containing a single frame with a binding for 
+    \vscm{?middle-manager}, which would have caused the processing of \linebreak
+    \vscm{(outranked-by ?staff-person ?boss)} with \vscm{?staff-person} bound to 
+    the name of someone higher in the hierarchy than in the previous processing 
+    of the rule. Since the tower of hierarchy is not infinite, the evaluation of 
+    the rule’s body terminates eventually.
+\end{exe}
