@@ -1470,3 +1470,33 @@ This subsection contains no exercises.
              (supervisor (Hacker Alyssa P) (Bitdiddle Ben)))
     \end{cscm}
 \end{exe}
+
+\begin{exe}[4.66]
+    Ben has just realized that some values could appear multiple times in the 
+    result stream. For instance, if we try to sum all the wheels’ salaries 
+    using:
+    \begin{cscm}
+        (sum ?amount
+             (and (wheel ?w)
+                  (salary ?w ?amount)))
+    \end{cscm}
+    the result will be the sum of Ben’s salary and four times Oliver Warbucks’ 
+    salary instead of being the sum of Ben’s and Oliver Warbucks’ salaries.
+
+    Ben could filter the frames so that each possible set of values for the 
+    variables appearing in the query appears only once in the filtered stream 
+    before extracting the value of the designated variable. With the example 
+    above, the unfiltered stream contains five frames. In one of them, \vscm{?w} 
+    is bound to \vscm{(Bitdiddle Ben)} and \vscm{?amount} is bound to 
+    \vscm{60000}, and in four of them \vscm{?w} is bound to
+    \vscm{(Warbucks Oliver)} and \vscm{?amount} is bound to \vscm{150000}, but 
+    the values of some other variables bound in these frames differ. The 
+    filtered stream would contain only one frame for Ben Bitdiddle and one for 
+    Oliver Warbucks.
+
+    Keeping unique frames would not work because in the example above, the five 
+    frames in the result stream are distinct if we take all the bindings they 
+    define into account. Keeping unique values of the extracted variable would 
+    not work either because there can be legitimate duplicates: several 
+    employees can have the same salary for instance.
+\end{exe}
