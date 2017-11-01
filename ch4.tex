@@ -1374,3 +1374,42 @@
         (2 next-to 1 in (2 1 3 1))
     \end{cscm}
 \end{exe}
+
+\begin{exe}[4.62]
+    The operation can be implemented with the following rules:
+    \scm{ch4/4.62.scm}
+    They give the expected results with queries such as
+    \vscm{(last-pair (3) ?x)},\linebreak
+    \vscm{(last-pair (1 2 3) ?x)} or
+    \vscm{(last-pair (2 ?x) (3))}.
+
+    With queries such as \vscm{(last-pair ?x (3))}, the behavior depends on the 
+    rules’order because of the evaluator’s implementation: if they are entered 
+    as written above, the rule corresponding to lists with one element is 
+    checked first (since new rules are added at the beginning of the stream of 
+    rules and the stream is checked sequentially), and the evaluator displays 
+    the elements of an infinite stream of results with unbound variables:
+    \begin{cscm}
+        (last-pair (3) (3))
+        (last-pair (?u-2 3) (3))
+        (last-pair (?u-2 ?u-6 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 ?u-26 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 ?u-26 ?u-30 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 ?u-26 ?u-30 ?u-34 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 ?u-26 ?u-30 ?u-34 ?u-38 3) 
+                (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 ?u-26 ?u-30 ?u-34 ?u-38 
+                ?u-42 3) (3))
+        (last-pair (?u-2 ?u-6 ?u-10 ?u-14 ?u-18 ?u-22 ?u-26 ?u-30 ?u-34 ?u-38 
+                ?u-42 ?u-46 3) (3))
+        [...]
+    \end{cscm}
+    If the rules are entered in reverse order, the rule corresponding to lists 
+    of several elements is checked first and the evaluator enters an infinite 
+    loop as it tries to build an infinite list ending in 3, so no result is 
+    displayed.
+\end{exe}
