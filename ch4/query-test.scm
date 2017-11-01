@@ -32,3 +32,5 @@
 
 (load "4.57.scm") ; can-replace
 (load "4.58.scm") ; big-shot
+(load "4.61pre.scm") ; append-to-form
+(load "4.61.scm") ; next-to
