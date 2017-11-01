@@ -1334,3 +1334,28 @@
             \scm{ch4/4.59c.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[4.60]
+    Each pair appears twice because the rule’s body is symmetric in the 
+    variables \vscm{?person-1} and \vscm{?person-2}, so that if none of them is 
+    bound by the query, if a frame where \vscm{?person-1} is bound to person 
+    A and \vscm{?person-2} is bound to person B appears in the result, the frame 
+    where \vscm{?person-1} is bound to person B and \vscm{?person-2} is bound to 
+    person A appears in the result too.
+
+    The obvious idea is to define an order on the variables’ values and modify 
+    the rule so that, for instance, the value of \vscm{?person-1} is smaller 
+    than that of \vscm{?person-2}. The trouble is that it would not work with 
+    queries where one of the variables \vscm{?person-1} or \vscm{?person-2} is 
+    already bound: the expected behavior is that the two queries:
+    \begin{cscm}
+        (lives-near (Hacker Alyssa P) ?x)
+        (lives-near ?x (Hacker Alyssa P))
+    \end{cscm}
+    lead to the same set of possible values for \vscm{?x}, which won’t be the 
+    case if \vscm{lives-near} is not symmetric, so the idea of sorting the 
+    variables’ values does not work. The solution would involve defining a rule 
+    that behaves differently depending on whether one of the variables 
+    \vscm{?person-1} and \vscm{?person-2} has a value imposed by the query, 
+    which does not seem possible, or at least not easily.
+\end{exe}
