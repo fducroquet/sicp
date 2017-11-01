@@ -1450,3 +1450,23 @@ This subsection contains no exercises.
     of the rule. Since the tower of hierarchy is not infinite, the evaluation of 
     the rule’s body terminates eventually.
 \end{exe}
+
+\begin{exe}[4.65]
+    Oliver Warbucks is listed four times because the interpreter found four sets 
+    of bindings for the variables appearing in the body of the rule for 
+    \vscm{wheel} with \vscm{?who} bound to \vscm{(Warbucks Oliver)}. We can 
+    understand the result better if we evaluate the rule’s body at the driver 
+    loop:
+    \begin{cscm}
+        (and (supervisor (Scrooge Eben) (Warbucks Oliver))
+             (supervisor (Cratchet Robert) (Scrooge Eben)))
+        (and (supervisor (Hacker Alyssa P) (Bitdiddle Ben))
+             (supervisor (Reasoner Louis) (Hacker Alyssa P)))
+        (and (supervisor (Bitdiddle Ben) (Warbucks Oliver))
+             (supervisor (Tweakit Lem E) (Bitdiddle Ben)))
+        (and (supervisor (Bitdiddle Ben) (Warbucks Oliver))
+             (supervisor (Fect Cy D) (Bitdiddle Ben)))
+        (and (supervisor (Bitdiddle Ben) (Warbucks Oliver))
+             (supervisor (Hacker Alyssa P) (Bitdiddle Ben)))
+    \end{cscm}
+\end{exe}
