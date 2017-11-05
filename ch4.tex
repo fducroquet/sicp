@@ -1552,3 +1552,23 @@ This subsection contains no exercises.
     It’s also necessary to add \vscm{(reset-history!)} at the beginning of 
     \vscm{query-driver-loop}.
 \end{exe}
+
+\begin{exe}[4.68]
+    My initial rules were:
+    \scm{ch4/4.68atex.scm}
+    These rules can answer \vscm{(reverse (1 2 3) ?x)} but not
+    \vscm{(reverse ?x (1 2 3))} because in this case
+    \vscm{(reverse ?rest ?reverse-rest)} is evaluated with both variables 
+    unbound and it leads to an infinite loop.
+
+    The second query can be solved by the rule:
+    \scm{ch4/4.68btex.scm}
+    but then it’s the first one that leads to an infinite loop.
+
+    If we add the infinite loop detector from the previous exercise and use all 
+    three rules above, both queries are solved, and also queries like
+    \vscm{(reverse (1 2 ?x) (3 . ?y))} and
+    \vscm{(reverse (1 2  . ?x) (3 . ?y))}. However,
+    \vscm{(reverse (1 2 . ?x) (4 3 . ?y))} returns no answer because the 
+    computation is interrupted by the loop detector.
+\end{exe}
