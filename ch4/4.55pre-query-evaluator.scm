@@ -3,6 +3,7 @@
 (define output-prompt ";;; Query-results:")
 
 (define (query-driver-loop)
+  (reset-history!)
   (prompt-for-input input-prompt)
   (let ((q (query-syntax-process (read))))
     (cond ((assertion-to-be-added? q)

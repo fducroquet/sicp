@@ -1376,6 +1376,7 @@
 \end{exe}
 
 \begin{exe}[4.62]
+    \label{4.62}
     The operation can be implemented with the following rules:
     \scm{ch4/4.62.scm}
     They give the expected results with queries such as
@@ -1426,6 +1427,7 @@ This subsection contains no exercises.
 \subsection{Is Logic Programming Mathematical Logic?}
 
 \begin{exe}[4.64]
+    \label{4.64}
     The evaluator unifies the query with the conclusion of the rule for 
     \vscm{outranked-by} by binding the variable \vscm{?staff-person} to 
     \vscm{(Bitdiddle Ben)} and \vscm{?boss} to \vscm{?who}. It then evaluates 
@@ -1499,4 +1501,54 @@ This subsection contains no exercises.
     define into account. Keeping unique values of the extracted variable would 
     not work either because there can be legitimate duplicates: several 
     employees can have the same salary for instance.
+\end{exe}
+
+\begin{exe}[4.67]
+    A possible way to detect loops it to define a global history that is reset 
+    at the beginning of \vscm{query-driver-loop}. This history contains pairs 
+    with a query and a frame containing the bindings defined before the given 
+    query was processed. We modify \vscm{simple-query} to check whether the 
+    given query has already been processed before going forward. If a loop is 
+    detected, \vscm{simple-query} returns the empty stream. Otherwise it adds an 
+    entry to the history before computing the result.
+
+    To check whether a query has already been processed, we check whether the 
+    instantiation of the query in the current frame (with the numbers in unbound 
+    variables removed) is equal to the instantiation of the stored query in the 
+    associated stored frame (with the numbers in unbound variables removed as 
+    well). If that’s the case, we check whether the stored frame is reachable 
+    from the current frame: if that’s not the case, the stored history entry 
+    does not belong to the current chain of deductions so we would detect a loop 
+    where there is none and lose potential results.
+
+    The problem with this implementation is that, though it does prevent 
+    infinite loops, it also cuts off some computations that would have 
+    terminated. For instance, with the version of \vscm{outranked-by} from 
+    exercise \ref{4.64}, when evaluating
+    \vscm{(outranked-by (Reasoner Louis) ?x)}, an answer with Alyssa P.~Hacker 
+    is found from the first branch of the \vscm{or}. Then the recursive 
+    evaluation of \vscm{outranked-by} (which is not eliminated because both 
+    variables are unbound whereas one of them was bound in the query) allows the 
+    interpreter to find that Louis is outranked by Ben Bitdiddle. But the second 
+    recursion on \vscm{outranked-by} with both variables unbound is eliminated, 
+    so the third answer with Oliver Warbucks is not found. The evaluation of 
+    \vscm{(outranked-by ?x ?y)} is even worse since the second branch is 
+    completely eliminated so we only get the supervisors. With \vscm{last-pair} 
+    from exercise \ref{4.62}, where we got an infinite stream of results by 
+    evaluating \vscm{(last-pair ?x (3))}, we only get the first two results 
+    because the rest of the computation is eliminated.
+
+    I spent some time trying to find a better solution without much success: 
+    either the system cut too much or not enough. After a look at some research 
+    articles on the subject, it seems that it is really difficult to find 
+    a system that both eliminates all infinite loops and does not eliminate 
+    valid computations. From what I understood (which is not much), it is 
+    certainly not easily feasible, so I decided to stick with this version.
+
+    The modified implementation of \vscm{simple-query} and the other procedures 
+    needed can be defined as:
+    \scm{ch4/4.67.scm}
+
+    It’s also necessary to add \vscm{(reset-history!)} at the beginning of 
+    \vscm{query-driver-loop}.
 \end{exe}
