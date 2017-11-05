@@ -1572,3 +1572,12 @@ This subsection contains no exercises.
     \vscm{(reverse (1 2 . ?x) (4 3 . ?y))} returns no answer because the 
     computation is interrupted by the loop detector.
 \end{exe}
+
+\begin{exe}[4.69]
+    The rules can be defined in the following way:
+    \scm{ch4/4.69.scm}
+    Without the loop detector, queries such as \vscm{(?rel Adam Irad)} cause an 
+    infinite loop. With the loop detector, there are no infinite loops but 
+    queries such as \vscm{((great great grandson) ?x ?y)} return no result 
+    (though \vscm{((great grandson) ?x ?y)} works).
+\end{exe}
