@@ -1,6 +1,6 @@
-(rule (grand-son ?grand-father ?grand-son)
+(rule (grandson ?grand-father ?grandson)
       (and (son ?grand-father ?father)
-           (son ?father ?grand-son)))
+           (son ?father ?grandson)))
 
 (rule (son ?father ?son)
       (and (wife ?father ?wife)
