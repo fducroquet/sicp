@@ -1581,3 +1581,13 @@ This subsection contains no exercises.
     queries such as \vscm{((great great grandson) ?x ?y)} return no result 
     (though \vscm{((great grandson) ?x ?y)} works).
 \end{exe}
+
+\subsection{Implementing the Query System}
+
+\begin{exe}[4.70]
+    It’s necessary to use \vscm{let} because the second argument of 
+    \vscm{cons-stream} is evaluated lazily, which implies that after evaluating
+    \vscm{(set! THE-ASSERTIONS (cons-stream assertion THE-ASSERTIONS))}, 
+    \vscm{THE-ASSERTIONS} is an infinite stream and all its elements are 
+    \vscm{assertion}.
+\end{exe}
