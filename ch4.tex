@@ -1591,3 +1591,18 @@ This subsection contains no exercises.
     \vscm{THE-ASSERTIONS} is an infinite stream and all its elements are 
     \vscm{assertion}.
 \end{exe}
+
+\begin{exe}[4.71]
+    The use of explicit delays postpones the apparition of some infinite loops 
+    caused by the rules’ evaluation and allows the interpreter to display some 
+    answers. For instance, with explicit delays, the query
+    \vscm{(married Minnie ?who)} displays an infinite stream of answers, but 
+    with the simpler version of \vscm{simple-query} no answer is displayed 
+    because the infinite loop appears during the evaluation of the second 
+    argument of \vscm{stream-append}. In the same way, with Louis’ version of 
+    \vscm{outranked-by} from exercise \ref{4.64}, with explicit delays the query
+    \vscm{(outranked-by (Bitdiddle Ben) ?x)} displays an answer before going 
+    into a loop. With the simple version of \vscm{disjoin} no answer is 
+    displayed because the loop happens during the evaluation of the second 
+    argument of \vscm{interleave}.
+\end{exe}
