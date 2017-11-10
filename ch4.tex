@@ -1606,3 +1606,11 @@ This subsection contains no exercises.
     displayed because the loop happens during the evaluation of the second 
     argument of \vscm{interleave}.
 \end{exe}
+
+\begin{exe}[4.72]
+    If one of the streams resulting from the evaluation of a disjunct or from 
+    the application of the mapped function to the stream of frames is infinite, 
+    with append no element of any ulterior stream would appear in the result. 
+    With \vscm{interleave} we are guaranteed that any element from a partial 
+    result stream will appear in the global merged stream eventually.
+\end{exe}
