@@ -1640,3 +1640,18 @@ This subsection contains no exercises.
     similar to the query that lists all jobs that are filled by only one person:
     \scm{ch4/4.75b.scm}
 \end{exe}
+
+\begin{exe}[4.76]
+    We can define a \vscm{merge-frames} procedure that merges two frames as 
+    indicated in the text, a \vscm{merge-frame-streams} procedure that applies 
+    \vscm{merge-frames} to each possible pair of frames from two input streams, 
+    and rewrite \vscm{conjoin} using these two procedures.
+    \scm{ch4/4.76.scm}
+    There are problems caused by the separate evaluation of the clauses of the 
+    \vscm{and} however: we have seen previously that in some cases, the 
+    evaluation of the second clause works correctly only because some bindings 
+    have been provided by the evaluation of the previous clause, such as in the 
+    \vscm{outranked-by} rule, or when using \vscm{not} or \vscm{lisp-value}. 
+    This new implementation won’t give the expected results in such cases, it 
+    works only when the clauses can be evaluated in any order.
+\end{exe}
