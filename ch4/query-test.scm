@@ -38,3 +38,5 @@
 (include "4.67.scm") ; loop-detector
 (load "4.64.scm") ; outranked-by with infinite loop
 (load "4.68.scm") ; reverse
+(load "4.74.scm") ; simple-flatten-stream
+(load "4.74a.scm")

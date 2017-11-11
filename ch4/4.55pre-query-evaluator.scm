@@ -71,7 +71,7 @@
 (put 'or 'qeval disjoin)
 
 (define (negate operands frame-stream)
-  (stream-flatmap
+  (simple-stream-flatmap
     (lambda (frame)
       (if (stream-null? (qeval (negated-query operands)
                                (singleton-stream frame)))
@@ -82,7 +82,7 @@
 (put 'not 'qeval negate)
 
 (define (lisp-value call frame-stream)
-  (stream-flatmap
+  (simple-stream-flatmap
     (lambda (frame)
       (if (execute
             (instantiate
@@ -106,7 +106,7 @@
 
 ;; 4.4.4.3 Finding Assertions by Pattern Matching
 (define (find-assertions pattern frame)
-  (stream-flatmap (lambda (datum)
+  (simple-stream-flatmap (lambda (datum)
                     (check-an-assertion datum pattern frame))
                   (fetch-assertions pattern)))
 

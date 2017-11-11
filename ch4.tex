@@ -1622,3 +1622,13 @@ This subsection contains no exercises.
     (either because \vscm{stream} is infinite or because one of its elements is 
     an infinite stream), \vscm{flatten-stream} will never return.
 \end{exe}
+
+\begin{exe}[4.74]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] The program can be completed simply by filtering out the empty 
+            streams and taking the first and only element of non-empty streams:
+            \scm{ch4/4.74a.scm}
+        \item[b.] The query system’s behavior does not change.
+    \end{itemize}
+\end{exe}
