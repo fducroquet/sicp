@@ -40,3 +40,4 @@
 (load "4.68.scm") ; reverse
 (load "4.74.scm") ; simple-flatten-stream
 (load "4.74a.scm")
+(load "4.75.scm") ; unique special form
