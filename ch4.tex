@@ -1614,3 +1614,11 @@ This subsection contains no exercises.
     With \vscm{interleave} we are guaranteed that any element from a partial 
     result stream will appear in the global merged stream eventually.
 \end{exe}
+
+\begin{exe}[4.73]
+    Without \vscm{delay}, \vscm{flatten-stream} is called on the input stream’s 
+    \vscm{cdr} before any element of the flattened stream can be displayed, so 
+    if the value of \vscm{(flatten-stream (stream-cdr stream))} is infinite 
+    (either because \vscm{stream} is infinite or because one of its elements is 
+    an infinite stream), \vscm{flatten-stream} will never return.
+\end{exe}
