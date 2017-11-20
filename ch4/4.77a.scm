@@ -1,0 +1,12 @@
+(define (has-unbound-var? query frame)
+  (define (tree-walk exp)
+    (cond ((var? exp)
+           (let ((binding (binding-in-frame exp frame)))
+             (if binding
+               (tree-walk (binding-value binding))
+               #t)))
+          ((pair? exp)
+           (or (has-unbound-var? (car exp) frame)
+               (has-unbound-var? (cdr exp) frame)))
+          (else #f)))
+  (tree-walk query))

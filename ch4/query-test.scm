@@ -41,3 +41,5 @@
 (load "4.74.scm") ; simple-flatten-stream
 (load "4.74a.scm")
 (load "4.75.scm") ; unique special form
+(load "4.77a.scm") ; has-unbound-var?
+(load "4.77b.scm") ; delayed filtering for not and lisp-value

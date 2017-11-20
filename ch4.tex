@@ -1655,3 +1655,21 @@ This subsection contains no exercises.
     This new implementation won’t give the expected results in such cases, it 
     works only when the clauses can be evaluated in any order.
 \end{exe}
+
+\begin{exe}[4.77]
+    First, let’s define a procedure to check whether a query contains an unbound 
+    variable in a given frame:
+    \scm{ch4/4.77a.scm}
+    Then I modified the procedures \vscm{negate} and \vscm{lisp-value} so that 
+    they check if the query contains unbound variables. If so, they add 
+    a promise to filter to the frame. If not, they do the filtering directly. 
+    A promise is a pair consisting of a query and a predicate applying to 
+    a frame that returns true if the frame must be kept and false if it must be 
+    filtered out. It is added to the frame as a special binding. Since 
+    \vscm{not} and \vscm{lisp-value} queries are necessarily part of an 
+    \vscm{and} expression, I then modified \vscm{conjoin} so that it filters out 
+    the stream of frames produced by the evaluation of the first subquery if any 
+    promises are found. The disadvantage of this method is that if the frame is 
+    kept, the same promise will be checked multiple times.
+    \scm{ch4/4.77b.scm}
+\end{exe}
