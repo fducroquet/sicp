@@ -21,6 +21,7 @@
         ((amb? exp) (analyze-amb exp))
         ((ramb? exp) (analyze-ramb exp))
         ((if-fail? exp) (analyze-if-fail exp))
+        ((require-fail? exp) (analyze-require-fail exp))
         ((require? exp) (analyze-require exp))
         ((application? exp) (analyze-application exp))
         (else

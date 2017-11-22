@@ -1673,3 +1673,61 @@ This subsection contains no exercises.
     kept, the same promise will be checked multiple times.
     \scm{ch4/4.77b.scm}
 \end{exe}
+
+\begin{exe}[4.78]
+    To implement the query language as a nondeterministic program, we first 
+    replace the driver loop with two procedures: \vscm{assert!} to add 
+    assertions and rules to the database and \vscm{request} to run queries.
+    \scm{ch4/4.78b.scm}
+    All the procedures on frame streams now operate on a single frame. 
+    \vscm{Qeval} is unchanged except that the \vscm{frame-stream} argument will 
+    now be a single frame, but \vscm{simple-query}, \vscm{conjoin}, 
+    \vscm{disjoin}, \vscm{negate} and \vscm{lisp-value} have to be modified:
+    \scm{ch4/4.78c.scm}
+    For \vscm{negate}, we need to succeed if the evaluation of the negated query 
+    fails without producing any result, and I found no other way to do that than 
+    to define a new special form \vscm{require-fail} that succeeds (with the 
+    value \vscm{true}) if its argument fails:
+    \scm{ch4/4.78a.scm}
+    The procedures used for pattern matching and unification must be adapted as 
+    well. By using \vscm{amb} instead of returning the \vscm{failed} symbol in 
+    \vscm{pattern-match} and \vscm{unify-match}, we can simplify the procedures 
+    a little since it’s not necessary to check for the \vscm{failed} symbol 
+    anymore.
+    \scm{ch4/4.78d.scm}
+    I also rewrote the code for maintaining the data base so that it uses lists 
+    instead of streams (not included here).
+
+    \medskip
+
+    There are differences in the answers’ order due to my use of \vscm{ramb} in 
+    \vscm{disjoin} where the stream-based version used 
+    \vscm{interleave-delayed}.
+
+    The main differences regard infinite loops. Because I used \vscm{ramb} in 
+    \vscm{disjoin}, elements from all the disjuncts will appear eventually but 
+    it’s impossible to predict when. If the computation of one element causes 
+    an infinite loop, it may appear at the start or after some answers have 
+    been displayed. For instance, with Louis’ version of \vscm{outranked-by} 
+    from exercise \ref{4.64}, sometimes the query
+    \vscm{(outranked-by (Bitdiddle Ben) ?x)} loops without displaying anything, 
+    sometimes it answers first. But most of the time
+    \vscm{(outranked-by ?x ?y)} displays several answers before going into 
+    a loop, whereas the stream-based version always displayed only the first 
+    answer.
+
+    With the query \vscm{(last-pair ?x (3))} from exercise \ref{4.62}, the 
+    successive results displayed show an increment of one only in the ids of the 
+    unbound variables, where the increment was of 4 in the stream version. The 
+    first results are:
+    \begin{cscm}
+	(last-pair (3) (3))
+	(last-pair (?u-1 3) (3))
+	(last-pair (?u-1 ?u-2 3) (3))
+	(last-pair (?u-1 ?u-2 ?u-3 3) (3))
+	(last-pair (?u-1 ?u-2 ?u-3 ?u-4 3) (3))
+    \end{cscm}
+    The reason is that the rule-counter is decreased when the evaluator 
+    backtracks after a rule application fails (there are 4 rules in the test 
+    database).
+\end{exe}
