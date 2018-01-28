@@ -46,8 +46,8 @@ colorlinks]{hyperref}
 
 % For exercise 2.24, and some exercises in chapter 3
 \usepackage{tikz}
-\usetikzlibrary{positioning, arrows.meta, calc, fit, backgrounds, 
-decorations.markings,shapes.misc}
+\usetikzlibrary{positioning, arrows.meta, calc, fit, matrix, backgrounds, 
+decorations.markings, shapes.misc, shapes.geometric}
 \newcommand\var[2]{%
     \newlength{#1}
     \setlength{#1}{#2}
@@ -190,6 +190,99 @@ decorations.markings,shapes.misc}
     },
 }
 
+% Settings for the data-path and controller diagrams in section 5.1.
+\var{\regheight}{1cm}
+\var{\push}{1.5ex}
+\tikzset{
+    % Node matrix
+    data matrix/.style={
+        column sep=1.5em,
+        row sep=2.5em,
+        nodes = { anchor = center, align = center },
+    },
+    controller matrix/.style={
+        data matrix,
+        column sep = 3em,
+    },
+    % Nodes
+    data/.style={
+        draw,
+        thick,
+        rounded corners=2pt,
+        minimum height=\regheight,
+    },
+    reg/.style={
+        data,
+        rectangle,
+        inner xsep=.5cm,
+        fill=gray!12!blue!5,
+    },
+    const/.style={
+        data,
+        regular polygon,
+        regular polygon sides=3,
+        fill=gray!12!green!5,
+        minimum height=1.7\regheight,
+    },
+    op/.style={
+        data,
+        trapezium,
+        trapezium left angle=120,
+        trapezium right angle=120,
+        fill=pink!22!yellow!20
+    },
+    test/.style={
+        data,
+        circle,
+        fill=gray!12!pink!15,
+    },
+    % Controller diagrams
+    cio/.style={
+        thick,
+        rounded corners=2pt,
+    },
+    ctest/.style={
+        cio,
+        draw,
+        inner xsep=.4cm,
+        diamond,
+        fill=gray!12!pink!15,
+    },
+    cbutton/.style={
+        cio,
+        draw,
+        inner xsep=.5cm,
+        rectangle,
+        fill=gray!12!blue!5,
+        minimum height=\regheight,
+    },
+    % Paths
+    path/.style={
+        thick,
+        rounded corners=3pt,
+    },
+    button/.style={
+        path,
+        decoration = {markings,
+            mark = at position #1 with {
+                \fill[white] circle (.7071\push);
+                \draw[-] ++(-.5\push, -.5\push) -- ++(\push, \push);
+                \draw[-] ++(-.5\push, .5\push) -- ++(\push, -\push);
+                \clip[draw] circle (.7071\push); }
+        },
+        postaction = decorate,
+        ->,
+        font=\ttfamily,
+    },
+    arg/.style={
+        path,
+        ->,
+    },
+    flow/.style={
+        arg,
+    },
+}
+
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}
 {\IfNoValueTF{#1}
@@ -240,5 +333,6 @@ library.
 \include{ch2}
 \include{ch3}
 \include{ch4}
+\include{ch5}
 
 \end{document}

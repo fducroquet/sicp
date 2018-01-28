@@ -1,0 +1,65 @@
+\chapter{Computing with Register Machines}
+
+\section{Designing Register Machines}
+
+\begin{exe}[5.1]
+    \label{5.1}
+    The data-path and the controller diagrams for the iterative factorial 
+    machine are shown on figure \ref{5.1fig}.
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            % Data-path diagram.
+            \matrix[data matrix] (dp) {
+                & \node[reg] (n) {n}; &
+                \node[test] (>) {>}; \\
+
+                & \node[const] (c1) {1}; & \\
+
+                \node[reg] (p) {product}; &&
+                \node[reg] (c) {counter}; \\
+
+                & \node[op] (+) {+}; & \\
+
+                & \node[op] (*) {*}; & \\
+            };
+
+            \draw[arg] (n) -- (>);
+            \draw[arg] (c) -- (>);
+            \draw[button=0.82] (c1) -| node[near start, above] {p<-1} (p);
+            \draw[button=0.82] (c1) -| node[near start, above] {c<-1}
+                ($ (c.north) + (-1em, 0) $);
+            \draw[arg] (c1) -- (+);
+            \draw[button=0.8] ($ (+.north) + (1em, 0) $) |-
+                node[near end, above] {c++} (c);
+            \draw[arg] (c) |- (+);
+            \draw[arg] ($ (p.south) + (-1em, 0) $) |-
+                ($ (*.south) + (0, -1.5em) $) -- (*);
+            \draw[arg] (c) |- (*);
+            \draw[button=0.8] (*) -| node[near end, right]{p<-*}
+                ($ (p.south) + (1em, 0) $);
+
+            % Controller diagram
+            \matrix[controller matrix, right=5em of dp] {
+                \node[cio] (s) {start}; \\
+                \node[cbutton] (pi) {p<-1}; \\
+                \node[cbutton] (ci) {c<-1}; \\
+                \node[ctest] (ct) {>}; & \node[cio] (cd) {done}; \\[+1em]
+                \node[cbutton] (cp) {p<-*}; \\
+                \node[cbutton] (cc) {c++}; \\
+            };
+
+            \draw[flow] (s) -- (pi);
+            \draw[flow] (pi) -- (ci);
+            \draw[flow] (ci) -- (ct);
+            \draw[flow] (ct) --node[right] {no} (cp);
+            \draw[flow] (ct) --node[above] {yes} (cd);
+            \draw[flow] (cp) -- (cc);
+            \draw[flow] (cc) -| ($ (ct.west) - (2.5em, 0) $) -- (ct);
+        \end{tikzpicture}
+        \caption{The data-path and controller diagrams for the iterative 
+        factorial machine.}
+        \label{5.1fig}
+    \end{figure}
+\end{exe}
