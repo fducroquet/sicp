@@ -381,3 +381,9 @@ This subsection contains no exercises.
         (goto (reg cont)) -> fib-done &&&& \\\hline
     \end{longtable}
 \end{exe}
+
+\begin{exe}[5.6]
+    In \vscm{after-fib-n-1}, the instructions \vscm{(restore continue)} and 
+    \vscm{(save continue)} can be removed because no change is done to the 
+    \vscm{continue} register or to the stack between them.
+\end{exe}
