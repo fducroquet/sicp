@@ -71,3 +71,105 @@
     can define the iterative factorial machine of exercise \ref{5.1} as:
     \scm{ch5/5.02.scm}
 \end{exe}
+
+\subsection{Abstraction in Machine Design}
+
+\begin{exe}[5.3]
+    Using the simulator again, the first version of the register machines can be 
+    defined as:
+    \scm{ch5/5.03a.scm}
+    and the second version as:
+    \scm{ch5/5.03b.scm}
+    The data-path diagrams are shown on figures \ref{5.03afig} and 
+    \ref{5.03bfig} respectively.
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[data matrix] {
+                \node[const] (c1) {1};
+                &[+1em] \node[reg] (g) {guess};
+                & \node[test] (ge) {g-e?};
+                & \node[reg] (x) {x}; \\
+
+                && \node[op] (i) {improve}; \\
+            };
+
+            \draw[button=.5] (c1) -- (g);
+            \draw[arg] (g) -- (ge);
+            \draw[arg] (x) -- (ge);
+            \draw[arg] ($ (g.south) + (1em, 0) $) |- (i);
+            \draw[button=.7] (i.south) -- ($ (i.south) - (0, 1em) $) -|
+                ($ (g.south) - (1em, 0) $);
+            \draw[arg] (x) |- (i);
+        \end{tikzpicture}
+        \caption{The data-path diagram for the square root machine using complex 
+        primitive operations.}
+        \label{5.03afig}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[data matrix, matrix of nodes, nodes in empty cells]
+            (table) {%
+                && \node[const] (c1) {1};
+                & \node[op] (div2) {/};
+                & \node[const] (c2) {2}; \\
+
+                &&& \node[minimum height=1.5\regheight] {guess}; &&& \\
+
+                && \node[op] (divx) {/};
+                & \node[op] (*) {*};
+                & \node[op] (+) {+}; \\
+
+                & \node[reg] (x) {x};
+                && \node {tmp};
+                && \node[test] (<eps) {<};
+                & \node[const, inner xsep = -.2em] (eps) {0.001}; \\
+
+                && \node[op] (mx) {-};
+                & \node[op] (mtmp) {-};
+                & \node[test] (>0) {<};
+                & \node[const] (c0) {0}; \\
+            };
+            \begin{scope}[on background layer]
+                \node[reg, fit=(table-2-3)(table-2-5)] (guess) {};
+                \node[reg, fit=(table-4-3)(table-4-5)] (tmp) {};
+            \end{scope}
+
+            \draw[button=.6] (c1) -- (guess.north -| c1);
+            \draw[arg] ($ (guess.north) - (3em, 0) $) |- (div2);
+            \draw[arg] (c2) -- (div2);
+            \draw[button=.6] (div2) -- (guess);
+            \draw[arg] (x) |- (divx);
+            \draw[arg] (guess.south -| divx) -- (divx);
+            \draw[button=.6] (divx) -- (tmp.north -| divx.south);
+            \draw[arg] ($ (guess.south) - (1em, 0) $) --
+                ($ (*.north) - (1em, 0) $);
+            \draw[arg] ($ (guess.south) + (1em, 0) $) --
+                ($ (*.north) + (1em, 0) $);
+            \draw[button=.6] (*) -- (tmp);
+            \coordinate (pc) at (guess.south -| +.north);
+            \draw[arg] ($ (pc) - (1em, 0) $) -- ($ (+.north) - (1em, 0) $);
+            \draw[button=.6] ($ (+.north) + (1em, 0) $) -- ($ (pc) + (1em, 0) $);
+            \draw[arg] (tmp.north -| +) -- (+);
+            \draw[arg] (tmp) -- (<eps);
+            \draw[arg] (eps) -- (<eps);
+            \draw[arg] (x) |- (mx);
+            \coordinate (mc) at (tmp.south -| mx.north);
+            \draw[arg] ($ (mc) - (1em, 0) $) -- ($ (mx.north) - (1em, 0) $);
+            \draw[button=.6] ($ (mx.north) + (1em, 0) $) --
+                ($ (mc) + (1em, 0) $);
+            \draw[arg] ($ (tmp.south) - (1em, 0) $) --
+                ($ (mtmp.north) - (1em, 0) $);
+            \draw[button=.6] ($ (mtmp.north) + (1em, 0) $) --
+                ($ (tmp.south) + (1em, 0) $);
+            \draw[arg] (tmp.south -| >0) -- (>0);
+            \draw[arg] (c0) -- (>0);
+        \end{tikzpicture}
+        \caption{The data-path diagram for the square root machine using only 
+        basic primitive operations.}
+        \label{5.03bfig}
+    \end{figure}
+\end{exe}
