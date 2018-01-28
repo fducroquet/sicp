@@ -279,3 +279,105 @@ This subsection contains no exercises.
         \label{5.04bfig}
     \end{figure}
 \end{exe}
+
+\begin{exe}[5.5]
+    The following table lists the instructions evaluated during the simulation 
+    of factorial 3, with their effect on the values of the registers \vscm{n}, 
+    \vscm{val}, and \vscm{continue} and on the stack.
+    \begin{longtable}{|l|c|c|c|c|}
+        \hline
+        \bfseries Instruction & \bfseries n & \bfseries val & \bfseries continue 
+        & \bfseries stack \\\hline
+        \endhead
+        (assign cont (label fact-done)) & 3 & *unassigned* & fact-done & () 
+        \\\hline
+        (test (op =) ...) -> false &&&& \\\hline
+        (branch (label base-case)) &&&& \\\hline
+        (save continue) &&&& (fact-done) \\\hline
+        (save n) &&&& (3 fact-done) \\\hline
+        (assign n (op -) ...) & 2 &&& \\\hline
+        (assign cont (label after-fact)) &&& after-fact & \\\hline
+        (goto (label fact-loop)) &&&& \\\hline
+        (test (op =) ...) -> false &&&& \\\hline
+        (branch (label base-case)) &&&& \\\hline
+        (save cont) &&&& (after-fact 3 fact-done) \\\hline
+        (save n) &&&& (2 after-fact 3 fact-done) \\\hline
+        (assign n (op -) ...) & 1 &&& \\\hline
+        (assign cont (label after-fact)) &&& after-fact & \\\hline
+        (goto (label fact-loop)) &&&& \\\hline
+        (test (op =) ...) -> true &&&& \\\hline
+        (branch (label base-case)) &&&& \\\hline
+        (assign val (const 1)) && 1 && \\\hline
+        (goto (reg cont)) -> after-fact &&&& \\\hline
+        (restore n) & 2 &&& (after-fact 3 fact-done) \\\hline
+        (restore cont) &&& after-fact & (3 fact-done) \\\hline
+        (assign val (op *) ...) && 2 && \\\hline
+        (goto (reg cont)) -> after-fact &&&& \\\hline
+        (restore n) & 3 &&& (fact-done) \\\hline
+        (restore cont) &&& fact-done & () \\\hline
+        (assign val (op *) ...) && 6 && \\\hline
+        (goto (reg cont)) -> fact-done &&&& \\\hline
+    \end{longtable}
+
+    The following table lists the instructions evaluated during the simulation 
+    of fibonacci 3, with their effect on the values of the registers \vscm{n}, 
+    \vscm{val}, and \vscm{continue} and on the stack.
+    \begin{longtable}{|l|c|c|c|c|}
+        \hline
+        \bfseries Instruction & \bfseries n & \bfseries val & \bfseries continue 
+        & \bfseries stack \\\hline
+        \endhead
+        (assign cont (label fib-done) & 3 & *unassigned* & fib-done & () 
+        \\\hline
+        (test (op <) ...) -> false &&&& \\\hline
+        (branch (label imm-answer)) &&&& \\\hline
+        (save cont) &&&& (fib-done) \\\hline
+        (assign cont (label after-fib-n-1)) &&& after-fib-n-1 & \\\hline
+        (save n) &&&& (3 fib-done) \\\hline
+        (assign n (op -) ...1) & 2 &&& \\\hline
+        (goto (label fib-loop)) &&&& \\\hline
+        (test (op <) ...) -> false &&&& \\\hline
+        (branch (label imm-answer)) &&&& \\\hline
+        (save cont) &&&& (after-fib-n-1 3 fib-done) \\\hline
+        (assign cont (label after-fib-n-1)) &&& after-fib-n-1 & \\\hline
+        (save n) &&&& (2 after-fib-n-1 3 fib-done) \\\hline
+        (assign n (op -) ...1) & 1 &&& \\\hline
+        (goto (label fib-loop)) &&&& \\\hline
+        (test (op <) ...) -> true &&&& \\\hline
+        (branch (label imm-answer)) &&&& \\\hline
+        (assign val (reg n)) && 1 && \\\hline
+        (goto (reg cont)) -> after-fib-n-1 &&&& \\\hline
+        (restore n) & 2 &&& (after-fib-n-1 3 fib-done) \\\hline
+        (restore cont) &&& after-fib-n-1 & (3 fib-done) \\\hline
+        (assign n (op -) ...2) & 0 &&& \\\hline
+        (save cont) &&&& (after-fib-n-1 3 fib-done) \\\hline
+        (assign cont (label after-fib-n-2)) &&& after-fib-n-2 & \\\hline
+        (save val) &&&& (1 after-fib-n-1 3 fib-done) \\\hline
+        (goto (label fib-loop)) &&&& \\\hline
+        (test (op <) ...) -> true &&&& \\\hline
+        (branch (label imm-answer)) &&&& \\\hline
+        (assign val (reg n)) && 0 && \\\hline
+        (goto (reg cont)) -> after-fib-n-2 &&&& \\\hline
+        (assign n (reg val)) & 0 &&& \\\hline
+        (restore val) && 1 && (after-fib-n-1 3 fib-done) \\\hline
+        (restore cont) &&& after-fib-n-1 & (3 fib-done) \\\hline
+        (assign val (op +) ...) && 1 && \\\hline
+        (goto (reg cont)) -> after-fib-n-1 &&&& \\\hline
+        (restore n) & 3 &&& (fib-done) \\\hline
+        (restore cont) &&& fib-done & () \\\hline
+        (assign n (op -) ... 2) & 1 &&& \\\hline
+        (save cont) &&&& (fib-done) \\\hline
+        (assign cont (label after-fib-n-2)) &&& after-fib-n-2 & \\\hline
+        (save val) &&&& (1 fib-done) \\\hline
+        (goto (label fib-loop)) &&&& \\\hline
+        (test (op <) ...) -> true &&&& \\\hline
+        (branch (label imm-answer)) &&&& \\\hline
+        (assign val (reg n)) && 1 && \\\hline
+        (goto (reg cont)) -> after-fib-n-2 &&&& \\\hline
+        (assign n (reg val)) & 1 &&& \\\hline
+        (restore val) && 1 && (fib-done) \\\hline
+        (restore cont) &&& fib-done & () \\\hline
+        (assign val (op +) ...) && 2 && \\\hline
+        (goto (reg cont)) -> fib-done &&&& \\\hline
+    \end{longtable}
+\end{exe}
