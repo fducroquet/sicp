@@ -7,3 +7,6 @@
 (load "5.03asup.scm") ; Definitions used in 5.03a.
 (load "5.03a.scm") ; Square roots usign Newton’s method, complex primitives.
 (load "5.03b.scm") ; Square roots usign Newton’s method, expanded operations.
+(load "5.04pre.scm") ; Recursive fact-machine, Fibonacci-machine.
+(load "5.04a.scm") ; Recursive exponentiation.
+(load "5.04b.scm") ; Iterative exponentiation.

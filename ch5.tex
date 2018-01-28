@@ -173,3 +173,109 @@
         \label{5.03bfig}
     \end{figure}
 \end{exe}
+
+\subsection{Subroutines}
+
+This subsection contains no exercises.
+
+\subsection{Using a Stack to Implement Recursion}
+
+\begin{exe}[5.4]
+    \label{5.04}
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] The recursive exponentiation machine can be defined as 
+            follows. The corresponding data-path diagram is shown on figure 
+            \ref{5.04afig}.
+            \scm{ch5/5.04a.scm}
+        \item[b.] The iterative exponentiation machine can be defined as 
+            follows. The corresponding data-path diagram is shown on figure 
+            \ref{5.04bfig}.
+            \scm{ch5/5.04b.scm}
+    \end{itemize}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[data matrix] {
+                \node[const] (c0) {0};
+                & \node[test] (=) {=};
+                & \node[reg] (n) {n};
+                &[+1em] &[-4.5em] \node[reg] (stack) {stack}; \\
+
+                \node[const] (c1) {1};
+                & \node[op] (-) {-};
+                &&& \node[reg] (continue) {continue};
+                &[-4.5em]& \node (controller) {controller}; \\
+
+                \node[reg] (val) {val};
+                & \node[op] (*) {*};
+                & \node[reg] (b) {b};
+                & \node[const, inner xsep=-.2em] (ed) {e-d};
+                && \node[const, inner xsep=-.2em] (ae) {a-e}; \\
+            };
+
+            \draw[arg] (c0) -- (=);
+            \draw[arg] (n) -- (=);
+            \draw[button=.5] ($ (n.east) + (0, .7em) $) --
+                ($ (stack.west) + (0, .7em) $);
+            \draw[button=.5] ($ (stack.west) - (0, .7em) $) --
+                ($ (n.east) - (0, .7em) $);
+            \draw[arg] (c1) -- (-);
+            \draw[arg] ($ (n.south) - (.7em, 0) $) |- (-);
+            \draw[button=.8] (-) -- ($ (-.south) - (0, 1em) $)
+                -| ($ (n.south) + (.7em, 0) $);
+            \draw[button=.5] ($ (stack.south) - (.7em, 0) $) --
+                ($ (continue.north) - (.7em, 0) $);
+            \draw[button=.5] ($ (continue.north) + (.7em, 0) $) --
+                ($ (stack.south) + (.7em, 0) $);
+            \draw[arg] (continue) -- (controller);
+            \draw[arg] (c1) -- (val);
+            \draw[arg] (val) -- (*);
+            \draw[button=.7] (*) -- ($ (*) - (0, 3em) $) -| (val);
+            \draw[arg] (b) -- (*);
+            \draw[button=.5] (ed) -- (ed |- continue.south);
+            \draw[button=.5] (ae) -- (ae |- continue.south);
+        \end{tikzpicture}
+        \caption{The data-path diagram for the recursive exponentiation 
+        machine.}
+        \label{5.04afig}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[>=Stealth]
+            \matrix[data matrix] {
+                \node[reg] (b) {b};
+                & \node[const] (c0) {0};
+                &[+1em] \node[op] (=) {=}; \\
+
+                \node[op] (*) {*};
+                & \node[reg] (n) {n};
+                & \node[reg] (c) {counter}; \\
+
+                \node[reg] (p) {product};
+                & \node[const] (c1) {1};
+                & \node[op] (-) {-}; \\
+            };
+
+            \draw[arg] (c0) -- (=);
+            \draw[arg] (c) -- (=);
+            \draw[arg] (b) -- (*);
+            \draw[arg] ($ (p.north) - (.7em, 0) $) --
+                ($ (*.south) - (.7em, 0) $);
+            \draw[button=.5] ($ (*.south) + (.7em, 0) $) --
+                ($ (p.north) + (.7em, 0) $);
+            \draw[button=.5] (n) -- (c);
+            \draw[arg] (c1) -- (p);
+            \draw[arg] (c1) -- (-);
+            \draw[arg] ($ (c.south) - (1em, 0) $) --
+                ($ (-.north) - (1em, 0) $);
+            \draw[button=.5] ($ (-.north) + (1em, 0) $) --
+                ($ (c.south) + (1em, 0) $);
+        \end{tikzpicture}
+        \caption{The data-path diagram for the iterative exponentiation 
+        machine.}
+        \label{5.04bfig}
+    \end{figure}
+\end{exe}
