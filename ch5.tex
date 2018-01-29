@@ -397,3 +397,20 @@ This subsection contains no exercises.
 \begin{exe}[5.7]
     Already done while doing exercise \ref{5.04}.
 \end{exe}
+
+\subsection{The Machine Model}
+
+This subsection contains no exercises.
+
+\subsection{The Assembler}
+
+\begin{exe}[5.8]
+    With the simulator as written, the contents of register \vscm{a} will be 3: 
+    two labels with the name \vscm{here} are present in the list of labels, but 
+    the one corresponding to the first location comes first and is the one 
+    returned by \vscm{lookup-label}.
+
+    We can return an error if the same label name is used to indicate two 
+    different locations by modifying \vscm{extract-labels} as follows:
+    \scm{ch5/5.08.scm}
+\end{exe}
