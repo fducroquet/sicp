@@ -38,10 +38,20 @@ colorlinks]{hyperref}
 % Show subsubsections in the table of contents.
 \setcounter{tocdepth}{4}
 
+% Counter needed to link to the right pages in the online version of the book on 
+% the MIT’s website.
+\newcounter{mitpage}
+\setcounter{mitpage}{6}
+\let\oldsection\section
+\renewcommand\section{\stepcounter{mitpage}\oldsection}
+\let\oldchapter\chapter
+\renewcommand\chapter{\stepcounter{mitpage}\oldchapter}
+
 % Theorem environments
 \usepackage{amssymb,amsmath,amsthm}
-\newtheoremstyle{break}{}{}{}{-12pt}{\bfseries}{}{\newline}{}
-\theoremstyle{break}
+\newtheoremstyle{sicp-exe}{}{}{}{-12pt}{\bfseries}{}{\newline}
+{\href{https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-\themitpage.html\thmnumber{\#\%_thm_#2}}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
+\theoremstyle{sicp-exe}
 \newtheorem{exeaux}{Exercise}[chapter]
 
 % For tables.
