@@ -39,10 +39,10 @@
       (restore continue)
       (assign n (op -) (reg n) (const 2))
       (save continue)
-      (assign continue (label after-fact-n-2))
+      (assign continue (label after-fib-n-2))
       (save val)
       (goto (label fib-loop))
-    after-fact-n-2
+    after-fib-n-2
       (assign n (reg val))
       (restore val)
       (restore continue)
