@@ -1,0 +1,31 @@
+(define (make-register name)
+  (let ((contents '*unassigned*)
+        (sources '()))
+    (define (add-source source)
+      (set! sources
+        (adjoin-set source sources smaller?)))
+    (define (dispatch message)
+      (cond ((eq? message 'get) contents)
+            ((eq? message 'set)
+             (lambda (value)
+               (set! contents value)))
+            ((eq? message 'sources) sources)
+            ((eq? message 'add-source) add-source)
+            (else
+              (error "Unknown request: REGISTER" message))))
+    dispatch))
+
+(define (make-assign inst machine labels operations pc)
+  (let ((target (get-register machine (assign-reg-name inst)))
+        (value-exp (assign-value-exp inst)))
+    ((target 'add-source) value-exp)
+    (let ((value-proc
+            (if (operation-exp? value-exp)
+              (make-operation-exp value-exp machine labels operations)
+              (make-primitive-exp (car value-exp) machine labels))))
+      (lambda ()
+        (set-contents! target (value-proc))
+        (advance-pc pc)))))
+
+(define (get-sources machine reg-name)
+  ((get-register machine reg-name) 'sources))

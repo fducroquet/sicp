@@ -468,3 +468,29 @@ This subsection contains no exercises.
 	    \scm{ch5/5.11c-init.scm}
     \end{itemize}
 \end{exe}
+
+\begin{exe}[5.12]
+    Since we need ordered sets, we first reuse a slightly modified version of 
+    the representation of sets as ordered lists defined in section \ref{2.3.3}:
+    \scm{ch5/5.12set.scm}
+    To store the list of all instructions, we change \vscm{assemble} and 
+    \vscm{extract-label} to build the list gradually as the instructions are 
+    processed and then add it to the machine:
+    \scm{ch5/5.12a1.scm}
+    We also modify \vscm{make-new-machine} to define \vscm{instructions-list} as 
+    the empty list at first and add new cases to the \vscm{dispatch} procedure:
+    \scm{ch5/5.12a2.scm}
+    To store the lists of the registers used to hold entry points and of the 
+    registers that are \vscm{saved} or \vscm{restored}, we change 
+    \vscm{make-new-machine} to define those lists, as well as procedures to add 
+    an element to them and new messages to access them:
+    \scm{ch5/5.12b2.scm}
+    We then modify \vscm{make-goto}, \vscm{make-save} and \vscm{make-restore} to 
+    add elements to the lists:
+    \scm{ch5/5.12b1.scm}
+    To store the sources from which each register is assigned, we change 
+    \vscm{make-register} to store this information in each register, and 
+    \vscm{make-assign} to add the sources to the target register. We also define 
+    a \vscm{get-sources} procedure to access this information more easily:
+    \scm{ch5/5.12c.scm}
+\end{exe}

@@ -13,3 +13,10 @@
 (load "5.08.scm") ; Forbid using the same label name at several places.
 (load "5.09.scm") ; Forbid labels in operation arguments.
 (load "5.11a.scm") ; Fibonacci-machine with one fewer instruction.
+
+; Store additional information in the machine model. 
+(load "5.12set.scm")
+(load "5.12.scm")
+(load "5.12a1.scm")
+(load "5.12b1.scm")
+(load "5.12c.scm")
