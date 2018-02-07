@@ -427,3 +427,42 @@ This subsection contains no exercises.
     \vscm{(assign <reg-name> op <op-name> <args>)}:
     \scm{ch5/5.10.scm}
 \end{exe}
+
+\begin{exe}[5.11]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item[a.] After the label \vscm{after-fib-n-2}, the last value placed on 
+            the stack is $\Fib(n - 1)$, and the \vscm{val} register contains 
+            $\Fib(n - 2)$. The Fibonacci machine places $\Fib(n - 2)$ in the 
+            \vscm{n} register before restoring the last saved value in the 
+            \vscm{val} register. We can instead restore the last saved value in 
+            the \vscm{n} register and remove an assignment operation. So the 
+            lines:
+            \begin{cscm}
+                (assign n (reg val))
+                (restore val)
+            \end{cscm}
+            become:
+            \begin{cscm}
+                (restore n)
+            \end{cscm}
+	\item[b.] We need to change \vscm{make-save} to put the register name on 
+	    the stack, and \vscm{make-restore} to check that the original 
+	    register corresponds to the target register:
+	    \scm{ch5/5.11b.scm}
+	\item[c.] I chose to modify \vscm{make-register} to directly add a stack 
+	    to each register:
+	    \scm{ch5/5.11c.scm}
+	    Some other procedures must be modified as well: no stack is needed 
+	    anymore in
+	    \linebreak
+	    \vscm{make-new-machine}, and the \vscm{stack} parameter can be 
+	    removed from
+	    \linebreak
+	    \vscm{make-execution-procedure}. As indicated in the text, the 
+	    \vscm{initialize-stack} operation should initialize all the register 
+	    stacks, which can be done by replacing the original definition of 
+	    \vscm{the-ops} in \vscm{make-new-machine} with:
+	    \scm{ch5/5.11c-init.scm}
+    \end{itemize}
+\end{exe}
