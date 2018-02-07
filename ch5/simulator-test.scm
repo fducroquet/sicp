@@ -11,3 +11,4 @@
 (load "5.04a.scm") ; Recursive exponentiation.
 (load "5.04b.scm") ; Iterative exponentiation.
 (load "5.08.scm") ; Forbid using the same label name at several places.
+(load "5.09.scm") ; Forbid labels in operation arguments.
