@@ -494,3 +494,15 @@ This subsection contains no exercises.
     a \vscm{get-sources} procedure to access this information more easily:
     \scm{ch5/5.12c.scm}
 \end{exe}
+
+\begin{exe}[5.13]
+    We change \vscm{make-machine} so it does not take a list of registers as an 
+    argument:
+    \scm{ch5/5.13a.scm}
+    Then, we change the \vscm{lookup-register} procedure in 
+    \vscm{make-new-machine} so that it allocates a new register if no register 
+    with the given name exists. I also modified \vscm{allocate-register} to 
+    return the newly allocated register to simplify the procedures. The dispatch 
+    clause for \vscm{allocate-register} can be removed.
+    \scm{ch5/5.13b.scm}
+\end{exe}
