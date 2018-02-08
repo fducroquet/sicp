@@ -8,7 +8,9 @@
         (saved-regs '()))
     (let ((the-ops
             (list (list 'initialize-stack
-                        (lambda () (stack 'initialize)))))
+                        (lambda () (stack 'initialize)))
+                  (list 'print-stack-statistics
+                        (lambda () (stack 'print-statistics)))))
           (register-table
             (list (list 'pc pc) (list 'flag flag))))
       (define (allocate-register name)

@@ -506,3 +506,15 @@ This subsection contains no exercises.
     clause for \vscm{allocate-register} can be removed.
     \scm{ch5/5.13b.scm}
 \end{exe}
+
+\subsection{Monitoring Machine Performance}
+
+\begin{exe}[5.14]
+    The recursive factorial machine can be modified as shown below to initialize 
+    the stack and print the statistics.
+    \scm{ch5/5.14.scm}
+    The total number of push operations and the maximum stack depth used in 
+    computing $n!$ are both equal to $2 (n - 1)$: the \vscm{n} and 
+    \vscm{continue} registers are each saved $n - 1$ times, then all the 
+    elements of the stack are popped.
+\end{exe}

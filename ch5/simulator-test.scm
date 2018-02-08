@@ -20,3 +20,6 @@
 (load "5.12a1.scm")
 (load "5.12b1.scm")
 (load "5.12c.scm")
+
+(load "5.14pre.scm")
+(load "5.14.scm")
