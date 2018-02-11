@@ -49,10 +49,38 @@ colorlinks]{hyperref}
 
 % Theorem environments
 \usepackage{amssymb,amsmath,amsthm}
+\newtheoremstyle{example}{}{}{}{}{\itshape}{:}{ }
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{example}
+\newtheorem*{example}{Example}
+
+\newtheoremstyle{remark}{}{}{}{}{\bfseries}{.}{ }
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{comp}{}{}{\small}{}{\itshape}{:}{\newline}
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{comp}
+\newtheorem*{comp}{Complement}
+
 \newtheoremstyle{sicp-exe}{}{}{}{-12pt}{\bfseries}{}{\newline}
 {\href{https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-\themitpage.html\thmnumber{\#\%_thm_#2}}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
 \theoremstyle{sicp-exe}
 \newtheorem{exeaux}{Exercise}[chapter]
+
+% Include the exercises in the table of contents.
+\NewDocumentEnvironment{exe}{o}
+{\IfNoValueTF{#1}
+    {\exeaux\addcontentsline{toc}{paragraph}%
+        {Exercise}}
+    {\exeaux\addcontentsline{toc}{paragraph}%
+        {Exercise #1}}%
+        \ignorespaces}
+{\endexeaux}
+
+% For inline fractions
+\usepackage{xfrac}
 
 % For Fibonacci numbers.
 \DeclareMathOperator{\Fib}{Fib}
@@ -298,31 +326,6 @@ decorations.markings, shapes.misc, shapes.geometric}
         arg,
     },
 }
-
-% Include the exercises in the table of contents.
-\NewDocumentEnvironment{exe}{o}
-{\IfNoValueTF{#1}
-    {\exeaux\addcontentsline{toc}{paragraph}%
-        {Exercise}}
-    {\exeaux\addcontentsline{toc}{paragraph}%
-        {Exercise #1}}%
-        \ignorespaces}
-{\endexeaux}
-
-\newtheoremstyle{example}{}{}{}{}{\itshape}{:}{ }{}
-\theoremstyle{example}
-\newtheorem*{example}{Example}
-
-\newtheoremstyle{remark}{}{}{}{}{\bfseries}{.}{ }{}
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
-\newtheoremstyle{comp}{}{}{\small}{}{\itshape}{:}{\newline}{}
-\theoremstyle{comp}
-\newtheorem*{comp}{Complement}
-
-% For inline fractions
-\usepackage{xfrac}
 
 \title{Solutions to Structure and Interpretation of Computer Programs}
 \author{Fabienne \textsc{Ducroquet}}
