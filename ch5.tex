@@ -552,6 +552,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.17]
+    \label{5.17}
     First, we change the representation of instructions from a pair to a list of 
     three elements: the instruction text, the label immediately preceding the 
     instruction, and the execution procedure.
@@ -569,4 +570,38 @@ This subsection contains no exercises.
     turn tracing on and off for a given register as shown below. This extends 
     the definition of \vscm{make-register} from exercise \ref{5.12}.
     \scm{ch5/5.18.scm}
+\end{exe}
+
+\begin{exe}[5.19]
+    The procedures described in the text are just syntactic sugar:
+    \scm{ch5/5.19a.scm}
+    We will need the labels in order to find the instruction where to put the 
+    breakpoint, so we add a message to set them to the machine and set them in 
+    \vscm{assemble}:
+    \scm{ch5/5.19b.scm}
+    We add the appropriate messages to the \vscm{dispatch} procedure in 
+    \vscm{make-new-machine}:
+    \scm{ch5/5.19c.scm}
+    A breakpoint is defined as a pair containing the label and offset, and the 
+    representation of instructions from exercise \ref{5.17} is extended to 
+    include the breakpoint. We define procedures to check if an instruction has 
+    a breakpoint and to remove the breakpoint from an instruction as well.
+    \scm{ch5/5.19d.scm}
+    The only missing part is the code actually handling the messages:
+    \begin{itemize}
+	\item To set or cancel a breakpoint, we look up the instruction 
+	    corresponding to the given label and offset and add or remove the 
+	    breakpoint to the instruction.
+	\item To cancel all breakpoints, we remove any breakpoint from each 
+	    instruction in the instruction sequence.
+	\item The \vscm{execute} procedure is modified to check if the next 
+	    instruction has a breakpoint. If so, it prints the information 
+	    regarding the breakpoint and stops executing instructions.
+	\item To continue execution, we just call \vscm{execute}, but we need to 
+	    tell this procedure that it should not check again whether the next 
+	    instruction is a breakpoint (we know it is and we already stopped), 
+	    which we do with an additional parameter to \vscm{execute}, which is 
+	    \vscm{false} only when proceeding from a breakpoint.
+    \end{itemize}
+    \scm{ch5/5.19e.scm}
 \end{exe}
