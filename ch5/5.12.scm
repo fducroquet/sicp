@@ -5,6 +5,7 @@
         (the-instruction-sequence '())
         (instructions-list '())
         (instruction-count 0)
+        (trace #f)
         (entry-points '())
         (saved-regs '()))
     (let ((the-ops
@@ -32,6 +33,10 @@
             'done
             (begin
               (set! instruction-count (+ 1 instruction-count))
+              (if trace
+                (begin
+                  (display (instruction-text (car insts)))
+                  (newline)))
               ((instruction-execution-proc (car insts)))
               (execute)))))
       (define (add-entry-point reg-name)
@@ -68,6 +73,10 @@
                (display instruction-count)
                (newline)
                (set! instruction-count 0))
+              ((eq? message 'trace-on)
+               (set! trace #t))
+              ((eq? message 'trace-off)
+               (set! trace #f))
               (else (error "Unknown request: MACHINE" message))))
       dispatch)))
 
