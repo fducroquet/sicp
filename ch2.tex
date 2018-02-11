@@ -357,19 +357,19 @@ Let’s first define a function that prints intervals:
 
 \begin{exe}[2.29]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The selectors can be defined as:
+    \begin{enumerate}
+        \item The selectors can be defined as:
             \scm{ch2/2.29a.scm}
-        \item[b.] The total weight can be computed with:
+        \item The total weight can be computed with:
             \scm{ch2/2.29b.scm}
-        \item[c.] Since we defined a \vscm{branch-weight} procedure in b., 
+        \item Since we defined a \vscm{branch-weight} procedure in b., 
             \vscm{balanced?} can be defined simply with:
             \scm{ch2/2.29c.scm}
-        \item[d.] To convert to the new representation, the only things that 
-            need to be changed are the \vscm{right-branch} and 
-            \vscm{branch-structure} selectors:
+        \item To convert to the new representation, the only things that need to 
+            be changed are the \vscm{right-branch} and \vscm{branch-structure} 
+            selectors:
             \scm{ch2/2.29d.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[2.30]
@@ -582,15 +582,14 @@ Let’s first define a function that prints intervals:
 
 \begin{exe}[2.49]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The painter drawing the outline can be defined as: 
+    \begin{enumerate}
+        \item The painter drawing the outline can be defined as: 
             \scm{ch2/2.49a.scm}
-        \item[b.] The painter drawing an “X” can be defined as: 
-            \scm{ch2/2.49b.scm}
-        \item[c.] The painter drawing a diamond can be defined as: 
+        \item The painter drawing an “X” can be defined as: \scm{ch2/2.49b.scm}
+        \item The painter drawing a diamond can be defined as: 
             \scm{ch2/2.49c.scm}
-        \item[d.] The \vscm{wave} painter can be defined as: \scm{ch2/2.49d.scm}
-    \end{itemize}
+        \item The \vscm{wave} painter can be defined as: \scm{ch2/2.49d.scm}
+    \end{enumerate}
 \end{exe}
 
 \subsubsection{Transforming and combining painters}
@@ -612,14 +611,14 @@ Let’s first define a function that prints intervals:
 
 \begin{exe}[2.52]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] Possible modified version of \vscm{wave}:
+    \begin{enumerate}
+        \item Possible modified version of \vscm{wave}:
             \scm{ch2/2.52a.scm}
-        \item[b.] Modified \vscm{corner-split}:
+        \item Modified \vscm{corner-split}:
             \scm{ch2/2.52b.scm}
-        \item[c.] Modified \vscm{square-limit}:
+        \item Modified \vscm{square-limit}:
             \scm{ch2/2.52c.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \section{Symbolic Data}
@@ -671,10 +670,10 @@ Let’s first define a function that prints intervals:
 
 \begin{exe}[2.58]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] It is sufficient to redefine the following procedures:
+    \begin{enumerate}
+        \item It is sufficient to redefine the following procedures:
             \scm{ch2/2.58a.scm}
-        \item[b.] The following implementations supports only multiplication and 
+        \item The following implementations supports only multiplication and 
             addition and can produce results with unnecessary parentheses.
 
             It uses several helper procedures:
@@ -690,7 +689,7 @@ Let’s first define a function that prints intervals:
                     elements.
             \end{itemize}
             \scm{ch2/2.58b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \subsection{Example: Representing sets}
@@ -735,27 +734,27 @@ Let’s first define a function that prints intervals:
 
 \begin{exe}[2.63]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] Both procedures produce the same result for every tree. They 
+    \begin{enumerate}
+        \item Both procedures produce the same result for every tree. They 
             produce the ordered list representation of the set represented by 
             the tree. For the trees in figure 2.16, they produce the list 
             \vscm{(1 3 5 7 9 11)}.
-        \item[b.] If $T(n)$ is the number of steps required to convert 
-            a balanced tree to a list, with the first procedure we have: $T(n) 
-            \approx 2T\left(\sfrac{n}{2}\right) + \sfrac{n}{2}$ since 
-            \vscm{append} has linear complexity. By applying this formula 
-            recursively, we can see that $T(n) \approx n +  \sfrac{n \log 
-            n}{2}$, so that \vscm{tree->list-1} grows as $\Theta(n \log{n})$.
+        \item If $T(n)$ is the number of steps required to convert a balanced 
+            tree to a list, with the first procedure we have: $T(n) \approx 
+            2T\left(\sfrac{n}{2}\right) + \sfrac{n}{2}$ since \vscm{append} has 
+            linear complexity. By applying this formula recursively, we can see 
+            that $T(n) \approx n +  \sfrac{n \log n}{2}$, so that 
+            \vscm{tree->list-1} grows as $\Theta(n \log{n})$.
 
             With the second procedure, we have $T(n) = 2T(\sfrac{n}{2}) + 1$, so 
             \vscm{tree->list-2} grows as $\Theta(n)$.
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[2.64]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] If $n = 0$, the constructed tree is empty.
+    \begin{enumerate}
+        \item If $n = 0$, the constructed tree is empty.
 
             Otherwise, one element will be the tree’s entry, so $n - 1$ elements 
             will be in the subtrees.
@@ -770,11 +769,11 @@ Let’s first define a function that prints intervals:
             remaining elements for the current call to \vscm{partial-tree}, so 
             all that remains to be done is to put all the results together.
 
-        \item[b.] For \vscm{partial-tree}, the number of steps $T(n)$ as 
-            a function of the size of the tree to build $n$ verifies
+        \item For \vscm{partial-tree}, the number of steps $T(n)$ as a function 
+            of the size of the tree to build $n$ verifies
             $T(n) \approx 2 T\left(\sfrac{n}{2}\right)$, so its growth is in 
             $\Theta(n)$, so \vscm{list->tree} has linear growth.
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[2.65]
@@ -867,48 +866,47 @@ This subsection contains no exercises.
 \begin{exe}[2.73]
     \label{2.73}
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] \vscm{same-variable?} and \vscm{number?} can’t be integrated 
-            to the main dispatch because when they are true, \vscm{exp} has no 
+    \begin{enumerate}
+        \item \vscm{same-variable?} and \vscm{number?} can’t be integrated to 
+            the main dispatch because when they are true, \vscm{exp} has no 
             operator or operands.
 
-        \item[b.] The procedures for derivation can be written in the following 
-            way, using \vscm{make-sum} and \vscm{make-product} from section 
+        \item The procedures for derivation can be written in the following way, 
+            using \vscm{make-sum} and \vscm{make-product} from section 
             \ref{2.3.2}.
             \scm{ch2/2.73b.scm}
 
-        \item[c.] To allow differentiation of exponents, it’s enough to call the 
+        \item To allow differentiation of exponents, it’s enough to call the 
             following procedure, using \vscm{make-exporentiation} from exercise 
             \ref{2.56}.
 
-        \item[d.] The only change required is to exchange the arguments when 
-            calling \vscm{put}, using e.g. \vscm{(put '+ 'deriv deriv-sum)} 
-            instead of \vscm{(put 'deriv '+ deriv-sum)}.
-    \end{itemize}
+        \item The only change required is to exchange the arguments when calling 
+            \vscm{put}, using e.g. \vscm{(put '+ 'deriv deriv-sum)} instead of 
+            \vscm{(put 'deriv '+ deriv-sum)}.
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[2.74]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The \vscm{get-record} procedure can be written using 
+    \begin{enumerate}
+        \item The \vscm{get-record} procedure can be written using 
             \vscm{apply-generic}, provided each division file is tagged with 
             a division-specific tag, and each division has recorded a procedure 
             get-record that takes a file’s contents and returns a procedure 
             returning a given employee’s record.
             \scm{ch2/2.74a.scm}
-        \item[b.] \vscm{get-salary} can also be implemented with 
+        \item \vscm{get-salary} can also be implemented with 
             \vscm{apply-generic}, if each record is tagged with the 
             division-specific tag, and each division records a procedure for the 
             \vscm{get-salary} operation.
             \scm{ch2/2.74b.scm}
-        \item[c.] The \vscm{find-employee-record} procedure can be written as:
+        \item The \vscm{find-employee-record} procedure can be written as:
             \scm{ch2/2.74c.scm}
-        \item[d.] When Insatiable takes over a new company, the new company must 
-            tag its record file and each of its employee’s record with 
-            a specific tag. It must install specific procedures for 
-            \vscm{get-record}, \vscm{get-salary}, etc. into the 
-            operation-and-type table.
-    \end{itemize}
+        \item When Insatiable takes over a new company, the new company must tag 
+            its record file and each of its employee’s record with a specific 
+            tag. It must install specific procedures for \vscm{get-record}, 
+            \vscm{get-salary}, etc. into the operation-and-type table.
+    \end{enumerate}
 \end{exe}
 
 \subsubsection{Message passing}
@@ -988,19 +986,19 @@ This subsection contains no exercises.
 
 \begin{exe}[2.81]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] With Louis’s coercion procedures installed, if 
+    \begin{enumerate}
+        \item With Louis’s coercion procedures installed, if 
             \vscm{apply-generic} is called with two arguments of type 
             \vscm{complex} for an operation that is not found in the table for 
             those types, as in the example given for \vscm{exp}, 
             \vscm{apply-generic} is called recursively with the same arguments, 
             so there is an infinite loop.
-        \item[b.]The  \vscm{apply-coercion} procedure works correctly, however, 
-            it’s unnecessary to attempt coercion to the same type so it should 
-            not be attempted.
-        \item[c.] The new version of \vscm{apply-generic} could be:
+        \item The \vscm{apply-coercion} procedure works correctly, however, it’s 
+            unnecessary to attempt coercion to the same type so it should not be 
+            attempted.
+        \item The new version of \vscm{apply-generic} could be:
             \scm{ch2/2.81.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[2.82]
@@ -1228,32 +1226,32 @@ This subsection contains no exercises.
 
 \begin{exe}[2.96]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The procedure \vscm{pseudoremainder-terms} can be defined as:
+    \begin{enumerate}
+        \item The procedure \vscm{pseudoremainder-terms} can be defined as:
             \scm{ch2/2.96a1.scm}
             and the new version of \vscm{gcd-terms} is:
             \scm{ch2/2.96a2.scm}
             On the example in exercise \ref{2.95}, 
             \vscm{greatest-common-divisor} now produces the polynomial $1458 x^2 
             - 2916 x + 1458$.
-        \item[b.] The procedure can be rewritten in the following way to divide 
-            the coefficients of the answer by their greatest common divisor.
+        \item The procedure can be rewritten in the following way to divide the 
+            coefficients of the answer by their greatest common divisor.
             \scm{ch2/2.96b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[2.97]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The \vscm{reduce-terms} and \vscm{reduce-poly} procedures can 
-            be defined as:
+    \begin{enumerate}
+        \item The \vscm{reduce-terms} and \vscm{reduce-poly} procedures can be 
+            defined as:
             \scm{ch2/2.97a.scm}
-        \item[b.] The only change needed besides adding the necessary entries to 
-            the associative table is to redefine \vscm{make-rat} as:
+        \item The only change needed besides adding the necessary entries to the 
+            associative table is to redefine \vscm{make-rat} as:
             \scm{ch2/2.97b.scm}
             The result returned by \vscm{(add rf1 rf2)} corresponds to
             $\frac{-x^3 - 2x^2 - 3x - 1}{-x^4 - x^3 + x + 1}$, which is 
             correctly reduced to lowest terms, though multiplying both the 
             numerator and the denominator by $-1$ would seem more natural.
-    \end{itemize}
+    \end{enumerate}
 \end{exe}

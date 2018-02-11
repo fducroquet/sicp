@@ -1368,8 +1368,8 @@ This subsection contains no exercises.
 
 \begin{exe}[3.38]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] If no interleaving is possible, the possible final values are 
+    \begin{enumerate}
+        \item If no interleaving is possible, the possible final values are 
             \$35, \$40, \$45 and \$50:
             \begin{itemize}
                 \item Peter, Paul, Mary: \$45;
@@ -1379,10 +1379,10 @@ This subsection contains no exercises.
                 \item Peter, Mary, Paul: \$35;
                 \item Paul, Mary, Peter: \$50.
             \end{itemize}
-        \item[b.] Some of the possible other values are \$110, \$80, \$55, \$90. 
+        \item Some of the possible other values are \$110, \$80, \$55, \$90. 
             Figures \ref{3.38.1} and \ref{3.38.2} show timing diagrams 
             explaining how the value \$110 and \$90 can occur.
-    \end{itemize}
+    \end{enumerate}
 
     \begin{figure}
         \small
@@ -1731,16 +1731,16 @@ This subsection contains no exercises.
 
 \begin{exe}[3.47]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The following implementation of semaphores uses a mutex to 
-            guard a variable holding the number of available accesses to the 
+    \begin{enumerate}
+        \item The following implementation of semaphores uses a mutex to guard 
+            a variable holding the number of available accesses to the 
             semaphore:
             \scm{ch3/3.47a.scm}
-        \item[b.] The following implementation uses a cell holding the number of 
+        \item The following implementation uses a cell holding the number of 
             available accesses, and an atomic \vscm{test-and-set!} operation to 
             change the value of that cell:
             \scm{ch3/3.47b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \subsubsection{Deadlock}
@@ -1896,12 +1896,12 @@ This subsection contains no exercises.
 
 \begin{exe}[3.59]
     \ \vspace{-20pt}
-    \begin{itemize}
-	\item[a.] The procedure \vscm{integrate-series} can be written:
+    \begin{enumerate}
+        \item The procedure \vscm{integrate-series} can be written:
 	    \scm{ch3/3.59a.scm}
-	\item[b.] The series for sine and cosine can be defined with:
+        \item The series for sine and cosine can be defined with:
 	    \scm{ch3/3.59b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[3.60]
@@ -2051,12 +2051,12 @@ This subsection contains no exercises.
     that if multiple elements have the same weight, they are all kept, whereas 
     \vscm{merge} removed duplicates.
     \scm{ch3/3.70.scm}
-    \begin{itemize}
-        \item[a.] The ordered pairs can be defined as follows:
+    \begin{enumerate}
+        \item The ordered pairs can be defined as follows:
             \scm{ch3/3.70a.scm}
-        \item[b.] The required stream can be defined as:
+        \item The required stream can be defined as:
             \scm{ch3/3.70b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[3.71]

@@ -15,21 +15,20 @@
 
 \begin{exe}[4.2]
     \ \vspace{-20pt}
-    \begin{itemize}
-	\item[a.] The test to determine whether an expression is a procedure 
-	    just checks whether it is a pair, so it will return true for all 
-	    list expressions: \vscm{if}, \vscm{cond}, \vscm{begin}, 
-	    \vscm{define}, \vscm{set!}, etc., and the evaluator will try to 
-	    apply the procedure \vscm{if}, \vscm{cond}, etc. to the rest of the 
-	    arguments. It’s not possible to transform the special forms into 
-	    procedures because all the arguments of a procedure are evaluated 
-	    before evaluation.
-	\item[b.] The only required change to \vscm{eval} is to put the 
-	    \vscm{application?} test first. Then we only need changing the 
-	    definition of the \vscm{application?} predicate and the associated 
-	    selectors so they reflect the new syntax.
+    \begin{enumerate}
+        \item The test to determine whether an expression is a procedure just 
+            checks whether it is a pair, so it will return true for all list 
+            expressions: \vscm{if}, \vscm{cond}, \vscm{begin}, \vscm{define}, 
+            \vscm{set!}, etc., and the evaluator will try to apply the procedure 
+            \vscm{if}, \vscm{cond}, etc. to the rest of the arguments. It’s not 
+            possible to transform the special forms into procedures because all 
+            the arguments of a procedure are evaluated before evaluation.
+        \item The only required change to \vscm{eval} is to put the 
+            \vscm{application?} test first. Then we only need changing the 
+            definition of the \vscm{application?} predicate and the associated 
+            selectors so they reflect the new syntax.
 	    \scm{ch4/4.02.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.3]
@@ -354,24 +353,24 @@
 \begin{exe}[4.16]
     \label{4.16}
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] Here is the updated version of \vscm{lookup-variable-value} 
-            for the frame representation as a list of pairs, with the 
-            abstractions defined in exercise \ref{4.12}:
+    \begin{enumerate}
+        \item Here is the updated version of \vscm{lookup-variable-value} for 
+            the frame representation as a list of pairs, with the abstractions 
+            defined in exercise \ref{4.12}:
             \scm{ch4/4.16a.scm}
-        \item[b.] The \vscm{scan-out-defines} procedure can be defined as:
+        \item The \vscm{scan-out-defines} procedure can be defined as:
             \scm{ch4/4.16b.scm}
             No transformation must be done if no definition is found because 
             \vscm{let} expressions are transformed into procedure applications, 
             so this would lead to infinite loops. The \vscm{*unassigned*} symbol 
             has to be quoted twice so that the returned code contains a quoted 
             symbol.
-        \item[c.] It is better to install \vscm{scan-out-defines} in 
+        \item It is better to install \vscm{scan-out-defines} in 
             \vscm{make-procedure} than in \vscm{procedure-body}, because the 
             latter is called every time the procedure is applied, while the 
             former is called only when it is defined.
             \scm{ch4/4.16c.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.17]
@@ -598,42 +597,42 @@
 	evaluated during evaluation of the expression \vscm{(f 5)}.}
 	\label{4.20fig}
     \end{figure}
-    \begin{itemize}
-	\item[a.] \vscm{Letrec} can be implemented as shown below. This is very 
-	    similar to exercise \ref{4.16}, so the code could be mutualized:
+    \begin{enumerate}
+        \item \vscm{Letrec} can be implemented as shown below. This is very 
+            similar to exercise \ref{4.16}, so the code could be mutualized:
 	    \scm{ch4/4.20.scm}
-	\item[b.] Figure \ref{4.20fig} shows the environment structures in which 
-	    the \vscm{<rest of body of f>} is evaluated during evaluation of the 
-	    expression \vscm{(f 5)}, first with \vscm{letrec}, then with 
-	    \vscm{let}. With \vscm{letrec}, the values of \vscm{odd?} and 
-	    \vscm{even?} are evaluated in an environment where the bindings 
-	    already exist, so the procedures created point to an environment 
-	    where the other is defined. With \vscm{let}, the values of 
-	    \vscm{even?} and \vscm{odd?} are evaluated before the bindings 
-	    exist, so they point to an environment where they are undefined and 
-	    the recursive calls won’t work.
-    \end{itemize}
+        \item Figure \ref{4.20fig} shows the environment structures in which the 
+            \vscm{<rest of body of f>} is evaluated during evaluation of the 
+            expression \vscm{(f 5)}, first with \vscm{letrec}, then with 
+            \vscm{let}. With \vscm{letrec}, the values of \vscm{odd?} and 
+            \vscm{even?} are evaluated in an environment where the bindings 
+            already exist, so the procedures created point to an environment 
+            where the other is defined. With \vscm{let}, the values of 
+            \vscm{even?} and \vscm{odd?} are evaluated before the bindings 
+            exist, so they point to an environment where they are undefined and 
+            the recursive calls won’t work.
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.21]
     \ \vspace{-20pt}
-    \begin{itemize}
-	\item[a.] The trick used here is to modify the recursive procedure 
-	    (\vscm{(lambda (ft k) ...)} in the exercise) so it takes as an 
-	    additional parameter the procedure to call where a recursive call 
-	    would be used otherwise, and the argument used is the modified 
-	    procedure itself. The first inner \vscm{lambda}
+    \begin{enumerate}
+        \item The trick used here is to modify the recursive procedure 
+            (\vscm{(lambda (ft k) ...)} in the exercise) so it takes as an 
+            additional parameter the procedure to call where a recursive call 
+            would be used otherwise, and the argument used is the modified 
+            procedure itself. The first inner \vscm{lambda}
 	    (\vscm{(lambda (fact) ...)}) is used to do the initial call to the 
 	    modified (derecursified?) procedure.
 
 	    The Fibonacci numbers can be computed similarly:
 	    \scm{ch4/4.21a.scm}
 
-	\item[b.] This time, since there are two mutually recursive procedures, 
-	    two procedure parameters are needed to pass around the procedures to 
-	    call when we are not in the terminal case.
+        \item This time, since there are two mutually recursive procedures, two 
+            procedure parameters are needed to pass around the procedures to 
+            call when we are not in the terminal case.
 	    \scm{ch4/4.21b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \subsection{Separating Syntactic Analysis from Execution}
@@ -779,18 +778,18 @@
 
 \begin{exe}[4.30]
     \ \vspace{-20pt}
-    \begin{itemize}
-	\item[a.] Ben is right about the behavior of \vscm{for-each} because 
-	    each expression in the body of the \vscm{begin} expression is 
-	    evaluated with \vscm{eval}, which causes each expression in the body 
-	    of \vscm{proc} to be evaluated with each item in turn, so the 
-	    side-effects they cause do take place.
+    \begin{enumerate}
+        \item Ben is right about the behavior of \vscm{for-each} because each 
+            expression in the body of the \vscm{begin} expression is evaluated 
+            with \vscm{eval}, which causes each expression in the body of 
+            \vscm{proc} to be evaluated with each item in turn, so the 
+            side-effects they cause do take place.
 
 	    The only case where a side effect could not take place is when the 
 	    expression defining it is delayed and then never forced, which can 
 	    happen only if that expression was passed as an argument to 
 	    a compound procedure, as in b. below.
-	\item[b.] With the original \vscm{eval-sequence}, the value of
+        \item With the original \vscm{eval-sequence}, the value of
 	    \vscm{(p1 1)} is \vscm{(1 2)} because the \vscm{set!} expression in 
 	    the body of \vscm{p1} was evaluated. The value of \vscm{(p2 1)} is 
 	    \vscm{1} because during the evaluation of \vscm{e} in the body of 
@@ -800,27 +799,27 @@
 
 	    With Cy’s proposed change to \vscm{eval-sequence}, the values would 
 	    be \vscm{(1 2)} for both \vscm{(p1 1)} and \vscm{(p2 1)}.
-	\item[c.] The proposed change does not affect the behavior of the 
-	    example in part a. because if the result of \vscm{eval} is not 
-	    a thunk, applying \vscm{force-it} to it does nothing.
-	\item[d.] I prefer the approach in the text. I don’t think the change 
-	    proposed by Cy is necessary because, as noticed in part a., the only 
-	    case when a side effect could not take place is when the expression 
-	    causing it―not a procedure containing that expression, unless said 
-	    procedure is not called of course—is passed as an argument to 
-	    a compound procedure\footnote{It could also happen if an argument is 
-	    the result of a procedure application that produces side effects and 
-	    returns a value. If this argument’s value is not needed in the body 
-	    of the procedure, the side effects won’t happen, but this is to be 
-	    expected with normal-order evaluation and this is not directly 
-	    related to the evaluation of sequences.}, which I don’t think should 
-	    be done anyway: an expression passed as an argument should be there 
-	    for its value, not for its side effects, and it does not make much 
-	    sense to use an expression defining only side effects where a value 
-	    should be used. For the example of \vscm{p2} in the exercise, if we 
-	    want to use a parameter of \vscm{p} to define a side-effect before 
-	    returning \vscm{x}, it is better to use a procedure, and it works 
-	    without changing the evaluator’s behavior:
+        \item The proposed change does not affect the behavior of the example in 
+            part a. because if the result of \vscm{eval} is not a thunk, 
+            applying \vscm{force-it} to it does nothing.
+        \item I prefer the approach in the text. I don’t think the change 
+            proposed by Cy is necessary because, as noticed in part a., the only 
+            case when a side effect could not take place is when the expression 
+            causing it―not a procedure containing that expression, unless said 
+            procedure is not called of course—is passed as an argument to 
+            a compound procedure\footnote{It could also happen if an argument is 
+            the result of a procedure application that produces side effects and 
+            returns a value. If this argument’s value is not needed in the body 
+            of the procedure, the side effects won’t happen, but this is to be 
+            expected with normal-order evaluation and this is not directly 
+            related to the evaluation of sequences.}, which I don’t think should 
+            be done anyway: an expression passed as an argument should be there 
+            for its value, not for its side effects, and it does not make much 
+            sense to use an expression defining only side effects where a value 
+            should be used. For the example of \vscm{p2} in the exercise, if we 
+            want to use a parameter of \vscm{p} to define a side-effect before 
+            returning \vscm{x}, it is better to use a procedure, and it works 
+            without changing the evaluator’s behavior:
 	    \scm{ch4/4.30.scm}
 	    When reading the definition above, we can tell that the parameter 
 	    \vscm{e} should be a procedure, and that it is expected to cause 
@@ -836,7 +835,7 @@
 	    programs where this happens can be modified in a straightforward way 
 	    to fix the problem, and furthermore the modification is likely to 
 	    make them clearer.
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.31]
@@ -1285,22 +1284,22 @@
 
 \begin{exe}[4.55]
     The queries that retrieve the required information are:
-    \begin{itemize}
-        \item[a.] \scm{ch4/4.55a.scm}
-        \item[b.] \scm{ch4/4.55b.scm}
-        \item[c.] \scm{ch4/4.55c.scm}
-    \end{itemize}
+    \begin{enumerate}
+        \item \scm{ch4/4.55a.scm}
+        \item \scm{ch4/4.55b.scm}
+        \item \scm{ch4/4.55c.scm}
+    \end{enumerate}
 \end{exe}
 
 \subsubsection{Compound queries}
 
 \begin{exe}[4.56]
     The queries that retrieve the required information are:
-    \begin{itemize}
-        \item[a.] \scm{ch4/4.56a.scm}
-        \item[b.] \scm{ch4/4.56b.scm}
-        \item[c.] \scm{ch4/4.56c.scm}
-    \end{itemize}
+    \begin{enumerate}
+        \item \scm{ch4/4.56a.scm}
+        \item \scm{ch4/4.56b.scm}
+        \item \scm{ch4/4.56c.scm}
+    \end{enumerate}
 \end{exe}
 
 \subsubsection{Rules}
@@ -1308,14 +1307,13 @@
 \begin{exe}[4.57]
     The rule \vscm{can-replace} can be defined as:
     \scm{ch4/4.57tex.scm}
-    \begin{itemize}
-        \item[a.] The people who can replace Cy D. Fect can be found with the 
-            query:
+    \begin{enumerate}
+        \item The people who can replace Cy D. Fect can be found with the query:
             \scm{ch4/4.57a.scm}
-        \item[b.] The people who can replace someone who is being paid more than 
+        \item The people who can replace someone who is being paid more than 
             they are can be found thanks to the query:
             \scm{ch4/4.57b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.58]
@@ -1325,14 +1323,14 @@
 
 \begin{exe}[4.59]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] Ben should use the query:
+    \begin{enumerate}
+        \item Ben should use the query:
             \scm{ch4/4.59a.scm}
-        \item[b.] Alyssa’s rule can be defined as:
+        \item Alyssa’s rule can be defined as:
             \scm{ch4/4.59b.scm}
-        \item[c.] Alyssa should run the query:
+        \item Alyssa should run the query:
             \scm{ch4/4.59c.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.60]
@@ -1625,12 +1623,12 @@ This subsection contains no exercises.
 
 \begin{exe}[4.74]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] The program can be completed simply by filtering out the empty 
+    \begin{enumerate}
+        \item The program can be completed simply by filtering out the empty 
             streams and taking the first and only element of non-empty streams:
             \scm{ch4/4.74a.scm}
-        \item[b.] The query system’s behavior does not change.
-    \end{itemize}
+        \item The query system’s behavior does not change.
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[4.75]

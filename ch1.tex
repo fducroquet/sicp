@@ -254,13 +254,13 @@ This subsection contains no exercises.
 
 \begin{exe}[1.15]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] If the argument is greater than $0.1$, \vscm{p} is called 
-            once, and the argument is divided by three. So the number of steps 
+    \begin{enumerate}
+        \item If the argument is greater than $0.1$, \vscm{p} is called once, 
+            and the argument is divided by three. So the number of steps 
             required is the smallest integer $n$ such that $\sfrac{12.15}{3^n} 
             < 0.1$, or equivalently $121.5 < 3^n$. The smallest such $n$ is 5, 
             so \vscm{p} is called 5 times when \vscm{(sine 12.15)} is evaluated.
-        \item[b.] By the same calculation as above, if $a > 0.1$, the number of 
+        \item By the same calculation as above, if $a > 0.1$, the number of 
             steps is the smallest $n$ such that $10 \, a < 3^n$. By taking the 
             logarithm, we get $\log(10) + \log(a) < n \log(3)$, so $n 
             = \left\lceil \sfrac{(\log(10) + \log(a))}{\log(3)} \right\rceil$.
@@ -268,7 +268,7 @@ This subsection contains no exercises.
             Therefore, the number of steps has order of growth 
             $\Theta(\log(n))$. The space required is proportional to the number 
             of steps, so its order of growth is the same.
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \subsection{Exponentiation}
@@ -418,27 +418,27 @@ This subsection contains no exercises.
 
 \begin{exe}[1.31]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] Here is a procedure analogous to \vscm{sum} that computes 
+    \begin{enumerate}
+        \item Here is a procedure analogous to \vscm{sum} that computes 
             a product, generating a recursive process, and examples of its use 
             to define \vscm{factorial} and to compute approximations of $\pi$. 
             In the latter case, we use $\sfrac{(i - 1)(i + 1)}{i^2} = \sfrac{i^2 
             - 1}{i^2}$ as the general term.
             \scm{ch1/1.31a.scm}
-        \item[b.] A \vscm{product} procedure generating an iterative process.
+        \item A \vscm{product} procedure generating an iterative process.
             \scm{ch1/1.31b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[1.32]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] A recursive \vscm{accumulate} procedure and the definition of 
+    \begin{enumerate}
+        \item A recursive \vscm{accumulate} procedure and the definition of 
             \vscm{sum} and \vscm{product} using that procedure:
             \scm{ch1/1.32a.scm}
-        \item[b.] An iterative version of \vscm{accumulate}:
+        \item An iterative version of \vscm{accumulate}:
             \scm{ch1/1.32b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[1.33]
@@ -446,15 +446,15 @@ This subsection contains no exercises.
     \scm{ch1/1.33.1.scm}
     A \vscm{filtered-accumulate} procedure generating an iterative process:
     \scm{ch1/1.33.2.scm}
-    \begin{itemize}
-        \item[a.] Assuming \vscm{prime?} is already written, the sum of the 
-            squares of the prime numbers in the interval $a$ to $b$ can be 
-            computed with:
+    \begin{enumerate}
+        \item Assuming \vscm{prime?} is already written, the sum of the squares 
+            of the prime numbers in the interval $a$ to $b$ can be computed 
+            with:
             \scm{ch1/1.33a.scm}
-        \item[b.] The product of all positive integers less than $n$ that are 
+        \item The product of all positive integers less than $n$ that are 
             relatively prime to $n$ can be computed with:
             \scm{ch1/1.33b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \subsection{Construction Procedures Using \vscm{Lambda}}
@@ -492,18 +492,18 @@ This subsection contains no exercises.
 
 \begin{exe}[1.37]
     \ \vspace{-20pt}
-    \begin{itemize}
-        \item[a.] A procedure \vscm{cont-frac} generating an iterative process, 
+    \begin{enumerate}
+        \item A procedure \vscm{cont-frac} generating an iterative process, 
             doing the computation starting from \vscm{k}:
             \scm{ch1/1.37a.scm}
 
             11 steps are necessary to get an approximation that is accurate to 
             4 decimal places.
 
-        \item[b.] A procedure \vscm{cont-frac} generating a recursive process, 
-            doing the computation starting from 1:
+        \item A procedure \vscm{cont-frac} generating a recursive process, doing 
+            the computation starting from 1:
             \scm{ch1/1.37b.scm}
-    \end{itemize}
+    \end{enumerate}
 \end{exe}
 
 \begin{exe}[1.38]
