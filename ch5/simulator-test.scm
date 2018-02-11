@@ -28,3 +28,6 @@
 (load "5.17a.scm")
 (load "5.17b.scm")
 (load "5.17c.scm")
+
+; Enable registers to be traced.
+(load "5.18.scm")
