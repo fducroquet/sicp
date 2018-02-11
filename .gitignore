@@ -4,7 +4,6 @@
 *.aux
 *.log
 *.out
-*.pdf
 *.pyg
 *.pyg.lst
 *.pyg.sty
