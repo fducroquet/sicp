@@ -1,0 +1,8 @@
+(define (make-instruction text) (list text '() '()))
+(define (instruction-text inst) (car inst))
+(define (instruction-label inst) (cadr inst))
+(define (instruction-execution-proc inst) (caddr inst))
+(define (set-instruction-label! inst label-name)
+  (set-car! (cdr inst) label-name))
+(define (set-instruction-execution-proc! inst proc)
+  (set-car! (cddr inst) proc))

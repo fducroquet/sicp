@@ -23,3 +23,8 @@
 
 (load "5.14pre.scm")
 (load "5.14.scm")
+
+; Print the label preceding an instruction.
+(load "5.17a.scm")
+(load "5.17b.scm")
+(load "5.17c.scm")

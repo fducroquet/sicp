@@ -34,9 +34,7 @@
             (begin
               (set! instruction-count (+ 1 instruction-count))
               (if trace
-                (begin
-                  (display (instruction-text (car insts)))
-                  (newline)))
+                (print-inst (car insts)))
               ((instruction-execution-proc (car insts)))
               (execute)))))
       (define (add-entry-point reg-name)

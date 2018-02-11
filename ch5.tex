@@ -549,3 +549,16 @@ This subsection contains no exercises.
 	    \scm{ch5/5.16b.scm}
     \end{enumerate}
 \end{exe}
+
+\begin{exe}[5.17]
+    First, we change the representation of instructions from a pair to a list of 
+    three elements: the instruction text, the label immediately preceding the 
+    instruction, and the execution procedure.
+    \scm{ch5/5.17a.scm}
+    Then, we change \vscm{make-label-entry} so that it sets the label name of 
+    the instruction following the label, if any:
+    \scm{ch5/5.17b.scm}
+    Lastly, we define a procedure to print an instruction and call it in 
+    \vscm{execute}:
+    \scm{ch5/5.17c.scm}
+\end{exe}

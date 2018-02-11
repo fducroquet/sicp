@@ -1,0 +1,5 @@
+(define (make-label-entry label-name insts)
+  (if (not (null? insts))
+    (let ((inst (car insts)))
+      (set-instruction-label! inst label-name)))
+  (cons label-name insts))
