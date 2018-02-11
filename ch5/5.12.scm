@@ -4,6 +4,7 @@
         (stack (make-stack))
         (the-instruction-sequence '())
         (instructions-list '())
+        (instruction-count 0)
         (entry-points '())
         (saved-regs '()))
     (let ((the-ops
@@ -30,6 +31,7 @@
           (if (null? insts)
             'done
             (begin
+              (set! instruction-count (+ 1 instruction-count))
               ((instruction-execution-proc (car insts)))
               (execute)))))
       (define (add-entry-point reg-name)
@@ -62,6 +64,10 @@
               ((eq? message 'entry-points) entry-points)
               ((eq? message 'add-saved-reg) add-saved-reg)
               ((eq? message 'saved-regs) saved-regs)
+              ((eq? message 'print-and-reset-count)
+               (display instruction-count)
+               (newline)
+               (set! instruction-count 0))
               (else (error "Unknown request: MACHINE" message))))
       dispatch)))
 

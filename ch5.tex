@@ -518,3 +518,22 @@ This subsection contains no exercises.
     \vscm{continue} registers are each saved $n - 1$ times, then all the 
     elements of the stack are popped.
 \end{exe}
+
+\begin{exe}[5.15]
+    We need to change \vscm{make-new-machine} at three places:
+    \begin{enumerate}
+	\item Add an \vscm{instruction-count} in the variables defined by the 
+	    \vscm{let} at the beginning:
+	    \begin{cscm}
+		(instruction-count 0)
+	    \end{cscm}
+
+	\item Modify \vscm{execute} to increase the count before executing the 
+	    procedure:
+	    \scm{ch5/5.15a.scm}
+
+	\item Add a message to the \vscm{dispatch} procedure to print and reset 
+	    the count:
+	    \scm{ch5/5.15b.scm}
+    \end{enumerate}
+\end{exe}
