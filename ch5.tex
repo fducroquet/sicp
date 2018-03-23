@@ -605,3 +605,60 @@ This subsection contains no exercises.
     \end{itemize}
     \scm{ch5/5.19e.scm}
 \end{exe}
+
+\section{Storage Allocation and Garbage Collection}
+
+\subsection{Memory as Vectors}
+
+\begin{exe}[5.20]
+    The box-and-pointer representation and the memory-vector representation of 
+    the given list structure are shown in figure \ref{5.20y}. The final value of 
+    \vscm{free} is \vscm{p4}. The values of \vscm{x} and \vscm{y} are 
+    represented by the pointers \vscm{p1} and \vscm{p3} respectively.
+    \begin{figure}
+        \centering
+	\begin{tikzpicture}[box and pointer]
+	    % Box-and-pointer representation.
+	    \matrix[cell matrix] (box-pointer) {
+		\node[struct name] (y) {y}; &[+2\boxsize]
+		\node[car, label=225:{3}] (c11) {}; & \node[cdr] (c12) {}; 
+		&[+\boxsize]
+		\node[car, label=225:{2}] (c13) {}; & \node[cdr] (c14) {}; \\
+
+		\node[struct name] (x) {x}; &[+2\boxsize]
+		\node[car, label=225:{1}] (c21) {}; & \node[cdr] (c22) {}; &
+		\node[box] (n2) {2}; \\
+
+		&
+		\node[box] (n1) {1}; \\
+	    };
+
+	    \draw[pointer] (y) -- (c11);
+	    \draw[pointer] (x) -- (c21);
+            \link{c11}{c21}
+            \link{c12}{c13}
+	    \draw[box pointer] (c13.base) -- ++(0, -1cm) -| (c22);
+	    \nil{c14}
+	    \link{c21}{n1}
+	    \link{c22}{n2}
+
+	    % Memory-vector representation.
+	    \node[right=of box-pointer] {
+	    \renewcommand\arraystretch{1.5}
+	    \newcommand\mc[1]{\multicolumn{1}{|c}{#1}}
+	    \newcommand\emc{\mc{\hphantom{n1}}}
+	    \setlength{\arrayrulewidth}{1pt}
+	    \begin{tabular}{rcccccc}
+		Index & 0 & 1 & 2 & 3 & 4 & ... \\\cline{2-7}
+		the-cars & \emc & \mc{n1} & \mc{p1} & \mc{p1} & \emc & \mc{...} 
+		\\\cline{2-7}
+		the-cdrs & \emc & \mc{n2} & \mc{e0} & \mc{p2} & \emc & \mc{...} 
+		\\\cline{2-7}
+	    \end{tabular}
+	    };
+	\end{tikzpicture}
+	\caption{The list structure produced by \vscm{(define x (cons 1 2))} 
+	followed by \vscm{(define y (list x x))}.}
+	\label{5.20y}
+    \end{figure}
+\end{exe}
