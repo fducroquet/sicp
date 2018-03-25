@@ -5,12 +5,12 @@ An umptieth repository of solutions to most exercises from Abelson and Sussman�
 [*Structure and Interpretation of Computer 
 Programs*](https://mitpress.mit.edu/sicp/).
 
-Link to PDF file with explanations (and code): [sicp.pdf](sicp.pdf). Looking in 
-this file is probably the most convenient way to see how I solved a particular 
-exercise (especially for the more complex ones): the `.scm` files don’t contain 
-explanations since I put them in the PDF, and sometimes an exercise is split 
-into several parts because it was more convenient to explain the parts 
-separately.
+Link to PDF file with explanations (and code): 
+[SICP-Solutions.pdf](SICP-Solutions.pdf). Looking in this file is probably the 
+most convenient way to see how I solved a particular exercise (especially for 
+the more complex ones): the `.scm` files don’t contain explanations since I put 
+them in the PDF, and sometimes an exercise is split into several parts because 
+it was more convenient to explain the parts separately.
 
 The files named `<exercise-number>pre.scm` contain code from the book that 
 precedes the exercise with the given number, or sometimes code from the text of 
