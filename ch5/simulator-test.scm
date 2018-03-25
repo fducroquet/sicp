@@ -37,3 +37,6 @@
 (load "5.04a.scm") ; Recursive exponentiation.
 (load "5.04b.scm") ; Iterative exponentiation.
 (load "5.11a.scm") ; Fibonacci-machine with one fewer instruction.
+
+(load "5.21a.scm") ; Count-leaves with double-recursion.
+(load "5.21b.scm") ; Count-leaves with explicit counter.
