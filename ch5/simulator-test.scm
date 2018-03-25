@@ -40,3 +40,6 @@
 
 (load "5.21a.scm") ; Count-leaves with double-recursion.
 (load "5.21b.scm") ; Count-leaves with explicit counter.
+
+(load "5.22a.scm") ; append
+(load "5.22b.scm") ; append!
