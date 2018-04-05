@@ -11,8 +11,8 @@
         ((variable? exp) (lookup-variable-value exp env))
         ; Uncomment for exercise 4.19
         ; ((variable? exp) (force (lookup-variable-value exp env)))
-        ; ((quoted? exp) (text-of-quotation exp))
-        ((quoted? exp) (eval-quotation exp env))
+        ((quoted? exp) (text-of-quotation exp))
+        ; ((quoted? exp) (eval-quotation exp env))
         ((assignment? exp) (eval-assignment exp env))
         ((definition? exp) (eval-definition exp env))
         ((if? exp) (eval-if exp env))

@@ -67,7 +67,7 @@
 (load "4.31.scm")
 
 ; Lazy quoted lists
-(load "4.33b.scm")
+; (load "4.33b.scm")
 
 (load "4.34b.scm") ; lazy-pair?
 
@@ -125,5 +125,5 @@
   (set! driver-loop default-driver-loop))
 
 ; Printing of lazy lists
-(load "4.34a.scm") ; definitions in the interpreter
-(load "4.34d.scm") ; redefinition of user-print
+; (load "4.34a.scm") ; definitions in the interpreter
+; (load "4.34d.scm") ; redefinition of user-print
