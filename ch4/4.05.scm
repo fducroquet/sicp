@@ -2,10 +2,10 @@
   (eq? (cadr clause) '=>))
 
 (define (cond-recipient clause)
-  (cddr clause))
+  (caddr clause))
 
 (define (cond-actions clause)
   (if (cond-=>-clause? clause)
-    (list (cond-recipient clause)
-          (cond-predicate clause)))
-  (cdr clause))
+    (list (list (cond-recipient clause)
+                (cond-predicate clause)))
+    (cdr clause)))
