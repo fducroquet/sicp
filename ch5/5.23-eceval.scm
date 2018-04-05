@@ -36,6 +36,26 @@
     (ecop no-operands?)
     (ecop first-operand)
     (ecop rest-operands)
+    (ecop cond?)
+    (ecop and?)
+    (ecop or?)
+    (ecop let?)
+    (ecop let*?)
+    (ecop letrec?)
+    (ecop while?)
+    (ecop until?)
+    (ecop for?)
+
+    ; Syntax transformation procedures
+    (ecop cond->if)
+    (ecop and->if)
+    (ecop or->if)
+    (ecop let->combination)
+    (ecop let*->nested-lets)
+    (ecop letrec->let)
+    (ecop while->if)
+    (ecop until->while)
+    (ecop for->let)
 
     ;; Other operations
     (ecop true?)
@@ -102,6 +122,24 @@
         (branch (label ev-definition))
         (test (op if?) (reg exp))
         (branch (label ev-if))
+        (test (op cond?) (reg exp))
+        (branch (label ev-cond))
+        (test (op and?) (reg exp))
+        (branch (label ev-and))
+        (test (op or?) (reg exp))
+        (branch (label ev-or))
+        (test (op let?) (reg exp))
+        (branch (label ev-let))
+        (test (op let*?) (reg exp))
+        (branch (label ev-let*))
+        (test (op letrec?) (reg exp))
+        (branch (label ev-letrec))
+        (test (op while?) (reg exp))
+        (branch (label ev-while))
+        (test (op until?) (reg exp))
+        (branch (label ev-until))
+        (test (op for?) (reg exp))
+        (branch (label ev-for))
         (test (op lambda?) (reg exp))
         (branch (label ev-lambda))
         (test (op begin?) (reg exp))
@@ -267,4 +305,33 @@
         (restore unev)
         (perform (op define-variable!) (reg unev) (reg val) (reg env))
         (assign val (const ok))
-        (goto (reg continue)))))
+        (goto (reg continue))
+
+    ;; Exercise 5.23: Derived expressions
+    ev-cond
+        (assign exp (op cond->if) (reg exp))
+        (goto (label eval-dispatch))
+    ev-and
+        (assign exp (op and->if) (reg exp))
+        (goto (label eval-dispatch))
+    ev-or
+        (assign exp (op or->if) (reg exp))
+        (goto (label eval-dispatch))
+    ev-let
+        (assign exp (op let->combination) (reg exp))
+        (goto (label eval-dispatch))
+    ev-let*
+        (assign exp (op let*->nested-lets) (reg exp))
+        (goto (label eval-dispatch))
+    ev-letrec
+        (assign exp (op letrec->let) (reg exp))
+        (goto (label eval-dispatch))
+    ev-while
+        (assign exp (op while->if) (reg exp))
+        (goto (label eval-dispatch))
+    ev-until
+        (assign exp (op until->while) (reg exp))
+        (goto (label eval-dispatch))
+    ev-for
+        (assign exp (op for->let) (reg exp))
+        (goto (label eval-dispatch)))))

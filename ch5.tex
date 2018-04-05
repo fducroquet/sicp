@@ -682,3 +682,50 @@ This subsection contains no exercises.
     \scm{ch5/5.22a.scm}
     \scm{ch5/5.22b.scm}
 \end{exe}
+
+\subsection{Maintaining the Illusion of Infinite Memory}
+
+This subsection contains no exercises.
+
+\section{The Explicit-Control Evaluator}
+
+\subsection{The Core of the Explicit-Control Evaluator}
+
+This subsection contains no exercises.
+
+\subsection{Sequence Evaluation and Tail Recursion}
+
+This subsection contains no exercises.
+
+\subsection{Conditionals, Assignments, and Definitions}
+
+\begin{exe}[5.23]
+    I added the expressions \vscm{cond} (including the alternative syntax from 
+    exercise \ref{4.5}), \vscm{and} and \vscm{or} from exercise \ref{4.4}, 
+    \vscm{let} (\ref{4.6} and \ref{4.8}), \vscm{let*} (\ref{4.7}), \vscm{letrec} 
+    (\ref{4.20}), and \vscm{while}, \vscm{until} and \vscm{for} from exercise 
+    \ref{4.9}.
+
+    The changes are similar for each expression type, so I am including them 
+    here only for \vscm{cond} expressions. Besides loading the necessary syntax 
+    predicates, selectors and transformers, we add a new test to the 
+    \vscm{eval-dispatch} loop:
+    \begin{cscm}
+	(test (op cond?) (reg exp))
+	(branch (label ev-cond))
+    \end{cscm}
+    At the given label, we transform the expression to evaluate before going 
+    back to \vscm{eval-dispatch}:
+    \begin{cscm}
+    ev-cond
+        (assign exp (op cond->if) (reg exp))
+        (goto (label eval-dispatch))
+    \end{cscm}
+    It is tempting to go to \vscm{ev-if} instead, but if the \vscm{cond} 
+    expression has no clauses, \vscm{cond->if} simply returns \vscm{false}, 
+    which is not an \vscm{if} expression, so this would lead to an error. 
+    Several other transformations (\vscm{and}, \vscm{or}, \vscm{let}...) also do 
+    not always return an expression of the same type, so I chose to always 
+    return to the \vscm{eval-dispatch} label after the transformation, even if 
+    in some cases we could directly jump to the right expression type.
+\end{exe}
