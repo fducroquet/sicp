@@ -4,7 +4,7 @@
 ; And and or
 (load "4.04b.scm")
 ; And and or as derived forms
-; (load "4.04b.scm")
+(load "4.04d.scm")
 ; Additional syntax for cond
 (load "4.05.scm")
 ; let expressions
