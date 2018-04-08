@@ -729,3 +729,35 @@ This subsection contains no exercises.
     return to the \vscm{eval-dispatch} label after the transformation, even if 
     in some cases we could directly jump to the right expression type.
 \end{exe}
+
+\begin{exe}[5.24]
+    We can implement \vscm{cond} as a new special form by replacing the 
+    instructions handling such expressions with the instructions included below.
+
+    The instructions are a translation of the \vscm{cond->if} procedure to 
+    register-machine code.
+
+    The loop starts at the label \vscm{ev-cond-clauses}, at which point the 
+    \vscm{unev} register holds the remaining clauses. We first check if there 
+    are remaining clauses. If no clauses remain, either because the \vscm{cond} 
+    was empty or because no predicate was true, we return \vscm{false}. Then we 
+    test whether the next clause is an \vscm{else} clause:
+    \begin{itemize}
+	\item If not, we evaluate the next clause’s predicate, after saving all 
+	    the registers that could be needed later.
+	    \begin{itemize}
+		\item If the predicate is true, we evaluate the clause’s actions 
+		    as a sequence. We save \vscm{continue} because it should be 
+		    on the stack when reaching \vscm{ev-sequence}.
+		\item If the predicate is false, we update \vscm{unev} to remove 
+		    the first clause and go back to the beginning of the loop.
+	    \end{itemize}
+	\item If so, we check whether it is the last clause:
+	    \begin{itemize}
+		\item If not, we raise an error.
+		\item If so, we evaluate the actions, as when a true predicate 
+		    is found.
+	    \end{itemize}
+    \end{itemize}
+    \scm{ch5/5.24b.scm}
+\end{exe}

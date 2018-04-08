@@ -45,6 +45,14 @@
     (ecop while?)
     (ecop until?)
     (ecop for?)
+    (ecop cond-clauses)
+    (ecop cond-else-clause?)
+    (ecop cond-predicate)
+    (ecop cond-actions)
+    (ecop no-more-clauses?)
+    (ecop first-clause)
+    (ecop rest-clauses)
+    (ecop last-clause?)
 
     ; Syntax transformation procedures
     (ecop cond->if)
@@ -308,9 +316,9 @@
         (goto (reg continue))
 
     ;; Exercise 5.23: Derived expressions
-    ev-cond
-        (assign exp (op cond->if) (reg exp))
-        (goto (label eval-dispatch))
+    ; ev-cond
+    ;     (assign exp (op cond->if) (reg exp))
+    ;     (goto (label eval-dispatch))
     ev-and
         (assign exp (op and->if) (reg exp))
         (goto (label eval-dispatch))
@@ -334,4 +342,48 @@
         (goto (label eval-dispatch))
     ev-for
         (assign exp (op for->let) (reg exp))
-        (goto (label eval-dispatch)))))
+        (goto (label eval-dispatch))
+
+    ; Exercise 5.24: Cond as a basic special form.
+    ev-cond
+        (assign unev (op cond-clauses) (reg exp))
+    ev-cond-clauses
+        ; unev contains the remaining clauses.
+        (test (op no-more-clauses?) (reg unev))
+        (branch (label no-clause-found))
+        (assign exp (op first-clause) (reg unev))
+        (test (op cond-else-clause?) (reg exp))
+        (branch (label else-clause))
+        (save unev)
+        (save env)
+        ; Save exp so we can retrieve the actions if the predicate is true.
+        (save exp)
+        (assign exp (op cond-predicate) (reg exp))
+        (save continue)
+        (assign continue (label cond-clause-pred-evaluated))
+        (goto (label eval-dispatch))
+    cond-clause-pred-evaluated
+        (restore continue)
+        (restore exp)
+        (restore env)
+        (restore unev)
+        (test (op true?) (reg val))
+        ; Success, evaluate the actions of the clause.
+        (branch (label true-pred-found))
+        ; Go to next clause.
+        (assign unev (op rest-clauses) (reg unev))
+        (goto (label ev-cond-clauses))
+    else-clause
+        (test (op last-clause?) (reg unev))
+        (branch (label true-pred-found))
+        (goto (label else-not-last))
+    true-pred-found
+        (assign unev (op cond-actions) (reg exp))
+        (save continue)
+        (goto (label ev-sequence))
+    no-clause-found
+        (assign val (const false))
+        (goto (reg continue))
+    else-not-last
+        (assign val (const else-not-last-clause))
+        (goto (label signal-error)))))

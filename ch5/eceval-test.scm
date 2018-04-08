@@ -25,6 +25,9 @@
 ; letrec
 (load "../ch4/4.20.scm")
 
+; Additional selectors for cond clauses.
+(load "5.24a.scm")
+
 ; The evaluator itself.
 (include "5.23-eceval.scm")
 
