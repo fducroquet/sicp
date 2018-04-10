@@ -439,13 +439,13 @@
     \end{figure}
     Figure~\ref{4.17fig} shows the environment structures in which \vscm{<e3>} 
     is evaluated when the definitions are interpreted sequentially and when they 
-    are scanned out. In the later case, there is an extra frame because 
+    are scanned out. In the latter case, there is an extra frame because 
     \vscm{let} corresponds to a \vscm{lambda} application.
 
     This difference in environment structure makes no difference in a correct 
     program’s behavior because the same bindings are accessible when the body of 
     the procedure is evaluated, and since the inner \vscm{let} contains the 
-    whole body of the outer lambda, both frames in the later case always go 
+    whole body of the outer lambda, both frames in the latter case always go 
     together: if the outer lambda returns a procedure, its environment will be 
     E2, it can never be E1, so there can be no lost bindings.
 
