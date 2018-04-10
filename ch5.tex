@@ -969,3 +969,41 @@ This subsection contains no exercises.
 	\end{tabular}
     \end{center}
 \end{exe}
+
+\begin{exe}[5.29]
+    The figures for small values of $n$ are:
+    \begin{center}
+	\begin{tabular}{|c|c|c|}
+	    \hline
+	    \textbf{$n$} & \textbf{Maximum depth} & \textbf{Number of pushes} 
+	    \\\hline
+	    0 & 8 & 16 \\\hline
+	    1 & 8 & 16 \\\hline
+	    2 & 13 & 72 \\\hline
+	    3 & 18 & 128 \\\hline
+	    4 & 23 & 240 \\\hline
+	    5 & 28 & 408 \\\hline
+	\end{tabular}
+    \end{center}
+    \begin{enumerate}
+	\item Since we know that the space grows linearly, we can deduce from 
+	    the collected data that for $n \geq 1$, the maximum depth of the 
+	    stack required is $5n + 3$.
+	\item To compute $\Fib(n)$, we need to compute $\Fib(n - 1)$
+	    and $\Fib(n - 2)$ and then to add the results. The operations needed 
+	    to compute $\Fib(n)$ from $\Fib(n - 1)$ and $\Fib(n - 2)$ are 
+	    independent of $n$, so we can expect that for any $n \geq 2$,
+	    $S(n) = S(n - 1) + S(n - 2) + k$ where $k$ is independent of $n$. We 
+	    can check that this is true on the collected data and find that $k 
+	    = 40$.
+
+	    By adding 40 to each side of the equation, we can rewrite it as
+	    \[ S(n) + 40 = \left(S(n - 1) + 40\right)
+			   + \left(S(n - 2) + 40\right) \]
+	    So the sequence $S(n) + 40$ verifies the same recurrence 
+	    relationship as the Fibonacci sequence, but its first values are 
+	    $56, 56,…$ whereas the first values of the Fibonacci sequence are 
+	    $0, 1, 1,…$. So $S(n) + 40 = 56 \Fib(n + 1)$, in other words
+	    \[ S(n) = 56 \Fib(n + 1) - 40 \]
+    \end{enumerate}
+\end{exe}
