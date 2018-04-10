@@ -32,7 +32,7 @@
 \end{exe}
 
 \begin{exe}[4.3]
-    As in exercise \ref{2.73}, a few cases can’t be assimilated to the 
+    As in exercise~\ref{2.73}, a few cases can’t be assimilated to the 
     data-directed dispatch because they correspond to untagged data: here it’s 
     the case of \vscm{variable?}, \vscm{self-evaluating?} and 
     \vscm{application?}. If we had kept Louis’ idea from the previous exercise 
@@ -262,8 +262,8 @@
 
     We can replace \vscm{not} with \vscm{!} by replacing
     \vscm{(list 'not not)} with \vscm{(list '! not)} in the list of primitive 
-    procedures and redefining the \vscm{make-not} procedure defined in exercise 
-    \ref{4.9}:
+    procedures and redefining the \vscm{make-not} procedure defined in 
+    exercise~\ref{4.9}:
     \scm{ch4/4.10b.scm}
 
     I also modified the selectors for procedure application so that
@@ -361,7 +361,7 @@
     \begin{enumerate}
         \item Here is the updated version of \vscm{lookup-variable-value} for 
             the frame representation as a list of pairs, with the abstractions 
-            defined in exercise \ref{4.12}:
+            defined in exercise~\ref{4.12}:
             \scm{ch4/4.16a.scm}
         \item The \vscm{scan-out-defines} procedure can be defined as:
             \scm{ch4/4.16b.scm}
@@ -437,7 +437,7 @@
         the definitions are interpreted sequentially and after scanning out.}
         \label{4.17fig}
     \end{figure}
-    Figure \ref{4.17fig} shows the environment structures in which \vscm{<e3>} 
+    Figure~\ref{4.17fig} shows the environment structures in which \vscm{<e3>} 
     is evaluated when the definitions are interpreted sequentially and when they 
     are scanned out. In the later case, there is an extra frame because 
     \vscm{let} corresponds to a \vscm{lambda} application.
@@ -501,7 +501,7 @@
     automatically delaying their values’ evaluation, and forcing them only when 
     a variable’s value is looked up. This is a big change to Scheme’s evaluation 
     order, but since we have already seen how to use \vscm{delay} and 
-    \vscm{force} in section \ref{streams} this is not difficult to implement. We 
+    \vscm{force} in section~\ref{streams} this is not difficult to implement. We 
     need to redefine \vscm{eval-definition} and \vscm{eval-assignment} so they 
     delay the values’ evaluation:
     \scm{ch4/4.19a.scm}
@@ -605,9 +605,9 @@
     \end{figure}
     \begin{enumerate}
         \item \vscm{Letrec} can be implemented as shown below. This is very 
-            similar to exercise \ref{4.16}, so the code could be mutualized:
+            similar to exercise~\ref{4.16}, so the code could be mutualized:
 	    \scm{ch4/4.20.scm}
-        \item Figure \ref{4.20fig} shows the environment structures in which the 
+        \item Figure~\ref{4.20fig} shows the environment structures in which the 
             \vscm{<rest of body of f>} is evaluated during evaluation of the 
             expression \vscm{(f 5)}, first with \vscm{letrec}, then with 
             \vscm{let}. With \vscm{letrec}, the values of \vscm{odd?} and 
@@ -657,7 +657,7 @@
         well as \vscm{make-unbound!}:
         \scm{ch4/4.22c.scm}
         Lastly, we can implement scanning out of internal definitions as in 
-        exercise \ref{4.16} by calling \vscm{scan-out-defines} in 
+        exercise~\ref{4.16} by calling \vscm{scan-out-defines} in 
         \vscm{analyze-lambda}:
         \scm{ch4/4.22d.scm}
     \end{comp}
@@ -712,8 +712,8 @@
     \scm{ch4/4.26a.scm}
     Then we just have to have the following line to \vscm{eval}:
     \scm{ch4/4.26b.scm}
-    or the following line to \vscm{analyze} for the evaluator from section 
-    \ref{analysis}:
+    or the following line to \vscm{analyze} for the evaluator from 
+    section~\ref{analysis}:
     \scm{ch4/4.26c.scm}
 
     It would be useful to have \vscm{unless} available as a procedure rather 
@@ -858,14 +858,14 @@
 \subsection{Streams as Lazy Lists}
 
 \begin{exe}[4.32]
-    With the streams of section \ref{streams}, there were places where we had to 
+    With the streams of section~\ref{streams}, there were places where we had to 
     define the first element of a stream separately to avoid infinite loops. 
     With the lazy evaluator, we can simplify some of the definitions. For 
-    instance, the following definition of \vscm{pairs} taken from exercise 
-    \ref{3.68}, where it caused an infinite loop, works for lazy lists:
+    instance, the following definition of \vscm{pairs} taken from 
+    exercise~\ref{3.68}, where it caused an infinite loop, works for lazy lists:
     \scm{ch4/4.32a.scm}
-    Similar simplifications can be applied to the answers to exercises 
-    \ref{3.69} and \ref{3.70}.
+    Similar simplifications can be applied to the answers to 
+    exercises~\ref{3.69} and~\ref{3.70}.
 
     \medskip
 
@@ -885,8 +885,8 @@
     \medskip
 
     As noted in the book’s footnote, lazy lists allow us to define arbitrary 
-    lazy data structures which can’t be defined with the streams of section 
-    \ref{streams}, such as trees where all branches could potentially be 
+    lazy data structures which can’t be defined with the streams of 
+    section~\ref{streams}, such as trees where all branches could potentially be 
     infinite.
 \end{exe}
 
@@ -944,14 +944,14 @@
 
 \begin{exe}[4.36]
     Replacing \vscm{an-integer-between} by \vscm{an-integer-starting-from} in 
-    the procedure in exercise \ref{4.35} wouldn’t work because the interpreter 
+    the procedure in exercise~\ref{4.35} wouldn’t work because the interpreter 
     would pick the lowest possible value for $i$ and $j$ and would then try all 
     the possible values for $k$ without ever finding a successful triple.
 
     We can generate all Pythagorean triples by first picking $j$, and then 
     picking $i \leq j$. We can then define $k$ as $\sqrt{i^2 + j^2}$ and check 
     if it’s an integer. To define a procedure more similar to the one in 
-    exercise \ref{4.35}, we could choose $k$ between finite bounds, for instance 
+    exercise~\ref{4.35}, we could choose $k$ between finite bounds, for instance 
     $j$ and $2j$. Either way, once $j$ has been picked, there are only a finite 
     number of possibilities to test for $i$ and $k$, and these possibilities 
     contain all the Pythagorean triples for the given value of $j$, so all 
@@ -961,7 +961,7 @@
 \end{exe}
 
 \begin{exe}[4.37]
-    Ben is correct. The procedure in exercise \ref{4.35} systematically searches 
+    Ben is correct. The procedure in exercise~\ref{4.35} systematically searches 
     all possible triples $(i, j, k)$ with $low \leq i \leq j \leq k \leq high$. 
     Ben’s version eliminates the pairs $(i, j)$ for which $i^2 + j^2 > high^2$ 
     since there is no possible value of $k$ within the bounds in this case, and 
@@ -1034,13 +1034,13 @@
     permutations and then filtering the set to keep only those that verify the 
     puzzle’s requirements.
 
-    We already defined a \vscm{permutations} procedure in section \ref{2.2.3}, 
+    We already defined a \vscm{permutations} procedure in section~\ref{2.2.3}, 
     but I rewrote a different procedure to generate them before remembering 
     that, and then I noticed that my version was faster so I kept it. To 
     generate the permutations of a set $S$, I generate all the permutations of 
     the set minus the first element, and then for each permutation I insert the 
     removed element at each possible position in the returned list. The version 
-    in section \ref{2.2.3} generated all permutations of $S - x$ for \emph{each} 
+    in section~\ref{2.2.3} generated all permutations of $S - x$ for \emph{each} 
     element $x$ of $S$ and adjoined $x$ at the front of each permutation, 
     whereas I generate all permutations of $S - x$ only for one $x$ and the 
     adjoin $x$ at all possible positions.
@@ -1091,11 +1091,11 @@
 \end{exe}
 
 \begin{exe}[4.44]
-    We use the same idea as in exercise \ref{2.42}: we place a queen in each 
+    We use the same idea as in exercise~\ref{2.42}: we place a queen in each 
     column successively. Once we have placed $k - 1$ queens in the first $k - 1$ 
     columns, we place a queen in the $k$th column and require that it is safe 
     with respect to the others. The \vscm{safe?} procedure is the same as in 
-    exercise \ref{2.42}.
+    exercise~\ref{2.42}.
     \scm{ch4/4.44tex.scm}
 \end{exe}
 
@@ -1232,7 +1232,7 @@
         \item A professor sleeps.
     \end{itemize}
     Some generated sentences if we also include the adjectives and adverbs added 
-    in exercise \ref{4.48}:
+    in exercise~\ref{4.48}:
     \begin{itemize}
         \item A class studies.
         \item The student for the cat to a beautiful student by the student with 
@@ -1529,7 +1529,7 @@ This subsection contains no exercises.
     The problem with this implementation is that, though it does prevent 
     infinite loops, it also cuts off some computations that would have 
     terminated. For instance, with the version of \vscm{outranked-by} from 
-    exercise \ref{4.64}, when evaluating
+    exercise~\ref{4.64}, when evaluating
     \vscm{(outranked-by (Reasoner Louis) ?x)}, an answer with Alyssa P.~Hacker 
     is found from the first branch of the \vscm{or}. Then the recursive 
     evaluation of \vscm{outranked-by} (which is not eliminated because both 
@@ -1539,7 +1539,7 @@ This subsection contains no exercises.
     so the third answer with Oliver Warbucks is not found. The evaluation of 
     \vscm{(outranked-by ?x ?y)} is even worse since the second branch is 
     completely eliminated so we only get the supervisors. With \vscm{last-pair} 
-    from exercise \ref{4.62}, where we got an infinite stream of results by 
+    from exercise~\ref{4.62}, where we got an infinite stream of results by 
     evaluating \vscm{(last-pair ?x (3))}, we only get the first two results 
     because the rest of the computation is eliminated.
 
@@ -1605,7 +1605,7 @@ This subsection contains no exercises.
     with the simpler version of \vscm{simple-query} no answer is displayed 
     because the infinite loop appears during the evaluation of the second 
     argument of \vscm{stream-append}. In the same way, with Louis’ version of 
-    \vscm{outranked-by} from exercise \ref{4.64}, with explicit delays the query
+    \vscm{outranked-by} from exercise~\ref{4.64}, with explicit delays the query
     \vscm{(outranked-by (Bitdiddle Ben) ?x)} displays an answer before going 
     into a loop. With the simple version of \vscm{disjoin} no answer is 
     displayed because the loop happens during the evaluation of the second 
@@ -1714,14 +1714,14 @@ This subsection contains no exercises.
     it’s impossible to predict when. If the computation of one element causes 
     an infinite loop, it may appear at the start or after some answers have 
     been displayed. For instance, with Louis’ version of \vscm{outranked-by} 
-    from exercise \ref{4.64}, sometimes the query
+    from exercise~\ref{4.64}, sometimes the query
     \vscm{(outranked-by (Bitdiddle Ben) ?x)} loops without displaying anything, 
     sometimes it answers first. But most of the time
     \vscm{(outranked-by ?x ?y)} displays several answers before going into 
     a loop, whereas the stream-based version always displayed only the first 
     answer.
 
-    With the query \vscm{(last-pair ?x (3))} from exercise \ref{4.62}, the 
+    With the query \vscm{(last-pair ?x (3))} from exercise~\ref{4.62}, the 
     successive results displayed show an increment of one only in the ids of the 
     unbound variables, where the increment was of 4 in the stream version. The 
     first results are:

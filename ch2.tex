@@ -513,7 +513,7 @@ Let’s first define a function that prints intervals:
 \begin{exe}[2.43]
     In Louis’ program, each call to \vscm{(queen-cols k)} calls 
     \vscm{(queen-cols (- k 1))} 8 times, instead of only one time with the 
-    program in exercise \ref{2.42}. Since there are 8 recursion levels, Louis’ 
+    program in exercise~\ref{2.42}. Since there are 8 recursion levels, Louis’ 
     program will take about $8^8T$ time to solve the eight-queens puzzle.
 \end{exe}
 
@@ -825,9 +825,9 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.72]
-    In the \vscm{encode-symbol} procedure given in exercise \ref{2.68}, only the 
+    In the \vscm{encode-symbol} procedure given in exercise~\ref{2.68}, only the 
     symbol list of the left subtree is searched at each node encountered, so we 
-    can distinguish two cases for the distribution given in exercise \ref{2.71}:
+    can distinguish two cases for the distribution given in exercise~\ref{2.71}:
 
     \paragraph*{The left subtree of each node corresponds to the most frequent 
     symbol.}
@@ -872,13 +872,13 @@ This subsection contains no exercises.
             operator or operands.
 
         \item The procedures for derivation can be written in the following way, 
-            using \vscm{make-sum} and \vscm{make-product} from section 
-            \ref{2.3.2}.
+            using \vscm{make-sum} and \vscm{make-product} from 
+            section~\ref{2.3.2}.
             \scm{ch2/2.73b.scm}
 
         \item To allow differentiation of exponents, it’s enough to call the 
-            following procedure, using \vscm{make-exporentiation} from exercise 
-            \ref{2.56}.
+            following procedure, using \vscm{make-exporentiation} from 
+            exercise~\ref{2.56}.
 
         \item The only change required is to exchange the arguments when calling 
             \vscm{put}, using e.g. \vscm{(put '+ 'deriv deriv-sum)} instead of 
@@ -1065,7 +1065,7 @@ This subsection contains no exercises.
 
 \begin{comp}
     I decided to add the polynomial type to the tower of types used since 
-    exercise \ref{2.83}. For this to work, I had to redefine the tower of types:
+    exercise~\ref{2.83}. For this to work, I had to redefine the tower of types:
     \begin{cscm}
         (define tower '(integer rational real complex polynomial))
     \end{cscm}
@@ -1231,7 +1231,7 @@ This subsection contains no exercises.
             \scm{ch2/2.96a1.scm}
             and the new version of \vscm{gcd-terms} is:
             \scm{ch2/2.96a2.scm}
-            On the example in exercise \ref{2.95}, 
+            On the example in exercise~\ref{2.95}, 
             \vscm{greatest-common-divisor} now produces the polynomial $1458 x^2 
             - 2916 x + 1458$.
         \item The procedure can be rewritten in the following way to divide the 
