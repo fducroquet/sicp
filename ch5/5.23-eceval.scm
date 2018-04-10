@@ -242,7 +242,11 @@
         (save continue)
         (goto (label ev-sequence))
     ev-sequence
+        ; Uncomment the 2 following lines for the non tail-recursive evaluator.
+        ; (test (op no-more-exps?) (reg unev))
+        ; (branch (label ev-sequence-end))
         (assign exp (op first-exp) (reg unev))
+        ; Comment out the 2 following lines for the non tail-recursive evaluator.
         (test (op last-exp?) (reg unev))
         (branch (label ev-sequence-last-exp))
         (save unev)
@@ -257,6 +261,9 @@
     ev-sequence-last-exp
         (restore continue)
         (goto (label eval-dispatch))
+    ev-sequence-end
+        (restore continue)
+        (goto (reg continue))
 
     ;; 5.4.3 Conditionals, Assignments, and Definitions
     ;; Conditionals

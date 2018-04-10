@@ -955,3 +955,17 @@ This subsection contains no exercises.
 	\end{tabular}
     \end{center}
 \end{exe}
+
+\begin{exe}[5.28]
+    With a non tail-recursive evaluator, both procedures now require space and 
+    time that grow linearly with their input. The results can be summed up in 
+    the following table, for any $n \geq 1$:
+    \begin{center}
+	\begin{tabular}{|c|c|c|}
+	    \hline
+	    & Maximum depth & Number of pushes \\\hline
+	    Recursive factorial & $8n + 3$ & $34n - 16$ \\\hline
+	    Iterative factorial & $3n + 14$ & $37n + 33$ \\\hline
+	\end{tabular}
+    \end{center}
+\end{exe}
