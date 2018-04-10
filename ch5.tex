@@ -761,3 +761,174 @@ This subsection contains no exercises.
     \end{itemize}
     \scm{ch5/5.24b.scm}
 \end{exe}
+
+\begin{exe}[5.25]
+    I used some procedures for thunk manipulation from section~\ref{lazy-eval} 
+    as primitive procedures: \vscm{delay-it}, \vscm{thunk?}, \vscm{thunk-exp}, 
+    \vscm{thunk-env}, \vscm{evaluated-thunk?} and \vscm{thunk-value}.
+
+    The other changes to the evaluator described in that section are implemented 
+    in the explicit-control evaluator: I modified \vscm{ev-application}, 
+    \vscm{apply-dispatch}, \vscm{ev-if} and the driver loop. For this, the 
+    equivalent of \vscm{actual-value} in the explicit-control evaluator is 
+    needed.
+
+    The \vscm{actual-value} procedure from section~\ref{lazy-eval} just calls 
+    \vscm{force-it} on the result of \vscm{eval}, so in the register machine, it 
+    saves the \vscm{continue} register and goes to \vscm{force-it} at the end of 
+    \vscm{eval-dispatch}. At the \vscm{force-it} label, the \vscm{continue} 
+    register is restored, then the actual value of the contents of the 
+    \vscm{val} register is computed, and if \vscm{val} contained a thunk it is 
+    turned into an evaluated thunk.
+    \begin{cscm}
+    actual-value
+        (save continue)
+        (assign continue (label force-it))
+        (goto (label eval-dispatch))
+    force-it
+        ;; Forces value of reg val.
+        ; Saved at actual-value
+        (restore continue)
+        (test (op thunk?) (reg val))
+        (branch (label force-thunk))
+        (test (op evaluated-thunk?) (reg val))
+        (branch (label force-evaluated-thunk))
+        (goto (reg continue))
+    force-thunk
+        (assign env (op thunk-env) (reg val))
+        (assign exp (op thunk-exp) (reg val))
+        ; Comment out the following 3 lines to use unmemoized force-it.
+        (save val) ; Save thunk to set its value later.
+        (save continue)
+        (assign continue (label thunk-result-forced))
+        (goto (label actual-value))
+    thunk-result-forced
+        ; val contains the actual value.
+        (assign exp (reg val))
+        (restore continue)
+        (restore val) ; Thunk
+        (perform (op set-car!) (reg val) (const evaluated-thunk))
+        (assign unev (op cdr) (reg val))
+        (perform (op set-car!) (reg unev) (reg exp))
+        (perform (op set-cdr!) (reg unev) (const ()))
+        (assign val (reg exp))
+        (goto (reg continue))
+    force-evaluated-thunk
+        (assign val (op thunk-value) (reg val))
+        (goto (reg continue)))))
+    \end{cscm}
+    The above instructions implement the memoized version of \vscm{force-it}. To 
+    use the non-memoized version, it is enough to comment out the lines that set 
+    up the stack and the continuation so that the thunk is turned into an 
+    evaluated thunk once its value has been computed: that way the 
+    \vscm{thunk-result-forced} label is never reached, so no evaluated thunks 
+    are created.
+
+    With these instructions for \vscm{actual-value}, the only change needed at 
+    the places where \vscm{actual-value} is used in the lazy evaluator is to 
+    replace \vscm{(goto (label eval-dispatch))} with
+    \vscm{(goto (label actual-value))}, which is the only change needed in 
+    \vscm{read-eval-print-loop} and in \vscm{ev-if}.
+
+    Significant changes to \vscm{ev-application} and \vscm{apply-dispatch} are 
+    needed. The instructions at \vscm{ev-application} are simplified since the 
+    argument accumulation is now left to \vscm{apply-dispatch}. The actual value 
+    of the operator is computed and stored in \vscm{proc}, the operand 
+    expressions are put in \vscm{unev}, and the rest is left to 
+    \vscm{apply-dispatch}:
+    \begin{cscm}
+    ev-application
+        (save continue)
+        (save env)
+        (assign unev (op operands) (reg exp))
+        (save unev)
+        (assign exp (op operator) (reg exp))
+        (assign continue (label ev-appl-did-operator))
+        (goto (label actual-value))
+    ev-appl-did-operator
+        (restore unev)          ; the operands
+        (restore env)
+        (assign proc (reg val)) ; the operator
+        (goto (label apply-dispatch))
+    \end{cscm}
+
+    The beginning of \vscm{apply-dispatch} does not change much: it dispatches 
+    on the procedure type. It also initializes the argument list.
+    \begin{cscm}
+    apply-dispatch
+        ; Actual value of procedure to apply in proc, operand expressions in 
+        ; unev, environment in env.
+        (assign argl (op empty-arglist))
+        (test (op primitive-procedure?) (reg proc))
+        (branch (label primitive-apply))
+        (test (op compound-procedure?) (reg proc))
+        (branch (label compound-apply))
+        (goto (label unknown-procedure-type))
+    \end{cscm}
+
+    Before applying a primitive procedure, the actual values of the arguments 
+    must be computed and accumulated in \vscm{argl}, which was previously done 
+    in \vscm{ev-application}. The instructions are almost the same as those used 
+    in \vscm{ev-application} in the applicative-order evaluator, the main 
+    difference is the use of \vscm{actual-value} rather than 
+    \vscm{eval-dispatch} to compute each argument value.
+    \begin{cscm}
+    primitive-apply
+        ; Accumulate actual values of arguments in argl.
+        (save proc)
+        (test (op no-operands?) (reg unev))
+        (branch (label actual-primitive-apply))
+    ev-appl-operand-loop
+        (save argl)
+        (assign exp (op first-operand) (reg unev))
+        (test (op last-operand?) (reg unev))
+        (branch (label ev-appl-last-arg))
+        (save env)
+        (save unev)
+        (assign continue (label ev-appl-accumulate-arg))
+        (goto (label actual-value))
+    ev-appl-accumulate-arg
+        (restore unev)
+        (restore env)
+        (restore argl)
+        (assign argl (op adjoin-arg) (reg val) (reg argl))
+        (assign unev (op rest-operands) (reg unev))
+        (goto (label ev-appl-operand-loop))
+    ev-appl-last-arg
+        (assign continue (label ev-appl-accum-last-arg))
+        (goto (label actual-value))
+    ev-appl-accum-last-arg
+        (restore argl)
+        (assign argl (op adjoin-arg) (reg val) (reg argl))
+    actual-primitive-apply
+        (restore proc)
+        (assign val (op apply-primitive-procedure) (reg proc) (reg argl))
+        (restore continue)
+        (goto (reg continue))
+    \end{cscm}
+
+    Before applying a compound procedure, the delayed arguments are accumulated. 
+    Though the procedures \vscm{list-of-arg-values} and 
+    \vscm{list-of-delayed-args} are very similar in section~\ref{lazy-eval}, 
+    their register-machine translations are very different: for the latter no 
+    actual computation besides the argument accumulation is done so we can use 
+    a simple loop without using the stack at all, unlike the implementation of 
+    \vscm{list-of-arg-values} above.
+    \begin{cscm}
+    compound-apply
+        ; Accumulate delayed arguments in argl.
+        (test (op no-operands?) (reg unev))
+        (branch (label actual-compound-apply))
+        (assign exp (op first-operand) (reg unev))
+        (assign exp (op delay-it) (reg exp) (reg env))
+        (assign argl (op adjoin-arg) (reg exp) (reg argl))
+        (assign unev (op rest-operands) (reg unev))
+        (goto (label compound-apply))
+    actual-compound-apply
+        (assign unev (op procedure-parameters) (reg proc))
+        (assign env (op procedure-environment) (reg proc))
+        (assign env (op extend-environment) (reg unev) (reg argl) (reg env))
+        (assign unev (op procedure-body) (reg proc))
+        (goto (label ev-sequence))
+    \end{cscm}
+\end{exe}

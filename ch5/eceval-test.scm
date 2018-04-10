@@ -31,4 +31,10 @@
 ; The evaluator itself.
 (include "5.23-eceval.scm")
 
+; Exercise 5.25: Lazy explicit-control evaluator
+; Representation of thunks for lazy evaluation.
+(load "../ch4/4.27pre-lazy-evaluator.scm")
+(define force-it memoized-force-it)
+(include "5.25.scm")
+
 (define the-global-environment (setup-environment))
