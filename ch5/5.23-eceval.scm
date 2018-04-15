@@ -6,6 +6,11 @@
   (list
     ;; Primitive Scheme operations.
     (ecop read)
+    (ecop list)
+    (ecop eq?)
+    (ecop string-append)
+    (ecop object->string)
+    (ecop length)
 
     ;; Syntax operations
     (ecop self-evaluating?)
@@ -78,6 +83,7 @@
     (ecop define-variable!)
     (ecop primitive-procedure?)
     (ecop apply-primitive-procedure)
+    (ecop check-primitive-arguments)
     (ecop prompt-for-input)
     (ecop announce-output)
     (ecop user-print)
@@ -91,7 +97,7 @@
   (make-machine
     '(exp env val proc argl continue unev)
     eceval-operations
-    '(;; 5.4.4 Running the Evaluator
+    `(;; 5.4.4 Running the Evaluator
     read-eval-print-loop
         (perform (op initialize-stack))
         (perform (op prompt-for-input) (const ";;; EC-Eval input:"))
@@ -166,7 +172,15 @@
                 (op lookup-variable-value)
                 (reg exp)
                 (reg env))
+        (test (op eq?) (reg val) (const ,err-unbound-var))
+        (branch (label err-lookup-unbound-var))
         (goto (reg continue))
+    err-lookup-unbound-var
+        (assign unev (op object->string) (reg exp))
+        (assign val (op string-append)
+                (const "Error: accessing unbound variable: ")
+                (reg unev))
+        (goto (label signal-error))
     ev-quoted
         (assign val (op text-of-quotation) (reg exp))
         (goto (reg continue))
@@ -226,6 +240,14 @@
         (branch (label compound-apply))
         (goto (label unknown-procedure-type))
     primitive-apply
+        (assign val (op check-primitive-arguments) (reg proc) (reg argl))
+        (test (op eq?) (reg val) (const #t))
+        (branch (label primitive-apply-1))
+        (assign unev (op object->string) (reg argl))
+        (assign val (op string-append) (const "Error in primitive procedure application: ")
+                (reg val) (const "\nArguments: ") (reg unev))
+        (goto (label signal-error))
+    primitive-apply-1
         (assign val (op apply-primitive-procedure) (reg proc) (reg argl))
         (restore continue)
         (goto (reg continue))
@@ -233,8 +255,19 @@
         (assign unev (op procedure-parameters) (reg proc))
         (assign env (op procedure-environment) (reg proc))
         (assign env (op extend-environment) (reg unev) (reg argl) (reg env))
+        (test (op eq?) (reg env) (const ,err-arity))
+        (branch (label arity-error))
         (assign unev (op procedure-body) (reg proc))
         (goto (label ev-sequence))
+    arity-error
+        (assign unev (op length) (reg unev))
+        (assign unev (op object->string) (reg unev))
+        (assign argl (op length) (reg argl))
+        (assign argl (op object->string) (reg argl))
+        (assign val (op string-append)
+                (const "Error in procedure applicatio: wrong number of arguments, expected ")
+                (reg unev) (const ", got ") (reg argl))
+        (goto (label signal-error))
 
     ;; 5.4.2 Sequence Evaluation and Tail Recursion
     ev-begin
@@ -302,9 +335,17 @@
         (restore continue)
         (restore env)
         (restore unev)
-        (perform (op set-variable-value!) (reg unev) (reg val) (reg env))
+        (assign val (op set-variable-value!) (reg unev) (reg val) (reg env))
+        (test (op eq?) (reg val) (const ,err-unbound-var))
+        (branch (label err-set-unbound-var))
         (assign val (const ok))
         (goto (reg continue))
+    err-set-unbound-var
+        (assign unev (op object->string) (reg unev))
+        (assign val (op string-append)
+                (const "Error: setting unbound variable: ")
+                (reg unev))
+        (goto (label signal-error))
 
     ev-definition
         (assign unev (op definition-variable) (reg exp))
@@ -393,5 +434,5 @@
         (assign val (const false))
         (goto (reg continue))
     else-not-last
-        (assign val (const else-not-last-clause))
+        (assign val (const "Error: the else clause must be the last clause."))
         (goto (label signal-error)))))

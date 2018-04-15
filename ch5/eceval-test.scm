@@ -1,6 +1,23 @@
 ;; Code for the register machine simulator.
 (load "simulator-test.scm")
 
+; Error checking in primitive procedures application.
+; check-primitive-arguments: applies the checks for a procedure on given 
+; arguments.
+(load "5.30b1.scm")
+; Check procedures useful in lots of cases.
+(load "5.30b2.scm")
+; For cadr, cddr, etc.
+(load "5.30b3.scm")
+; Range checks for substring and list-ref.
+(load "5.30b4.scm")
+; association-list?, for assoc.
+(load "5.30b5.scm")
+; Division by zero.
+(load "5.30b6.scm")
+; Procedure name.
+(load "5.30b7.scm")
+
 ;; Code from chapter 4 needed by the explicit-control evaluator, plus a few 
 ;; functions from footnotes in section 5.4.
 (load "5.23-eceval-support.scm")
@@ -27,6 +44,9 @@
 
 ; Additional selectors for cond clauses.
 (load "5.24a.scm")
+
+; Error checking in the evaluation process.
+(load "5.30a.scm")
 
 ; The evaluator itself.
 (include "5.23-eceval.scm")

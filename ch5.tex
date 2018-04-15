@@ -1007,3 +1007,176 @@ This subsection contains no exercises.
 	    \[ S(n) = 56 \Fib(n + 1) - 40 \]
     \end{enumerate}
 \end{exe}
+
+\begin{exe}[5.30]
+    \ \vspace{-20pt}
+    \begin{enumerate}
+	\item For the error condition codes, I used uninterned symbols because 
+	    they are guaranteed not to be equal to any symbol but themselves. 
+	    I did not use a tagged list such as \vscm{(error <msg>)} because 
+	    this could be the value of a user variable. Three places must be 
+	    modified: \vscm{extend-environment}, \vscm{lookup-variable-value} 
+	    and \vscm{set-variable-value!}. The modified version of these 
+	    procedures is:
+	    \scm{ch5/5.30a.scm}
+	    Each of these procedures is used at one place in the evaluator, so 
+	    there are three places to modify. Note that we must also use 
+	    a quasiquote instead of a quote for the controller instructions so 
+	    that the variables holding the error condition codes can be 
+	    evaluated.
+	    For \vscm{lookup-variable-value}, we modify \vscm{ev-variable}:
+	    \begin{cscm}
+		ev-variable
+		    (assign val
+			    (op lookup-variable-value)
+			    (reg exp)
+			    (reg env))
+		    (test (op eq?) (reg val) (const ,err-unbound-var))
+		    (branch (label err-lookup-unbound-var))
+		    (goto (reg continue))
+		err-lookup-unbound-var
+		    (assign unev (op object->string) (reg exp))
+		    (assign val (op string-append)
+			    (const "Error: accessing unbound variable: ")
+			    (reg unev))
+		    (goto (label signal-error))
+	    \end{cscm}
+	    For \vscm{set-variable-value!}, we modify \vscm{ev-assignment-1}:
+	    \begin{cscm}
+		ev-assignment-1
+		    (restore continue)
+		    (restore env)
+		    (restore unev)
+		    (assign val (op set-variable-value!) (reg unev) (reg val) (reg env))
+		    (test (op eq?) (reg val) (const ,err-unbound-var))
+		    (branch (label err-set-unbound-var))
+		    (assign val (const ok))
+		    (goto (reg continue))
+		err-set-unbound-var
+		    (assign unev (op object->string) (reg unev))
+		    (assign val (op string-append)
+			    (const "Error: setting unbound variable: ")
+			    (reg unev))
+		    (goto (label signal-error))
+	    \end{cscm}
+	    And lastly, for \vscm{extend-environment}, we modify 
+	    \vscm{compound-apply}:
+	    \begin{cscm}
+		compound-apply
+		    (assign unev (op procedure-parameters) (reg proc))
+		    (assign env (op procedure-environment) (reg proc))
+		    (assign env (op extend-environment) (reg unev) (reg argl) (reg env))
+		    (test (op eq?) (reg env) (const ,err-arity))
+		    (branch (label arity-error))
+		    (assign unev (op procedure-body) (reg proc))
+		    (goto (label ev-sequence))
+		arity-error
+		    (assign unev (op length) (reg unev))
+		    (assign unev (op object->string) (reg unev))
+		    (assign argl (op length) (reg argl))
+		    (assign argl (op object->string) (reg argl))
+		    (assign val (op string-append)
+			    (const "Error in procedure applicatio: wrong number of arguments, expected ")
+			    (reg unev) (const ", got ") (reg argl))
+		    (goto (label signal-error))
+	    \end{cscm}
+
+	\item Instead of writing wrappers around each primitive procedure, 
+	    replacing, for instance, \vscm{(list 'car car)} with
+	    \vscm{(list 'car safe-car)} in \vscm{primitive-procedures}, 
+	    I modified the representation of primitive procedures to include any 
+	    number of checking procedures that are to be applied to the 
+	    procedure’s arguments before the procedure is called. For instance, 
+	    the definiton of \vscm{car} becomes:
+	    \begin{cscm}
+		(list 'car car (arity 1) (arg-type 0 pair?))
+	    \end{cscm}
+	    where \vscm{(arity 1)} and \vscm{(arg-type 0 pair?)} are procedures 
+	    that will be defined later. All the new arguments added at the end 
+	    of the list defining a given primitive procedure must be procedures 
+	    that take the list of arguments we wish to apply the primitive 
+	    procedure to as a parameter, they must return the boolean 
+	    \vscm{true} (or \vscm{#t}) if the arguments pass the test, and 
+	    a string with an error message if not.
+
+	    We need a new accessor and a new definition of 
+	    \vscm{primitive-procedure-objects}:
+	    \scm{ch5/5.30b0.scm}
+	    The following procedure tests the arguments with each checking 
+	    procedure for the given procedure, and returns the first error, if 
+	    any. If no error is found, it returns \vscm{true}.
+	    \scm{ch5/5.30b1.scm}
+	    It is called in the evaluator before applying a primitive procedure 
+	    to the arguments: if an error is found, we go to 
+	    \vscm{signal-error}, otherwise we can apply the procedure.
+	    \begin{cscm}
+		primitive-apply
+		    (assign val (op check-primitive-arguments) (reg proc) (reg argl))
+		    (test (op eq?) (reg val) (const #t))
+		    (branch (label primitive-apply-1))
+		    (assign unev (op object->string) (reg argl))
+		    (assign val (op string-append)
+			    (const "Error in primitive procedure application: ")
+			    (reg val) (const "\nArguments: ") (reg unev))
+		    (goto (label signal-error))
+		primitive-apply-1
+		    (assign val (op apply-primitive-procedure) (reg proc) (reg argl))
+		    (restore continue)
+		    (goto (reg continue))
+	    \end{cscm}
+	    In a lot of cases, we only need to check the number or the type of 
+	    the arguments, so we can define higher-order procedures that will be 
+	    used by several primitive procedures. \vscm{(arity n)} returns 
+	    a procedure that checks that the number of arguments is $n$, 
+	    \vscm{pos-arity} checks that there is at least one argument, 
+	    \vscm{(arg-type p test)} checks that the $p$-th argument (starting 
+	    at 0) passes the given test (\vscm{test} could be any predicate in 
+	    theory, but the error message assumes that it is a type predicate), 
+	    and \vscm{(args-type test)} checks that all the arguments pass the 
+	    test (same remark as for \vscm{arg-type}).
+
+	    This could be improved by using memoization to save some space: lots 
+	    of primitive procedures have the same arity or the same argument 
+	    types, but the implementation shown below will return a new 
+	    procedure object each time \vscm{(arity 1)} is called, for instance, 
+	    though the same object could be used each time.
+	    \scm{ch5/5.30b2.scm}
+	    \vscm{Arg-type} uses \vscm{procedure-name} to retrieve the string 
+	    \vscm{" pair"} when the \vscm{pair?} procedure is passed as 
+	    a parameter, for instance. This implementation is specific to how 
+	    Gambit Scheme displays procedures:
+	    \scm{ch5/5.30b7.scm}
+	    My list of primitive procedures includes \vscm{cddr}, \vscm{cadr}, 
+	    etc., so I defined some specific checks for them:
+	    \scm{ch5/5.30b3.scm}
+	    Some range checks are needed for \vscm{substring} and 
+	    \vscm{list-ref}:
+	    \scm{ch5/5.30b4.scm}
+	    \vscm{Assoc} needs an argument that is an association list:
+	    \scm{ch5/5.30b5.scm}
+	    The \vscm{/} procedure takes any positive number of arguments, and 
+	    \vscm{(/ x)} is equivalent to \vscm{(/ 1 x)}, so to avoid divisions 
+	    by zero we must treat the case where the number of arguments is 
+	    1 differently. Another division by zero could happen in 
+	    \vscm{remainder}.
+	    \scm{ch5/5.30b6.scm}
+	    And lastly, a part of the modified definition of 
+	    \vscm{primitive-procedures}. I can’t guarantee that all the 
+	    necessary checks are done…
+
+	    While testing what error messages I got, I discovered that more 
+	    procedures than what I expected can take any number of arguments, 
+	    including none. This is for instance the case of \vscm{append}, 
+	    \vscm{list}, \vscm{+} and \vscm{*}, who return respectively 
+	    \vscm{()}, \vscm{()}, \vscm{0} and \vscm{1} when called with no 
+	    argument. This is also the case of the comparison operators 
+	    \vscm{=}, \vscm{<}, \vscm{>}, \vscm{<=}, \vscm{>=}, and others such 
+	    as \vscm{string=?} etc. (but not \vscm{eq?} or \vscm{equal?}): with 
+	    0 or 1 argument they return \vscm{true}, with more than 2 arguments 
+	    they are applied to each successive pair of arguments, so that it’s 
+	    possible to check that a list of numbers is sorted in non-decreasing 
+	    order with
+	    \vscm{(apply <= <list>)}.
+	    \scm{ch5/5.30b8.scm}
+    \end{enumerate}
+\end{exe}
