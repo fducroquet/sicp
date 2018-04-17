@@ -37,6 +37,8 @@ colorlinks]{hyperref}
 
 % Show subsubsections in the table of contents.
 \setcounter{tocdepth}{4}
+% Show a less detailed table of contents first.
+\usepackage{shorttoc}
 
 % Use letters in enumerate.
 \usepackage{enumitem}
@@ -338,6 +340,11 @@ decorations.markings, shapes.misc, shapes.geometric}
 
 \maketitle
 
+\pdfbookmark[1]{Short Contents}{shorttoc}
+\shorttoc{Short Contents}{1}
+
+\clearpage
+\pdfbookmark[1]{\contentsname}{toc}
 \tableofcontents
 
 \chapter*{Introduction}
