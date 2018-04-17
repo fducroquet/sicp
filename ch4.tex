@@ -501,9 +501,9 @@
     automatically delaying their values’ evaluation, and forcing them only when 
     a variable’s value is looked up. This is a big change to Scheme’s evaluation 
     order, but since we have already seen how to use \vscm{delay} and 
-    \vscm{force} in section~\ref{streams} this is not difficult to implement. We 
-    need to redefine \vscm{eval-definition} and \vscm{eval-assignment} so they 
-    delay the values’ evaluation:
+    \vscm{force} in \secref{3.5} this is not difficult to implement. We need to 
+    redefine \vscm{eval-definition} and \vscm{eval-assignment} so they delay the 
+    values’ evaluation:
     \scm{ch4/4.19a.scm}
     Then we must call \vscm{force} when we look up a variable’s value, for 
     instance by modifying the \vscm{variable?} case in \vscm{eval}:
@@ -642,7 +642,6 @@
 \end{exe}
 
 \subsection{Separating Syntactic Analysis from Execution}
-\label{analysis}
 
 \begin{exe}[4.22]
     Since \vscm{let} is a derived form, all that’s needed to support it is to 
@@ -694,7 +693,6 @@
 \end{exe}
 
 \section{Variations on a Scheme―Lazy Evaluation}
-\label{lazy-eval}
 
 \subsection{Normal Order and Applicative Order}
 
@@ -713,7 +711,7 @@
     Then we just have to have the following line to \vscm{eval}:
     \scm{ch4/4.26b.scm}
     or the following line to \vscm{analyze} for the evaluator from 
-    section~\ref{analysis}:
+    \secref{4.1.7}:
     \scm{ch4/4.26c.scm}
 
     It would be useful to have \vscm{unless} available as a procedure rather 
@@ -858,11 +856,11 @@
 \subsection{Streams as Lazy Lists}
 
 \begin{exe}[4.32]
-    With the streams of section~\ref{streams}, there were places where we had to 
-    define the first element of a stream separately to avoid infinite loops. 
-    With the lazy evaluator, we can simplify some of the definitions. For 
-    instance, the following definition of \vscm{pairs} taken from 
-    exercise~\ref{3.68}, where it caused an infinite loop, works for lazy lists:
+    With the streams of \secref{3.5}, there were places where we had to define 
+    the first element of a stream separately to avoid infinite loops. With the 
+    lazy evaluator, we can simplify some of the definitions. For instance, the 
+    following definition of \vscm{pairs} taken from exercise~\ref{3.68}, where 
+    it caused an infinite loop, works for lazy lists:
     \scm{ch4/4.32a.scm}
     Similar simplifications can be applied to the answers to 
     exercises~\ref{3.69} and~\ref{3.70}.
@@ -886,7 +884,7 @@
 
     As noted in the book’s footnote, lazy lists allow us to define arbitrary 
     lazy data structures which can’t be defined with the streams of 
-    section~\ref{streams}, such as trees where all branches could potentially be 
+    \secref{3.5}, such as trees where all branches could potentially be 
     infinite.
 \end{exe}
 
@@ -1034,16 +1032,17 @@
     permutations and then filtering the set to keep only those that verify the 
     puzzle’s requirements.
 
-    We already defined a \vscm{permutations} procedure in section~\ref{2.2.3}, 
-    but I rewrote a different procedure to generate them before remembering 
-    that, and then I noticed that my version was faster so I kept it. To 
-    generate the permutations of a set $S$, I generate all the permutations of 
-    the set minus the first element, and then for each permutation I insert the 
-    removed element at each possible position in the returned list. The version 
-    in section~\ref{2.2.3} generated all permutations of $S - x$ for \emph{each} 
-    element $x$ of $S$ and adjoined $x$ at the front of each permutation, 
-    whereas I generate all permutations of $S - x$ only for one $x$ and the 
-    adjoin $x$ at all possible positions.
+    We already defined a \vscm{permutations} procedure in 
+    \secref[Nested-Mappings]{2.2.3}, but I rewrote a different procedure to 
+    generate them before remembering that, and then I noticed that my version 
+    was faster so I kept it. To generate the permutations of a set $S$, 
+    I generate all the permutations of the set minus the first element, and then 
+    for each permutation I insert the removed element at each possible position 
+    in the returned list. The version in \secref[Nested-Mappings]{2.2.3} 
+    generated all permutations of $S - x$ for \emph{each} element $x$ of $S$ and 
+    adjoined $x$ at the front of each permutation, whereas I generate all 
+    permutations of $S - x$ only for one $x$ and the adjoin $x$ at all possible 
+    positions.
     \scm{ch4/4.41.scm}
 \end{exe}
 

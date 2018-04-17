@@ -40,6 +40,20 @@ colorlinks]{hyperref}
 % Show a less detailed table of contents first.
 \usepackage{shorttoc}
 
+% External links to parts of the text on sarabander.github.io.
+\usepackage{xstring,xifthen}
+% \secref{<sectionnumber>} links to the given section or subsection.
+% \secref[<anchor>]{<sectionnumber>} links to the anchor in the given section, 
+% and still shows “section <sectionnumber>” as the link text.
+\newcommand*\secref[2][]{%
+    \StrCut[2]{#2}{.}{\sectionpart}{\rest}%
+    \StrSubstitute{\sectionpart}{.}{_002e}[\pagepart]%
+    \ifthenelse{\isempty{#1}}%
+	{\StrSubstitute{#2}{.}{_002e}[\anchorpart]%
+	 \href{https://sarabander.github.io/sicp/html/\pagepart.xhtml\#g_t\anchorpart}{section~#2}}%
+	{\href{https://sarabander.github.io/sicp/html/\pagepart.xhtml\##1}{section~#2}}
+}
+
 % Use letters in enumerate.
 \usepackage{enumitem}
 \setenumerate[0]{label=\alph*.}
@@ -347,9 +361,8 @@ Computer Programs}, second edition, by Harold \textsc{Abelson} and Gerald Jay
 
 The answers to these exercises have been tested with the Scheme interpreter from 
 \href{http://gambitscheme.org}{Gambit Scheme}, at the exception of the exercises 
-from section~\ref{2.2.4} about the picture language, which have been written 
-with \href{http://racket-lang.org}{Racket}, using the \vscm{graphics.ss} 
-library.
+from \secref{2.2.4} about the picture language, which have been written with 
+\href{http://racket-lang.org}{Racket}, using the \vscm{graphics.ss} library.
 
 \include{ch1}
 \include{ch2}

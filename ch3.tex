@@ -978,9 +978,9 @@ This subsection contains no exercises.
     Here is an example of a one-dimensional table where the keys are ordered 
     with the given comparison procedure \vscm{<?}. The local table is stored as 
     a binary tree of records instead of a headed list. I used mutable trees 
-    instead of using the \vscm{adjoin-tree} procedure for binary trees of 
-    section~\ref{2.3.3} to avoid stacking recursive calls and creating multiple 
-    intermediate trees.
+    instead of using the \vscm{adjoin-set} procedure for binary trees of 
+    \secref[Sets-as-binary-trees]{2.3.3} to avoid stacking recursive calls and 
+    creating multiple intermediate trees.
     \scm{ch3/3.26.scm}
 \end{exe}
 
@@ -1767,7 +1767,6 @@ This subsection contains no exercises.
 \end{exe}
 
 \section{Streams}
-\label{streams}
 
 \begin{comp}
     In order to make the code in this section work with Gambit scheme, it’s 

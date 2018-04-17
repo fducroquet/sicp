@@ -470,7 +470,8 @@ This subsection contains no exercises.
 \begin{exe}[5.12]
     \label{5.12}
     Since we need ordered sets, we first reuse a slightly modified version of 
-    the representation of sets as ordered lists defined in section~\ref{2.3.3}:
+    the representation of sets as ordered lists defined in 
+    \secref[Sets-as-ordered-lists]{2.3.3}:
     \scm{ch5/5.12set.scm}
     To store the list of all instructions, we change \vscm{assemble} and 
     \vscm{extract-label} to build the list gradually as the instructions are 
@@ -762,9 +763,10 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.25]
-    I used some procedures for thunk manipulation from section~\ref{lazy-eval} 
-    as primitive procedures: \vscm{delay-it}, \vscm{thunk?}, \vscm{thunk-exp}, 
-    \vscm{thunk-env}, \vscm{evaluated-thunk?} and \vscm{thunk-value}.
+    I used some procedures for thunk manipulation from 
+    \secref[Representing-thunks]{4.2} as primitive procedures: \vscm{delay-it}, 
+    \vscm{thunk?}, \vscm{thunk-exp}, \vscm{thunk-env}, \vscm{evaluated-thunk?} 
+    and \vscm{thunk-value}.
 
     The other changes to the evaluator described in that section are implemented 
     in the explicit-control evaluator: I modified \vscm{ev-application}, 
@@ -772,13 +774,13 @@ This subsection contains no exercises.
     equivalent of \vscm{actual-value} in the explicit-control evaluator is 
     needed.
 
-    The \vscm{actual-value} procedure from section~\ref{lazy-eval} just calls 
-    \vscm{force-it} on the result of \vscm{eval}, so in the register machine, it 
-    saves the \vscm{continue} register and goes to \vscm{force-it} at the end of 
-    \vscm{eval-dispatch}. At the \vscm{force-it} label, the \vscm{continue} 
-    register is restored, then the actual value of the contents of the 
-    \vscm{val} register is computed, and if \vscm{val} contained a thunk it is 
-    turned into an evaluated thunk.
+    The \vscm{actual-value} procedure from \secref[Modifying-the-evaluator]{4.2} 
+    just calls \vscm{force-it} on the result of \vscm{eval}, so in the register 
+    machine, it saves the \vscm{continue} register and goes to \vscm{force-it} 
+    at the end of \vscm{eval-dispatch}. At the \vscm{force-it} label, the 
+    \vscm{continue} register is restored, then the actual value of the contents 
+    of the \vscm{val} register is computed, and if \vscm{val} contained a thunk 
+    it is turned into an evaluated thunk.
     \begin{cscm}
     actual-value
         (save continue)
@@ -908,11 +910,11 @@ This subsection contains no exercises.
 
     Before applying a compound procedure, the delayed arguments are accumulated. 
     Though the procedures \vscm{list-of-arg-values} and 
-    \vscm{list-of-delayed-args} are very similar in section~\ref{lazy-eval}, 
-    their register-machine translations are very different: for the latter no 
-    actual computation besides the argument accumulation is done so we can use 
-    a simple loop without using the stack at all, unlike the implementation of 
-    \vscm{list-of-arg-values} above.
+    \vscm{list-of-delayed-args} are very similar in 
+    \secref[Modifying-the-evaluator]{4.2}, their register-machine translations 
+    are very different: for the latter no actual computation besides the 
+    argument accumulation is done so we can use a simple loop without using the 
+    stack at all, unlike the implementation of \vscm{list-of-arg-values} above.
     \begin{cscm}
     compound-apply
         ; Accumulate delayed arguments in argl.
