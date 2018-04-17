@@ -97,8 +97,7 @@
     that takes one argument and always returns the identity procedure, we can 
     make the hypothesis that the $n$th Church numeral is a procedure that takes 
     a one-argument procedure $f$ as its argument and returns the $n$th repeated 
-    application of $f$ (see exercise~\ref{1.43}). This can be proved by 
-    induction.
+    application of $f$ (see \autoref{1.43}). This can be proved by induction.
 
     \begin{proof}
         We’ve already shown that it’s true for $0$, $1$ and $2$.
@@ -512,8 +511,8 @@ Let’s first define a function that prints intervals:
 \begin{exe}[2.43]
     In Louis’ program, each call to \vscm{(queen-cols k)} calls 
     \vscm{(queen-cols (- k 1))} 8 times, instead of only one time with the 
-    program in exercise~\ref{2.42}. Since there are 8 recursion levels, Louis’ 
-    program will take about $8^8T$ time to solve the eight-queens puzzle.
+    \autoref{2.42}. Since there are 8 recursion levels, Louis’ program will take 
+    about $8^8T$ time to solve the eight-queens puzzle.
 \end{exe}
 
 \subsection{Example: A Picture Language}
@@ -524,9 +523,9 @@ Let’s first define a function that prints intervals:
     To test the code in this section, it’s necessary to load a module including 
     graphical functions. The solution I chose here is to use DrRacket’s 
     \vscm{graphics.ss} library. It required me to adapt my solution to 
-    exercise~\ref{2.46} and to slightly modify the \vscm{segments->painter} to 
-    use the given viewport. The code from later exercises is sometimes needed to 
-    try out some previous code.
+    \autoref{2.46} and to slightly modify the \vscm{segments->painter} to use 
+    the given viewport. The code from later exercises is sometimes needed to try 
+    out some previous code.
 
     Code to put at the beginning of the file:
     \scm{ch2/2.44pre2.scm}
@@ -821,9 +820,9 @@ Let’s first define a function that prints intervals:
 \end{exe}
 
 \begin{exe}[2.72]
-    In the \vscm{encode-symbol} procedure given in exercise~\ref{2.68}, only the 
+    In the \vscm{encode-symbol} procedure given in \autoref{2.68}, only the 
     symbol list of the left subtree is searched at each node encountered, so we 
-    can distinguish two cases for the distribution given in exercise~\ref{2.71}:
+    can distinguish two cases for the distribution given in \autoref{2.71}:
 
     \paragraph*{The left subtree of each node corresponds to the most frequent 
     symbol.}
@@ -872,9 +871,9 @@ This subsection contains no exercises.
 	    \secref[Representing-algebraic-expressions]{2.3.2}.
             \scm{ch2/2.73b.scm}
 
-        \item To allow differentiation of exponents, it’s enough to call the 
-            following procedure, using \vscm{make-exporentiation} from 
-            exercise~\ref{2.56}.
+	\item To allow differentiation of exponents, it’s enough to call the 
+	    following procedure, using \vscm{make-exporentiation} from 
+	    \autoref{2.56}.
 
         \item The only change required is to exchange the arguments when calling 
             \vscm{put}, using e.g. \vscm{(put '+ 'deriv deriv-sum)} instead of 
@@ -1061,7 +1060,7 @@ This subsection contains no exercises.
 
 \begin{comp}
     I decided to add the polynomial type to the tower of types used since 
-    exercise~\ref{2.83}. For this to work, I had to redefine the tower of types:
+    \autoref{2.83}. For this to work, I had to redefine the tower of types:
     \begin{cscm}
         (define tower '(integer rational real complex polynomial))
     \end{cscm}
@@ -1227,9 +1226,8 @@ This subsection contains no exercises.
             \scm{ch2/2.96a1.scm}
             and the new version of \vscm{gcd-terms} is:
             \scm{ch2/2.96a2.scm}
-            On the example in exercise~\ref{2.95}, 
-            \vscm{greatest-common-divisor} now produces the polynomial $1458 x^2 
-            - 2916 x + 1458$.
+	    On the example in \autoref{2.95}, \vscm{greatest-common-divisor} now 
+	    produces the polynomial $1458 x^2 - 2916 x + 1458$.
         \item The procedure can be rewritten in the following way to divide the 
             coefficients of the answer by their greatest common divisor.
             \scm{ch2/2.96b.scm}

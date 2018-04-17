@@ -81,6 +81,9 @@ colorlinks]{hyperref}
 \theoremstyle{sicp-exe}
 \newtheorem{exeaux}{Exercise}[chapter]
 
+% For hyperref's autoref.
+\newcommand\exeauxautorefname{exercise}
+
 % Include the exercises in the table of contents.
 \NewDocumentEnvironment{exe}{o}
 {\IfNoValueTF{#1}

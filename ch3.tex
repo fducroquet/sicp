@@ -511,10 +511,10 @@ This subsection contains no exercises.
         definition of \vscm{w}.}
         \label{3.12w}
     \end{figure}
-    The first response is \vscm{(b)}, the second response is \vscm{(b c d)}. The 
-    figure~\ref{3.12z} shows the lists \vscm{x}, \vscm{y} and \vscm{z} right 
-    after the definition of \vscm{z}. The figure~\ref{3.12w} shows the lists 
-    \vscm{x}, \vscm{y} and \vscm{w} after the definition of \vscm{w}.
+    The first response is \vscm{(b)}, the second response is \vscm{(b c d)}. 
+    \autoref{3.12z} shows the lists \vscm{x}, \vscm{y} and \vscm{z} right after 
+    the definition of \vscm{z}. \autoref{3.12w} shows the lists \vscm{x}, 
+    \vscm{y} and \vscm{w} after the definition of \vscm{w}.
 \end{exe}
 
 \begin{exe}[3.13]
@@ -551,7 +551,7 @@ This subsection contains no exercises.
         \vscm{(define z (make-cycle (list 'a 'b 'c))}.}
         \label{3.13fig}
     \end{figure}
-    The structure \vscm{z} is shown in figure~\ref{3.13fig}.
+    The structure \vscm{z} is shown in \autoref{3.13fig}.
 
     If we try to compute \vscm{(last-pair z)}, we get an infinite loop since 
     \vscm{z} has a cycle.
@@ -624,8 +624,8 @@ This subsection contains no exercises.
         \label{3.14w}
     \end{figure}
     The \vscm{mystery} procedure reverses the elements of the list. 
-    Figure~\ref{3.14v} shows the list \vscm{v} as it is initially, and 
-    figure~\ref{3.14w} shows the lists \vscm{v} and \vscm{w} after evaluating 
+    \autoref{3.14v} shows the list \vscm{v} as it is initially, and 
+    \autoref{3.14w} shows the lists \vscm{v} and \vscm{w} after evaluating 
     \vscm{(define w (mystery v))}. The values of \vscm{v} and \vscm{w} would be 
     \vscm{(a)} and \vscm{(d c b a)}.
 \end{exe}
@@ -697,8 +697,8 @@ This subsection contains no exercises.
         \caption{The list \vscm{z2} after applying \vscm{set-to-wow!} to it.}
         \label{3.15z2}
     \end{figure}
-    The figures~\ref{3.15z1} and~\ref{3.15z2} show the effect of 
-    \vscm{set-to-wow!} on \vscm{z1} and \vscm{z2}.
+    Figures~\ref{3.15z1} and~\ref{3.15z2} show the effect of \vscm{set-to-wow!} 
+    on \vscm{z1} and \vscm{z2}.
 \end{exe}
 
 \begin{exe}[3.16]
@@ -794,10 +794,10 @@ This subsection contains no exercises.
             procedure returns different values.}
         \label{3.16ex}
     \end{figure}
-    Figure~\ref{3.16ex} shows examples of list structures made up of exactly 
-    three pairs for which Ben’s procedure returns 3, 4, 7, or never at all.
+    \autoref{3.16ex} shows examples of list structures made up of exactly three 
+    pairs for which Ben’s procedure returns 3, 4, 7, or never at all.
     These structures can be defined in the following way, using 
-    \vscm{make-cycle} from exercise~\ref{3.13} for the last one.
+    \vscm{make-cycle} from \autoref{3.13} for the last one.
     \scm{ch3/3.16.scm}
 \end{exe}
 
@@ -901,7 +901,7 @@ This subsection contains no exercises.
         \vscm{x} defined in the global environment.}
         \label{3.20fig}
     \end{figure}
-    Figure~\ref{3.20fig} shows the environments created by the definitions of 
+    \autoref{3.20fig} shows the environments created by the definitions of 
     \vscm{x} and \vscm{z}. When\\
     \vscm{(set-car! (cdr z) 17)} is evaluated, \vscm{(cdr z)} is evaluated 
     first. This creates an environment E3 pointing to E2, where \vscm{(z 'cdr)} 
@@ -1037,7 +1037,7 @@ This subsection contains no exercises.
         \vscm{(memo-fib 3)}.}
         \label{3.27fig}
     \end{figure}
-    Figure~\ref{3.27fig} shows some of the environments created during the 
+    \autoref{3.27fig} shows some of the environments created during the 
     evaluation of \vscm{(memo-fib 3)}.
     The call to \vscm{memoize} creates a local environment E1 containing 
     a table, and the procedure returned by \vscm{memoize} points to this 
@@ -1316,12 +1316,12 @@ This subsection contains no exercises.
         \label{3.36fig}
     \end{figure}
 
-    Figure~\ref{3.36fig} shows the environment structure in which the expression 
-    is evaluated. The environments created when defining \vscm{a} and \vscm{b} 
-    are similar to those created in exercise~\ref{3.10}: an environment E1 
-    (resp. E3) is created for the evaluation of \vscm{(make-connector)}, then 
-    since \vscm{(make-connector)} contains a \vscm{let}, a new environment E2 
-    (resp. E4) pointing to E1 (resp. E3) is created. The variables \vscm{value}, 
+    \autoref{3.36fig} shows the environment structure in which the expression is 
+    evaluated. The environments created when defining \vscm{a} and \vscm{b} are 
+    similar to those created in \autoref{3.10}: an environment E1 (resp. E3) is 
+    created for the evaluation of \vscm{(make-connector)}, then since 
+    \vscm{(make-connector)} contains a \vscm{let}, a new environment E2 (resp. 
+    E4) pointing to E1 (resp. E3) is created. The variables \vscm{value}, 
     \vscm{informant}, \vscm{constraints} and the local procedures 
     \vscm{set-my-value}, \vscm{forget-my-value}, \vscm{connect} and \vscm{me} 
     are defined in E2 (resp. E4). The local procedure \vscm{me} pointing to E2 
@@ -1651,22 +1651,21 @@ This subsection contains no exercises.
     accounts, if any number of exchanges happen sequentially the balances of the 
     accounts will still be \$10, \$20 and \$30 in some order.
 
-    Figure~\ref{3.43.1} shows how the account balances can be different than 
-    \$10, \$20 and \$30 with the first version of the account-exchange program. 
-    The \vscm{withdraw} and \vscm{deposit} procedures from each account are 
+    \autoref{3.43.1} shows how the account balances can be different than \$10, 
+    \$20 and \$30 with the first version of the account-exchange program. The 
+    \vscm{withdraw} and \vscm{deposit} procedures from each account are 
     serialized, so each of them is an atomic operation. Each exchange operation 
     removes an amount from an account and adds the same amount to another 
     account, and these operations are serialized, so the sum of the balances is 
     preserved.
 
-    Figure~\ref{3.43.2} shows a case where the sum of the balances of the 
-    accounts is not preserved after exchanges between \vscm{a1} and \vscm{a2} on 
-    one side, \vscm{a2} and \vscm{a3} on the other side. Compared to the version 
-    from figure~\ref{3.43.1}, the only transaction for a single account that 
-    does not happen as if it were serialized is \vscm{((a2 'withdraw) 10)}: the 
-    first exchange procedure sets the account’s balance to \$20 before the 
-    second procedure can set it to \$10, and the final sum is \$50 instead of 
-    \$60.
+    \autoref{3.43.2} shows a case where the sum of the balances of the accounts 
+    is not preserved after exchanges between \vscm{a1} and \vscm{a2} on one 
+    side, \vscm{a2} and \vscm{a3} on the other side. Compared to the version 
+    from \autoref{3.43.1}, the only transaction for a single account that does 
+    not happen as if it were serialized is \vscm{((a2 'withdraw) 10)}: the first 
+    exchange procedure sets the account’s balance to \$20 before the second 
+    procedure can set it to \$10, and the final sum is \$50 instead of \$60.
 \end{exe}
 
 \begin{exe}[3.44]
@@ -1694,9 +1693,9 @@ This subsection contains no exercises.
 \subsubsection{Implementing serializers}
 
 \begin{exe}[3.46]
-    Figure~\ref{3.46fig} shows how the implementation of \vscm{test-and-set!} 
-    can fail if two procedures access the cell and find its contents at false 
-    before both set its contents to true.
+    \autoref{3.46fig} shows how the implementation of \vscm{test-and-set!} can 
+    fail if two procedures access the cell and find its contents at false before 
+    both set its contents to true.
     \begin{figure}
         \centering
         \begin{tikzpicture}[>=Stealth]

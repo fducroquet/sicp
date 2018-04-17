@@ -32,21 +32,20 @@
 \end{exe}
 
 \begin{exe}[4.3]
-    As in exercise~\ref{2.73}, a few cases can’t be assimilated to the 
-    data-directed dispatch because they correspond to untagged data: here it’s 
-    the case of \vscm{variable?}, \vscm{self-evaluating?} and 
-    \vscm{application?}. If we had kept Louis’ idea from the previous exercise 
-    to start procedure applications with \vscm{call}, \vscm{application?} could 
-    have been assimilated into the dispatch. Since we don’t keep this idea, we 
-    have to redefine the \vscm{application?} predicate: if we keep it as 
-    \vscm{pair?} we can’t put it before the dispatch because all the special 
-    forms will be considered as procedure applications, and we can’t put it 
-    after the dispatch either because the procedure won’t be found in the table 
-    and it will cause an error. So I consider that every expression for which no 
-    procedure of the correct type is found in the table is a procedure 
-    application. I used a two-dimensional table as in chapter 2, though 
-    a one-dimensional table would be enough if we don’t do any other dispatch on 
-    the expressions’ type.
+    As in \autoref{2.73}, a few cases can’t be assimilated to the data-directed 
+    dispatch because they correspond to untagged data: here it’s the case of 
+    \vscm{variable?}, \vscm{self-evaluating?} and \vscm{application?}. If we had 
+    kept Louis’ idea from the previous exercise to start procedure applications 
+    with \vscm{call}, \vscm{application?} could have been assimilated into the 
+    dispatch. Since we don’t keep this idea, we have to redefine the 
+    \vscm{application?} predicate: if we keep it as \vscm{pair?} we can’t put it 
+    before the dispatch because all the special forms will be considered as 
+    procedure applications, and we can’t put it after the dispatch either 
+    because the procedure won’t be found in the table and it will cause an 
+    error. So I consider that every expression for which no procedure of the 
+    correct type is found in the table is a procedure application. I used 
+    a two-dimensional table as in chapter 2, though a one-dimensional table 
+    would be enough if we don’t do any other dispatch on the expressions’ type.
     \scm{ch4/4.03.scm}
 \end{exe}
 
@@ -263,7 +262,7 @@
     We can replace \vscm{not} with \vscm{!} by replacing
     \vscm{(list 'not not)} with \vscm{(list '! not)} in the list of primitive 
     procedures and redefining the \vscm{make-not} procedure defined in 
-    exercise~\ref{4.9}:
+    \autoref{4.9}:
     \scm{ch4/4.10b.scm}
 
     I also modified the selectors for procedure application so that
@@ -360,8 +359,8 @@
     \ \vspace{-20pt}
     \begin{enumerate}
         \item Here is the updated version of \vscm{lookup-variable-value} for 
-            the frame representation as a list of pairs, with the abstractions 
-            defined in exercise~\ref{4.12}:
+	    the frame representation as a list of pairs, with the abstractions 
+	    defined in \autoref{4.12}:
             \scm{ch4/4.16a.scm}
         \item The \vscm{scan-out-defines} procedure can be defined as:
             \scm{ch4/4.16b.scm}
@@ -437,8 +436,8 @@
         the definitions are interpreted sequentially and after scanning out.}
         \label{4.17fig}
     \end{figure}
-    Figure~\ref{4.17fig} shows the environment structures in which \vscm{<e3>} 
-    is evaluated when the definitions are interpreted sequentially and when they 
+    \autoref{4.17fig} shows the environment structures in which \vscm{<e3>} is 
+    evaluated when the definitions are interpreted sequentially and when they 
     are scanned out. In the latter case, there is an extra frame because 
     \vscm{let} corresponds to a \vscm{lambda} application.
 
@@ -604,19 +603,19 @@
 	\label{4.20fig}
     \end{figure}
     \begin{enumerate}
-        \item \vscm{Letrec} can be implemented as shown below. This is very 
-            similar to exercise~\ref{4.16}, so the code could be mutualized:
+	\item \vscm{Letrec} can be implemented as shown below. This is very 
+	    similar to \autoref{4.16}, so the code could be mutualized:
 	    \scm{ch4/4.20.scm}
-        \item Figure~\ref{4.20fig} shows the environment structures in which the 
-            \vscm{<rest of body of f>} is evaluated during evaluation of the 
-            expression \vscm{(f 5)}, first with \vscm{letrec}, then with 
-            \vscm{let}. With \vscm{letrec}, the values of \vscm{odd?} and 
-            \vscm{even?} are evaluated in an environment where the bindings 
-            already exist, so the procedures created point to an environment 
-            where the other is defined. With \vscm{let}, the values of 
-            \vscm{even?} and \vscm{odd?} are evaluated before the bindings 
-            exist, so they point to an environment where they are undefined and 
-            the recursive calls won’t work.
+	\item \autoref{4.20fig} shows the environment structures in which the 
+	    \vscm{<rest of body of f>} is evaluated during evaluation of the 
+	    expression \vscm{(f 5)}, first with \vscm{letrec}, then with 
+	    \vscm{let}. With \vscm{letrec}, the values of \vscm{odd?} and 
+	    \vscm{even?} are evaluated in an environment where the bindings 
+	    already exist, so the procedures created point to an environment 
+	    where the other is defined. With \vscm{let}, the values of 
+	    \vscm{even?} and \vscm{odd?} are evaluated before the bindings 
+	    exist, so they point to an environment where they are undefined and 
+	    the recursive calls won’t work.
     \end{enumerate}
 \end{exe}
 
@@ -655,9 +654,9 @@
         \vscm{or} and \vscm{and} defined with special evaluation functions, as 
         well as \vscm{make-unbound!}:
         \scm{ch4/4.22c.scm}
-        Lastly, we can implement scanning out of internal definitions as in 
-        exercise~\ref{4.16} by calling \vscm{scan-out-defines} in 
-        \vscm{analyze-lambda}:
+	Lastly, we can implement scanning out of internal definitions as in 
+	\autoref{4.16} by calling \vscm{scan-out-defines} in 
+	\vscm{analyze-lambda}:
         \scm{ch4/4.22d.scm}
     \end{comp}
 \end{exe}
@@ -859,8 +858,8 @@
     With the streams of \secref{3.5}, there were places where we had to define 
     the first element of a stream separately to avoid infinite loops. With the 
     lazy evaluator, we can simplify some of the definitions. For instance, the 
-    following definition of \vscm{pairs} taken from exercise~\ref{3.68}, where 
-    it caused an infinite loop, works for lazy lists:
+    following definition of \vscm{pairs} taken from \autoref{3.68}, where it 
+    caused an infinite loop, works for lazy lists:
     \scm{ch4/4.32a.scm}
     Similar simplifications can be applied to the answers to 
     exercises~\ref{3.69} and~\ref{3.70}.
@@ -942,15 +941,15 @@
 
 \begin{exe}[4.36]
     Replacing \vscm{an-integer-between} by \vscm{an-integer-starting-from} in 
-    the procedure in exercise~\ref{4.35} wouldn’t work because the interpreter 
-    would pick the lowest possible value for $i$ and $j$ and would then try all 
-    the possible values for $k$ without ever finding a successful triple.
+    the procedure in \autoref{4.35} wouldn’t work because the interpreter would 
+    pick the lowest possible value for $i$ and $j$ and would then try all the 
+    possible values for $k$ without ever finding a successful triple.
 
     We can generate all Pythagorean triples by first picking $j$, and then 
     picking $i \leq j$. We can then define $k$ as $\sqrt{i^2 + j^2}$ and check 
     if it’s an integer. To define a procedure more similar to the one in 
-    exercise~\ref{4.35}, we could choose $k$ between finite bounds, for instance 
-    $j$ and $2j$. Either way, once $j$ has been picked, there are only a finite 
+    \autoref{4.35}, we could choose $k$ between finite bounds, for instance $j$ 
+    and $2j$. Either way, once $j$ has been picked, there are only a finite 
     number of possibilities to test for $i$ and $k$, and these possibilities 
     contain all the Pythagorean triples for the given value of $j$, so all 
     Pythagorean triples could in principle be generated by typing 
@@ -959,8 +958,8 @@
 \end{exe}
 
 \begin{exe}[4.37]
-    Ben is correct. The procedure in exercise~\ref{4.35} systematically searches 
-    all possible triples $(i, j, k)$ with $low \leq i \leq j \leq k \leq high$. 
+    Ben is correct. The procedure in \autoref{4.35} systematically searches all 
+    possible triples $(i, j, k)$ with $low \leq i \leq j \leq k \leq high$. 
     Ben’s version eliminates the pairs $(i, j)$ for which $i^2 + j^2 > high^2$ 
     since there is no possible value of $k$ within the bounds in this case, and 
     then instead of trying all possible values for $k$, it tests only whether 
@@ -1090,11 +1089,11 @@
 \end{exe}
 
 \begin{exe}[4.44]
-    We use the same idea as in exercise~\ref{2.42}: we place a queen in each 
-    column successively. Once we have placed $k - 1$ queens in the first $k - 1$ 
+    We use the same idea as in \autoref{2.42}: we place a queen in each column 
+    successively. Once we have placed $k - 1$ queens in the first $k - 1$ 
     columns, we place a queen in the $k$th column and require that it is safe 
     with respect to the others. The \vscm{safe?} procedure is the same as in 
-    exercise~\ref{2.42}.
+    \autoref{2.42}.
     \scm{ch4/4.44tex.scm}
 \end{exe}
 
@@ -1231,7 +1230,7 @@
         \item A professor sleeps.
     \end{itemize}
     Some generated sentences if we also include the adjectives and adverbs added 
-    in exercise~\ref{4.48}:
+    in \autoref{4.48}:
     \begin{itemize}
         \item A class studies.
         \item The student for the cat to a beautiful student by the student with 
@@ -1528,7 +1527,7 @@ This subsection contains no exercises.
     The problem with this implementation is that, though it does prevent 
     infinite loops, it also cuts off some computations that would have 
     terminated. For instance, with the version of \vscm{outranked-by} from 
-    exercise~\ref{4.64}, when evaluating
+    \autoref{4.64}, when evaluating
     \vscm{(outranked-by (Reasoner Louis) ?x)}, an answer with Alyssa P.~Hacker 
     is found from the first branch of the \vscm{or}. Then the recursive 
     evaluation of \vscm{outranked-by} (which is not eliminated because both 
@@ -1538,7 +1537,7 @@ This subsection contains no exercises.
     so the third answer with Oliver Warbucks is not found. The evaluation of 
     \vscm{(outranked-by ?x ?y)} is even worse since the second branch is 
     completely eliminated so we only get the supervisors. With \vscm{last-pair} 
-    from exercise~\ref{4.62}, where we got an infinite stream of results by 
+    from \autoref{4.62}, where we got an infinite stream of results by 
     evaluating \vscm{(last-pair ?x (3))}, we only get the first two results 
     because the rest of the computation is eliminated.
 
@@ -1604,7 +1603,7 @@ This subsection contains no exercises.
     with the simpler version of \vscm{simple-query} no answer is displayed 
     because the infinite loop appears during the evaluation of the second 
     argument of \vscm{stream-append}. In the same way, with Louis’ version of 
-    \vscm{outranked-by} from exercise~\ref{4.64}, with explicit delays the query
+    \vscm{outranked-by} from \autoref{4.64}, with explicit delays the query
     \vscm{(outranked-by (Bitdiddle Ben) ?x)} displays an answer before going 
     into a loop. With the simple version of \vscm{disjoin} no answer is 
     displayed because the loop happens during the evaluation of the second 
@@ -1713,17 +1712,17 @@ This subsection contains no exercises.
     it’s impossible to predict when. If the computation of one element causes 
     an infinite loop, it may appear at the start or after some answers have 
     been displayed. For instance, with Louis’ version of \vscm{outranked-by} 
-    from exercise~\ref{4.64}, sometimes the query
+    from \autoref{4.64}, sometimes the query
     \vscm{(outranked-by (Bitdiddle Ben) ?x)} loops without displaying anything, 
     sometimes it answers first. But most of the time
     \vscm{(outranked-by ?x ?y)} displays several answers before going into 
     a loop, whereas the stream-based version always displayed only the first 
     answer.
 
-    With the query \vscm{(last-pair ?x (3))} from exercise~\ref{4.62}, the 
-    successive results displayed show an increment of one only in the ids of the 
-    unbound variables, where the increment was of 4 in the stream version. The 
-    first results are:
+    With the query \vscm{(last-pair ?x (3))} from \autoref{4.62}, the successive 
+    results displayed show an increment of one only in the ids of the unbound 
+    variables, where the increment was of 4 in the stream version. The first 
+    results are:
     \begin{cscm}
 	(last-pair (3) (3))
 	(last-pair (?u-1 3) (3))

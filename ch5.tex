@@ -5,7 +5,7 @@
 \begin{exe}[5.1]
     \label{5.1}
     The data-path and the controller diagrams for the iterative factorial 
-    machine are shown on figure~\ref{5.1fig}.
+    machine are shown on \autoref{5.1fig}.
 
     \begin{figure}
         \centering
@@ -68,7 +68,7 @@
 
 \begin{exe}[5.2]
     Anticipating on the next section to use the register-machine simulator, we 
-    can define the iterative factorial machine of exercise~\ref{5.1} as:
+    can define the iterative factorial machine of \autoref{5.1} as:
     \scm{ch5/5.02.scm}
 \end{exe}
 
@@ -185,11 +185,10 @@ This subsection contains no exercises.
     \ \vspace{-20pt}
     \begin{enumerate}
 	\item The recursive exponentiation machine can be defined as follows. 
-	    The corresponding data-path diagram is shown on figure~\ref{5.04afig}.
+	    The corresponding data-path diagram is shown on \autoref{5.04afig}.
             \scm{ch5/5.04a.scm}
 	\item The iterative exponentiation machine can be defined as follows. 
-	    The corresponding data-path diagram is shown on 
-	    figure~\ref{5.04bfig}.
+	    The corresponding data-path diagram is shown on \autoref{5.04bfig}.
             \scm{ch5/5.04b.scm}
     \end{enumerate}
 
@@ -394,7 +393,7 @@ This subsection contains no exercises.
 \section{A Register-Machine Simulator}
 
 \begin{exe}[5.7]
-    Already done while doing exercise~\ref{5.04}.
+    Already done while doing \autoref{5.04}.
 \end{exe}
 
 \subsection{The Machine Model}
@@ -568,7 +567,7 @@ This subsection contains no exercises.
 \begin{exe}[5.18]
     We can modify the \vscm{make-register} procedure and define procedures to 
     turn tracing on and off for a given register as shown below. This extends 
-    the definition of \vscm{make-register} from exercise~\ref{5.12}.
+    the definition of \vscm{make-register} from \autoref{5.12}.
     \scm{ch5/5.18.scm}
 \end{exe}
 
@@ -583,8 +582,8 @@ This subsection contains no exercises.
     \vscm{make-new-machine}:
     \scm{ch5/5.19c.scm}
     A breakpoint is defined as a pair containing the label and offset, and the 
-    representation of instructions from exercise~\ref{5.17} is extended to 
-    include the breakpoint. We define procedures to check if an instruction has 
+    representation of instructions from \autoref{5.17} is extended to include 
+    the breakpoint. We define procedures to check if an instruction has 
     a breakpoint and to remove the breakpoint from an instruction as well.
     \scm{ch5/5.19d.scm}
     The only missing part is the code actually handling the messages:
@@ -612,7 +611,7 @@ This subsection contains no exercises.
 
 \begin{exe}[5.20]
     The box-and-pointer representation and the memory-vector representation of 
-    the given list structure are shown in figure~\ref{5.20y}. The final value of 
+    the given list structure are shown in \autoref{5.20y}. The final value of 
     \vscm{free} is \vscm{p4}. The values of \vscm{x} and \vscm{y} are 
     represented by the pointers \vscm{p1} and \vscm{p3} respectively.
     \begin{figure}
@@ -701,10 +700,10 @@ This subsection contains no exercises.
 
 \begin{exe}[5.23]
     I added the expressions \vscm{cond} (including the alternative syntax from 
-    exercise~\ref{4.5}), \vscm{and} and \vscm{or} from exercise~\ref{4.4}, 
-    \vscm{let} (\ref{4.6} and~\ref{4.8}), \vscm{let*} (\ref{4.7}), \vscm{letrec} 
+    \autoref{4.5}), \vscm{and} and \vscm{or} from \autoref{4.4}, \vscm{let} 
+    (\ref{4.6} and~\ref{4.8}), \vscm{let*} (\ref{4.7}), \vscm{letrec} 
     (\ref{4.20}), and \vscm{while}, \vscm{until} and \vscm{for} from 
-    exercise~\ref{4.9}.
+    \autoref{4.9}.
 
     The changes are similar for each expression type, so I am including them 
     here only for \vscm{cond} expressions. Besides loading the necessary syntax 
