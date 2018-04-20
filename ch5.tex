@@ -1181,3 +1181,30 @@ This subsection contains no exercises.
 	    \scm{ch5/5.30b8.scm}
     \end{enumerate}
 \end{exe}
+
+\section{Compilation}
+
+\subsection{Structure of the Compiler}
+
+\begin{exe}[5.31]
+    \ \vspace{-20pt}
+    \begin{itemize}
+        \item \vscm{(f 'x 'y)}: All the saves and restores are superfluous.
+        \item \vscm{((f) 'x 'y)}: All the saves and restores are superfluous 
+            because the arguments are quoted so \vscm{env} is not necessary for 
+            their evaluation.
+        \item \vscm{(f (g 'x) y)}: \vscm{proc} must be saved around the 
+            evaluation of the operand sequence. \vscm{argl} must be saved around 
+            the evaluation of \vscm{(g 'x)}. If the operands are evaluated 
+            left-to-right, \vscm{env} must be saved around the evaluation of 
+            \vscm{(g 'x)} so that the value of \vscm{y} can be retrieved. If 
+            they are evaluated right-to-left\footnote{This is the case with the 
+            code in the book, but we are not supposed to know that yet.}, no 
+            further saves are needed.
+        \item \vscm{(f (g 'x) 'y)}: This time the saves and restores are the 
+            same no matter whether the operands are evaluated left-to-right or 
+            right-to-left: as in the right-to-left case above, \vscm{proc} must 
+            be saved around the evaluation of the operand sequence and 
+            \vscm{argl} must be saved around the evaluation of \vscm{(g 'x)}.
+    \end{itemize}
+\end{exe}
