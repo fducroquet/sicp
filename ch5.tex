@@ -1010,6 +1010,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.30]
+    \label{5.30}
     \ \vspace{-20pt}
     \begin{enumerate}
 	\item For the error condition codes, I used uninterned symbols because 
@@ -1207,4 +1208,53 @@ This subsection contains no exercises.
             be saved around the evaluation of the operand sequence and 
             \vscm{argl} must be saved around the evaluation of \vscm{(g 'x)}.
     \end{itemize}
+\end{exe}
+
+\begin{exe}[5.32]
+    \ \vspace{-20pt}
+    \begin{enumerate}
+	\item In our evaluator, \vscm{variable?} is defined as \vscm{symbol?}, 
+	    so we can replace the beginning of \vscm{ev-application} with:
+            \begin{cscm}
+                ev-application
+                    (save continue)
+                    (assign unev (op operands) (reg exp))
+                    (assign exp (op operator) (reg exp))
+                    (test (op variable?) (reg exp))
+                    (branch (label symbol-operator))
+                    (save env)
+                    (save unev)
+                    (assign continue (label ev-appl-did-operator))
+                    (goto (label eval-dispatch))
+                symbol-operator
+                    (assign continue (label ev-appl-did-symbol-operator))
+                    (goto (label ev-variable))
+                ev-appl-did-operator
+                    (restore unev)          ; the operands
+                    (restore env)
+                ev-appl-did-symbol-operator
+                    (assign argl (op empty-arglist))
+                ;; ... same as before
+            \end{cscm}
+            Since we know it is a variable, we could directly assign the result 
+            of \vscm{lookup-variable-value} to \vscm{val}, but this would bypass 
+            the error checking for unbound variables added in \autoref{5.30}.
+        \item We could certainly recognize more special cases in the 
+            interpreter, but this would make the interpreter much more complex, 
+            which would mitigate, if not cancel out, the gains from the 
+            optimizations. For instance, in the procedure application of the 
+            previous exercise, we need to analyze all the arguments before 
+            deciding whether it’s necessary to save \vscm{proc} before the 
+            evaluation of the operand sequence, and when computing the value of 
+            an argument we must analyze all the remaining arguments to decide 
+            whether it’s necessary to preserve \vscm{env} and \vscm{argl}.
+
+            Furthermore, as is explained at the beginning of the section, the 
+            compiler’s optimizations regarding saves, restores, etc. are only 
+            one of the reasons why compilation is more efficient. The other 
+            reason is that each compiled expression is analyzed only once 
+            whereas each interpreted expression is analyzed each time it is 
+            evaluated. There is no way to incorporate this optimization into the 
+            interpreter without compiling the expressions.
+    \end{enumerate}
 \end{exe}
