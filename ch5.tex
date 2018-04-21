@@ -1258,3 +1258,26 @@ This subsection contains no exercises.
             interpreter without compiling the expressions.
     \end{enumerate}
 \end{exe}
+
+\subsection{Compiling Expressions}
+
+This subsection contains no exercises.
+
+\subsection{Compiling Combinations}
+
+This subsection contains no exercises.
+
+\subsection{Compiling Instruction Sequences}
+
+This subsection contains no exercises.
+
+\subsection{An Example of Compiled Code}
+
+\begin{exe}[5.33]
+    With the first version, in the evaluation of the product, $n$ is evaluated 
+    first and \vscm{argl} is preserved around the evaluation of
+    \vscm{(factorial (- n 1))}. In the second version,
+    \vscm{(factorial (- n 1))} is evaluated first and \vscm{env} is preserved 
+    around its evaluation, but \vscm{argl} needs not be preserved. So both 
+    program have the same efficiency.
+\end{exe}
