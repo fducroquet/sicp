@@ -1328,3 +1328,23 @@ This subsection contains no exercises.
 \begin{exe}[5.35]
     The compiled expression was \vscm{(define (f x) (+ x (g (+ x 2))))}.
 \end{exe}
+
+\begin{exe}[5.36]
+    The compiler produces code that evaluates the operands right-to-left. The 
+    order is determined in \vscm{construct-arglist}, which reverses the codes for 
+    the operands and then evaluates the operands starting from the last. We can 
+    modify \vscm{construct-arglist} to evaluate the operands left-to-right as 
+    shown below. The operand codes are not reversed, instead \vscm{argl} is 
+    reversed at run-time after all the operands have been evaluated.
+
+    The generated code is slower that the original version because the list has 
+    to be reversed each time a procedure application is evaluated, whereas with 
+    the right-to-left version the operand codes were reversed only once at 
+    compile-time.
+
+    Instead of reversing the argument list, it would have been possible to use 
+    \vscm{adjoin-arg} instead of \vscm{cons} in \vscm{code-to-get-rest-args}, as 
+    in the explicit-control evaluator, but this would have been less efficient 
+    than reversing the list at the end.
+    \scm{ch5/5.36.scm}
+\end{exe}

@@ -81,6 +81,9 @@
 ; evaluator is assembled.
 (include "eceval-compiler.scm")
 
+; Evaluation of arguments in left-to-right order.
+; (load "5.36.scm")
+
 ; The evaluator itself.
 (include "eceval.scm")
 

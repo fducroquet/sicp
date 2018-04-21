@@ -12,6 +12,7 @@
     (ecop object->string)
     (ecop length)
     (ecop cons)
+    (ecop reverse)
 
     ;; Syntax operations
     (ecop self-evaluating?)
