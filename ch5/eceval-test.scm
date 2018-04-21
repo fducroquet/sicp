@@ -49,7 +49,7 @@
 
 ;; Code from chapter 4 needed by the explicit-control evaluator, plus a few 
 ;; functions from footnotes in section 5.4.
-(load "5.23-eceval-support.scm")
+(load "eceval-support.scm")
 
 ; Additional syntax procedures and syntax transformers from chapter 4 for 
 ; exercise 5.23.
@@ -82,7 +82,7 @@
 (include "eceval-compiler.scm")
 
 ; The evaluator itself.
-(include "5.23-eceval.scm")
+(include "eceval.scm")
 
 ; Exercise 5.25: Lazy explicit-control evaluator
 ; Representation of thunks for lazy evaluation.
