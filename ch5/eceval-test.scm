@@ -84,6 +84,9 @@
 ; Evaluation of arguments in left-to-right order.
 ; (load "5.36.scm")
 
+; Preserving that always generates save and restore operations.
+; (load "5.37.scm")
+
 ; The evaluator itself.
 (include "eceval.scm")
 
