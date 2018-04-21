@@ -11,6 +11,7 @@
     (ecop string-append)
     (ecop object->string)
     (ecop length)
+    (ecop cons)
 
     ;; Syntax operations
     (ecop self-evaluating?)
@@ -72,11 +73,16 @@
 
     ;; Other operations
     (ecop true?)
+    (ecop false?)
     (ecop make-procedure)
     (ecop compound-procedure?)
     (ecop procedure-parameters)
     (ecop procedure-body)
     (ecop procedure-environment)
+    (ecop compiled-procedure?)
+    (ecop compiled-procedure-entry)
+    (ecop compiled-procedure-env)
+    (ecop make-compiled-procedure)
     (ecop extend-environment)
     (ecop lookup-variable-value)
     (ecop set-variable-value!)
@@ -98,6 +104,7 @@
     '(exp env val proc argl continue unev)
     eceval-operations
     `(;; 5.4.4 Running the Evaluator
+        (branch (label external-entry))
     read-eval-print-loop
         (perform (op initialize-stack))
         (perform (op prompt-for-input) (const ";;; EC-Eval input:"))
@@ -110,6 +117,12 @@
         (perform (op announce-output) (const ";;; EC-Eval value:"))
         (perform (op user-print) (reg val))
         (goto (label read-eval-print-loop))
+
+    external-entry
+        (perform (op initialize-stack))
+        (assign env (op get-global-environment))
+        (assign continue (label print-result))
+        (goto (reg val))
 
     unknown-expression-type
         (assign val (const unknown-expression-type-error))
@@ -244,6 +257,8 @@
         (branch (label primitive-apply))
         (test (op compound-procedure?) (reg proc))
         (branch (label compound-apply))
+        (test (op compiled-procedure?) (reg proc))
+        (branch (label compiled-apply))
         (goto (label unknown-procedure-type))
     primitive-apply
         (assign val (op check-primitive-arguments) (reg proc) (reg argl))
@@ -274,6 +289,10 @@
                 (const "Error in procedure applicatio: wrong number of arguments, expected ")
                 (reg unev) (const ", got ") (reg argl))
         (goto (label signal-error))
+    compiled-apply
+        (restore continue)
+        (assign val (op compiled-procedure-entry) (reg proc))
+        (goto (reg val))
 
     ;; 5.4.2 Sequence Evaluation and Tail Recursion
     ev-begin

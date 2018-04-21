@@ -1,5 +1,34 @@
 ;; Code for the register machine simulator.
-(load "simulator-test.scm")
+;; (Loads the same files as simulator-test.scm except the definitions of various 
+;; machines and the code from exercise 5.9 which forbids labels in operation 
+;; arguments because make-compiled-procedure needs a label argument.)
+(load "5.07pre-simulator.scm")
+(load "5.08.scm") ; Forbid using the same label name at several places.
+
+; Store additional information in the machine model.
+(load "5.12set.scm")
+(load "5.12.scm")
+(load "5.12a1.scm")
+(load "5.12b1.scm")
+(load "5.12c.scm")
+
+(load "5.14pre.scm")
+(load "5.14.scm")
+
+; Print the label preceding an instruction.
+(load "5.17a.scm")
+(load "5.17b.scm")
+(load "5.17c.scm")
+
+; Enable registers to be traced.
+(load "5.18.scm")
+
+; Breakpoints.
+(load "5.19a.scm")
+(load "5.19b.scm")
+(load "5.19d.scm")
+
+;; Code used by the evaluator itself
 
 ; Error checking in primitive procedures application.
 ; check-primitive-arguments: applies the checks for a procedure on given 
@@ -47,6 +76,10 @@
 
 ; Error checking in the evaluation process.
 (load "5.30a.scm")
+
+; Must be loaded before the evaluator or some operations are undefined when the 
+; evaluator is assembled.
+(include "eceval-compiler.scm")
 
 ; The evaluator itself.
 (include "5.23-eceval.scm")
