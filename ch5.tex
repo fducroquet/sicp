@@ -1281,3 +1281,46 @@ This subsection contains no exercises.
     around its evaluation, but \vscm{argl} needs not be preserved. So both 
     program have the same efficiency.
 \end{exe}
+
+\begin{exe}[5.34]
+    I won’t include the whole compiled code here, but the essential difference 
+    lies in the generated code for the application of \vscm{factorial} (resp. 
+    \vscm{iter}). With the recursive procedure, \vscm{(factorial (- n 1))} is 
+    compiled with a linkage of \vscm{next} since it is an operand of \vscm{*}. 
+    This means that before entering the procedure, it has to set up 
+    \vscm{continue} so that \vscm{*} can be applied after the call. At that 
+    point, the partial argument list for \vscm{*}, the procedure \vscm{*} 
+    itself, and \vscm{continue} are on the stack, and they are restored only 
+    after \vscm{(factorial (- n 1))} has returned, which happens after the same 
+    data for the $n - 2$ following recursive calls has been put on the stack and 
+    then removed as each call returned.
+    \begin{cscm}
+	;; apply factorial
+	  (test (op primitive-procedure?) (reg proc))
+	  (branch (label primitive-branch11))
+	compiled-branch10
+	  (assign continue (label after-call9))
+	  (assign val (op compiled-procedure-entry) (reg proc))
+	  (goto (reg val))
+	;; Return point after the call:
+	after-call9
+	  (restore argl)
+	  (assign argl (op cons) (reg val) (reg argl))
+	  (restore proc)
+	  (restore continue)
+	;; Application of * after this.
+    \end{cscm}
+    With the iterative procedure,
+    \vscm{(iter (* counter product) (+ counter 1))} is compiled with a linkage 
+    of \vscm{return} because it is the last expression of the sequence. This is 
+    a direct transfer, nothing is left on the stack that is needed to compute 
+    the value of the original call to \vscm{iter}.
+    \begin{cscm}
+	;; Apply iter
+	  (test (op primitive-procedure?) (reg proc))
+	  (branch (label primitive-branch17))
+	compiled-branch18
+	  (assign val (op compiled-procedure-entry) (reg proc))
+	  (goto (reg val))
+    \end{cscm}
+\end{exe}
