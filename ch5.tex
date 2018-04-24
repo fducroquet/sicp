@@ -1564,3 +1564,11 @@ This subsection contains no exercises.
     can be defined as shown below.
     \scm{ch5/5.39.scm}
 \end{exe}
+
+\begin{exe}[5.40]
+    All the \vscm{compile-...} procedures (except \vscm{compile-self-evaluating} 
+    and \vscm{compile-quoted}) must be modified to pass around the new argument, 
+    I’m not including the code here. In \vscm{compile-lambda-body}, the 
+    compile-time environment is extended with the formals:
+    \scm{ch5/5.40.scm}
+\end{exe}
