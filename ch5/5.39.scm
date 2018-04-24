@@ -1,0 +1,22 @@
+(define (make-lexical-address frame-num disp-num)
+  (list frame-num disp-num))
+
+(define (lexical-address-frame address) (car address))
+(define (lexical-address-disp address) (cadr address))
+
+(define (lexical-address-lookup address env)
+  (let ((frame-num (lexical-address-frame address))
+        (disp-num (lexical-address-disp address)))
+    (let ((frame (list-ref env frame-num)))
+      (list-ref (frame-values frame) disp-num))))
+
+(define (lexical-address-set! address value env)
+  (define (set-value! disp-num vals)
+    (if (null? vals)
+      (error "Invalid displacement number." disp-num)
+      (if (= disp-num 0)
+        (set-car! vals value)
+        (set-value! (- disp-num 1) (cdr vals)))))
+  (let ((frame-num (lexical-address-frame address))
+        (disp-num (lexical-address-disp address)))
+    (set-value! disp-num (frame-values (list-ref env frame-num)))))
