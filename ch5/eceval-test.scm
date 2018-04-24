@@ -87,6 +87,13 @@
 ; Preserving that always generates save and restore operations.
 ; (load "5.37.scm")
 
+; Open coding of some primitives.
+; With at most two arguments.
+(load "5.38a.scm")
+(load "5.38b.scm")
+; Arbitrary numbers of arguments.
+(load "5.38d.scm")
+
 ; The evaluator itself.
 (include "eceval.scm")
 

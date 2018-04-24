@@ -25,6 +25,10 @@
         ((while? exp) (compile (while->if exp) target linkage))
         ((until? exp) (compile (until->while exp) target linkage))
         ((for? exp) (compile (for->let exp) target linkage))
+        ; Exercise 5.38.
+        ; ((native-op? exp) (compile-native-op exp target linkage))
+        ((native-num-op? exp) (compile-native-num-op exp target linkage))
+        ((native-comp-op? exp) (compile-native-comp-op exp target linkage))
         ((application? exp)
          (compile-application exp target linkage))
         (else
@@ -262,7 +266,7 @@
         after-call))))
 
 ; Applying compiled procedures
-(define all-regs '(env proc val argl continue))
+(define all-regs '(env proc val argl continue arg1 arg2))
 
 (define (compile-proc-appl target linkage)
   (cond  ((and (eq? target 'val)

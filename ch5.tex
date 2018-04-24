@@ -1425,3 +1425,134 @@ This subsection contains no exercises.
     a \vscm{restore} with the modified \vscm{preserving}. This comes from 
     \vscm{end-with-linkage}.
 \end{exe}
+
+\begin{exe}[5.38]
+    \ \vspace{-20pt}
+    \begin{enumerate}
+	\item It’s not very clear from the text whether \vscm{spread-arguments} 
+	    is supposed to work for only two arguments or more, but with only 
+	    the operands as a parameter and not the native operation to apply 
+	    it’s not really possible to do something useful for more than two 
+	    arguments. Since the Scheme procedures \vscm{=}, \vscm{+} and 
+	    \vscm{*} take 0 or more arguments and \vscm{-} and \vscm{/} one or 
+	    more, I wrote a procedure that assumes that there are at most two 
+	    arguments.
+
+	    If there is no argument, it returns the empty instruction sequence.
+	    If there is one argument, it returns code to evaluate it and put its 
+	    value in \vscm{arg1}.
+	    If there are two arguments, it returns code to put the first one in 
+	    \vscm{arg1} and the second one in \vscm{arg2}. \vscm{arg1} must be 
+	    preserved around the evaluation of the second argument. Since I know 
+	    that \vscm{arg1} will be needed after the evaluation of the 
+	    arguments, I used an instruction sequence with no statements to 
+	    force \vscm{preserving} to save \vscm{arg1} if it is modified during 
+	    the computation of \vscm{arg2}.
+	    \scm{ch5/5.38a.scm}
+
+	\item We can use the same code generator for all the open-coded 
+	    primitives we currently have:
+	    \scm{ch5/5.38b.scm}
+	    The compilation procedure checks the arity, but the other checks 
+	    added in \autoref{5.30}, for the arguments’ type and for division by 
+	    zero, are not done here because they can’t be done at compile-time.
+
+	    Then we just have to add the following line to the dispatch in the 
+	    compiler:
+	    \begin{cscm}
+		((native-op? exp) (compile-native-op exp target linkage))
+	    \end{cscm}
+
+	    The \vscm{arg1} and \vscm{arg2} registers must be added to 
+	    \vscm{all-args}, otherwise, when compiling code such as:
+	    \begin{cscm}
+		(define (f x) (* 2 x))
+		(define (g x) (+ 3 (f x)))
+	    \end{cscm}
+	    the compiler does not detect that the evaluation of \vscm{(f x)} 
+	    modifies \vscm{arg1}, so \vscm{(g x)} returns $2x + 2$ instead of
+	    $2x + 3$.
+
+	\item The compiled code for \vscm{factorial} is much shorter than the 
+	    result produced without open coding:
+	    \begin{cscm}
+		    (assign val (op make-compiled-procedure) (label entry1) (reg env))
+		    (goto (label after-lambda2))
+		entry1
+		    (assign env (op compiled-procedure-env) (reg proc))
+		    (assign env (op extend-environment) (const (n)) (reg argl) (reg env))
+		    (assign arg1 (op lookup-variable-value) (const n) (reg env))
+		    (assign arg2 (const 1))
+		    (assign val (op =) (reg arg1) (reg arg2))
+		    (test (op false?) (reg val))
+		    (branch (label false-branch4))
+		true-branch3
+		    (assign val (const 1))
+		    (goto (reg continue))
+		false-branch4
+		    (save continue)
+		    (save env)
+		    (assign proc (op lookup-variable-value) (const factorial) (reg env))
+		    (assign arg1 (op lookup-variable-value) (const n) (reg env))
+		    (assign arg2 (const 1))
+		    (assign val (op -) (reg arg1) (reg arg2))
+		    (assign argl (op list) (reg val))
+		    (test (op primitive-procedure?) (reg proc))
+		    (branch (label primitive-branch6))
+		compiled-branch7
+		    (assign continue (label proc-return9))
+		    (assign val (op compiled-procedure-entry) (reg proc))
+		    (goto (reg val))
+		proc-return9
+		    (assign arg1 (reg val))
+		    (goto (label after-call8))
+		primitive-branch6
+		    (assign arg1 (op apply-primitive-procedure) (reg proc) (reg argl))
+		after-call8
+		    (restore env)
+		    (assign arg2 (op lookup-variable-value) (const n) (reg env))
+		    (assign val (op *) (reg arg1) (reg arg2))
+		    (restore continue)
+		    (goto (reg continue))
+		after-if5
+		after-lambda2
+		    (perform (op define-variable!) (const factorial) (reg val) (reg env))
+		    (assign val (const ok))
+	    \end{cscm}
+
+	\item I started to modify \vscm{spread-arguments} so that it would take 
+	    the operation to be applied as a parameter and handle any number of 
+	    arguments by accumulating them in \vscm{arg1} successively. But then 
+	    I noticed that:
+	    \begin{itemize}
+		\item This approach does not work if I also want to generalize 
+		    \vscm{=} to any number of arguments, though this is not 
+		    asked in the text.
+		\item For \vscm{+}, \vscm{-}, \vscm{*} and \vscm{/}, it’s easier 
+		    to just rewrite the expressions so that \vscm{(+ a b c)} 
+		    becomes \vscm{(+ (+ a b) c)}.
+	    \end{itemize}
+
+	    So I divided the native procedures into two sets:
+	    \begin{itemize}
+		\item \vscm{+}, \vscm{-}, \vscm{*} and \vscm{/} are numeric 
+		    procedures for which the above transformation can be done.
+		\item Expressions with \vscm{=}\footnote{And the other 
+		    comparison procedures that take any number of arguments: 
+		    \vscm{<}, \vscm{>}…} are instead transformed in \vscm{and} 
+		    expressions if they have more than two arguments: for 
+		    instance\vscm{(= a b c)} becomes
+		    \vscm{(and (= a b) (= a c))}.
+	    \end{itemize}
+	    The \vscm{compile-native-num-op} procedure applies to the first set, 
+	    it transforms the expression it receives so that it does not have 
+	    more that two arguments and calls \vscm{compile-native-op} from 
+	    point b to compile it.
+
+	    The \vscm{compile-native-comp-op} procedure calls 
+	    \vscm{compile-native-op} if there are at most two arguments, 
+	    otherwise it transforms the expression into an \vscm{and} expression 
+	    and calls \vscm{compile}.
+	    \scm{ch5/5.38d.scm}
+    \end{enumerate}
+\end{exe}

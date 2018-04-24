@@ -13,6 +13,15 @@
     (ecop length)
     (ecop cons)
     (ecop reverse)
+    (ecop =)
+    (ecop <)
+    (ecop >)
+    (ecop <=)
+    (ecop >=)
+    (ecop +)
+    (ecop -)
+    (ecop *)
+    (ecop /)
 
     ;; Syntax operations
     (ecop self-evaluating?)
@@ -102,7 +111,7 @@
 
 (define eceval
   (make-machine
-    '(exp env val proc argl continue unev)
+    '(exp env val proc argl continue unev arg1 arg2)
     eceval-operations
     `(;; 5.4.4 Running the Evaluator
         (branch (label external-entry))
