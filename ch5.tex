@@ -1577,3 +1577,11 @@ This subsection contains no exercises.
     We can define \vscm{find-variable} as follows:
     \scm{ch5/5.41.scm}
 \end{exe}
+
+\begin{exe}[5.42]
+    Here are the new versions of \vscm{compile-variable} and 
+    \vscm{compile-assignment}. If the variable is not found in the compile-time 
+    environment, the \vscm{env} register is modified so it must be added to the 
+    list of modified registers.
+    \scm{ch5/5.42.scm}
+\end{exe}
