@@ -1212,6 +1212,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.32]
+    \label{5.32}
     \ \vspace{-20pt}
     \begin{enumerate}
 	\item In our evaluator, \vscm{variable?} is defined as \vscm{symbol?}, 
@@ -1427,6 +1428,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.38]
+    \label{5.38}
     \ \vspace{-20pt}
     \begin{enumerate}
 	\item It’s not very clear from the text whether \vscm{spread-arguments} 
@@ -1598,4 +1600,56 @@ This subsection contains no exercises.
     \vscm{native-comp-op?} predicates so that they check whether the names have 
     been rebound.
     \scm{ch5/5.44.scm}
+\end{exe}
+
+\subsection{Interfacing Compiled Code to the Evaluator}
+
+\begin{exe}[5.45]
+    \ \vspace{-20pt}
+    \begin{enumerate}
+	\item The table below shows the number of pushes and the maximum depth 
+	    for the special-purpose machine, the interpreter, the compiler 
+	    without optimizations from \autoref{5.32} (case where the procedure 
+	    is a variable) and \autoref{5.38} (open-coding of some primitives) 
+	    and the optimized compiler.
+	    \begin{center}
+		\begin{tabular}{|c|c|c|}
+		    \hline
+		    & Maximum depth & Number of pushes \\\hline
+		    Evaluator & $5n + 3$ & $32n - 16$ \\\hline
+		    Compiler with no optimizations & $3n - 1$ & $6n + 1$ \\\hline
+		    Compiler with optimizations & $2n - 2$ & $2n + 1$\\\hline
+		    Special-purpose machine & $2n - 2$ & $2n - 2$ \\\hline
+		\end{tabular}
+	    \end{center}
+	    The table below shows the limits of the ratios for the various 
+	    versions.
+	    \begin{center}
+		\begin{tabular}{|c|c|c|}
+		    \hline
+		    & Maximum depth & Number of pushes \\\hline
+		    Interpreted / Compiled, non optimized & $1.66…$ & $5.33…$ \\\hline
+		    Interpreted / Compiled, optimized & $2.5$ & $16$ \\\hline
+		    Interpreted / Special-purpose & $2.5$ & $16$ \\\hline
+		    Compiled, non optimized / Special-purpose & $1.5$ & $3$ \\\hline
+		    Compiled, optimized / Special-purpose & $1$ & $1$ \\\hline
+		\end{tabular}
+	    \end{center}
+	\item With the optimizations turned on, the generated code for the 
+	    procedure contains just one save of \vscm{continue} and one save 
+	    of \vscm{env} before each recursive call, just like the 
+	    hand-tailored version. Invoking the compiled procedure causes three 
+	    additional pushes compared to the hand-tailored version, but they 
+	    come from the interpreter: \vscm{continue} is saved at 
+	    \vscm{ev-application}, \vscm{proc} is saved at 
+	    \vscm{ev-appl-did-symbol-operator}, and \vscm{argl} is saved at 
+	    \vscm{ev-appl-operand-loop}. So at least regarding stack usage, it’s 
+	    not possible to improve the compiler here.
+
+	    The compiled code has more instructions than the hand-tailored 
+	    version because the compiler generates code that can handle general 
+	    application of primitive or compiled procedures using environments 
+	    and argument lists, and I don’t really see how to improve the 
+	    compiler here either.
+    \end{enumerate}
 \end{exe}
