@@ -26,6 +26,8 @@
 (load "../ch4/4.16b.scm")
 ; Scan out defines in procedures’ bodies (redefines lambda-body).
 (load "5.43.scm")
+; Allow rebinding of open-coded primitives.
+(load "5.44.scm")
 
 ; Operations available in eceval.
 (include "eceval-ops.scm")

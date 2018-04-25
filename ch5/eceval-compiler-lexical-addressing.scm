@@ -30,8 +30,8 @@
         ((for? exp) (compile (for->let exp) target linkage compile-time-env))
         ; Exercise 5.38.
         ; ((native-op? exp compile-time-env) (compile-native-op exp target linkage compile-time-env))
-        ((native-num-op? exp) (compile-native-num-op exp target linkage compile-time-env))
-        ((native-comp-op? exp) (compile-native-comp-op exp target linkage compile-time-env))
+        ((native-num-op? exp compile-time-env) (compile-native-num-op exp target linkage compile-time-env))
+        ((native-comp-op? exp compile-time-env) (compile-native-comp-op exp target linkage compile-time-env))
         ((application? exp)
          (compile-application exp target linkage compile-time-env))
         (else
