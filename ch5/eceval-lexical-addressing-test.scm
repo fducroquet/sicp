@@ -22,6 +22,10 @@
 (load "5.41.scm")
 ; Versions of compile-variable and compile-assignment using lexical addresses.
 (load "5.42.scm")
+; scan-out-defines, for use in solution of exercise 5.43.
+(load "../ch4/4.16b.scm")
+; Scan out defines in procedures’ bodies (redefines lambda-body).
+(load "5.43.scm")
 
 ; Operations available in eceval.
 (include "eceval-ops.scm")
