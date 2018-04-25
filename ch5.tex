@@ -381,6 +381,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.6]
+    \label{5.6}
     In \vscm{after-fib-n-1}, the instructions \vscm{(restore continue)} and 
     \vscm{(save continue)} can be removed because no change is done to the 
     \vscm{continue} register or to the stack between them.
@@ -973,6 +974,7 @@ This subsection contains no exercises.
 \end{exe}
 
 \begin{exe}[5.29]
+    \label{5.29}
     The figures for small values of $n$ are:
     \begin{center}
 	\begin{tabular}{|c|c|c|}
@@ -1653,4 +1655,50 @@ This subsection contains no exercises.
 	    and argument lists, and I don’t really see how to improve the 
 	    compiler here either.
     \end{enumerate}
+\end{exe}
+
+\begin{exe}[5.46]
+    The table below gives the maximum depth and the number of pushes for the 
+    computation of the Fibonacci numbers with the tree-recursive procedure. The 
+    special purpose machine from the book actually does more stack pushes than 
+    the optimized compiled version, which is as good as the hand-tailored 
+    machine with the optimization of \autoref{5.6}\footnote{As in the previous 
+    exercise, the three additional pushes come from the interpreter.}.
+
+    The formulas for the number of pushes were determined with the same method 
+    as in \autoref{5.29}.
+    \begin{center}
+	\begin{tabular}{|c|c|c|}
+	    \hline
+	    & Maximum depth & Number of pushes \\\hline
+	    Evaluator & $5n + 3$ & $56 \Fib(n + 1) - 40$ \\\hline
+	    Compiler with no optimizations & $3n - 1$ & $10 \Fib(n + 1) - 3$ \\\hline
+	    Compiler with optimizations & $2n - 2$ & $3 \Fib(n + 1)$ \\\hline
+	    Special-purpose machine & $2n - 2$ & $4 \Fib(n + 1) - 4$ \\\hline
+	    Special-purpose machine, \ref{5.6} & $2n - 2$ & $3 \Fib(n + 1) - 3$ \\\hline
+	\end{tabular}
+    \end{center}
+    The table below shows the limits of the ratios for the various versions. 
+    Contrary to what the text says, the ratios of stack operations do approach 
+    a constant because the formulas are all linear in $\Fib(n + 1)$. For 
+    instance:
+    \[
+    \frac{56 \Fib(n + 1) - 40}{10 \Fib(n + 1) - 3} =
+	\frac{56 - \sfrac{40}{\Fib(n + 1)}}{10 - \sfrac{3}{\Fib(n + 1)}}
+    \]
+    which has limit $\sfrac{56}{10} = 5.6$ when $n$ tends to infinity.
+    \begin{center}
+	\begin{tabular}{|c|c|c|}
+	    \hline
+	    & Maximum depth & Number of pushes \\\hline
+	    Interpreted / Compiled, non optimized & $1.66…$ & $5.6$ \\\hline
+	    Interpreted / Compiled, optimized & $2.5$ & $18.66…$ \\\hline
+	    Interpreted / Special-purpose & $2.5$ & $14$ \\\hline
+	    Interpreted / Special-purpose, \ref{5.6} & $2.5$ & $18.66…$ \\\hline
+	    Compiled, non optimized / Special-purpose & $1.5$ & $2.5$ \\\hline
+	    Compiled, non optimized / Special-purpose, \ref{5.6} & $1.5$ & $3.33…$ \\\hline
+	    Compiled, optimized / Special-purpose & $1$ & $0.75$ \\\hline
+	    Compiled, optimized / Special-purpose, \ref{5.6} & $1$ & $1$ \\\hline
+	\end{tabular}
+    \end{center}
 \end{exe}
