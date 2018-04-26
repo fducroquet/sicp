@@ -11,7 +11,11 @@
         (assign exp (op read))
         (assign env (op get-global-environment))
         (assign continue (label print-result))
-        (goto (label eval-dispatch))
+        ;; Comment for read-eval-print-loop
+        ; (goto (label eval-dispatch))
+        ;; Uncomment two next lines for read-compile-execute-print-loop
+        (assign val (op compile-and-assemble) (reg exp))
+        (goto (reg val))
     print-result
         (perform (op print-stack-statistics))
         (perform (op announce-output) (const ";;; EC-Eval value:"))

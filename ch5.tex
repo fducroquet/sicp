@@ -1720,3 +1720,18 @@ This subsection contains no exercises.
     entered in the interpreter.
     \scm{ch5/5.48.scm}
 \end{exe}
+
+\begin{exe}[5.49]
+    The only change needed is to replace the following line in 
+    \vscm{read-eval-print-loop}:
+    \begin{cscm}
+	(goto (label eval-dispatch))
+    \end{cscm}
+    with the following two lines:
+    \begin{cscm}
+	(assign val (op compile-and-assemble) (reg exp))
+	(goto (reg val))
+    \end{cscm}
+    With \vscm{compile-and-assemble} defined as:
+    \scm{ch5/5.49.scm}
+\end{exe}

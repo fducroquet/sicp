@@ -107,4 +107,5 @@
     (ecop adjoin-arg)
     (ecop last-operand?)
     (ecop no-more-exps?)
-    (ecop get-global-environment)))
+    (ecop get-global-environment)
+    (ecop compile-and-assemble)))

@@ -50,6 +50,9 @@
 ; Compile and run.
 (load "5.48.scm")
 
+; For the read-compile-execute-print loop.
+(load "5.49.scm")
+
 ;; Code from chapter 4 needed by the explicit-control evaluator, plus a few 
 ;; functions from footnotes in section 5.4.
 (load "eceval-support.scm")
