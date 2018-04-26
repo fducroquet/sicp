@@ -47,6 +47,9 @@
 ; Procedure name.
 (load "5.30b7.scm")
 
+; Compile and run.
+(load "5.48.scm")
+
 ;; Code from chapter 4 needed by the explicit-control evaluator, plus a few 
 ;; functions from footnotes in section 5.4.
 (load "eceval-support.scm")

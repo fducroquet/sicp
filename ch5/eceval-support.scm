@@ -302,7 +302,8 @@
         (list 'write write (arity 1))
         (list 'display display (arity 1))
         (list 'newline newline (arity 0))
-        (list 'exit exit (arity 0))))
+        (list 'exit exit (arity 0))
+        (list 'compile-and-run compile-and-run (arity 1))))
 
 (define (primitive-procedure-names)
   (map car primitive-procedures))
