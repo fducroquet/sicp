@@ -1,8 +1,9 @@
 (define eceval
   (make-machine
-    '(exp env val proc argl continue unev arg1 arg2)
+    '(exp env val proc argl continue unev arg1 arg2 compapp)
     eceval-operations
     `(;; 5.4.4 Running the Evaluator
+        (assign compapp (label compound-apply))
         (branch (label external-entry))
     read-eval-print-loop
         (perform (op initialize-stack))

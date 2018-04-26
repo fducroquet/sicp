@@ -18,6 +18,9 @@
 ; Arbitrary numbers of arguments.
 (load "5.38d.scm")
 
+; Call interpreted procedures from compiled code.
+(load "5.47.scm")
+
 ; Operations available in eceval (in a separate file so that the operations for 
 ; lexical addressing can be added in the version of the compiler with lexical 
 ; addressing).
