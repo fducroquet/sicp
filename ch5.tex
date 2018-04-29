@@ -1735,3 +1735,76 @@ This subsection contains no exercises.
     With \vscm{compile-and-assemble} defined as:
     \scm{ch5/5.49.scm}
 \end{exe}
+
+\begin{exe}[5.50]
+    The biggest difficulty is to not confuse the different levels of execution. 
+    In particular, there are now three lists of primitive operations:
+    \begin{enumerate}[label=\arabic{enumi}.]
+        \item \vscm{eceval-operations} defines the operations that may be used 
+            as register-machine operations, in \vscm{(assign ... (op ...) ...)} 
+            or
+            \vscm{(perform (op ...) ...)} expressions. In an element of this 
+            list such as \vscm{(list 'length length)}, the \vscm{length} 
+            procedure is that of the underlying Scheme implementation used to 
+            run the register machine.
+	\item The \vscm{primitive-procedures} list defined when implementing the 
+	    explicit-control evaluator, and also used by the compiler, defines 
+	    the procedures considered as primitives in any program running in 
+	    the explicit-control evaluator (interpreted or compiled). As for the 
+	    first case, when this list contains an element such as
+	    \vscm{(list 'length length)}, the \vscm{length} procedure is that of 
+	    the underlying Scheme implementation used to run the register 
+	    machine. The primitive procedures of this list need not belong to 
+	    the previous list\footnote{Except for the open-coded primitives.} 
+	    because they are applied with \vscm{apply-primitive-procedure}, 
+	    which belongs to the previous list.
+	\item The metacircular evaluator also defines a list of primitive 
+	    procedures. They refer to the underlying Scheme implementation, 
+	    which is this time the explicit-control evaluator and not the Scheme 
+	    interpreter running still underneath it. This means that the 
+	    primitives defined there must be primitives for the explicit-control 
+	    evaluator.
+
+	    For instance, if I add a new primitive to the explicit-control 
+	    evaluator:
+	    \begin{cscm}
+		(list 'iszero? (lambda (x) (= x 0)))
+	    \end{cscm}
+	    The new \vscm{iszero?} procedure can be used in the explicit-control 
+	    evaluator, in particular in the procedures used to define the 
+	    metacircular evaluator, and if I add the line:
+	    \begin{cscm}
+		(list 'zero? iszero?)
+	    \end{cscm}
+	    to the primitive procedures of the compiled metacircular evaluator, 
+	    \vscm{zero?} can be used in the driver-loop of this interpreter, but 
+	    not in the explicit-control evaluator.
+    \end{enumerate}
+    Because the metacircular evaluator is now defined as a program running in 
+    the explicit-control evaluator, the Scheme procedures it uses must be added 
+    to the primitives of the explicit-control evaluator if they are not there 
+    yet: \vscm{caadr}, \vscm{cdadr}, \vscm{cdddr}, \vscm{cadddr}, 
+    \vscm{set-car!}, \vscm{set-cdr!}, \vscm{string?}, \vscm{true?} and 
+    \vscm{false?} must be added.
+
+    Several procedures used to implement the metacircular evaluator use 
+    \vscm{map}, but that procedure must first be redefined because the 
+    procedures to apply are now compiled or compound procedures and not 
+    procedures for the underlying Scheme implementation, so \vscm{map} can’t be 
+    used as a primitive (see \autoref{4.14}).
+
+    The last notable change needed is for \vscm{apply-primitive-procedure}: the 
+    evaluator from \secref{4.1} used the \vscm{apply} procedure from the 
+    underlying Scheme by defining:
+    \begin{cscm}
+	(define apply-in-underlying-scheme apply)
+    \end{cscm}
+    The same works here provided that \vscm{apply} is a primitive of the 
+    explicit-control evaluator, but since the procedures to apply are primitive 
+    procedures of the explicit-control evaluator and not Scheme procedures, it 
+    must use \vscm{apply-primitive-procedure} and not \vscm{apply}, i.e. the 
+    second list in the above enumeration has
+    \begin{cscm}
+	(list 'apply apply-primitive-procedure)
+    \end{cscm}
+\end{exe}

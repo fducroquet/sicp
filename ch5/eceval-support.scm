@@ -1,8 +1,6 @@
 (define false #f)
 (define true #t)
 
-(define apply-in-underlying-scheme apply)
-
 ;; Syntax procedures from section 4.1.2
 ; Self-evaluating
 (define (self-evaluating? exp)
@@ -247,6 +245,10 @@
 
 (define (primitive-checks proc) (caddr proc))
 
+(define (apply-primitive-procedure proc args)
+  (apply
+    (primitive-implementation proc) args))
+
 (define primitive-procedures
   (list (list 'car car (arity 1) (arg-type 0 pair?))
         (list 'cdr cdr (arity 1) (arg-type 0 pair?))
@@ -255,12 +257,19 @@
         (list 'cddr cddr (arity 1) (arg-type 0 pair?) pair-cdr-arg)
         (list 'caar caar (arity 1) (arg-type 0 pair?) pair-car-arg)
         (list 'caddr caddr (arity 1) (arg-type 0 pair?) pair-cdr-arg pair-cddr-arg)
+        (list 'caadr caadr (arity 1) (arg-type 0 pair?) pair-cdr-arg)
+        (list 'cdadr cdadr (arity 1) (arg-type 0 pair?) pair-cdr-arg)
+        (list 'cdddr cdddr (arity 1) (arg-type 0 pair?) pair-cdr-arg pair-cddr-arg)
+        (list 'cadddr cadddr (arity 1) (arg-type 0 pair?) pair-cdr-arg pair-cddr-arg)
+        (list 'set-car! set-car! (arity 2) (arg-type 1 pair?))
+        (list 'set-cdr! set-cdr! (arity 2) (arg-type 1 pair?))
         (list 'cons cons (arity 2))
         (list 'read read (arity 0))
         (list 'append append (args-type list?))
         (list 'pair? pair? (arity 1))
         (list 'integer? integer? (arity 1))
         (list 'number? number? (arity 1))
+        (list 'string? string? (arity 1))
         (list 'symbol? symbol? (arity 1))
         (list 'symbol->string symbol->string (arity 1) (args-type symbol?))
         (list 'number->string number->string (arity 1) (args-type number?))
@@ -274,8 +283,9 @@
         (list 'eq? eq? (arity 2))
         (list 'equal? equal? (arity 2))
         (list 'error error pos-arity)
-        (list 'apply apply-in-underlying-scheme (arity 2) (arg-type 0 procedure?)
-              (arg-type 1 list))
+        (list 'apply apply-primitive-procedure (arity 2) (arg-type 0 primitive-procedure?) (arg-type 1 list))
+        (list 'true? true? (arity 1))
+        (list 'false? false? (arity 1))
         (list 'null? null? (arity 1))
         (list 'list list)
         (list '* * (args-type number?))
@@ -311,10 +321,6 @@
 (define (primitive-procedure-objects)
   (map (lambda (proc) (list 'primitive (cadr proc) (cddr proc)))
        primitive-procedures))
-
-(define (apply-primitive-procedure proc args)
-  (apply-in-underlying-scheme
-    (primitive-implementation proc) args))
 
 (define (prompt-for-input string)
   (newline) (newline) (display string) (newline))
